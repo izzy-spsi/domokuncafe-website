@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Domo Cafe — Coming June 13, 2026</title>
+<meta name="description" content="Domo Cafe opens June 13, 2026 in Buena Park, CA. An immersive character café experience unlike anything you've seen.">
+<style>
+  :root {
+    --red:    #D62828;
+    --brown:  #8B5A3C;
+    --dark:   #0d0805;
+    --cream:  #FDF6EF;
+    --gold:   #C8922A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    font-family: 'Georgia', serif;
+    background: var(--dark);
+    color: #fff;
+    overflow-x: hidden;
+  }
+
+  /* ══════════════════════════
+     BACKGROUND SLIDESHOW
+  ══════════════════════════ */
+  .bg-reel {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+  }
+  .bg-reel .slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1.8s ease-in-out;
+  }
+  .bg-reel .slide.active { opacity: 1; }
+  .bg-reel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(13,8,5,0.72) 0%,
+      rgba(13,8,5,0.55) 40%,
+      rgba(13,8,5,0.72) 100%
+    );
+    z-index: 1;
+  }
+
+  /* ══════════════════════════
+     LAYOUT
+  ══════════════════════════ */
+  .page {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /* ══════════════════════════
+     TOP BAR
+  ══════════════════════════ */
+  .top-bar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 36px 24px 0;
+  }
+  .top-bar img.logo {
+    height: 72px;
+    filter: drop-shadow(0 2px 16px rgba(0,0,0,0.6));
+  }
+
+  /* ══════════════════════════
+     HERO
+  ══════════════════════════ */
+  .hero {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 24px 0;
+    text-align: center;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  /* ══════════════════════════
+     DAILY REVEAL — CENTRAL DOMO
+  ══════════════════════════ */
+  .silhouette-wrap {
+    position: relative;
+    margin-bottom: 8px;
+    width: 320px;
+    height: 340px;
+    margin-left: auto;
+    margin-right: auto;
+    /* clip-path handles reveal — no overflow:hidden needed */
+    transition: clip-path 2s ease, filter 2.2s ease;
+  }
+  .sil-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
+    opacity: 0;
+    filter: brightness(0) invert(1); /* white silhouette — always */
+    transition: opacity 1.6s ease-in-out;
+    pointer-events: none;
+  }
+  .sil-frame.active { opacity: 0.82; } /* white translucent */
+  .sil-frame.full-color { filter: none; } /* opening day only */
+  .silhouette-label {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-top: -4px;
+    margin-bottom: 20px;
+  }
+
+  /* ambient side silhouettes removed */
+
+  /* Headline */
+  .headline {
+    font-size: clamp(28px, 5vw, 54px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 14px;
+    text-shadow: 0 2px 24px rgba(0,0,0,0.5);
+  }
+  .headline em {
+    color: var(--red);
+    font-style: normal;
+  }
+  .subline {
+    font-family: Arial, sans-serif;
+    font-size: clamp(14px, 2.5vw, 18px);
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1px;
+    margin-bottom: 36px;
+    line-height: 1.6;
+  }
+
+  /* ══════════════════════════
+     COUNTDOWN
+  ══════════════════════════ */
+  .countdown-wrap {
+    margin-bottom: 44px;
+  }
+  .countdown-label {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 14px;
+  }
+  .countdown {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: flex-start;
+  }
+  .cd-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .cd-num {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    width: clamp(64px, 14vw, 90px);
+    height: clamp(64px, 14vw, 90px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: clamp(28px, 6vw, 44px);
+    font-weight: 700;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    letter-spacing: -1px;
+    backdrop-filter: blur(8px);
+    transition: all 0.3s;
+  }
+  .cd-unit {
+    font-family: Arial, sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .cd-sep {
+    font-size: 32px;
+    color: rgba(255,255,255,0.2);
+    padding-top: 14px;
+    font-weight: 300;
+  }
+
+  /* ══════════════════════════
+     CTA — eVite
+  ══════════════════════════ */
+  .cta-section {
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .cta-label {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 14px;
+    letter-spacing: 0.3px;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--red);
+    color: #fff;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    box-shadow: 0 4px 20px rgba(214,40,40,0.4);
+  }
+  .cta-btn:hover { background: #b51f1f; transform: translateY(-2px); }
+  .cta-fine {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+    margin-top: 10px;
+  }
+
+  /* ══════════════════════════
+     ADDRESS
+  ══════════════════════════ */
+  .address-line {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .address-line span { color: rgba(255,255,255,0.2); }
+
+  /* ══════════════════════════
+     SOCIAL
+  ══════════════════════════ */
+  .social-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .social-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.7);
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .social-btn:hover { background: rgba(255,255,255,0.14); color: #fff; }
+  .social-btn .ico { font-size: 16px; }
+
+
+
+  /* ══════════════════════════
+     ABOUT US
+  ══════════════════════════ */
+  .about-section {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 80px 32px 64px;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+  .about-section::before {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin: 0 auto 56px;
+  }
+  .about-eyebrow {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 24px;
+  }
+  .about-headline {
+    font-size: clamp(40px, 8vw, 80px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.05;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 32px rgba(0,0,0,0.4);
+  }
+  .about-quote {
+    font-size: clamp(15px, 2.2vw, 19px);
+    font-style: italic;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 64px;
+    letter-spacing: 0.3px;
+  }
+  .about-pillars {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+  .pillar {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 32px 28px;
+    text-align: left;
+    transition: background 0.2s;
+  }
+  .pillar:hover {
+    background: rgba(255,255,255,0.07);
+  }
+  .pillar-title {
+    font-family: Arial, sans-serif;
+    font-size: clamp(13px, 1.8vw, 15px);
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.3px;
+    margin-bottom: 10px;
+  }
+  .pillar-body {
+    font-size: clamp(13px, 1.6vw, 15px);
+    color: rgba(255,255,255,0.5);
+    line-height: 1.6;
+  }
+  .pillar-body em {
+    color: rgba(255,255,255,0.8);
+    font-style: normal;
+    font-weight: 700;
+  }
+  @media (max-width: 560px) {
+    .about-pillars { grid-template-columns: 1fr; }
+    .about-section { padding: 60px 20px 48px; }
+  }
+
+  /* ══════════════════════════
+     FOOTER
+  ══════════════════════════ */
+  .footer {
+    width: 100%;
+    text-align: center;
+    padding: 20px 24px 32px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 10;
+  }
+  .footer a { color: rgba(255,255,255,0.3); text-decoration: none; }
+
+  /* ══════════════════════════
+     VERSION BADGE
+  ══════════════════════════ */
+  .version-badge {
+    position: fixed;
+    bottom: 14px;
+    right: 16px;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+    z-index: 100;
+    background: rgba(0,0,0,0.45);
+    padding: 4px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+
+  /* ══════════════════════════
+     DAY TESTER
+  ══════════════════════════ */
+  .day-tester {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    background: rgba(214,40,40,0.92);
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 14px;
+    padding: 12px 18px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+  }
+  .day-tester .dt-label {
+    font-family: Arial, sans-serif;
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-bottom: 2px;
+  }
+  .day-tester .dt-day {
+    font-family: Arial, sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  .day-tester .dt-total {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 2px;
+  }
+  .day-tester button {
+    background: rgba(255,255,255,0.25);
+    border: 1px solid rgba(255,255,255,0.4);
+    color: #fff;
+    width: 38px;
+    height: 34px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.15s;
+    line-height: 1;
+  }
+  .day-tester button:hover { background: rgba(255,255,255,0.4); }
+
+  /* ══════════════════════════
+     MOBILE
+  ══════════════════════════ */
+  @media (max-width: 480px) {
+    .silhouette-wrap { width: 220px; height: 240px; }
+    .social-row { gap: 12px; }
+    .social-btn { padding: 9px 16px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BACKGROUND REEL -->
+<div class="bg-reel" id="bgReel">
+  <div class="slide" style="background-image: url('domo-storefront-1.jpg')"></div>
+  <div class="slide" style="background-image: url('domo-storefront-2.jpg')"></div>
+  <div class="slide" style="background-image: url('domo-storefront-3.jpg')"></div>
+  <div class="slide" style="background-image: url('domo-storefront-4.jpg')"></div>
+  <div class="slide" style="background-image: url('domo-storefront-5.jpg')"></div>
+</div>
+
+
+
+<div class="page">
+
+  <!-- LOGO -->
+  <div class="top-bar">
+    <img class="logo" src="domo-cafe-logo-transparent.png" alt="Domo Cafe">
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+
+    <!-- CENTRAL DOMO — DAILY REVEAL (5 ghosts cycle, reveal from feet upward) -->
+    <div class="silhouette-wrap" id="silhouetteWrap">
+      <img class="sil-frame active" src="domo-site-assets/cropped-chef-domo-04.png" alt="">
+      <img class="sil-frame"        src="domo-site-assets/cropped-chef-domo-08.png" alt="">
+      <img class="sil-frame"        src="domo-site-assets/cropped-chef-domo-12.png" alt="">
+      <img class="sil-frame"        src="domo-site-assets/cropped-chef-domo-16.png" alt="">
+      <img class="sil-frame"        src="domo-site-assets/cropped-chef-domo-23.png" alt="">
+    </div>
+    <div class="silhouette-label">Someone's waiting to meet you.</div>
+
+    <!-- HEADLINE -->
+    <h1 class="headline">
+      The doors open<br><em>June 13, 2026.</em>
+    </h1>
+    <p class="subline">
+      We are not just a cafe.<br>
+      We are an experience worth remembering.
+    </p>
+
+    <!-- COUNTDOWN -->
+    <div class="countdown-wrap">
+      <div class="countdown-label">Opening in</div>
+      <div class="countdown">
+        <div class="cd-block">
+          <div class="cd-num" id="cd-days">00</div>
+          <div class="cd-unit">Days</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <div class="cd-num" id="cd-hours">00</div>
+          <div class="cd-unit">Hours</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <div class="cd-num" id="cd-mins">00</div>
+          <div class="cd-unit">Minutes</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-block">
+          <div class="cd-num" id="cd-secs">00</div>
+          <div class="cd-unit">Seconds</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA — eVite -->
+    <div class="cta-section">
+      <div class="cta-label">Be first inside.</div>
+      <a class="cta-btn" href="#" id="eviteLink" target="_blank">Get Your Invite →</a>
+      <div class="cta-fine">Private soft opening · Limited seats · $30/person</div>
+    </div>
+
+    <!-- ADDRESS -->
+    <div class="address-line">
+      📍 8340 La Palma Ave, Buena Park, CA 90620
+      <span>·</span>
+      Opening June 13
+    </div>
+
+    <!-- SOCIAL -->
+    <div class="social-row">
+      <a class="social-btn" href="https://instagram.com/domokuncafe" target="_blank">
+        <span class="ico">📸</span> Instagram
+      </a>
+      <a class="social-btn" href="https://tiktok.com/@domokuncafe" target="_blank">
+        <span class="ico">🎵</span> TikTok
+      </a>
+    </div>
+
+  </div><!-- /hero -->
+
+  <!-- ABOUT US -->
+  <div class="about-section">
+
+    <div class="about-eyebrow">What We Are</div>
+
+    <div class="about-headline">
+      More than<br>a cafe.
+    </div>
+
+    <div class="about-quote">
+      &ldquo;Not just serving food &mdash; creating moments.&rdquo;
+    </div>
+
+    <div class="about-pillars">
+
+      <div class="pillar">
+        <div class="pillar-title">An Immersive Experience</div>
+        <div class="pillar-body">You stepped into another world.</div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-title">A Hospitality Brand</div>
+        <div class="pillar-body">How people feel <em>is</em> the product.</div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-title">A Place That Creates Moments</div>
+        <div class="pillar-body">The kind people never forget.</div>
+      </div>
+
+      <div class="pillar">
+        <div class="pillar-title">A Training Ground</div>
+        <div class="pillar-body">You will leave here better than you arrived &mdash; that&rsquo;s our promise.</div>
+      </div>
+
+    </div>
+
+  </div><!-- /about -->
+
+  <!-- FOOTER -->
+  <div class="footer">
+    © 2026 Domo Cafe · Buena Park, CA ·
+    <a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a>
+  </div>
+
+</div><!-- /page -->
+
+<!-- VERSION BADGE -->
+<div class="version-badge">v0.2.9</div>
+
+<!-- DAY TESTER -->
+<div class="day-tester" id="dayTester">
+  <div class="dt-label">Date Tester</div>
+  <button onclick="adjustDate(1)">▲</button>
+  <div class="dt-day" id="dtDate">May 24</div>
+  <div class="dt-total" id="dtYear">2026</div>
+  <button onclick="adjustDate(-1)">▼</button>
+</div>
+
+
+
+<script>
+  // ── BACKGROUND REEL ──
+  const slides = document.querySelectorAll('.bg-reel .slide');
+  let cur = 0;
+  slides[0].classList.add('active');
+  setInterval(() => {
+    slides[cur].classList.remove('active');
+    cur = (cur + 1) % slides.length;
+    slides[cur].classList.add('active');
+  }, 5000);
+
+  // ── SHARED CLOCK ──
+  // null = real time; set to a Date to freeze for testing
+  let _simNow = null;
+  function getNow() { return _simNow ? new Date(_simNow) : new Date(); }
+
+  // ── KEY DATES ──
+  const OPENING    = new Date('2026-06-13T10:00:00-07:00');
+  const CTA_HIDE   = new Date('2026-06-09T00:00:00-07:00'); // hide eVite after June 8
+  const START_DATE = new Date('2026-05-23T00:00:00-07:00'); // reveal Day 1
+  const TOTAL_DAYS = 22; // Day 22 = June 13
+
+  const MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  // ── COUNTDOWN / COUNT-UP ──
+  function updateCountdown() {
+    const now  = getNow();
+    const diff = OPENING - now;
+    const label   = document.querySelector('.countdown-label');
+    const headline = document.querySelector('.headline');
+    const subline  = document.querySelector('.subline');
+
+    if (diff <= 0) {
+      // ★ WE ARE OPEN — count up
+      const elapsed = now - OPENING;
+      const d = Math.floor(elapsed / 86400000);
+      const h = Math.floor((elapsed % 86400000) / 3600000);
+      const m = Math.floor((elapsed % 3600000) / 60000);
+      const s = Math.floor((elapsed % 60000) / 1000);
+      document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+      document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+      document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+      label.textContent = 'Open for';
+      if (!headline.dataset.open) {
+        headline.innerHTML = '<em>We\'re Open!</em>';
+        subline.textContent = 'Come visit us at Buena Park, CA.';
+        headline.dataset.open = '1';
+      }
+    } else {
+      // ★ COUNTING DOWN
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+      document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+      document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+      document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+      label.textContent = 'Opening in';
+      if (headline.dataset.open) {
+        headline.innerHTML = 'The doors open<br><em>June 13, 2026.</em>';
+        subline.textContent = 'We are not just a cafe. We are an experience worth remembering.';
+        delete headline.dataset.open;
+      }
+    }
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ── CTA VISIBILITY ──
+  function updateCTA() {
+    const cta = document.querySelector('.cta-section');
+    cta.style.display = getNow() >= CTA_HIDE ? 'none' : '';
+  }
+  updateCTA();
+
+  // ── SILHOUETTE CYCLE ──
+  const silFrames = document.querySelectorAll('.sil-frame');
+  let silCur = 0;
+  setInterval(() => {
+    silFrames[silCur].classList.remove('active');
+    silCur = (silCur + 1) % silFrames.length;
+    silFrames[silCur].classList.add('active');
+  }, 4000);
+
+  // ── DAILY REVEAL ──
+  function applyReveal() {
+    const now     = getNow();
+    const elapsed = Math.floor((now - START_DATE) / 86400000);
+    const day     = Math.min(TOTAL_DAYS, Math.max(1, elapsed + 1));
+    const wrap    = document.getElementById('silhouetteWrap');
+    const frames  = document.querySelectorAll('.sil-frame');
+    const daysToGo = TOTAL_DAYS - day;
+    const progress = day / TOTAL_DAYS;
+
+    if (now >= OPENING) {
+      wrap.style.clipPath = 'none';
+      wrap.style.filter   = 'drop-shadow(0 0 32px rgba(214,40,40,0.85))';
+      frames.forEach(f => f.classList.add('full-color'));
+    } else {
+      frames.forEach(f => f.classList.remove('full-color'));
+      if (daysToGo <= 2) {
+        wrap.style.clipPath = 'none';
+        wrap.style.filter   = `drop-shadow(0 0 24px rgba(214,40,40,${daysToGo === 1 ? 0.65 : 0.45}))`;
+      } else if (daysToGo === 3) {
+        wrap.style.clipPath = 'none';
+        wrap.style.filter   = 'drop-shadow(0 0 16px rgba(214,40,40,0.3))';
+      } else {
+        const clipTop   = Math.max(0, 90 - (progress * 90)).toFixed(1);
+        const glowSize  = (10 + progress * 14).toFixed(0);
+        const glowAlpha = (0.2 + progress * 0.35).toFixed(2);
+        wrap.style.clipPath = `inset(${clipTop}% 0 0 0)`;
+        wrap.style.filter   = `drop-shadow(0 0 ${glowSize}px rgba(214,40,40,${glowAlpha}))`;
+      }
+    }
+  }
+  applyReveal();
+
+  // ── DATE TESTER ──
+  let testerDate = new Date(); // starts at today
+
+  function renderTester() {
+    const d = testerDate;
+    document.getElementById('dtDate').textContent = `${MONTHS[d.getMonth()]} ${d.getDate()}`;
+    document.getElementById('dtYear').textContent = d.getFullYear();
+  }
+
+  function updateAll() {
+    updateCountdown();
+    updateCTA();
+    applyReveal();
+    renderTester();
+  }
+
+  function adjustDate(delta) {
+    testerDate = new Date(testerDate);
+    testerDate.setDate(testerDate.getDate() + delta);
+    // Simulate noon of the selected date
+    _simNow = new Date(testerDate);
+    _simNow.setHours(12, 0, 0, 0);
+    updateAll();
+  }
+
+  renderTester();
+</script>
+
+</body>
+</html>
