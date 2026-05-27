@@ -412,60 +412,6 @@
   }
 
   /* ══════════════════════════
-     DAY TESTER
-  ══════════════════════════ */
-  .day-tester {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    z-index: 200;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-    background: rgba(214,40,40,0.92);
-    border: 2px solid rgba(255,255,255,0.3);
-    border-radius: 14px;
-    padding: 12px 18px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.6);
-  }
-  .day-tester .dt-label {
-    font-family: Arial, sans-serif;
-    font-size: 9px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.85);
-    margin-bottom: 2px;
-  }
-  .day-tester .dt-day {
-    font-family: Arial, sans-serif;
-    font-size: 20px;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 1px;
-  }
-  .day-tester .dt-total {
-    font-family: Arial, sans-serif;
-    font-size: 11px;
-    color: rgba(255,255,255,0.7);
-    margin-bottom: 2px;
-  }
-  .day-tester button {
-    background: rgba(255,255,255,0.25);
-    border: 1px solid rgba(255,255,255,0.4);
-    color: #fff;
-    width: 38px;
-    height: 34px;
-    border-radius: 8px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background 0.15s;
-    line-height: 1;
-  }
-  .day-tester button:hover { background: rgba(255,255,255,0.4); }
-
-  /* ══════════════════════════
      MOBILE
   ══════════════════════════ */
   @media (max-width: 480px) {
@@ -617,16 +563,7 @@
 </div><!-- /page -->
 
 <!-- VERSION BADGE -->
-<div class="version-badge">v0.2.9</div>
-
-<!-- DAY TESTER -->
-<div class="day-tester" id="dayTester">
-  <div class="dt-label">Date Tester</div>
-  <button onclick="adjustDate(1)">▲</button>
-  <div class="dt-day" id="dtDate">May 24</div>
-  <div class="dt-total" id="dtYear">2026</div>
-  <button onclick="adjustDate(-1)">▼</button>
-</div>
+<div class="version-badge">v1.0.0</div>
 
 
 
@@ -642,9 +579,6 @@
   }, 5000);
 
   // ── SHARED CLOCK ──
-  // null = real time; set to a Date to freeze for testing
-  let _simNow = null;
-  function getNow() { return _simNow ? new Date(_simNow) : new Date(); }
 
   // ── KEY DATES ──
   const OPENING    = new Date('2026-06-13T10:00:00-07:00');
@@ -656,7 +590,7 @@
 
   // ── COUNTDOWN / COUNT-UP ──
   function updateCountdown() {
-    const now  = getNow();
+    const now  = new Date();
     const diff = OPENING - now;
     const label   = document.querySelector('.countdown-label');
     const headline = document.querySelector('.headline');
@@ -703,7 +637,7 @@
   // ── CTA VISIBILITY ──
   function updateCTA() {
     const cta = document.querySelector('.cta-section');
-    cta.style.display = getNow() >= CTA_HIDE ? 'none' : '';
+    cta.style.display = new Date() >= CTA_HIDE ? 'none' : '';
   }
   updateCTA();
 
@@ -718,7 +652,7 @@
 
   // ── DAILY REVEAL ──
   function applyReveal() {
-    const now     = getNow();
+    const now     = new Date();
     const elapsed = Math.floor((now - START_DATE) / 86400000);
     const day     = Math.min(TOTAL_DAYS, Math.max(1, elapsed + 1));
     const wrap    = document.getElementById('silhouetteWrap');
@@ -749,32 +683,7 @@
   }
   applyReveal();
 
-  // ── DATE TESTER ──
-  let testerDate = new Date(); // starts at today
 
-  function renderTester() {
-    const d = testerDate;
-    document.getElementById('dtDate').textContent = `${MONTHS[d.getMonth()]} ${d.getDate()}`;
-    document.getElementById('dtYear').textContent = d.getFullYear();
-  }
-
-  function updateAll() {
-    updateCountdown();
-    updateCTA();
-    applyReveal();
-    renderTester();
-  }
-
-  function adjustDate(delta) {
-    testerDate = new Date(testerDate);
-    testerDate.setDate(testerDate.getDate() + delta);
-    // Simulate noon of the selected date
-    _simNow = new Date(testerDate);
-    _simNow.setHours(12, 0, 0, 0);
-    updateAll();
-  }
-
-  renderTester();
 </script>
 
 </body>
