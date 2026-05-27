@@ -442,7 +442,7 @@
     object-fit: contain;
     opacity: 0.88;
     pointer-events: none;
-    /* static — no animation */
+    transform: scaleX(-1); /* mirror to face the seconds */
   }
 
   /* ── UNIT VISITOR DOMOS (Days / Hours / Minutes) ── */
@@ -653,7 +653,7 @@
 </div><!-- /page -->
 
 <!-- VERSION BADGE -->
-<div class="version-badge">v1.3.1</div>
+<div class="version-badge">v1.3.2</div>
 
 <!-- DOMO GHOST LAYER -->
 <div id="domoLayer" aria-hidden="true"></div>
