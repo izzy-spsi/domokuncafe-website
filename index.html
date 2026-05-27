@@ -618,7 +618,7 @@
 </div><!-- /page -->
 
 <!-- VERSION BADGE -->
-<div class="version-badge">v1.2.1</div>
+<div class="version-badge">v1.2.2</div>
 
 <!-- DOMO GHOST LAYER -->
 <div id="domoLayer" aria-hidden="true"></div>
@@ -803,7 +803,7 @@
     // Random flip for variety
     if (Math.random() > 0.5) g.style.transform = 'scaleX(-1)';
 
-    const DOMO_IMGS = Array.from({length:30}, (_,i) => 'domo-site-assets/domo-' + String(i+1).padStart(2,'0') + '.png');
+    const DOMO_IMGS = Array.from({length:31}, (_,i) => 'domo-site-assets/domo-' + String(i+1).padStart(2,'0') + '.png');
     const src = DOMO_IMGS[Math.floor(Math.random() * DOMO_IMGS.length)];
     g.innerHTML = '<img src="' + src + '" alt="" draggable="false">';
     layer.appendChild(g);
