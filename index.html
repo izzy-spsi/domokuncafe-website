@@ -412,6 +412,61 @@
   }
 
   /* ══════════════════════════
+     DOMO GHOST LAYER
+  ══════════════════════════ */
+  #domoLayer {
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .domo-ghost {
+    position: absolute;
+    color: rgba(253, 246, 239, 0.13);
+    opacity: 0;
+    will-change: transform, opacity;
+    transition: none;
+  }
+  .domo-ghost svg { display: block; }
+
+  @keyframes domoAppear {
+    0%   { opacity: 0;    transform: translateY(18px) scale(0.92); }
+    15%  { opacity: 1;    transform: translateY(0px)  scale(1); }
+    70%  { opacity: 1;    transform: translateY(0px)  scale(1); }
+    100% { opacity: 0;    transform: translateY(-14px) scale(0.95); }
+  }
+  @keyframes domoFloat {
+    0%   { transform: translateY(0px); }
+    50%  { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+  }
+  @keyframes domoPeekLeft {
+    0%   { opacity: 0;    transform: translateX(-60px); }
+    20%  { opacity: 1;    transform: translateX(0px); }
+    75%  { opacity: 1;    transform: translateX(0px); }
+    100% { opacity: 0;    transform: translateX(-40px); }
+  }
+  @keyframes domoPeekRight {
+    0%   { opacity: 0;    transform: translateX(60px); }
+    20%  { opacity: 1;    transform: translateX(0px); }
+    75%  { opacity: 1;    transform: translateX(0px); }
+    100% { opacity: 0;    transform: translateX(40px); }
+  }
+  @keyframes domoPeekBottom {
+    0%   { opacity: 0;    transform: translateY(60px); }
+    20%  { opacity: 1;    transform: translateY(0px); }
+    75%  { opacity: 1;    transform: translateY(0px); }
+    100% { opacity: 0;    transform: translateY(60px); }
+  }
+  @keyframes domoSpin {
+    0%   { opacity: 0; transform: rotate(-15deg) scale(0.8); }
+    20%  { opacity: 1; transform: rotate(0deg)   scale(1); }
+    75%  { opacity: 1; transform: rotate(5deg)   scale(1); }
+    100% { opacity: 0; transform: rotate(15deg)  scale(0.9); }
+  }
+
+  /* ══════════════════════════
      MOBILE
   ══════════════════════════ */
   @media (max-width: 480px) {
@@ -563,7 +618,59 @@
 </div><!-- /page -->
 
 <!-- VERSION BADGE -->
-<div class="version-badge">v1.0.0</div>
+<div class="version-badge">v1.1.0</div>
+
+<!-- DOMO GHOST LAYER -->
+<div id="domoLayer" aria-hidden="true"></div>
+
+<!-- DOMO SVG TEMPLATE (hidden) -->
+<svg id="domoTpl" style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="domo" viewBox="0 0 100 115">
+    <!-- Furry body outline -->
+    <path d="
+      M18,22
+      Q14,18 13,14 Q12,9 16,7 Q15,3 20,2 Q24,0 27,3
+      Q30,0 35,1 Q39,0 42,2 Q46,0 50,1
+      Q54,0 58,2 Q61,0 65,1 Q68,0 72,3
+      Q76,1 80,4 Q85,6 84,10 Q88,13 87,18
+      Q92,22 90,28 Q93,34 91,40
+      Q94,47 91,54 Q93,61 90,67
+      Q93,74 89,80 Q90,86 85,90
+      Q84,96 79,97 Q76,103 70,104
+      Q64,109 57,108 Q53,112 50,111
+      Q47,112 43,108 Q36,109 30,104
+      Q24,103 21,97 Q16,96 15,90
+      Q10,86 11,80 Q7,74 10,67
+      Q7,61 10,54 Q7,47 10,40
+      Q8,33 11,27 Q9,23 13,20 Z
+    " fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"/>
+    <!-- Left ear bump -->
+    <path d="M24,4 Q22,0 28,0 Q34,0 30,5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <!-- Right ear bump -->
+    <path d="M76,4 Q78,0 72,0 Q66,0 70,5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <!-- Left eye (white filled) -->
+    <circle cx="33" cy="42" r="9" fill="currentColor" opacity="0.9"/>
+    <circle cx="33" cy="42" r="5" fill="#0d0805"/>
+    <circle cx="35" cy="40" r="1.5" fill="currentColor"/>
+    <!-- Right eye (white filled) -->
+    <circle cx="67" cy="42" r="9" fill="currentColor" opacity="0.9"/>
+    <circle cx="67" cy="42" r="5" fill="#0d0805"/>
+    <circle cx="69" cy="40" r="1.5" fill="currentColor"/>
+    <!-- Mouth cavity -->
+    <path d="M18,64 Q50,55 82,64 L80,88 Q50,95 20,88 Z" fill="#0d0805" stroke="currentColor" stroke-width="2"/>
+    <!-- Top teeth -->
+    <path d="M24,63 L27,72 L33,63 L39,72 L45,63 L51,72 L57,63 L63,72 L69,63 L75,72 L79,65" fill="currentColor" stroke="none"/>
+    <!-- Bottom teeth -->
+    <path d="M22,88 L26,80 L32,88 L38,80 L44,88 L50,80 L56,88 L62,80 L68,88 L74,80 L78,88" fill="currentColor" stroke="none"/>
+    <!-- Left foot -->
+    <ellipse cx="35" cy="109" rx="10" ry="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <!-- Right foot -->
+    <ellipse cx="65" cy="109" rx="10" ry="5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+    <!-- Arm stubs -->
+    <path d="M12,60 Q5,58 6,65 Q7,72 14,70" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+    <path d="M88,60 Q95,58 94,65 Q93,72 86,70" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+  </symbol>
+</svg>
 
 
 
@@ -684,6 +791,78 @@
   applyReveal();
 
 
+</script>
+
+<script>
+  // ── DOMO GHOST ENGINE ──
+  const DOMO_MAX = 5;
+  const layer = document.getElementById('domoLayer');
+
+  function rnd(a, b) { return Math.random() * (b - a) + a; }
+
+  // Zone definitions: {x%, y%, minW, maxW, animation, opacity, minMs, maxMs}
+  // Negative x/y means partially off-screen (peek effect)
+  const ZONES = [
+    // Peek from left edge
+    { x:-4,     y:()=>rnd(15,70),  w:()=>rnd(90,130),  anim:'domoPeekLeft',   op:0.20, d:()=>rnd(6000,9000)  },
+    // Peek from right edge
+    { x:()=>rnd(93,98), y:()=>rnd(10,70), w:()=>rnd(80,120), anim:'domoPeekRight', op:0.18, d:()=>rnd(6000,9000) },
+    // Peek from bottom
+    { x:()=>rnd(20,70), y:92,       w:()=>rnd(60,90),   anim:'domoPeekBottom', op:0.18, d:()=>rnd(5000,8000)  },
+    // Mid-field float — left side
+    { x:()=>rnd(5,18),  y:()=>rnd(30,60), w:()=>rnd(60,90),  anim:'domoAppear',    op:0.10, d:()=>rnd(8000,12000) },
+    // Mid-field float — right side
+    { x:()=>rnd(72,85), y:()=>rnd(25,55), w:()=>rnd(65,95),  anim:'domoAppear',    op:0.10, d:()=>rnd(8000,12000) },
+    // Center field
+    { x:()=>rnd(35,55), y:()=>rnd(15,40), w:()=>rnd(50,75),  anim:'domoSpin',      op:0.08, d:()=>rnd(7000,11000) },
+    // Large atmosphere ghost — left
+    { x:-2,             y:()=>rnd(35,55), w:()=>rnd(150,190), anim:'domoAppear',   op:0.05, d:()=>rnd(12000,18000) },
+    // Large atmosphere ghost — right
+    { x:()=>rnd(72,82), y:()=>rnd(30,55), w:()=>rnd(150,190), anim:'domoAppear',   op:0.05, d:()=>rnd(12000,18000) },
+    // Small corner top-right
+    { x:()=>rnd(82,90), y:()=>rnd(5,18),  w:()=>rnd(50,75),  anim:'domoSpin',      op:0.13, d:()=>rnd(6000,9000)  },
+    // Small corner bottom-left
+    { x:()=>rnd(5,14),  y:()=>rnd(72,84), w:()=>rnd(55,80),  anim:'domoAppear',    op:0.12, d:()=>rnd(6000,9000)  },
+  ];
+
+  function val(v) { return typeof v === 'function' ? v() : v; }
+
+  function spawnGhost() {
+    if (layer.children.length >= DOMO_MAX) return;
+
+    const z    = ZONES[Math.floor(Math.random() * ZONES.length)];
+    const size = val(z.w);
+    const dur  = val(z.d);
+    const left = val(z.x);
+    const top  = val(z.y);
+
+    const g = document.createElement('div');
+    g.className = 'domo-ghost';
+    g.style.cssText = [
+      'left:'   + Math.round(left) + '%',
+      'top:'    + Math.round(top)  + '%',
+      'width:'  + Math.round(size) + 'px',
+      'height:' + Math.round(size * 1.15) + 'px',
+      'color:rgba(253,246,239,' + z.op + ')',
+      'animation:' + z.anim + ' ' + Math.round(dur) + 'ms ease-in-out forwards',
+    ].join(';');
+
+    // Random flip for variety
+    if (Math.random() > 0.5) g.style.transform = 'scaleX(-1)';
+
+    g.innerHTML = '<svg width="100%" height="100%" viewBox="0 0 100 115" fill="none"><use href="#domo"/></svg>';
+    layer.appendChild(g);
+
+    setTimeout(() => g.remove(), dur + 300);
+  }
+
+  function tick() {
+    spawnGhost();
+    setTimeout(tick, rnd(2000, 5000));
+  }
+
+  // Kick off after page settles
+  setTimeout(tick, 1500);
 </script>
 
 </body>
