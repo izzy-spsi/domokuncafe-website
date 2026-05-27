@@ -467,6 +467,13 @@
     72%  { opacity: 1; transform: translateX(-50%) translateY(0)    scale(1); }
     100% { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.88); }
   }
+  /* Minutes visitor stays 30s — quick fade in/out, long hold */
+  @keyframes unitVisitLong {
+    0%   { opacity: 0; transform: translateX(-50%) translateY(12px) scale(0.75); }
+    3%   { opacity: 1; transform: translateX(-50%) translateY(0)    scale(1); }
+    93%  { opacity: 1; transform: translateX(-50%) translateY(0)    scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-10px) scale(0.88); }
+  }
 
   /* ── GHOST ANIMATIONS ── */
   @keyframes domoAppear {
@@ -653,7 +660,7 @@
 </div><!-- /page -->
 
 <!-- VERSION BADGE -->
-<div class="version-badge">v1.3.2</div>
+<div class="version-badge">v1.3.3</div>
 
 <!-- DOMO GHOST LAYER -->
 <div id="domoLayer" aria-hidden="true"></div>
@@ -884,8 +891,7 @@
   const HOUR_POSES   = [7,  11, 13, 19, 27]; // musical / lively
   const MINUTE_POSES = [3,  6,  10, 17, 23, 28, 31]; // cute / casual / sitting
 
-  function showUnitDomo(blockEl, poses) {
-    // Remove any existing visitor on this block
+  function showUnitDomo(blockEl, poses, durationMs) {
     const existing = blockEl.querySelector('.unit-domo');
     if (existing) existing.remove();
     const d = document.createElement('img');
@@ -893,8 +899,10 @@
     d.src = img(pick(poses));
     d.alt = '';
     d.draggable = false;
+    const anim = durationMs > 5000 ? 'unitVisitLong' : 'unitVisit';
+    d.style.animation = anim + ' ' + durationMs + 'ms ease-in-out forwards';
     blockEl.appendChild(d);
-    setTimeout(() => d.remove(), 3400);
+    setTimeout(() => d.remove(), durationMs + 400);
   }
 
   // Track previous values
@@ -909,9 +917,9 @@
     const h = parseInt(document.getElementById('cd-hours').textContent);
     const d = parseInt(document.getElementById('cd-days').textContent);
 
-    if (prevMins  !== -1 && m !== prevMins)  showUnitDomo(minsBlock,  MINUTE_POSES);
-    if (prevHours !== -1 && h !== prevHours) showUnitDomo(hoursBlock, HOUR_POSES);
-    if (prevDays  !== -1 && d !== prevDays)  showUnitDomo(daysBlock,  DAY_POSES);
+    if (prevMins  !== -1 && m !== prevMins)  showUnitDomo(minsBlock,  MINUTE_POSES, 30000);
+    if (prevHours !== -1 && h !== prevHours) showUnitDomo(hoursBlock, HOUR_POSES,   3200);
+    if (prevDays  !== -1 && d !== prevDays)  showUnitDomo(daysBlock,  DAY_POSES,    3200);
 
     prevMins = m; prevHours = h; prevDays = d;
   }, 500);
