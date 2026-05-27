@@ -1,0 +1,64 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+      - develop
+
+jobs:
+
+  # ── PRODUCTION ─────────────────────────────────────────────
+  # main branch → GitHub Pages (www.domokuncafe.com)
+  deploy-production:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to GitHub Pages
+        run: echo "GitHub Pages auto-deploys from main. No action needed."
+
+  # ── STAGING ────────────────────────────────────────────────
+  # staging branch → Railway staging env (domokuncafe-staging-staging.up.railway.app)
+  deploy-staging:
+    if: github.ref == 'refs/heads/staging'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      - name: Deploy to Railway Staging
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          railway up \
+            --service domokuncafe-staging \
+            --environment staging \
+            --detach
+        working-directory: .
+
+  # ── DEVELOPMENT ────────────────────────────────────────────
+  # develop branch → Railway dev env (domokuncafe-dev-development.up.railway.app)
+  deploy-dev:
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      - name: Deploy to Railway Dev
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          railway up \
+            --service domokuncafe-dev \
+            --environment development \
+            --detach
+        working-directory: .
