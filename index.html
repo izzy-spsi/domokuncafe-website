@@ -423,47 +423,69 @@
   }
   .domo-ghost {
     position: absolute;
-    color: rgba(253, 246, 239, 0.13);
     opacity: 0;
     will-change: transform, opacity;
     transition: none;
   }
   .domo-ghost img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
-  @keyframes domoAppear {
-    0%   { opacity: 0;    transform: translateY(18px) scale(0.92); }
-    15%  { opacity: 1;    transform: translateY(0px)  scale(1); }
-    70%  { opacity: 1;    transform: translateY(0px)  scale(1); }
-    100% { opacity: 0;    transform: translateY(-14px) scale(0.95); }
+  /* ── COUNTDOWN WATCHER ── */
+  .countdown-domo-wrap {
+    position: relative;
+    display: inline-block;
   }
-  @keyframes domoFloat {
-    0%   { transform: translateY(0px); }
-    50%  { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+  #countdownDomo {
+    position: absolute;
+    right: -90px;
+    bottom: -10px;
+    width: 78px;
+    height: 78px;
+    object-fit: contain;
+    opacity: 0.85;
+    pointer-events: none;
+    transform-origin: bottom center;
+  }
+  #countdownDomo.chomp {
+    animation: domoChomp 0.4s cubic-bezier(0.36,0.07,0.19,0.97) forwards;
+  }
+  @keyframes domoChomp {
+    0%   { transform: scale(1)    translateY(0)   rotate(0deg); }
+    20%  { transform: scale(1.25) translateY(-10px) rotate(-12deg); }
+    45%  { transform: scale(0.9)  translateY(5px)  rotate(8deg); }
+    65%  { transform: scale(1.08) translateY(-4px) rotate(-4deg); }
+    100% { transform: scale(1)    translateY(0)   rotate(0deg); }
+  }
+
+  /* ── GHOST ANIMATIONS ── */
+  @keyframes domoAppear {
+    0%   { opacity: 0;   transform: translateY(20px) scale(0.88); }
+    18%  { opacity: 1;   transform: translateY(0)    scale(1); }
+    72%  { opacity: 1;   transform: translateY(0)    scale(1); }
+    100% { opacity: 0;   transform: translateY(-12px) scale(0.94); }
   }
   @keyframes domoPeekLeft {
-    0%   { opacity: 0;    transform: translateX(-60px); }
-    20%  { opacity: 1;    transform: translateX(0px); }
-    75%  { opacity: 1;    transform: translateX(0px); }
-    100% { opacity: 0;    transform: translateX(-40px); }
+    0%   { opacity: 0;   transform: translateX(-70px) rotate(8deg); }
+    22%  { opacity: 1;   transform: translateX(0)    rotate(0deg); }
+    72%  { opacity: 1;   transform: translateX(0)    rotate(0deg); }
+    100% { opacity: 0;   transform: translateX(-50px) rotate(5deg); }
   }
   @keyframes domoPeekRight {
-    0%   { opacity: 0;    transform: translateX(60px); }
-    20%  { opacity: 1;    transform: translateX(0px); }
-    75%  { opacity: 1;    transform: translateX(0px); }
-    100% { opacity: 0;    transform: translateX(40px); }
+    0%   { opacity: 0;   transform: translateX(70px)  rotate(-8deg); }
+    22%  { opacity: 1;   transform: translateX(0)     rotate(0deg); }
+    72%  { opacity: 1;   transform: translateX(0)     rotate(0deg); }
+    100% { opacity: 0;   transform: translateX(50px)  rotate(-5deg); }
   }
   @keyframes domoPeekBottom {
-    0%   { opacity: 0;    transform: translateY(60px); }
-    20%  { opacity: 1;    transform: translateY(0px); }
-    75%  { opacity: 1;    transform: translateY(0px); }
-    100% { opacity: 0;    transform: translateY(60px); }
+    0%   { opacity: 0;   transform: translateY(70px); }
+    22%  { opacity: 1;   transform: translateY(0); }
+    72%  { opacity: 1;   transform: translateY(0); }
+    100% { opacity: 0;   transform: translateY(70px); }
   }
   @keyframes domoSpin {
-    0%   { opacity: 0; transform: rotate(-15deg) scale(0.8); }
-    20%  { opacity: 1; transform: rotate(0deg)   scale(1); }
-    75%  { opacity: 1; transform: rotate(5deg)   scale(1); }
-    100% { opacity: 0; transform: rotate(15deg)  scale(0.9); }
+    0%   { opacity: 0;   transform: rotate(-18deg) scale(0.78); }
+    22%  { opacity: 1;   transform: rotate(0deg)   scale(1); }
+    72%  { opacity: 1;   transform: rotate(4deg)   scale(1); }
+    100% { opacity: 0;   transform: rotate(18deg)  scale(0.9); }
   }
 
   /* ══════════════════════════
@@ -537,9 +559,10 @@
           <div class="cd-unit">Minutes</div>
         </div>
         <div class="cd-sep">:</div>
-        <div class="cd-block">
+        <div class="cd-block countdown-domo-wrap">
           <div class="cd-num" id="cd-secs">00</div>
           <div class="cd-unit">Seconds</div>
+          <img id="countdownDomo" src="domo-site-assets/domo-26.png" alt="" draggable="false" />
         </div>
       </div>
     </div>
@@ -618,7 +641,7 @@
 </div><!-- /page -->
 
 <!-- VERSION BADGE -->
-<div class="version-badge">v1.2.2</div>
+<div class="version-badge">v1.3.0</div>
 
 <!-- DOMO GHOST LAYER -->
 <div id="domoLayer" aria-hidden="true"></div>
@@ -747,77 +770,116 @@
 </script>
 
 <script>
-  // ── DOMO GHOST ENGINE ──
-  const DOMO_MAX = 5;
+  // ── DOMO GHOST ENGINE (Curated) ──
   const layer = document.getElementById('domoLayer');
+  const MAX_GHOSTS = 4;
 
   function rnd(a, b) { return Math.random() * (b - a) + a; }
-
-  // Zone definitions: {x%, y%, minW, maxW, animation, opacity, minMs, maxMs}
-  // Negative x/y means partially off-screen (peek effect)
-  const ZONES = [
-    // Peek from left edge
-    { x:-4,             y:()=>rnd(15,70),  w:()=>rnd(90,130),  anim:'domoPeekLeft',   op:0.55, d:()=>rnd(6000,9000)  },
-    // Peek from right edge
-    { x:()=>rnd(90,96), y:()=>rnd(10,70), w:()=>rnd(80,120), anim:'domoPeekRight',  op:0.50, d:()=>rnd(6000,9000)  },
-    // Peek from bottom
-    { x:()=>rnd(20,70), y:90,             w:()=>rnd(60,90),  anim:'domoPeekBottom', op:0.50, d:()=>rnd(5000,8000)  },
-    // Mid-field float — left side
-    { x:()=>rnd(3,15),  y:()=>rnd(30,60), w:()=>rnd(70,100), anim:'domoAppear',     op:0.30, d:()=>rnd(8000,12000) },
-    // Mid-field float — right side
-    { x:()=>rnd(75,88), y:()=>rnd(25,55), w:()=>rnd(70,100), anim:'domoAppear',     op:0.30, d:()=>rnd(8000,12000) },
-    // Center field spin
-    { x:()=>rnd(35,55), y:()=>rnd(15,40), w:()=>rnd(55,80),  anim:'domoSpin',       op:0.25, d:()=>rnd(7000,11000) },
-    // Large atmosphere — left
-    { x:-4,             y:()=>rnd(35,55), w:()=>rnd(130,170), anim:'domoAppear',    op:0.18, d:()=>rnd(12000,18000) },
-    // Large atmosphere — right
-    { x:()=>rnd(76,85), y:()=>rnd(30,55), w:()=>rnd(130,170), anim:'domoAppear',    op:0.18, d:()=>rnd(12000,18000) },
-    // Corner top-right
-    { x:()=>rnd(80,88), y:()=>rnd(5,18),  w:()=>rnd(55,80),  anim:'domoSpin',       op:0.35, d:()=>rnd(6000,9000)  },
-    // Corner bottom-left
-    { x:()=>rnd(4,14),  y:()=>rnd(72,82), w:()=>rnd(60,85),  anim:'domoAppear',     op:0.35, d:()=>rnd(6000,9000)  },
-  ];
-
+  function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+  function img(n) { return 'domo-site-assets/domo-' + String(n).padStart(2,'0') + '.png'; }
   function val(v) { return typeof v === 'function' ? v() : v; }
 
+  // — CURATED POSE POOLS per zone —
+  // Left edge: high-energy, expressive faces
+  const LEFT_POSES  = [7, 13, 18, 19, 3, 12];
+  // Right edge: cool / dynamic / musical
+  const RIGHT_POSES = [11, 14, 24, 27, 5, 20];
+  // Bottom: sitting / curious / cute
+  const BOTTOM_POSES = [6, 23, 28, 29, 31, 17];
+  // Atmosphere: simple standing, calm
+  const BG_POSES    = [1, 2, 9, 15, 22];
+  // Corner cameos: surprise energy
+  const CORNER_POSES = [10, 16, 21, 25, 30, 4];
+
+  const ZONES = [
+    // ─ Left edge peeker (high energy) ─
+    { poses: LEFT_POSES,
+      x: -4,              y: ()=>rnd(20,65), w: ()=>rnd(95,125),
+      anim: 'domoPeekLeft',   op: 0.70, d: ()=>rnd(6000,9000) },
+
+    // ─ Right edge peeker (cool / musical) ─
+    { poses: RIGHT_POSES,
+      x: ()=>rnd(90,95),  y: ()=>rnd(15,65), w: ()=>rnd(90,120),
+      anim: 'domoPeekRight',  op: 0.65, d: ()=>rnd(6000,9000) },
+
+    // ─ Bottom peeker (curious / sitting) ─
+    { poses: BOTTOM_POSES,
+      x: ()=>rnd(18,72),  y: 88,             w: ()=>rnd(65,95),
+      anim: 'domoPeekBottom', op: 0.68, d: ()=>rnd(5500,8500) },
+
+    // ─ Mid-left float ─
+    { poses: LEFT_POSES,
+      x: ()=>rnd(2,12),   y: ()=>rnd(30,58), w: ()=>rnd(70,95),
+      anim: 'domoAppear',     op: 0.38, d: ()=>rnd(9000,13000) },
+
+    // ─ Mid-right float ─
+    { poses: RIGHT_POSES,
+      x: ()=>rnd(78,88),  y: ()=>rnd(28,55), w: ()=>rnd(70,95),
+      anim: 'domoAppear',     op: 0.38, d: ()=>rnd(9000,13000) },
+
+    // ─ Top-right corner (surprise spin) ─
+    { poses: CORNER_POSES,
+      x: ()=>rnd(80,88),  y: ()=>rnd(4,16),  w: ()=>rnd(55,80),
+      anim: 'domoSpin',       op: 0.50, d: ()=>rnd(6000,8500) },
+
+    // ─ Bottom-left corner ─
+    { poses: CORNER_POSES,
+      x: ()=>rnd(3,12),   y: ()=>rnd(74,83), w: ()=>rnd(55,80),
+      anim: 'domoSpin',       op: 0.50, d: ()=>rnd(6000,8500) },
+
+    // ─ Large atmosphere — left (very subtle) ─
+    { poses: BG_POSES,
+      x: -6,              y: ()=>rnd(30,55), w: ()=>rnd(140,180),
+      anim: 'domoAppear',     op: 0.14, d: ()=>rnd(14000,20000) },
+
+    // ─ Large atmosphere — right (very subtle) ─
+    { poses: BG_POSES,
+      x: ()=>rnd(78,86),  y: ()=>rnd(28,52), w: ()=>rnd(140,180),
+      anim: 'domoAppear',     op: 0.14, d: ()=>rnd(14000,20000) },
+  ];
+
   function spawnGhost() {
-    if (layer.children.length >= DOMO_MAX) return;
-
-    const z    = ZONES[Math.floor(Math.random() * ZONES.length)];
-    const size = val(z.w);
-    const dur  = val(z.d);
-    const left = val(z.x);
-    const top  = val(z.y);
-
-    const g = document.createElement('div');
+    if (layer.children.length >= MAX_GHOSTS) return;
+    const z   = pick(ZONES);
+    const dur = val(z.d);
+    const w   = val(z.w);
+    const g   = document.createElement('div');
     g.className = 'domo-ghost';
     g.style.cssText = [
-      'left:'   + Math.round(left) + '%',
-      'top:'    + Math.round(top)  + '%',
-      'width:'  + Math.round(size) + 'px',
-      'height:' + Math.round(size * 1.15) + 'px',
-      'color:rgba(253,246,239,' + z.op + ')',
+      'left:'    + Math.round(val(z.x)) + '%',
+      'top:'     + Math.round(val(z.y)) + '%',
+      'width:'   + Math.round(w) + 'px',
+      'height:'  + Math.round(w * 1.1) + 'px',
+      'opacity:' + z.op,
       'animation:' + z.anim + ' ' + Math.round(dur) + 'ms ease-in-out forwards',
     ].join(';');
-
-    // Random flip for variety
+    // Occasional horizontal flip
     if (Math.random() > 0.5) g.style.transform = 'scaleX(-1)';
-
-    const DOMO_IMGS = Array.from({length:31}, (_,i) => 'domo-site-assets/domo-' + String(i+1).padStart(2,'0') + '.png');
-    const src = DOMO_IMGS[Math.floor(Math.random() * DOMO_IMGS.length)];
-    g.innerHTML = '<img src="' + src + '" alt="" draggable="false">';
+    g.innerHTML = '<img src="' + img(pick(z.poses)) + '" alt="" draggable="false">';
     layer.appendChild(g);
-
-    setTimeout(() => g.remove(), dur + 300);
+    setTimeout(() => g.remove(), dur + 400);
   }
 
   function tick() {
     spawnGhost();
-    setTimeout(tick, rnd(2000, 5000));
+    setTimeout(tick, rnd(2500, 5500));
   }
+  setTimeout(tick, 1800);
 
-  // Kick off after page settles
-  setTimeout(tick, 1500);
+  // ── COUNTDOWN DOMO — chomps every second ──
+  const cdDomo = document.getElementById('countdownDomo');
+  let lastSec = -1;
+  setInterval(() => {
+    const s = parseInt(document.getElementById('cd-secs').textContent);
+    if (s !== lastSec) {
+      lastSec = s;
+      if (!cdDomo) return;
+      cdDomo.classList.remove('chomp');
+      void cdDomo.offsetWidth; // force reflow
+      cdDomo.classList.add('chomp');
+      cdDomo.addEventListener('animationend', () => cdDomo.classList.remove('chomp'), { once: true });
+    }
+  }, 200);
 </script>
 
 </body>
