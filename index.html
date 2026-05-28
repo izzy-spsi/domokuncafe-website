@@ -126,10 +126,10 @@
   .sil-frame.full-color { filter: none; } /* opening day only */
   .silhouette-label {
     font-family: Arial, sans-serif;
-    font-size: 11px;
+    font-size: 14px;
     letter-spacing: 5px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.82);
     margin-top: -4px;
     margin-bottom: 20px;
   }
@@ -435,12 +435,12 @@
   }
   #countdownDomo {
     position: absolute;
-    right: -88px;
-    bottom: 0;
-    width: 72px;
-    height: 72px;
+    right: -160px;
+    bottom: -4px;
+    width: 144px;
+    height: 144px;
     object-fit: contain;
-    opacity: 0.88;
+    opacity: 0.92;
     pointer-events: none;
     transform: scaleX(-1); /* mirror to face the seconds */
   }
@@ -660,7 +660,7 @@
 </div><!-- /page -->
 
 <!-- VERSION BADGE -->
-<div class="version-badge">v1.3.3</div>
+<div class="version-badge">v1.3.4</div>
 
 <!-- DOMO GHOST LAYER -->
 <div id="domoLayer" aria-hidden="true"></div>
@@ -889,7 +889,7 @@
   // Curated pose pools per unit
   const DAY_POSES    = [14, 18, 20, 25, 30]; // dramatic / milestone energy
   const HOUR_POSES   = [7,  11, 13, 19, 27]; // musical / lively
-  const MINUTE_POSES = [3,  6,  10, 17, 23, 28, 31]; // cute / casual / sitting
+  const MINUTE_POSES = [3,  6,  10, 17, 23, 28]; // cute / casual / sitting (domo-31 removed — looks like eating)
 
   function showUnitDomo(blockEl, poses, durationMs) {
     const existing = blockEl.querySelector('.unit-domo');
