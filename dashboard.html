@@ -219,7 +219,7 @@
     // Load dashboard data
     async function loadDashboard() {
       try {
-        const response = await fetch('https://tranquil-magic-production-4aee.up.railway.app/api/rsvp/stats', {
+        const response = await fetch('https://tranquil-magic-production-4aee.up.railway.app/api/signup/stats', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -238,7 +238,7 @@
         document.getElementById('emailValidRate').textContent = '100%';
 
         // Load RSVPs for map
-        const rsvpResponse = await fetch('https://tranquil-magic-production-4aee.up.railway.app/api/rsvp/list', {
+        const rsvpResponse = await fetch('https://tranquil-magic-production-4aee.up.railway.app/api/signup/list', {
           headers: { 'Authorization': `Bearer ${token}` }
         });
         
