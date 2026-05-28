@@ -418,20 +418,10 @@
   /* ══════════════════════════
      DOMO GHOST LAYER
   ══════════════════════════ */
-  #domoLayer {
-    position: fixed;
-    inset: 0;
-    z-index: 5;
-    pointer-events: none;
-    overflow: hidden;
-  }
-  .domo-ghost {
-    position: absolute;
-    opacity: 0;
-    will-change: transform, opacity;
-    transition: none;
-  }
-  .domo-ghost img { display: block; width: 100%; height: 100%; object-fit: contain; }
+  /* Ghost layer disabled */
+  #domoLayer { display: none; }
+  .domo-ghost { display: none; }
+  .domo-ghost img { display: none; }
 
   /* ── COUNTDOWN WATCHER (static) ── */
   .countdown-domo-wrap {
@@ -869,8 +859,9 @@
 
 <script>
   // ── DOMO GHOST ENGINE (Curated) ──
-  const layer = document.getElementById('domoLayer');
-  const MAX_GHOSTS = 4;
+  // Ghost layer disabled
+  // const layer = document.getElementById('domoLayer');
+  // const MAX_GHOSTS = 4;
 
   function rnd(a, b) { return Math.random() * (b - a) + a; }
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
@@ -883,12 +874,12 @@
   function img(n) { return SPRITES[(n - 1) % SPRITES.length]; }
   function val(v) { return typeof v === 'function' ? v() : v; }
 
-  // — POSE POOLS — all use the 3 new high-res sprites —
-  const LEFT_POSES   = [1, 2, 3];
-  const RIGHT_POSES  = [1, 2, 3];
-  const BOTTOM_POSES = [1, 2, 3];
-  const BG_POSES     = [1, 2, 3];
-  const CORNER_POSES = [1, 2, 3];
+  // Pose pools disabled (ghost layer disabled)
+  // const LEFT_POSES   = [1, 2, 3];
+  // const RIGHT_POSES  = [1, 2, 3];
+  // const BOTTOM_POSES = [1, 2, 3];
+  // const BG_POSES     = [1, 2, 3];
+  // const CORNER_POSES = [1, 2, 3];
 
   const ZONES = [
     // ─ Left edge peeker (high energy) ─
@@ -937,33 +928,14 @@
       anim: 'domoAppear',     op: 0.14, d: ()=>rnd(14000,20000) },
   ];
 
-  function spawnGhost() {
-    if (layer.children.length >= MAX_GHOSTS) return;
-    const z   = pick(ZONES);
-    const dur = val(z.d);
-    const w   = val(z.w);
-    const g   = document.createElement('div');
-    g.className = 'domo-ghost';
-    g.style.cssText = [
-      'left:'    + Math.round(val(z.x)) + '%',
-      'top:'     + Math.round(val(z.y)) + '%',
-      'width:'   + Math.round(w) + 'px',
-      'height:'  + Math.round(w * 1.1) + 'px',
-      'opacity:' + z.op,
-      'animation:' + z.anim + ' ' + Math.round(dur) + 'ms ease-in-out forwards',
-    ].join(';');
-    // Occasional horizontal flip
-    if (Math.random() > 0.5) g.style.transform = 'scaleX(-1)';
-    g.innerHTML = '<img src="' + img(pick(z.poses)) + '" alt="" draggable="false">';
-    layer.appendChild(g);
-    setTimeout(() => g.remove(), dur + 400);
-  }
+    // spawnGhost() disabled — random Domos removed
+  /*
+function spawnGhost() { ... }
+  */
 
-  function tick() {
-    spawnGhost();
-    setTimeout(tick, rnd(2500, 5500));
-  }
-  setTimeout(tick, 1800);
+  // Ghost layer disabled
+  // function tick() { spawnGhost(); setTimeout(tick, rnd(2500,5500)); }
+  // setTimeout(tick, 1800);
 
   // ── DAYS FLIPBOOK ──
   (function() {
@@ -979,9 +951,10 @@
 
   // ── COUNTDOWN UNIT VISITORS (Days / Hours / Minutes) ──
   // Curated pose pools per unit
-  const DAY_POSES    = [1, 2, 3];
-  const HOUR_POSES   = [1, 2, 3];
-  const MINUTE_POSES = [1, 2, 3];
+  // Unit visitor poses disabled (ghost layer disabled)
+  // const DAY_POSES    = [1, 2, 3];
+  // const HOUR_POSES   = [1, 2, 3];
+  // const MINUTE_POSES = [1, 2, 3];
 
   function showUnitDomo(blockEl, poses, durationMs) {
     const existing = blockEl.querySelector('.unit-domo');
