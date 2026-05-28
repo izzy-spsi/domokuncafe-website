@@ -449,6 +449,26 @@
     /* mirrored at source — faces left toward seconds */
   }
 
+  /* ── DAYS FLIPBOOK ANIMATION ── */
+  .days-flipbook {
+    position: absolute;
+    left: -130px;
+    bottom: 0;
+    width: 110px;
+    height: 110px;
+    pointer-events: none;
+  }
+  .days-flipbook img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.08s ease-in-out;
+  }
+  .days-flipbook img.active { opacity: 1; }
+
   /* ── UNIT VISITOR DOMOS (Days / Hours / Minutes) ── */
   .cd-block {
     position: relative;
@@ -567,7 +587,13 @@
     <div class="countdown-wrap">
       <div class="countdown-label">Opening in</div>
       <div class="countdown">
-        <div class="cd-block">
+        <div class="cd-block countdown-domo-wrap">
+          <!-- Flipbook animation left of Days -->
+          <div class="days-flipbook" id="daysFlipbook">
+            <img src="domo-site-assets/domo-anim-1.png" class="active" alt="" draggable="false">
+            <img src="domo-site-assets/domo-anim-2.png" alt="" draggable="false">
+            <img src="domo-site-assets/domo-anim-3.png" alt="" draggable="false">
+          </div>
           <div class="cd-num" id="cd-days">00</div>
           <div class="cd-unit">Days</div>
         </div>
@@ -683,7 +709,7 @@
 </div><!-- /page -->
 
 <!-- VERSION BADGE -->
-<div class="version-badge">v1.3.6</div>
+<div class="version-badge">v1.4.0</div>
 
 <!-- DOMO GHOST LAYER -->
 <div id="domoLayer" aria-hidden="true"></div>
@@ -907,6 +933,18 @@
     setTimeout(tick, rnd(2500, 5500));
   }
   setTimeout(tick, 1800);
+
+  // ── DAYS FLIPBOOK ──
+  (function() {
+    const frames = document.querySelectorAll('#daysFlipbook img');
+    let current = 0;
+    const FRAME_MS = 220; // speed of flip
+    setInterval(() => {
+      frames[current].classList.remove('active');
+      current = (current + 1) % frames.length;
+      frames[current].classList.add('active');
+    }, FRAME_MS);
+  })();
 
   // ── COUNTDOWN UNIT VISITORS (Days / Hours / Minutes) ──
   // Curated pose pools per unit
