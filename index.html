@@ -539,6 +539,135 @@
     .social-row { gap: 12px; }
     .social-btn { padding: 9px 16px; font-size: 12px; }
   }
+
+  /* ── RSVP MODAL ── */
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .modal:not(.hidden) {
+    pointer-events: auto;
+  }
+  .modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    pointer-events: auto;
+  }
+  .modal-content {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    z-index: 101;
+  }
+  .modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+  }
+  .modal h2 {
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    color: #1a1a1a;
+  }
+  .modal-subtitle {
+    color: #888;
+    font-size: 14px;
+    margin: 0 0 24px 0;
+  }
+  #rsvpForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  #rsvpForm input {
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+  }
+  #rsvpForm input:focus {
+    outline: none;
+    border-color: #333;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+  }
+  .form-note {
+    font-size: 12px;
+    color: #666;
+    margin: 8px 0 0 0;
+    line-height: 1.4;
+  }
+  .submit-btn {
+    padding: 12px 20px;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .submit-btn:hover:not(:disabled) {
+    background: #333;
+  }
+  .submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .error-message {
+    padding: 12px;
+    background: #fee;
+    color: #c33;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+  }
+  .success-message {
+    text-align: center;
+    padding: 24px 0;
+  }
+  .success-message h3 {
+    margin: 0 0 12px 0;
+    font-size: 20px;
+  }
+  .success-message p {
+    color: #666;
+    margin: 0 0 20px 0;
+  }
+  .modal-close-btn {
+    padding: 10px 20px;
+    background: #f0f0f0;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .hidden {
+    display: none !important;
+  }
+
 </style>
 </head>
 <body>
@@ -616,11 +745,11 @@
       </div>
     </div>
 
-    <!-- CTA — eVite -->
+    <!-- CTA — Grand Opening RSVP -->
     <div class="cta-section">
-      <div class="cta-label">Be first inside.</div>
-      <a class="cta-btn" href="#" id="eviteLink" target="_blank">Get Your Invite →</a>
-      <div class="cta-fine">Private soft opening · Limited seats · $30/person</div>
+      <div class="cta-label">Coming to the Grand Opening?</div>
+      <button class="cta-btn" id="rsvpBtn">Count Me In →</button>
+      <div class="cta-fine">June 13, 2026 · 10:00 AM · Buena Park, CA</div>
     </div>
 
     <!-- ADDRESS -->
@@ -972,6 +1101,112 @@ function spawnGhost() { ... }
     prevMins = m; prevHours = h; prevDays = d;
   }, 500);
 </script>
+
+  <!-- RSVP Modal -->
+  <div id="rsvpModal" class="modal hidden" aria-hidden="true">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal">✗</button>
+      
+      <h2>Grand Opening RSVP</h2>
+      <p class="modal-subtitle">June 13, 2026 at 10:00 AM</p>
+      
+      <form id="rsvpForm">
+        <div class="form-row">
+          <input type="text" name="firstName" placeholder="First Name" required>
+          <input type="text" name="lastName" placeholder="Last Name" required>
+        </div>
+        
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="phone" placeholder="Phone Number" required>
+        <input type="text" name="areaCode" placeholder="Area Code (ZIP or State)" required>
+        
+        <p class="form-note">
+          ✓ Valid email & phone required for giveaway eligibility
+        </p>
+        
+        <button type="submit" class="submit-btn">Confirm RSVP →</button>
+        <div id="formError" class="error-message" style="display:none;"></div>
+      </form>
+      
+      <div id="successMessage" class="success-message" style="display:none;">
+        <h3>🎉 See you June 13!</h3>
+        <p>We can't wait to see you at the Grand Opening.</p>
+        <button class="modal-close-btn" id="successClose">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- RSVP Script -->
+  <script>
+    const rsvpBtn = document.getElementById('rsvpBtn');
+    const rsvpModal = document.getElementById('rsvpModal');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const closeModal = document.getElementById('closeModal');
+    const rsvpForm = document.getElementById('rsvpForm');
+    const formError = document.getElementById('formError');
+    const successMessage = document.getElementById('successMessage');
+    const successClose = document.getElementById('successClose');
+
+    // Open modal
+    rsvpBtn.addEventListener('click', () => {
+      rsvpModal.classList.remove('hidden');
+    });
+
+    // Close modal
+    const closeRsvpModal = () => {
+      rsvpModal.classList.add('hidden');
+      rsvpForm.style.display = 'block';
+      successMessage.style.display = 'none';
+      formError.style.display = 'none';
+      rsvpForm.reset();
+    };
+
+    closeModal.addEventListener('click', closeRsvpModal);
+    modalOverlay.addEventListener('click', closeRsvpModal);
+    successClose.addEventListener('click', closeRsvpModal);
+
+    // Submit form
+    rsvpForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(rsvpForm);
+      const data = Object.fromEntries(formData);
+      
+      const submitBtn = rsvpForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      formError.style.display = 'none';
+      
+      try {
+        const response = await fetch('https://tranquil-magic-production-4aee.up.railway.app/api/rsvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+          rsvpForm.style.display = 'none';
+          successMessage.style.display = 'block';
+        } else {
+          formError.textContent = result.error;
+          formError.style.display = 'block';
+          submitBtn.disabled = false;
+        }
+      } catch (err) {
+        formError.textContent = 'Connection error. Please try again.';
+        formError.style.display = 'block';
+        submitBtn.disabled = false;
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !rsvpModal.classList.contains('hidden')) {
+        closeRsvpModal();
+      }
+    });
+  </script>
 
 </body>
 </html>
