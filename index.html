@@ -709,7 +709,7 @@
 </div><!-- /page -->
 
 <!-- VERSION BADGE -->
-<div class="version-badge">v1.4.0</div>
+<div class="version-badge">v1.4.1</div>
 
 <!-- DOMO GHOST LAYER -->
 <div id="domoLayer" aria-hidden="true"></div>
@@ -844,20 +844,21 @@
 
   function rnd(a, b) { return Math.random() * (b - a) + a; }
   function pick(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
-  function img(n) { return 'domo-site-assets/domo-' + String(n).padStart(2,'0') + '.png'; }
+  // 3 high-res sprites: 1=waving, 2=arms-up, 3=running
+  const SPRITES = [
+    'domo-site-assets/domo-anim-1.png',
+    'domo-site-assets/domo-anim-2.png',
+    'domo-site-assets/domo-anim-3.png',
+  ];
+  function img(n) { return SPRITES[(n - 1) % SPRITES.length]; }
   function val(v) { return typeof v === 'function' ? v() : v; }
 
-  // — CURATED POSE POOLS per zone —
-  // Left edge: high-energy, expressive faces
-  const LEFT_POSES  = [7, 13, 18, 19, 3, 12];
-  // Right edge: cool / dynamic / musical
-  const RIGHT_POSES = [11, 14, 24, 27, 5, 20];
-  // Bottom: sitting / curious / cute
-  const BOTTOM_POSES = [6, 23, 28, 29, 31, 17];
-  // Atmosphere: simple standing, calm
-  const BG_POSES    = [1, 2, 9, 15, 22];
-  // Corner cameos: surprise energy
-  const CORNER_POSES = [10, 16, 21, 25, 30, 4];
+  // — POSE POOLS — all use the 3 new high-res sprites —
+  const LEFT_POSES   = [1, 2, 3];
+  const RIGHT_POSES  = [1, 2, 3];
+  const BOTTOM_POSES = [1, 2, 3];
+  const BG_POSES     = [1, 2, 3];
+  const CORNER_POSES = [1, 2, 3];
 
   const ZONES = [
     // ─ Left edge peeker (high energy) ─
@@ -948,9 +949,9 @@
 
   // ── COUNTDOWN UNIT VISITORS (Days / Hours / Minutes) ──
   // Curated pose pools per unit
-  const DAY_POSES    = [14, 18, 20, 25, 30]; // dramatic / milestone energy
-  const HOUR_POSES   = [7,  11, 13, 19, 27]; // musical / lively
-  const MINUTE_POSES = [3,  6,  10, 17, 23, 28]; // cute / casual / sitting (domo-31 removed — looks like eating)
+  const DAY_POSES    = [1, 2, 3];
+  const HOUR_POSES   = [1, 2, 3];
+  const MINUTE_POSES = [1, 2, 3];
 
   function showUnitDomo(blockEl, poses, durationMs) {
     const existing = blockEl.querySelector('.unit-domo');
