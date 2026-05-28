@@ -74,10 +74,29 @@
     display: flex;
     justify-content: center;
     padding: 36px 24px 0;
+    position: relative;
   }
   .top-bar img.logo {
     height: 72px;
     filter: drop-shadow(0 2px 16px rgba(0,0,0,0.6));
+  }
+  .login-btn {
+    position: absolute;
+    top: 36px;
+    right: 24px;
+    padding: 8px 16px;
+    background: rgba(0,0,0,0.08);
+    color: #1a1a1a;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .login-btn:hover {
+    background: rgba(0,0,0,0.12);
+    border-color: rgba(0,0,0,0.25);
   }
 
   /* ══════════════════════════
@@ -541,6 +560,95 @@
   }
 
   /* ── RSVP MODAL ── */
+  /* — LOGIN MODAL — */
+  .login-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+  }
+  .login-modal:not(.hidden) {
+    pointer-events: auto;
+  }
+  .login-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    pointer-events: auto;
+  }
+  .login-modal-content {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    padding: 40px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    z-index: 201;
+  }
+  .login-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #666;
+  }
+  .login-modal h2 {
+    margin: 0 0 24px 0;
+    font-size: 22px;
+    color: #1a1a1a;
+  }
+  #loginForm {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  #loginForm input {
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+  }
+  #loginForm input:focus {
+    outline: none;
+    border-color: #333;
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.1);
+  }
+  .login-submit-btn {
+    padding: 12px 20px;
+    background: #1a1a1a;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .login-submit-btn:hover:not(:disabled) {
+    background: #333;
+  }
+  .login-submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  .login-error {
+    padding: 12px;
+    background: #fee;
+    color: #c33;
+    border-radius: 6px;
+    font-size: 14px;
+    text-align: center;
+    display: none;
+  }
+
   .modal {
     position: fixed;
     inset: 0;
@@ -685,9 +793,10 @@
 
 <div class="page">
 
-  <!-- LOGO -->
+  <!-- LOGO + LOGIN -->
   <div class="top-bar">
     <img class="logo" src="domo-cafe-logo-transparent.png" alt="Domo Cafe">
+    <button id="loginBtn" class="login-btn">Login</button>
   </div>
 
   <!-- HERO -->
@@ -1102,6 +1211,23 @@ function spawnGhost() { ... }
   }, 500);
 </script>
 
+  <!-- Login Modal -->
+  <div id="loginModal" class="login-modal hidden" aria-hidden="true">
+    <div class="login-modal-overlay" id="loginModalOverlay"></div>
+    <div class="login-modal-content">
+      <button class="login-modal-close" id="closeLoginModal">✗</button>
+      
+      <h2>Admin Login</h2>
+      
+      <form id="loginForm">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit" class="login-submit-btn">Login</button>
+        <div id="loginError" class="login-error"></div>
+      </form>
+    </div>
+  </div>
+
   <!-- RSVP Modal -->
   <div id="rsvpModal" class="modal hidden" aria-hidden="true">
     <div class="modal-overlay" id="modalOverlay"></div>
@@ -1204,6 +1330,72 @@ function spawnGhost() { ... }
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && !rsvpModal.classList.contains('hidden')) {
         closeRsvpModal();
+      }
+    });
+  </script>
+
+  <!-- Login Script -->
+  <script>
+    const loginBtn = document.getElementById('loginBtn');
+    const loginModal = document.getElementById('loginModal');
+    const loginModalOverlay = document.getElementById('loginModalOverlay');
+    const closeLoginModal = document.getElementById('closeLoginModal');
+    const loginForm = document.getElementById('loginForm');
+    const loginError = document.getElementById('loginError');
+
+    // Open login modal
+    loginBtn.addEventListener('click', () => {
+      loginModal.classList.remove('hidden');
+    });
+
+    // Close login modal
+    const closeLogin = () => {
+      loginModal.classList.add('hidden');
+      loginForm.reset();
+      loginError.style.display = 'none';
+    };
+
+    closeLoginModal.addEventListener('click', closeLogin);
+    loginModalOverlay.addEventListener('click', closeLogin);
+
+    // Submit login
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const formData = new FormData(loginForm);
+      const data = Object.fromEntries(formData);
+      
+      const submitBtn = loginForm.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      loginError.style.display = 'none';
+      
+      try {
+        const response = await fetch('https://tranquil-magic-production-4aee.up.railway.app/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok) {
+          localStorage.setItem('authToken', result.token);
+          window.location.href = '/dashboard.html';
+        } else {
+          loginError.textContent = result.error || 'Login failed';
+          loginError.style.display = 'block';
+          submitBtn.disabled = false;
+        }
+      } catch (err) {
+        loginError.textContent = 'Connection error. Please try again.';
+        loginError.style.display = 'block';
+        submitBtn.disabled = false;
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !loginModal.classList.contains('hidden')) {
+        closeLogin();
       }
     });
   </script>
