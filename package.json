@@ -1,6 +1,6 @@
 {
   "name": "domokuncafe-landing",
-  "version": "1.5.10",
+  "version": "1.5.11",
   "description": "Domo Cafe coming soon landing page",
   "main": "server.js",
   "scripts": {
