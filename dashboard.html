@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Domo Cafe — Admin Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -24,10 +25,18 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.15);
       overflow-y: auto;
     }
-    .sidebar h1 {
-      font-size: 24px;
-      margin-bottom: 32px;
-      font-weight: 600;
+    .sidebar-logo {
+      display: block;
+      width: 160px;
+      margin: 0 auto 8px auto;
+    }
+    .sidebar-version {
+      text-align: center;
+      font-size: 11px;
+      color: rgba(255,255,255,0.4);
+      font-family: monospace;
+      letter-spacing: 0.5px;
+      margin-bottom: 28px;
     }
     .sidebar-nav {
       display: flex;
@@ -146,7 +155,8 @@
   <div class="dashboard">
     <!-- Sidebar -->
     <div class="sidebar">
-      <h1>Domo Cafe</h1>
+      <img class="sidebar-logo" src="domo-cafe-logo-transparent.png" alt="Domo Cafe" />
+      <div class="sidebar-version">v1.8.1</div>
       <nav class="sidebar-nav">
         <a href="#" class="nav-link active" data-page="overview">Overview</a>
         <a href="#" class="nav-link" data-page="rsvps">All RSVPs</a>
@@ -173,6 +183,11 @@
               <h3>Email Validation Rate</h3>
               <div class="number" id="emailValidRate">0%</div>
             </div>
+          </div>
+
+          <h3 style="margin-bottom: 16px;">Signup Timeline</h3>
+          <div style="background: white; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 24px; margin-bottom: 32px;">
+            <canvas id="signupChart" height="100"></canvas>
           </div>
 
           <h3 style="margin-bottom: 16px;">Guest Location Map</h3>
@@ -234,7 +249,7 @@
         const data = await response.json();
         
         // Update stats
-        document.getElementById('totalCount').textContent = data.totalRSVPs || 0;
+        document.getElementById('totalCount').textContent = data.totalSignups || 0;
         document.getElementById('emailValidRate').textContent = '100%';
 
         // Load RSVPs for map
@@ -246,10 +261,73 @@
           const rsvps = await rsvpResponse.json();
           initMap(rsvps);
           loadRSVPsTable(rsvps);
+          buildTimelineChart(rsvps);
         }
       } catch (err) {
         console.error('Error loading dashboard:', err);
       }
+    }
+
+    // Build signup timeline chart
+    function buildTimelineChart(rsvps) {
+      // Site launch date — May 29, 2026
+      const launchDate = new Date('2026-05-29');
+      const today = new Date();
+
+      // Build a map of date → count
+      const countByDate = {};
+      rsvps.forEach(r => {
+        const d = new Date(r.createdAt).toLocaleDateString('en-CA'); // YYYY-MM-DD
+        countByDate[d] = (countByDate[d] || 0) + 1;
+      });
+
+      // Generate every day from launch to today
+      const labels = [];
+      const counts = [];
+      for (let d = new Date(launchDate); d <= today; d.setDate(d.getDate() + 1)) {
+        const key = d.toLocaleDateString('en-CA');
+        labels.push(d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }));
+        counts.push(countByDate[key] || 0);
+      }
+
+      const ctx = document.getElementById('signupChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels,
+          datasets: [{
+            label: 'Sign Ups',
+            data: counts,
+            backgroundColor: 'rgba(139,69,19,0.7)',
+            borderColor: '#8B4513',
+            borderWidth: 1,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                title: (items) => items[0].label,
+                label: (item) => `${item.raw} sign up${item.raw !== 1 ? 's' : ''}`
+              }
+            }
+          },
+          scales: {
+            x: {
+              title: { display: true, text: 'Date', font: { size: 12 }, color: '#666' },
+              grid: { display: false }
+            },
+            y: {
+              title: { display: true, text: 'Sign Ups', font: { size: 12 }, color: '#666' },
+              beginAtZero: true,
+              ticks: { stepSize: 1, precision: 0 }
+            }
+          }
+        }
+      });
     }
 
     // Initialize Leaflet map
