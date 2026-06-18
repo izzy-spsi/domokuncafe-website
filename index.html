@@ -776,6 +776,163 @@
     display: none !important;
   }
 
+
+  /* ══════════════════════════
+     MENU SLIDESHOW
+  ══════════════════════════ */
+  .menu-section {
+    width: 100%;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 64px 24px 56px;
+    text-align: center;
+  }
+  .menu-eyebrow {
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  .menu-headline {
+    font-size: clamp(24px, 4vw, 40px);
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.4);
+  }
+  .menu-slider-wrap {
+    position: relative;
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .menu-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 16px 64px rgba(0,0,0,0.6);
+  }
+  .menu-slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.9s ease-in-out;
+    background-size: cover;
+    background-position: center;
+  }
+  .menu-slide.active { opacity: 1; }
+  .menu-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(13,8,5,0.82) 0%,
+      rgba(13,8,5,0.20) 50%,
+      rgba(13,8,5,0.0) 100%
+    );
+  }
+  .menu-slide-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 24px 28px;
+    z-index: 2;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+  .menu-slide-name {
+    font-size: clamp(18px, 3vw, 28px);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+  .menu-slide-desc {
+    font-family: Arial, sans-serif;
+    font-size: clamp(11px, 1.5vw, 14px);
+    color: rgba(255,255,255,0.65);
+    margin-top: 4px;
+    max-width: 420px;
+  }
+  .menu-slide-price {
+    font-family: Arial, sans-serif;
+    font-size: clamp(22px, 3.5vw, 34px);
+    font-weight: 700;
+    color: var(--gold);
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    white-space: nowrap;
+    margin-left: 16px;
+    flex-shrink: 0;
+  }
+  .menu-nav-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .menu-arrow {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.14);
+    color: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .menu-arrow:hover { background: rgba(255,255,255,0.16); }
+  .menu-dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .menu-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.25);
+    transition: background 0.3s, transform 0.3s;
+    cursor: pointer;
+  }
+  .menu-dot.active {
+    background: var(--red);
+    transform: scale(1.35);
+  }
+  .menu-cta {
+    margin-top: 36px;
+  }
+  .menu-cta a {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .menu-cta a:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
+  @media (max-width: 600px) {
+    .menu-slide-info { flex-direction: column; align-items: flex-start; padding: 16px 18px; }
+    .menu-slide-price { margin-left: 0; margin-top: 4px; }
+  }
+
 </style>
 </head>
 <body>
@@ -938,6 +1095,84 @@
 
   </div><!-- /about -->
 
+  <!-- MENU SLIDESHOW -->
+  <div class="menu-section" id="menuSection">
+    <div class="menu-eyebrow">What We're Serving</div>
+    <div class="menu-headline">Food worth the wait.</div>
+    <div class="menu-slider-wrap">
+      <div class="menu-slider" id="menuSlider">
+
+        <div class="menu-slide" style="background-image:url('https://geopulse-ai-production.up.railway.app/domo-food/domo-moco.jpg')">
+          <div class="menu-slide-info">
+            <div><div class="menu-slide-name">Domo Moco</div><div class="menu-slide-desc">Rice, hamburger patty, fried egg &amp; signature Domo gravy.</div></div>
+            <div class="menu-slide-price">$19</div>
+          </div>
+        </div>
+
+        <div class="menu-slide" style="background-image:url('https://geopulse-ai-production.up.railway.app/domo-food/katsu-curry.jpg')">
+          <div class="menu-slide-info">
+            <div><div class="menu-slide-name">Golden Katsu Curry</div><div class="menu-slide-desc">Crispy tonkatsu, golden Japanese curry, steamed rice.</div></div>
+            <div class="menu-slide-price">$18</div>
+          </div>
+        </div>
+
+        <div class="menu-slide" style="background-image:url('https://geopulse-ai-production.up.railway.app/domo-food/umami-pasta.jpg')">
+          <div class="menu-slide-info">
+            <div><div class="menu-slide-name">Umami Cream Pasta</div><div class="menu-slide-desc">Domo Pick ★ — rich umami cream sauce, house pasta.</div></div>
+            <div class="menu-slide-price">$18.50</div>
+          </div>
+        </div>
+
+        <div class="menu-slide" style="background-image:url('https://geopulse-ai-production.up.railway.app/domo-food/crispy-chicken-fries.jpg')">
+          <div class="menu-slide-info">
+            <div><div class="menu-slide-name">Crispy Chicken Loaded Fries</div><div class="menu-slide-desc">Korean fried chicken, waffle fries, house sauce.</div></div>
+            <div class="menu-slide-price">$17</div>
+          </div>
+        </div>
+
+        <div class="menu-slide" style="background-image:url('https://geopulse-ai-production.up.railway.app/domo-food/boss-burger.jpg')">
+          <div class="menu-slide-info">
+            <div><div class="menu-slide-name">Domo Boss Burger</div><div class="menu-slide-desc">Double smash patty, special sauce, brioche bun, waffle fries.</div></div>
+            <div class="menu-slide-price">$17</div>
+          </div>
+        </div>
+
+        <div class="menu-slide" style="background-image:url('https://geopulse-ai-production.up.railway.app/domo-food/kimchi-katsu.jpg')">
+          <div class="menu-slide-info">
+            <div><div class="menu-slide-name">Kimchi Katsu Sandwich</div><div class="menu-slide-desc">Crispy katsu, house kimchi, milk bread.</div></div>
+            <div class="menu-slide-price">$18.50</div>
+          </div>
+        </div>
+
+        <div class="menu-slide" style="background-image:url('https://geopulse-ai-production.up.railway.app/domo-food/street-dog.jpg')">
+          <div class="menu-slide-info">
+            <div><div class="menu-slide-name">Domo's Street Dog</div><div class="menu-slide-desc">All-beef dog, bonito flakes, waffle fries.</div></div>
+            <div class="menu-slide-price">$16.50</div>
+          </div>
+        </div>
+
+        <div class="menu-slide" style="background-image:url('https://geopulse-ai-production.up.railway.app/domo-food/drinks.jpg')">
+          <div class="menu-slide-info">
+            <div><div class="menu-slide-name">Refreshers &amp; Drinks</div><div class="menu-slide-desc">Matcha, Mango Lemonade, Iced Cookie Coffee, Milo Dinosaur &amp; more.</div></div>
+            <div class="menu-slide-price">from $6.50</div>
+          </div>
+        </div>
+
+      </div><!-- /menu-slider -->
+    </div><!-- /menu-slider-wrap -->
+
+    <div class="menu-nav-row">
+      <button class="menu-arrow" id="menuPrev">&#8592;</button>
+      <div class="menu-dots" id="menuDots"></div>
+      <button class="menu-arrow" id="menuNext">&#8594;</button>
+    </div>
+
+    <div class="menu-cta">
+      <a href="https://geopulse-ai-production.up.railway.app/domo-grand-opening-menu-GO-v1.2-print.html" target="_blank" rel="noopener">View Full Menu &rarr;</a>
+    </div>
+
+  </div><!-- /menu -->
+
   <!-- FOOTER -->
   <div class="footer">
     © 2026 Domo Cafe · Buena Park, CA ·
@@ -1075,6 +1310,45 @@
   }
   applyReveal();
 
+
+  // ══ MENU SLIDESHOW ══
+  (function() {
+    const slides = Array.from(document.querySelectorAll('.menu-slide'));
+    const dotsWrap = document.getElementById('menuDots');
+    const prevBtn  = document.getElementById('menuPrev');
+    const nextBtn  = document.getElementById('menuNext');
+    if (!slides.length || !dotsWrap) return;
+
+    let cur = 0;
+    let timer;
+
+    // Build dots
+    slides.forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'menu-dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(d);
+    });
+
+    function goTo(idx) {
+      slides[cur].classList.remove('active');
+      dotsWrap.children[cur].classList.remove('active');
+      cur = (idx + slides.length) % slides.length;
+      slides[cur].classList.add('active');
+      dotsWrap.children[cur].classList.add('active');
+      resetTimer();
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      timer = setInterval(() => goTo(cur + 1), 5500);
+    }
+
+    slides[0].classList.add('active');
+    prevBtn.addEventListener('click', () => goTo(cur - 1));
+    nextBtn.addEventListener('click', () => goTo(cur + 1));
+    resetTimer();
+  })();
 
 </script>
 
