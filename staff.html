@@ -1,0 +1,1540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Domo Cafe — Staff Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --brown:#8B4513;--brown-l:#A0522D;--brown-d:#6B3410;
+  --red:#CC2222;
+  --bg:#0c0c0c;--bg2:#1a1a1a;--bg3:#242424;--bg4:#2e2e2e;
+  --text:#f0ede8;--muted:#9a9490;--border:rgba(240,237,232,0.1);
+  --green:#22c55e;--amber:#f59e0b;--blue:#3b82f6;
+  --radius:12px;--radius-sm:8px;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;overflow-x:hidden}
+h1,h2,h3,h4{font-family:'Space Grotesk',sans-serif;font-weight:700}
+button{font-family:'DM Sans',sans-serif;cursor:pointer;border:none;outline:none}
+input,select,textarea{font-family:'DM Sans',sans-serif;font-size:15px}
+a{color:var(--brown-l);text-decoration:none}
+
+/* ── SCREEN MANAGER ── */
+.screen{display:none;flex-direction:column;min-height:100vh}
+.screen.active{display:flex}
+
+/* ══════════════ LOGIN ══════════════ */
+#screen-login{align-items:center;justify-content:center;padding:32px 20px;background:var(--bg)}
+.login-card{width:100%;max-width:400px;background:var(--bg2);border-radius:16px;padding:40px 32px;border:1px solid var(--border)}
+.login-logo{display:block;margin:0 auto 8px;height:64px;object-fit:contain}
+.login-title{text-align:center;font-size:22px;font-family:'Space Grotesk',sans-serif;font-weight:700;margin-bottom:4px}
+.login-sub{text-align:center;color:var(--muted);font-size:13px;margin-bottom:28px}
+.login-toggle{display:flex;background:var(--bg3);border-radius:var(--radius-sm);padding:3px;margin-bottom:24px}
+.login-toggle button{flex:1;padding:8px;border-radius:6px;background:transparent;color:var(--muted);font-size:13px;font-weight:500;transition:all .2s}
+.login-toggle button.active{background:var(--brown);color:#fff}
+.form-label{display:block;font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.form-control{width:100%;padding:11px 14px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text);font-size:15px;margin-bottom:16px;transition:border-color .2s}
+.form-control:focus{outline:none;border-color:var(--brown)}
+.form-control option{background:var(--bg3)}
+.btn-login{width:100%;padding:13px;background:var(--brown);color:#fff;border-radius:var(--radius-sm);font-size:15px;font-weight:600;margin-top:4px;transition:background .2s}
+.btn-login:hover{background:var(--brown-l)}
+.login-error{color:var(--red);font-size:13px;text-align:center;margin-top:8px;display:none}
+
+/* ══════════════ SHARED PORTAL LAYOUT ══════════════ */
+.portal-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:100}
+.portal-logo{height:32px;object-fit:contain}
+.portal-header-title{flex:1;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px}
+.header-badge{padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.badge-foh{background:rgba(139,69,19,.25);color:#E8A87C}
+.badge-boh{background:rgba(45,45,45,.8);color:#ccc}
+.badge-mgmt{background:rgba(6,95,70,.3);color:#34d399}
+.badge-manager{background:rgba(204,34,34,.2);color:#f87171}
+.btn-logout{padding:6px 12px;background:var(--bg3);border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:12px;font-weight:600}
+
+.portal-body{flex:1;overflow-y:auto;padding-bottom:80px}
+.tab-content{display:none;padding:20px 16px}
+.tab-content.active{display:block}
+
+/* bottom nav */
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--bg2);border-top:1px solid var(--border);display:flex;z-index:100;padding-bottom:env(safe-area-inset-bottom)}
+.nav-tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:10px 4px 8px;gap:3px;background:transparent;color:var(--muted);font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.04em;transition:color .2s}
+.nav-tab .nav-icon{font-size:20px;line-height:1}
+.nav-tab.active{color:var(--brown-l)}
+
+/* ── CARDS ── */
+.card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.card-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;margin-bottom:4px}
+.card-sub{color:var(--muted);font-size:13px}
+.section-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:18px;margin-bottom:16px}
+.divider{border:none;border-top:1px solid var(--border);margin:16px 0}
+
+/* ── BUTTONS ── */
+.btn{padding:10px 18px;border-radius:var(--radius-sm);font-size:14px;font-weight:600;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-primary{background:var(--brown);color:#fff}
+.btn-primary:hover{background:var(--brown-l)}
+.btn-secondary{background:var(--bg3);border:1px solid var(--border);color:var(--text)}
+.btn-danger{background:rgba(204,34,34,.15);border:1px solid rgba(204,34,34,.3);color:#f87171}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-full{width:100%;justify-content:center}
+
+/* ── READINESS SCORE ── */
+.readiness-wrap{text-align:center;padding:24px 0 16px}
+.readiness-ring{width:120px;height:120px;margin:0 auto 12px;position:relative}
+.readiness-ring svg{transform:rotate(-90deg)}
+.readiness-ring .ring-bg{fill:none;stroke:var(--bg3);stroke-width:8}
+.readiness-ring .ring-fg{fill:none;stroke:var(--brown);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset .6s ease}
+.readiness-num{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:700}
+.readiness-label{color:var(--muted);font-size:13px}
+
+/* ── CERT BADGES ── */
+.cert-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.cert-badge{background:var(--bg3);border-radius:var(--radius-sm);padding:10px 6px;text-align:center;border:2px solid transparent;transition:all .2s}
+.cert-badge.locked{opacity:.5}
+.cert-badge.knowledge{border-color:var(--amber)}
+.cert-badge.full{border-color:var(--green)}
+.cert-badge .cert-icon{font-size:22px;margin-bottom:4px}
+.cert-badge .cert-name{font-size:10px;font-weight:600;color:var(--muted);line-height:1.3}
+.cert-badge .cert-status{font-size:10px;margin-top:3px}
+
+/* ── MODULE CARDS ── */
+.module-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;display:flex;gap:14px;align-items:flex-start}
+.module-icon{font-size:28px;flex-shrink:0;margin-top:2px}
+.module-info{flex:1}
+.module-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px}
+.module-desc{color:var(--muted);font-size:13px;margin:3px 0 10px}
+.module-status{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.status-new{color:var(--muted)}
+.status-progress{color:var(--amber)}
+.status-done{color:var(--green)}
+
+/* ── MODULE DETAIL (modal-like overlay) ── */
+.module-detail{display:none;position:fixed;inset:0;background:var(--bg);z-index:200;flex-direction:column;overflow-y:auto}
+.module-detail.open{display:flex}
+.module-detail-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 16px;display:flex;align-items:center;gap:12px;position:sticky;top:0}
+.module-detail-header h2{flex:1;font-size:18px}
+.btn-back{background:transparent;color:var(--muted);font-size:22px;padding:0 4px}
+.module-detail-body{padding:20px 16px;max-width:680px;margin:0 auto;width:100%}
+.module-video-wrap{margin-bottom:24px}
+.module-video-wrap iframe{width:100%;aspect-ratio:16/9;border-radius:var(--radius);border:none}
+.video-placeholder{background:var(--bg3);border-radius:var(--radius);aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:14px;border:1px dashed var(--border)}
+.module-section{margin-bottom:20px}
+.module-section h3{font-size:16px;font-family:'Space Grotesk',sans-serif;margin-bottom:8px;color:var(--brown-l)}
+.module-section p,.module-section li{color:#d0ccc8;line-height:1.7;font-size:14px}
+.module-section ul{padding-left:18px}
+.empty-content{color:var(--muted);font-style:italic;font-size:14px;padding:32px 0;text-align:center}
+
+/* ── QUIZ CARDS ── */
+.quiz-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.quiz-card-left .quiz-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px}
+.quiz-card-left .quiz-meta{color:var(--muted);font-size:12px;margin-top:3px}
+.quiz-result{font-size:13px;font-weight:700}
+.result-pass{color:var(--green)}
+.result-fail{color:var(--red)}
+
+/* ── QUIZ RUNNER ── */
+.quiz-runner{display:none;position:fixed;inset:0;background:var(--bg);z-index:200;flex-direction:column}
+.quiz-runner.open{display:flex}
+.quiz-runner-header{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 16px;display:flex;align-items:center;gap:12px;flex-shrink:0}
+.quiz-runner-header h2{flex:1;font-size:16px}
+.quiz-progress-bar{height:4px;background:var(--bg3);border-radius:2px;margin:0 16px 0}
+.quiz-progress-fill{height:100%;background:var(--brown);border-radius:2px;transition:width .3s}
+.quiz-body{flex:1;overflow-y:auto;padding:24px 16px;max-width:600px;margin:0 auto;width:100%}
+.quiz-q-num{color:var(--muted);font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.quiz-q-text{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;line-height:1.4;margin-bottom:20px}
+.quiz-choices{display:flex;flex-direction:column;gap:10px}
+.quiz-choice{background:var(--bg3);border:2px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;cursor:pointer;text-align:left;color:var(--text);font-size:14px;transition:all .2s}
+.quiz-choice:hover{border-color:var(--brown)}
+.quiz-choice.selected{border-color:var(--brown);background:rgba(139,69,19,.15)}
+.quiz-choice.correct{border-color:var(--green);background:rgba(34,197,94,.1)}
+.quiz-choice.wrong{border-color:var(--red);background:rgba(204,34,34,.1)}
+.quiz-footer{padding:16px;background:var(--bg2);border-top:1px solid var(--border);display:flex;gap:10px;flex-shrink:0}
+.quiz-result-screen{text-align:center;padding:40px 20px}
+.quiz-result-score{font-family:'Space Grotesk',sans-serif;font-size:64px;font-weight:700;line-height:1}
+.quiz-result-label{font-size:20px;font-weight:600;margin:8px 0 4px}
+.quiz-result-sub{color:var(--muted);font-size:14px;margin-bottom:28px}
+
+/* ── CERT CARDS ── */
+.cert-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:12px}
+.cert-card-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.cert-card-icon{font-size:28px}
+.cert-card-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px}
+.cert-tracks{display:flex;flex-direction:column;gap:8px}
+.cert-track{display:flex;align-items:center;justify-content:space-between;padding:10px 12px;background:var(--bg3);border-radius:var(--radius-sm)}
+.track-label{font-size:13px;font-weight:600}
+.track-status{font-size:12px;font-weight:700}
+.track-earned{color:var(--green)}
+.track-pending{color:var(--amber)}
+.track-locked{color:var(--muted)}
+
+/* ── GROWTH TAB ── */
+.rating-wrap{display:flex;gap:6px;margin-top:6px;flex-wrap:wrap}
+.rating-btn{width:40px;height:40px;border-radius:8px;background:var(--bg3);border:2px solid var(--border);color:var(--text);font-weight:700;font-size:16px;transition:all .2s}
+.rating-btn.selected{background:var(--brown);border-color:var(--brown)}
+.assessment-history{margin-top:16px}
+.assess-row{background:var(--bg3);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:8px;font-size:13px}
+.assess-date{color:var(--muted);font-size:11px;margin-bottom:4px}
+.assess-scores{display:flex;gap:12px;flex-wrap:wrap}
+.assess-score-item{display:flex;gap:4px;align-items:center}
+
+/* ── ANNOUNCEMENTS ── */
+.announcement{background:rgba(139,69,19,.12);border:1px solid rgba(139,69,19,.3);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:10px}
+.announce-text{font-size:14px;line-height:1.6}
+.announce-meta{color:var(--muted);font-size:11px;margin-top:6px}
+
+/* ══════════════ MANAGER PORTAL ══════════════ */
+#screen-manager .portal-body{padding-bottom:80px}
+
+/* team table */
+.team-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.team-table{width:100%;border-collapse:collapse;font-size:13px;min-width:500px}
+.team-table th{text-align:left;padding:8px 10px;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;border-bottom:1px solid var(--border)}
+.team-table td{padding:10px;border-bottom:1px solid var(--border)}
+.team-table tr{cursor:pointer;transition:background .15s}
+.team-table tr:hover td{background:var(--bg3)}
+.team-table .staff-name{font-weight:600}
+.dept-pill{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:700;text-transform:uppercase}
+.dept-foh{background:rgba(139,69,19,.2);color:#E8A87C}
+.dept-boh{background:rgba(60,60,60,.6);color:#aaa}
+.dept-mgmt{background:rgba(6,95,70,.2);color:#34d399}
+.readiness-bar-wrap{display:flex;align-items:center;gap:6px}
+.readiness-bar{flex:1;height:6px;background:var(--bg4);border-radius:3px;overflow:hidden;min-width:40px}
+.readiness-bar-fill{height:100%;background:var(--brown);border-radius:3px}
+.readiness-pct{font-size:11px;color:var(--muted);width:28px;text-align:right}
+
+/* staff detail modal */
+.staff-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:300;align-items:flex-end}
+.staff-modal.open{display:flex}
+.staff-modal-inner{background:var(--bg2);border-radius:16px 16px 0 0;width:100%;max-height:90vh;overflow-y:auto;padding:20px 16px 32px}
+.staff-modal-handle{width:40px;height:4px;background:var(--bg4);border-radius:2px;margin:0 auto 16px}
+.staff-modal h2{font-size:20px;margin-bottom:4px}
+.staff-modal-role{color:var(--muted);font-size:13px;margin-bottom:16px}
+.cert-action-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
+.cert-action-btn{padding:10px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);text-align:left;color:var(--text);transition:all .2s}
+.cert-action-btn:hover{border-color:var(--brown)}
+.cert-action-btn .ca-name{font-size:12px;font-weight:700}
+.cert-action-btn .ca-status{font-size:11px;color:var(--muted)}
+
+/* overview */
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.stat-card{background:var(--bg3);border-radius:var(--radius-sm);padding:14px;text-align:center}
+.stat-num{font-family:'Space Grotesk',sans-serif;font-size:32px;font-weight:700}
+.stat-label{color:var(--muted);font-size:12px;margin-top:2px}
+.readiness-tiers{margin-top:4px}
+.tier-row{display:flex;align-items:center;gap:10px;margin-bottom:8px;font-size:13px}
+.tier-label{width:60px;color:var(--muted);font-size:12px}
+.tier-bar{flex:1;height:8px;background:var(--bg4);border-radius:4px;overflow:hidden}
+.tier-bar-fill{height:100%;border-radius:4px}
+.tier-pct{width:32px;text-align:right;font-size:12px;color:var(--muted)}
+
+/* content manager tabs */
+.mgr-sub-tabs{display:flex;gap:6px;margin-bottom:16px;overflow-x:auto;padding-bottom:4px}
+.mgr-sub-tab{padding:7px 14px;border-radius:20px;font-size:13px;font-weight:600;background:var(--bg3);border:1px solid var(--border);color:var(--muted);white-space:nowrap;transition:all .2s}
+.mgr-sub-tab.active{background:var(--brown);border-color:var(--brown);color:#fff}
+.mgr-sub-content{display:none}
+.mgr-sub-content.active{display:block}
+
+/* question builder */
+.question-card{background:var(--bg3);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px;border:1px solid var(--border)}
+.question-card .q-num{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;margin-bottom:6px}
+.question-card .q-text{font-size:14px;font-weight:600;margin-bottom:8px}
+.choice-row{display:flex;align-items:center;gap:8px;margin-bottom:4px;font-size:13px}
+.choice-correct{color:var(--green);font-weight:700}
+.choice-wrong{color:var(--muted)}
+.btn-icon{background:transparent;color:var(--muted);font-size:18px;padding:2px 6px}
+.btn-icon:hover{color:var(--red)}
+
+/* question form */
+.q-form{background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-top:12px}
+.q-form .form-control{background:var(--bg4);margin-bottom:10px}
+.correct-select{display:flex;gap:6px;margin-bottom:12px}
+.correct-select label{display:flex;align-items:center;gap:4px;font-size:13px;cursor:pointer}
+
+/* textarea */
+textarea.form-control{resize:vertical;min-height:80px}
+
+/* section builder */
+.section-block{background:var(--bg3);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px;border:1px solid var(--border)}
+.section-block h4{font-size:14px;margin-bottom:6px}
+.section-block p{font-size:13px;color:var(--muted)}
+
+/* survey */
+.survey-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:10px}
+.survey-card-header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.survey-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px}
+.survey-meta{color:var(--muted);font-size:12px;margin-top:2px}
+.toggle-switch{position:relative;width:40px;height:22px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;inset:0;background:var(--bg4);border-radius:11px;cursor:pointer;transition:.2s}
+.toggle-slider:before{content:'';position:absolute;width:16px;height:16px;left:3px;bottom:3px;background:#fff;border-radius:50%;transition:.2s}
+.toggle-switch input:checked+.toggle-slider{background:var(--brown)}
+.toggle-switch input:checked+.toggle-slider:before{transform:translateX(18px)}
+
+/* growth survey in staff view */
+.survey-question{margin-bottom:16px}
+.survey-q-label{font-size:14px;font-weight:600;margin-bottom:8px}
+
+/* toast */
+.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:var(--bg3);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 18px;font-size:13px;font-weight:600;z-index:999;opacity:0;transition:opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1}
+
+/* modal */
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:400;align-items:center;justify-content:center;padding:20px}
+.modal.open{display:flex}
+.modal-box{background:var(--bg2);border-radius:16px;padding:24px;width:100%;max-width:420px;max-height:85vh;overflow-y:auto}
+.modal-title{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:16px}
+.modal-actions{display:flex;gap:10px;margin-top:16px}
+
+@media(min-width:600px){
+  .cert-grid{grid-template-columns:repeat(6,1fr)}
+  .stat-grid{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- ─────────── TOAST ─────────── -->
+<div class="toast" id="toast"></div>
+
+<!-- ══════════════════════════════════════
+     SCREEN: LOGIN
+══════════════════════════════════════ -->
+<div class="screen active" id="screen-login">
+  <div class="login-card">
+    <img src="domo-cafe-logo-transparent.png" class="login-logo" alt="Domo Cafe" onerror="this.style.display='none'">
+    <div class="login-title">Staff Portal</div>
+    <div class="login-sub">Domo Cafe · Buena Park</div>
+
+    <div class="login-toggle">
+      <button class="active" id="toggle-staff" onclick="setLoginMode('staff')">Staff</button>
+      <button id="toggle-manager" onclick="setLoginMode('manager')">Manager</button>
+    </div>
+
+    <div id="login-staff-fields">
+      <label class="form-label">Your Name</label>
+      <select class="form-control" id="login-name">
+        <option value="">— Select your name —</option>
+      </select>
+    </div>
+
+    <div id="login-manager-fields" style="display:none">
+      <label class="form-label">Manager Name</label>
+      <input class="form-control" type="text" id="login-manager-name" placeholder="Your name">
+    </div>
+
+    <label class="form-label">Password</label>
+    <input class="form-control" type="password" id="login-password" placeholder="Password" onkeydown="if(event.key==='Enter')doLogin()">
+
+    <button class="btn-login" onclick="doLogin()">Enter Portal</button>
+    <div class="login-error" id="login-error">Incorrect password. Try again.</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN: STAFF PORTAL
+══════════════════════════════════════ -->
+<div class="screen" id="screen-staff">
+  <div class="portal-header">
+    <img src="domo-cafe-logo-transparent.png" class="portal-logo" alt="" onerror="this.style.display='none'">
+    <span class="portal-header-title" id="staff-header-name">Welcome</span>
+    <span class="header-badge" id="staff-dept-badge">FOH</span>
+    <button class="btn-logout" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="portal-body">
+    <!-- HOME -->
+    <div class="tab-content active" id="staff-tab-home">
+      <div class="readiness-wrap">
+        <div class="readiness-ring">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52"/>
+            <circle class="ring-fg" id="readiness-circle" cx="60" cy="60" r="52" stroke-dasharray="326.7" stroke-dashoffset="326.7"/>
+          </svg>
+          <div class="readiness-num" id="readiness-num">0</div>
+        </div>
+        <div class="readiness-label">Readiness Score</div>
+      </div>
+
+      <div class="cert-grid" id="home-cert-badges"></div>
+
+      <hr class="divider">
+      <div class="section-title" style="font-size:16px">📢 Announcements</div>
+      <div id="home-announcements">
+        <div style="color:var(--muted);font-size:14px;font-style:italic">No announcements yet.</div>
+      </div>
+    </div>
+
+    <!-- LEARN -->
+    <div class="tab-content" id="staff-tab-learn">
+      <div class="section-title">📚 Training Modules</div>
+      <div id="module-list"></div>
+    </div>
+
+    <!-- QUIZZES -->
+    <div class="tab-content" id="staff-tab-quizzes">
+      <div class="section-title">🎯 Quizzes</div>
+      <div id="quiz-list"></div>
+    </div>
+
+    <!-- CERTS -->
+    <div class="tab-content" id="staff-tab-certs">
+      <div class="section-title">✅ My Certifications</div>
+      <div id="cert-list"></div>
+    </div>
+
+    <!-- GROWTH -->
+    <div class="tab-content" id="staff-tab-growth">
+      <div class="section-title">📝 My Growth</div>
+      <div class="card">
+        <div class="card-title">Self-Assessment</div>
+        <div class="card-sub" style="margin-bottom:14px">How are you performing this week? Rate yourself honestly.</div>
+        <div id="self-assess-form"></div>
+        <button class="btn btn-primary btn-full" style="margin-top:12px" onclick="submitSelfAssess()">Save Assessment</button>
+      </div>
+      <div id="growth-surveys"></div>
+      <div class="section-title" style="font-size:15px;margin-top:4px">Past Assessments</div>
+      <div id="assess-history"></div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav" id="staff-nav">
+    <button class="nav-tab active" onclick="staffTab('home',this)"><span class="nav-icon">🏠</span>Home</button>
+    <button class="nav-tab" onclick="staffTab('learn',this)"><span class="nav-icon">📚</span>Learn</button>
+    <button class="nav-tab" onclick="staffTab('quizzes',this)"><span class="nav-icon">🎯</span>Quizzes</button>
+    <button class="nav-tab" onclick="staffTab('certs',this)"><span class="nav-icon">✅</span>Certs</button>
+    <button class="nav-tab" onclick="staffTab('growth',this)"><span class="nav-icon">📝</span>Growth</button>
+  </nav>
+</div>
+
+<!-- MODULE DETAIL OVERLAY -->
+<div class="module-detail" id="module-detail">
+  <div class="module-detail-header">
+    <button class="btn-back" onclick="closeModuleDetail()">←</button>
+    <h2 id="module-detail-title"></h2>
+  </div>
+  <div class="module-detail-body" id="module-detail-body"></div>
+</div>
+
+<!-- QUIZ RUNNER OVERLAY -->
+<div class="quiz-runner" id="quiz-runner">
+  <div class="quiz-runner-header">
+    <button class="btn-back" onclick="closeQuiz()">✕</button>
+    <h2 id="quiz-runner-title"></h2>
+  </div>
+  <div class="quiz-progress-bar"><div class="quiz-progress-fill" id="quiz-prog-fill" style="width:0%"></div></div>
+  <div class="quiz-body" id="quiz-body"></div>
+  <div class="quiz-footer" id="quiz-footer"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     SCREEN: MANAGER PORTAL
+══════════════════════════════════════ -->
+<div class="screen" id="screen-manager">
+  <div class="portal-header">
+    <img src="domo-cafe-logo-transparent.png" class="portal-logo" alt="" onerror="this.style.display='none'">
+    <span class="portal-header-title">Manager Dashboard</span>
+    <span class="header-badge badge-manager">Manager</span>
+    <button class="btn-logout" onclick="logout()">Logout</button>
+  </div>
+
+  <div class="portal-body">
+    <!-- TEAM -->
+    <div class="tab-content active" id="mgr-tab-team">
+      <div class="section-title">👥 Team</div>
+      <div class="team-table-wrap">
+        <table class="team-table" id="team-table">
+          <thead><tr>
+            <th>Name</th><th>Dept</th><th>Role</th><th>Readiness</th><th>K.Certs</th><th>S.Certs</th>
+          </tr></thead>
+          <tbody id="team-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- OVERVIEW -->
+    <div class="tab-content" id="mgr-tab-overview">
+      <div class="section-title">📊 Team Overview</div>
+      <div class="stat-grid" id="overview-stats"></div>
+      <div class="card">
+        <div class="card-title">Readiness Distribution</div>
+        <div class="readiness-tiers" id="readiness-tiers"></div>
+      </div>
+      <div class="card" id="overview-attention">
+        <div class="card-title">⚠️ Needs Attention</div>
+        <div id="attention-list"></div>
+      </div>
+    </div>
+
+    <!-- ANNOUNCE -->
+    <div class="tab-content" id="mgr-tab-announce">
+      <div class="section-title">📢 Announcements</div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:10px">New Announcement</div>
+        <textarea class="form-control" id="announce-text" placeholder="Write announcement for all staff..." rows="4"></textarea>
+        <button class="btn btn-primary btn-full" onclick="postAnnouncement()">Post to All Staff</button>
+      </div>
+      <div id="announcement-list"></div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="tab-content" id="mgr-tab-content">
+      <div class="section-title">🗂 Content Manager</div>
+      <div class="mgr-sub-tabs">
+        <button class="mgr-sub-tab active" onclick="mgrSubTab('modules',this)">Modules</button>
+        <button class="mgr-sub-tab" onclick="mgrSubTab('quizzes',this)">Quizzes</button>
+        <button class="mgr-sub-tab" onclick="mgrSubTab('surveys',this)">Surveys</button>
+      </div>
+
+      <!-- Modules sub-tab -->
+      <div class="mgr-sub-content active" id="mgr-sub-modules">
+        <div id="content-module-list"></div>
+      </div>
+
+      <!-- Quizzes sub-tab -->
+      <div class="mgr-sub-content" id="mgr-sub-quizzes">
+        <div id="content-quiz-list"></div>
+      </div>
+
+      <!-- Surveys sub-tab -->
+      <div class="mgr-sub-content" id="mgr-sub-surveys">
+        <div class="card">
+          <div class="card-title" style="margin-bottom:12px">Create Survey</div>
+          <input class="form-control" id="survey-title-input" placeholder="Survey title (e.g. Week 1 Check-In)">
+          <div id="survey-q-builder">
+            <div class="survey-q-row" style="margin-bottom:10px">
+              <input class="form-control" placeholder="Question 1" data-qi="0">
+              <div style="display:flex;gap:8px;align-items:center;font-size:13px;margin-top:-8px;margin-bottom:10px">
+                <label style="display:flex;gap:4px;align-items:center;cursor:pointer"><input type="radio" name="sqtype0" value="text" checked> Text</label>
+                <label style="display:flex;gap:4px;align-items:center;cursor:pointer"><input type="radio" name="sqtype0" value="rating"> Rating 1–5</label>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-secondary btn-sm" onclick="addSurveyQ()" style="margin-bottom:12px">+ Add Question</button>
+          <button class="btn btn-primary btn-full" onclick="createSurvey()">Create Survey</button>
+        </div>
+        <div id="survey-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="bottom-nav">
+    <button class="nav-tab active" onclick="mgrTab('team',this)"><span class="nav-icon">👥</span>Team</button>
+    <button class="nav-tab" onclick="mgrTab('overview',this)"><span class="nav-icon">📊</span>Overview</button>
+    <button class="nav-tab" onclick="mgrTab('announce',this)"><span class="nav-icon">📢</span>Announce</button>
+    <button class="nav-tab" onclick="mgrTab('content',this)"><span class="nav-icon">🗂</span>Content</button>
+  </nav>
+</div>
+
+<!-- STAFF DETAIL MODAL -->
+<div class="staff-modal" id="staff-modal" onclick="if(event.target===this)closeStaffModal()">
+  <div class="staff-modal-inner">
+    <div class="staff-modal-handle"></div>
+    <h2 id="smodal-name"></h2>
+    <div class="staff-modal-role" id="smodal-role"></div>
+    <div class="section-title" style="font-size:14px;margin-bottom:10px">Certifications</div>
+    <div class="cert-action-grid" id="smodal-cert-grid"></div>
+    <hr class="divider">
+    <div class="section-title" style="font-size:14px;margin-bottom:10px">Quiz History</div>
+    <div id="smodal-quiz-history"></div>
+    <hr class="divider">
+    <div class="section-title" style="font-size:14px;margin-bottom:10px">Manager Notes</div>
+    <textarea class="form-control" id="smodal-notes" rows="3" placeholder="Add notes..." onchange="saveStaffNotes()"></textarea>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn btn-secondary btn-sm" onclick="closeStaffModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODULE EDIT MODAL -->
+<div class="modal" id="module-edit-modal">
+  <div class="modal-box">
+    <div class="modal-title" id="mod-edit-title">Edit Module</div>
+    <label class="form-label">Video URL (YouTube or direct)</label>
+    <input class="form-control" id="mod-video-url" placeholder="https://youtube.com/watch?v=...">
+    <label class="form-label">Module Description</label>
+    <textarea class="form-control" id="mod-description" rows="2" placeholder="Brief description for staff"></textarea>
+    <div class="section-title" style="font-size:14px;margin:12px 0 8px">Content Sections</div>
+    <div id="mod-sections-editor"></div>
+    <button class="btn btn-secondary btn-sm" onclick="addModSection()">+ Add Section</button>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('module-edit-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveModuleEdit()">Save</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD QUESTION MODAL -->
+<div class="modal" id="add-q-modal">
+  <div class="modal-box">
+    <div class="modal-title">Add Question</div>
+    <label class="form-label">Question</label>
+    <input class="form-control" id="aq-question" placeholder="Question text">
+    <label class="form-label">Choice A</label>
+    <input class="form-control" id="aq-a" placeholder="Choice A">
+    <label class="form-label">Choice B</label>
+    <input class="form-control" id="aq-b" placeholder="Choice B">
+    <label class="form-label">Choice C</label>
+    <input class="form-control" id="aq-c" placeholder="Choice C">
+    <label class="form-label">Choice D</label>
+    <input class="form-control" id="aq-d" placeholder="Choice D">
+    <label class="form-label">Correct Answer</label>
+    <select class="form-control" id="aq-correct">
+      <option value="0">A</option><option value="1">B</option>
+      <option value="2">C</option><option value="3">D</option>
+    </select>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal('add-q-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveQuestion()">Add Question</button>
+    </div>
+  </div>
+</div>
+
+<div style="text-align:center;padding:12px;color:#555;font-size:11px;position:fixed;bottom:0;left:0;right:0;pointer-events:none;z-index:50" id="version-tag" style="display:none">v1.0.0</div>
+
+<script>
+// ═══════════════════════════════════════════
+// STORAGE
+// ═══════════════════════════════════════════
+const PFX = 'domo_portal_';
+function load(k,d){try{const v=localStorage.getItem(PFX+k);return v!==null?JSON.parse(v):d}catch(e){return d}}
+function save(k,v){localStorage.setItem(PFX+k,JSON.stringify(v))}
+
+// ═══════════════════════════════════════════
+// SEED DATA
+// ═══════════════════════════════════════════
+const SEED_STAFF = [
+  {id:1,first:'Hailey',last:'Salamanca',nick:'Hailey',email:'hailey@domokuncafe.com',role:'GM',dept:'MGMT',type:'salary'},
+  {id:2,first:'TBD',last:'Head Chef',nick:'Chef',email:'',role:'Head Chef',dept:'BOH',type:'salary'},
+  {id:3,first:'Nickolaus',last:'Gonzales',nick:'Nick',email:'nickgonzales1129@gmail.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:4,first:'Gabriel',last:'Heater',nick:'Gabriel',email:'heatergabriel82413@gmail.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:5,first:'Hope',last:'Allan',nick:'Hope',email:'hope.allan07@icloud.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:6,first:'Chantel',last:'Reyes',nick:'Chantel',email:'itschnt31@gmail.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:7,first:'Sophia',last:'Lomeli',nick:'Sophia',email:'szophiaaa@icloud.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:8,first:'Catherine',last:'Tran',nick:'Catherine',email:'tran.catherine.n@gmail.com',role:'Barista',dept:'FOH',type:'hourly'},
+  {id:9,first:'Jillian',last:'Penera',nick:'Jillian',email:'jillianpeneraa@gmail.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:10,first:'Alana',last:'Aguilar',nick:'Irene',email:'irene14aguilar@gmail.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:11,first:'Sierra',last:'Sharpless',nick:'Sierra',email:'sierrasharpless13@gmail.com',role:'Runner',dept:'FOH',type:'hourly'},
+  {id:12,first:'Alice',last:'Hahn',nick:'Ally',email:'aliceahahn@gmail.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:13,first:'Dalia',last:'Sanchez',nick:'Dalia',email:'sanchezd346@gmail.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:14,first:'Jaelynn',last:'Lane',nick:'Jaelynn',email:'Jaelane06@gmail.com',role:'Runner',dept:'FOH',type:'hourly'},
+  {id:15,first:'Stephanie',last:'Delgado',nick:'Steph',email:'stephaniedc101@gmail.com',role:'Busser',dept:'FOH',type:'hourly'},
+  {id:16,first:'Lauren',last:'Nguyen',nick:'Lauren',email:'laurennguyen898@gmail.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:17,first:'Jada',last:'Delgado',nick:'Jada',email:'djada0707@gmail.com',role:'Busser',dept:'FOH',type:'hourly'},
+  {id:18,first:'Laura',last:'Renteria',nick:'Laura',email:'Laura.Renteria31@outlook.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:19,first:'Kiana',last:'Meno',nick:'Kiana',email:'kianakmeno@gmail.com',role:'Barista',dept:'FOH',type:'hourly'},
+  {id:20,first:'Sarah',last:'Ramirez',nick:'Sarah',email:'mustang2003girl@gmail.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:21,first:'Yash',last:'Patel',nick:'Yash',email:'yp7buenapark@gmail.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:22,first:'Daniel',last:'Flores',nick:'Daniel',email:'danieljune007@gmail.com',role:'Runner',dept:'FOH',type:'hourly'},
+  {id:23,first:'Isabella',last:'Rodriguez',nick:'Isabella',email:'isabella.rdgz9@gmail.com',role:'Server',dept:'FOH',type:'hourly'},
+  {id:24,first:'James',last:'Clark',nick:'James',email:'jvclark222@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:25,first:'Bryce',last:'Machado',nick:'Bryce',email:'brycemachado34@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:26,first:'Eduardo',last:'Santos',nick:'Eduardo',email:'Eduardo.santoss05@icloud.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:27,first:'Jessica',last:'Gomez',nick:'Jessica',email:'jgomez090701@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:28,first:'Ashley',last:'Lazcano',nick:'Ashley',email:'Ashleylazcano505@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:29,first:'Rebekah',last:'Snyder',nick:'Rebekah',email:'rebekah07ns@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:30,first:'Jubilee',last:'Xieu',nick:'Jubilee',email:'jubileexieu@gmail.com',role:'Expo',dept:'BOH',type:'hourly'},
+  {id:31,first:'Janet',last:'Delgado',nick:'Janet',email:'janetdelgado.g7@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:32,first:'Josue',last:'Irineo',nick:'Josue',email:'josueirineo@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:33,first:'Isaac',last:'Cho',nick:'Isaac',email:'isch51805@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:34,first:'Jesus',last:'Alarcon',nick:'Jesus',email:'jesusalarcon1801@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:35,first:'Viviana',last:'Sanchez',nick:'Viviana',email:'Viviana404@icloud.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:36,first:'Graciela',last:'Arias',nick:'Grace',email:'ariasgraciela3@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:37,first:'Gian Gabriel',last:'Guillermo',nick:'Gian',email:'lawlap04@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+  {id:38,first:'Miguel',last:'Salas',nick:'Miguel',email:'Miguelsalas085@gmail.com',role:'Line Cook',dept:'BOH',type:'hourly'},
+];
+
+const SEED_MODULES = [
+  {id:'foh',title:'Front of House',icon:'🍽️',description:'Guest experience, service standards, and the Domo hospitality philosophy.',videoUrl:'',sections:[],questions:[]},
+  {id:'barista',title:'Barista',icon:'☕',description:'Drink menu mastery, prep techniques, and equipment care.',videoUrl:'',sections:[],questions:[]},
+  {id:'linecook',title:'Line Cook / Food Prep',icon:'🔥',description:'Kitchen safety, mise en place, menu execution, and allergen awareness.',videoUrl:'',sections:[],questions:[]},
+  {id:'expo',title:'Expo',icon:'📋',description:'Ticket flow, plating standards, and FOH/BOH communication.',videoUrl:'',sections:[],questions:[]},
+  {id:'opening',title:'Opening Shift',icon:'🌅',description:'Opening procedures, station setup, and pre-service safety walkthrough.',videoUrl:'',sections:[],questions:[]},
+  {id:'closing',title:'Closing Shift',icon:'🌙',description:'Closing checklist, cleaning standards, and end-of-shift protocols.',videoUrl:'',sections:[],questions:[]},
+];
+
+// ═══════════════════════════════════════════
+// APP STATE
+// ═══════════════════════════════════════════
+let staff = load('staff', null) || SEED_STAFF;
+let modules = load('modules', null) || SEED_MODULES;
+let progress = load('progress', {});
+let announcements = load('announcements', []);
+let surveys = load('surveys', []);
+
+// ensure no missing modules
+SEED_MODULES.forEach(sm => {
+  if (!modules.find(m=>m.id===sm.id)) modules.push(sm);
+});
+save('modules', modules);
+
+let currentUser = null; // {id, mode:'staff'|'manager', name}
+let currentQuizModuleId = null;
+let currentQuizState = null;
+let editingModuleId = null;
+let editingQuizModuleId = null;
+let sModalStaffId = null;
+
+const PASSWORD = 'Domo@2026';
+
+// ═══════════════════════════════════════════
+// UTILS
+// ═══════════════════════════════════════════
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById('screen-'+id).classList.add('active');
+}
+function toast(msg,ms=2200){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),ms);
+}
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+function fmtDate(ts){return ts?new Date(ts).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—'}
+function uid(){return Math.random().toString(36).slice(2,9)}
+
+function getProgress(staffId){
+  if(!progress[staffId]) progress[staffId]={modulesViewed:[],quizAttempts:{},certifications:{},selfAssessments:[],surveyResponses:{},notes:''};
+  return progress[staffId];
+}
+function saveProgress(){save('progress',progress)}
+
+function calcReadiness(staffId){
+  const p=getProgress(staffId);
+  const mods=modules;
+  const total=mods.length;
+  if(total===0)return 0;
+  let kScore=0,sScore=0;
+  mods.forEach(m=>{
+    const qa=p.quizAttempts[m.id]||[];
+    if(qa.some(a=>a.passed))kScore++;
+    if(p.certifications[m.id]?.serviceCert)sScore++;
+  });
+  return Math.round((kScore/total)*50+(sScore/total)*50);
+}
+
+// ═══════════════════════════════════════════
+// LOGIN
+// ═══════════════════════════════════════════
+let loginMode='staff';
+
+function setLoginMode(mode){
+  loginMode=mode;
+  document.getElementById('toggle-staff').classList.toggle('active',mode==='staff');
+  document.getElementById('toggle-manager').classList.toggle('active',mode==='manager');
+  document.getElementById('login-staff-fields').style.display=mode==='staff'?'block':'none';
+  document.getElementById('login-manager-fields').style.display=mode==='manager'?'block':'none';
+}
+
+function populateNameDropdown(){
+  const sel=document.getElementById('login-name');
+  sel.innerHTML='<option value="">— Select your name —</option>';
+  [...staff].sort((a,b)=>a.first.localeCompare(b.first)).forEach(s=>{
+    const o=document.createElement('option');
+    o.value=s.id;
+    o.textContent=`${s.first} ${s.last}`;
+    sel.appendChild(o);
+  });
+}
+
+function doLogin(){
+  const pw=document.getElementById('login-password').value;
+  const err=document.getElementById('login-error');
+  err.style.display='none';
+  if(pw!==PASSWORD){err.style.display='block';return;}
+  if(loginMode==='manager'){
+    const name=document.getElementById('login-manager-name').value.trim()||'Manager';
+    currentUser={id:'manager',mode:'manager',name};
+    showScreen('manager');
+    renderManagerPortal();
+  } else {
+    const sid=parseInt(document.getElementById('login-name').value);
+    if(!sid){err.textContent='Please select your name.';err.style.display='block';return;}
+    const s=staff.find(x=>x.id===sid);
+    if(!s){err.style.display='block';return;}
+    currentUser={id:sid,mode:'staff',name:s.nick||s.first};
+    showScreen('staff');
+    renderStaffPortal();
+  }
+  document.getElementById('login-password').value='';
+}
+
+function logout(){
+  currentUser=null;
+  showScreen('login');
+  staffTab('home',document.querySelector('#screen-staff .nav-tab'));
+}
+
+// ═══════════════════════════════════════════
+// STAFF PORTAL
+// ═══════════════════════════════════════════
+function staffTab(name,btn){
+  document.querySelectorAll('#screen-staff .tab-content').forEach(t=>t.classList.remove('active'));
+  document.getElementById('staff-tab-'+name).classList.add('active');
+  document.querySelectorAll('#screen-staff .nav-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(name==='home')renderHome();
+  if(name==='learn')renderModuleList();
+  if(name==='quizzes')renderQuizList();
+  if(name==='certs')renderCertList();
+  if(name==='growth')renderGrowth();
+}
+
+function renderStaffPortal(){
+  const s=staff.find(x=>x.id===currentUser.id);
+  document.getElementById('staff-header-name').textContent=`${currentUser.name} 👋`;
+  const badge=document.getElementById('staff-dept-badge');
+  badge.textContent=s.dept;
+  badge.className='header-badge '+(s.dept==='FOH'?'badge-foh':s.dept==='BOH'?'badge-boh':'badge-mgmt');
+  renderHome();
+}
+
+function renderHome(){
+  if(!currentUser||currentUser.mode!=='staff')return;
+  const score=calcReadiness(currentUser.id);
+  document.getElementById('readiness-num').textContent=score;
+  const circ=document.getElementById('readiness-circle');
+  const r=52,c=2*Math.PI*r;
+  circ.style.strokeDashoffset=c-(score/100)*c;
+
+  // cert badges
+  const grid=document.getElementById('home-cert-badges');
+  grid.innerHTML='';
+  const p=getProgress(currentUser.id);
+  modules.forEach(m=>{
+    const qa=p.quizAttempts[m.id]||[];
+    const passed=qa.some(a=>a.passed);
+    const svc=p.certifications[m.id]?.serviceCert;
+    const cls=svc?'full':passed?'knowledge':'locked';
+    const icon=svc?'🌟':passed?'✅':'🔒';
+    grid.innerHTML+=`<div class="cert-badge ${cls}">
+      <div class="cert-icon">${m.icon}</div>
+      <div class="cert-name">${m.title}</div>
+      <div class="cert-status">${icon}</div>
+    </div>`;
+  });
+
+  // announcements
+  const ann=document.getElementById('home-announcements');
+  const active=announcements.filter(a=>!a.deleted).sort((a,b)=>b.ts-a.ts);
+  if(!active.length){ann.innerHTML='<div style="color:var(--muted);font-size:14px;font-style:italic">No announcements yet.</div>';return;}
+  ann.innerHTML=active.slice(0,5).map(a=>`
+    <div class="announcement">
+      <div class="announce-text">${escHtml(a.text)}</div>
+      <div class="announce-meta">📌 ${fmtDate(a.ts)}</div>
+    </div>`).join('');
+}
+
+function renderModuleList(){
+  const p=getProgress(currentUser.id);
+  const el=document.getElementById('module-list');
+  el.innerHTML=modules.map(m=>{
+    const viewed=p.modulesViewed.includes(m.id);
+    const qa=p.quizAttempts[m.id]||[];
+    const passed=qa.some(a=>a.passed);
+    const statusCls=passed?'status-done':viewed?'status-progress':'status-new';
+    const statusTxt=passed?'✅ Completed':viewed?'📖 In Progress':'New';
+    return `<div class="module-card">
+      <div class="module-icon">${m.icon}</div>
+      <div class="module-info">
+        <div class="module-title">${m.title}</div>
+        <div class="module-desc">${escHtml(m.description||'')}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+          <span class="module-status ${statusCls}">${statusTxt}</span>
+          <button class="btn btn-primary btn-sm" onclick="openModuleDetail('${m.id}')">Open Module</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function openModuleDetail(mid){
+  const m=modules.find(x=>x.id===mid);
+  if(!m)return;
+  // mark viewed
+  const p=getProgress(currentUser.id);
+  if(!p.modulesViewed.includes(mid)){p.modulesViewed.push(mid);saveProgress();}
+
+  document.getElementById('module-detail-title').textContent=`${m.icon} ${m.title}`;
+  const body=document.getElementById('module-detail-body');
+
+  // video
+  let videoHtml='';
+  if(m.videoUrl){
+    const ytId=getYtId(m.videoUrl);
+    if(ytId){
+      videoHtml=`<div class="module-video-wrap"><iframe src="https://www.youtube.com/embed/${ytId}" allowfullscreen></iframe></div>`;
+    } else {
+      videoHtml=`<div class="module-video-wrap"><video controls style="width:100%;border-radius:12px"><source src="${m.videoUrl}"></video></div>`;
+    }
+  } else {
+    videoHtml=`<div class="module-video-wrap"><div class="video-placeholder">🎬 Training video coming soon</div></div>`;
+  }
+
+  // sections
+  let sectHtml='';
+  if(m.sections&&m.sections.length){
+    sectHtml=m.sections.map(s=>`<div class="module-section"><h3>${escHtml(s.title)}</h3><p>${escHtml(s.body).replace(/\n/g,'<br>')}</p></div>`).join('');
+  } else {
+    sectHtml=`<div class="empty-content">Training content coming soon.<br>Check back after your manager uploads the materials.</div>`;
+  }
+
+  // quiz button
+  const qa=p.quizAttempts[mid]||[];
+  const passed=qa.some(a=>a.passed);
+  const hasQ=m.questions&&m.questions.length>0;
+  let quizBtn='';
+  if(!hasQ){quizBtn=`<div style="color:var(--muted);font-size:13px;font-style:italic;text-align:center;padding:16px 0">Quiz coming soon — your manager will upload questions.</div>`;}
+  else if(passed){quizBtn=`<div style="text-align:center;padding:16px 0"><span style="color:var(--green);font-size:15px;font-weight:700">✅ Quiz Passed!</span></div><button class="btn btn-secondary btn-full" onclick="startQuiz('${mid}')">Retake Quiz</button>`;}
+  else{quizBtn=`<button class="btn btn-primary btn-full" style="margin-top:20px" onclick="startQuiz('${mid}')">Take Quiz →</button>`;}
+
+  body.innerHTML=videoHtml+sectHtml+quizBtn;
+  document.getElementById('module-detail').classList.add('open');
+}
+
+function closeModuleDetail(){
+  document.getElementById('module-detail').classList.remove('open');
+  if(document.querySelector('#screen-staff .tab-content.active')?.id==='staff-tab-learn')renderModuleList();
+}
+
+function getYtId(url){
+  const m=url.match(/(?:v=|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
+  return m?m[1]:null;
+}
+
+// ── QUIZ RUNNER ──
+function renderQuizList(){
+  const p=getProgress(currentUser.id);
+  const el=document.getElementById('quiz-list');
+  el.innerHTML=modules.map(m=>{
+    const qa=p.quizAttempts[m.id]||[];
+    const last=qa[qa.length-1];
+    const passed=qa.some(a=>a.passed);
+    const hasQ=m.questions&&m.questions.length>0;
+    let meta='',resultHtml='',btnTxt='Start Quiz';
+    if(!hasQ){meta='No questions yet';resultHtml=`<span style="color:var(--muted);font-size:12px">Coming soon</span>`;btnTxt=null;}
+    else if(last){
+      meta=`${qa.length} attempt${qa.length>1?'s':''}`;
+      const sc=`${last.score}/${last.total} — ${Math.round(last.score/last.total*100)}%`;
+      resultHtml=`<span class="quiz-result ${last.passed?'result-pass':'result-fail'}">${last.passed?'✅':'❌'} ${sc}</span>`;
+      btnTxt=passed?'Retake':'Retry';
+    }
+    return `<div class="quiz-card">
+      <div class="quiz-card-left">
+        <div class="quiz-name">${m.icon} ${m.title}</div>
+        <div class="quiz-meta">${meta}</div>
+        ${resultHtml}
+      </div>
+      ${btnTxt?`<button class="btn btn-primary btn-sm" onclick="startQuiz('${m.id}')">${btnTxt}</button>`:''}
+    </div>`;
+  }).join('');
+}
+
+function startQuiz(mid){
+  const m=modules.find(x=>x.id===mid);
+  if(!m||!m.questions||!m.questions.length){toast('No questions yet — check back soon.');return;}
+  document.getElementById('module-detail').classList.remove('open');
+  currentQuizModuleId=mid;
+  currentQuizState={questions:m.questions,idx:0,answers:[],answered:false};
+  document.getElementById('quiz-runner-title').textContent=m.title+' Quiz';
+  document.getElementById('quiz-runner').classList.add('open');
+  renderQuizQuestion();
+}
+
+function renderQuizQuestion(){
+  const s=currentQuizState;
+  const q=s.questions[s.idx];
+  const total=s.questions.length;
+  document.getElementById('quiz-prog-fill').style.width=`${(s.idx/total)*100}%`;
+
+  const body=document.getElementById('quiz-body');
+  body.innerHTML=`
+    <div class="quiz-q-num">Question ${s.idx+1} of ${total}</div>
+    <div class="quiz-q-text">${escHtml(q.question)}</div>
+    <div class="quiz-choices">
+      ${q.choices.map((c,i)=>`<button class="quiz-choice" id="qc${i}" onclick="selectChoice(${i})">${escHtml(c)}</button>`).join('')}
+    </div>`;
+  s.answered=false;
+
+  const footer=document.getElementById('quiz-footer');
+  footer.innerHTML=`<button class="btn btn-primary btn-full" id="quiz-next-btn" onclick="nextQuestion()" disabled>Next</button>`;
+}
+
+function selectChoice(i){
+  if(currentQuizState.answered)return;
+  document.querySelectorAll('.quiz-choice').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('qc'+i).classList.add('selected');
+  currentQuizState.selected=i;
+  document.getElementById('quiz-next-btn').disabled=false;
+}
+
+function nextQuestion(){
+  const s=currentQuizState;
+  const q=s.questions[s.idx];
+  if(s.selected===undefined)return;
+  s.answers.push(s.selected);
+  s.answered=true;
+
+  // reveal correct/wrong
+  const correct=q.correct;
+  document.querySelectorAll('.quiz-choice').forEach((b,i)=>{
+    b.onclick=null;
+    if(i===correct)b.classList.add('correct');
+    else if(i===s.selected&&i!==correct)b.classList.add('wrong');
+  });
+
+  s.idx++;
+  s.selected=undefined;
+  const footer=document.getElementById('quiz-footer');
+  if(s.idx>=s.questions.length){
+    footer.innerHTML=`<button class="btn btn-primary btn-full" onclick="finishQuiz()">See Results</button>`;
+  } else {
+    footer.innerHTML=`<button class="btn btn-primary btn-full" onclick="renderQuizQuestion()">Next Question →</button>`;
+  }
+}
+
+function finishQuiz(){
+  const s=currentQuizState;
+  let score=0;
+  s.answers.forEach((a,i)=>{if(a===s.questions[i].correct)score++;});
+  const total=s.questions.length;
+  const passed=score/total>=0.8;
+  const pct=Math.round(score/total*100);
+
+  // save attempt
+  const p=getProgress(currentUser.id);
+  if(!p.quizAttempts[currentQuizModuleId])p.quizAttempts[currentQuizModuleId]=[];
+  p.quizAttempts[currentQuizModuleId].push({score,total,passed,pct,ts:Date.now()});
+  if(passed){
+    if(!p.certifications[currentQuizModuleId])p.certifications[currentQuizModuleId]={};
+    p.certifications[currentQuizModuleId].knowledgeCert=true;
+    p.certifications[currentQuizModuleId].knowledgeCertDate=Date.now();
+  }
+  saveProgress();
+
+  document.getElementById('quiz-prog-fill').style.width='100%';
+  const body=document.getElementById('quiz-body');
+  body.innerHTML=`<div class="quiz-result-screen">
+    <div class="quiz-result-score" style="color:${passed?'var(--green)':'var(--red)'}">${pct}%</div>
+    <div class="quiz-result-label">${passed?'🎉 Passed!':'❌ Not Passed'}</div>
+    <div class="quiz-result-sub">${score} out of ${total} correct${passed?' — Knowledge Certified!':` — You need 80% to pass (${Math.ceil(total*0.8)}/${total})`}</div>
+    <div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">
+      <button class="btn btn-primary" onclick="closeQuiz()">Done</button>
+      ${!passed?`<button class="btn btn-secondary" onclick="startQuiz('${currentQuizModuleId}')">Try Again</button>`:''}
+    </div>
+  </div>`;
+  document.getElementById('quiz-footer').innerHTML='';
+}
+
+function closeQuiz(){
+  document.getElementById('quiz-runner').classList.remove('open');
+  currentQuizModuleId=null;currentQuizState=null;
+  renderQuizList();renderHome();
+}
+
+// ── CERTS ──
+function renderCertList(){
+  const p=getProgress(currentUser.id);
+  const el=document.getElementById('cert-list');
+  el.innerHTML=modules.map(m=>{
+    const qa=p.quizAttempts[m.id]||[];
+    const kCert=qa.some(a=>a.passed);
+    const kDate=kCert?(p.certifications[m.id]?.knowledgeCertDate||null):null;
+    const sCert=p.certifications[m.id]?.serviceCert;
+    const sDate=p.certifications[m.id]?.serviceCertDate;
+    return `<div class="cert-card">
+      <div class="cert-card-header">
+        <span class="cert-card-icon">${m.icon}</span>
+        <span class="cert-card-title">${m.title}</span>
+      </div>
+      <div class="cert-tracks">
+        <div class="cert-track">
+          <span class="track-label">📚 Knowledge</span>
+          <span class="track-status ${kCert?'track-earned':'track-locked'}">${kCert?'✅ Certified'+( kDate?` · ${fmtDate(kDate)}`:''):'🔒 Pass quiz to earn'}</span>
+        </div>
+        <div class="cert-track">
+          <span class="track-label">👁 Service</span>
+          <span class="track-status ${sCert?'track-earned':kCert?'track-pending':'track-locked'}">${sCert?'🌟 Certified'+( sDate?` · ${fmtDate(sDate)}`:''):kCert?'⏳ Awaiting manager observation':'🔒 Complete knowledge first'}</span>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── GROWTH ──
+const ASSESS_DIMS=['Hospitality','Speed','Accuracy','Teamwork'];
+function renderGrowth(){
+  // self-assessment form
+  const form=document.getElementById('self-assess-form');
+  form.innerHTML=ASSESS_DIMS.map(d=>`
+    <div style="margin-bottom:14px">
+      <div style="font-size:14px;font-weight:600;margin-bottom:6px">${d}</div>
+      <div class="rating-wrap" id="rate-${d}">
+        ${[1,2,3,4,5].map(n=>`<button class="rating-btn" data-dim="${d}" data-val="${n}" onclick="selectRating('${d}',${n})">${n}</button>`).join('')}
+      </div>
+    </div>`).join('');
+
+  // active surveys
+  const survEl=document.getElementById('growth-surveys');
+  const active=surveys.filter(s=>s.active);
+  if(active.length){
+    const p=getProgress(currentUser.id);
+    survEl.innerHTML=active.map(sv=>{
+      const responded=!!p.surveyResponses[sv.id];
+      return `<div class="card">
+        <div class="card-title">${escHtml(sv.title)}</div>
+        ${responded?`<div style="color:var(--green);font-size:13px;margin-top:4px">✅ Submitted</div>`
+        :`<div id="survey-form-${sv.id}">
+          ${sv.questions.map((q,i)=>`<div class="survey-question">
+            <div class="survey-q-label">${i+1}. ${escHtml(q.text)}</div>
+            ${q.type==='rating'?
+              `<div class="rating-wrap">${[1,2,3,4,5].map(n=>`<button class="rating-btn" data-sv="${sv.id}" data-qi="${i}" data-val="${n}" onclick="selectSurveyRating('${sv.id}',${i},${n})">${n}</button>`).join('')}</div>`:
+              `<textarea class="form-control" id="sv-${sv.id}-${i}" rows="2" placeholder="Your answer..."></textarea>`}
+          </div>`).join('')}
+          <button class="btn btn-primary btn-sm" onclick="submitSurvey('${sv.id}')">Submit</button>
+        </div>`}
+      </div>`;
+    }).join('');
+  } else {
+    survEl.innerHTML='';
+  }
+
+  // history
+  const p=getProgress(currentUser.id);
+  const hist=document.getElementById('assess-history');
+  const assessments=(p.selfAssessments||[]).slice().reverse().slice(0,3);
+  if(!assessments.length){hist.innerHTML='<div style="color:var(--muted);font-size:13px">No assessments yet.</div>';return;}
+  hist.innerHTML=assessments.map(a=>`<div class="assess-row">
+    <div class="assess-date">${fmtDate(a.ts)}</div>
+    <div class="assess-scores">${ASSESS_DIMS.map(d=>`<div class="assess-score-item"><span style="color:var(--muted);font-size:11px">${d}:</span> <strong>${a[d]||'—'}</strong></div>`).join('')}</div>
+  </div>`).join('');
+}
+
+function selectRating(dim,val){
+  document.querySelectorAll(`[data-dim="${dim}"]`).forEach(b=>{b.classList.toggle('selected',parseInt(b.dataset.val)===val);});
+  if(!window._ratings)window._ratings={};window._ratings[dim]=val;
+}
+
+function submitSelfAssess(){
+  const r=window._ratings||{};
+  const missing=ASSESS_DIMS.filter(d=>!r[d]);
+  if(missing.length){toast('Please rate all 4 dimensions');return;}
+  const p=getProgress(currentUser.id);
+  if(!p.selfAssessments)p.selfAssessments=[];
+  p.selfAssessments.push({ts:Date.now(),...r});
+  saveProgress();
+  window._ratings={};
+  document.querySelectorAll('.rating-btn').forEach(b=>b.classList.remove('selected'));
+  toast('✅ Assessment saved!');
+  renderGrowth();
+}
+
+function selectSurveyRating(svId,qi,val){
+  document.querySelectorAll(`[data-sv="${svId}"][data-qi="${qi}"]`).forEach(b=>b.classList.toggle('selected',parseInt(b.dataset.val)===val));
+  if(!window._svRatings)window._svRatings={};
+  if(!window._svRatings[svId])window._svRatings[svId]={};
+  window._svRatings[svId][qi]=val;
+}
+
+function submitSurvey(svId){
+  const sv=surveys.find(s=>s.id===svId);
+  if(!sv)return;
+  const p=getProgress(currentUser.id);
+  const responses=sv.questions.map((q,i)=>{
+    if(q.type==='rating') return {qi:i,value:(window._svRatings?.[svId]?.[i])||null};
+    return {qi:i,value:document.getElementById(`sv-${svId}-${i}`)?.value||''};
+  });
+  if(!p.surveyResponses)p.surveyResponses={};
+  p.surveyResponses[svId]={responses,ts:Date.now()};
+  saveProgress();
+  toast('✅ Survey submitted!');
+  renderGrowth();
+}
+
+// ═══════════════════════════════════════════
+// MANAGER PORTAL
+// ═══════════════════════════════════════════
+function mgrTab(name,btn){
+  document.querySelectorAll('#screen-manager .tab-content').forEach(t=>t.classList.remove('active'));
+  document.getElementById('mgr-tab-'+name).classList.add('active');
+  document.querySelectorAll('#screen-manager .nav-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  if(name==='team')renderTeam();
+  if(name==='overview')renderOverview();
+  if(name==='announce')renderAnnouncements();
+  if(name==='content')renderContent();
+}
+
+function mgrSubTab(name,btn){
+  document.querySelectorAll('.mgr-sub-content').forEach(t=>t.classList.remove('active'));
+  document.getElementById('mgr-sub-'+name).classList.add('active');
+  document.querySelectorAll('.mgr-sub-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function renderManagerPortal(){renderTeam();}
+
+function renderTeam(){
+  const tbody=document.getElementById('team-tbody');
+  tbody.innerHTML=staff.map(s=>{
+    const score=calcReadiness(s.id);
+    const p=getProgress(s.id);
+    let kCerts=0,sCerts=0;
+    modules.forEach(m=>{
+      const qa=p.quizAttempts[m.id]||[];
+      if(qa.some(a=>a.passed))kCerts++;
+      if(p.certifications[m.id]?.serviceCert)sCerts++;
+    });
+    const deptCls=s.dept==='FOH'?'dept-foh':s.dept==='BOH'?'dept-boh':'dept-mgmt';
+    return `<tr onclick="openStaffModal(${s.id})">
+      <td class="staff-name">${s.first} ${s.last}</td>
+      <td><span class="dept-pill ${deptCls}">${s.dept}</span></td>
+      <td>${s.role}</td>
+      <td><div class="readiness-bar-wrap"><div class="readiness-bar"><div class="readiness-bar-fill" style="width:${score}%"></div></div><span class="readiness-pct">${score}%</span></div></td>
+      <td>${kCerts}/${modules.length}</td>
+      <td>${sCerts}/${modules.length}</td>
+    </tr>`;
+  }).join('');
+}
+
+function openStaffModal(sid){
+  sModalStaffId=sid;
+  const s=staff.find(x=>x.id===sid);
+  const p=getProgress(sid);
+  document.getElementById('smodal-name').textContent=`${s.first} ${s.last}`;
+  document.getElementById('smodal-role').textContent=`${s.role} · ${s.dept}`;
+  document.getElementById('smodal-notes').value=p.notes||'';
+
+  // cert grid
+  const grid=document.getElementById('smodal-cert-grid');
+  grid.innerHTML=modules.map(m=>{
+    const qa=p.quizAttempts[m.id]||[];
+    const kCert=qa.some(a=>a.passed);
+    const sCert=p.certifications[m.id]?.serviceCert;
+    const status=sCert?'🌟 Full Cert':kCert?'✅ Knowledge':'🔒 None';
+    return `<button class="cert-action-btn" onclick="toggleServiceCert(${sid},'${m.id}')">
+      <div class="ca-name">${m.icon} ${m.title}</div>
+      <div class="ca-status">${status}</div>
+    </button>`;
+  }).join('');
+
+  // quiz history
+  const qhEl=document.getElementById('smodal-quiz-history');
+  const attempts=modules.flatMap(m=>(p.quizAttempts[m.id]||[]).map(a=>({...a,module:m.title})));
+  if(!attempts.length){qhEl.innerHTML='<div style="color:var(--muted);font-size:13px">No quizzes taken yet.</div>';}
+  else{qhEl.innerHTML=attempts.sort((a,b)=>b.ts-a.ts).slice(0,10).map(a=>`
+    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px">
+      <span>${a.module}</span>
+      <span class="${a.passed?'result-pass':'result-fail'}">${a.score}/${a.total} · ${a.pct}%</span>
+      <span style="color:var(--muted)">${fmtDate(a.ts)}</span>
+    </div>`).join('');}
+
+  document.getElementById('staff-modal').classList.add('open');
+}
+
+function toggleServiceCert(sid,mid){
+  const p=getProgress(sid);
+  if(!p.certifications[mid])p.certifications[mid]={};
+  const cur=p.certifications[mid].serviceCert;
+  p.certifications[mid].serviceCert=!cur;
+  p.certifications[mid].serviceCertDate=!cur?Date.now():null;
+  p.certifications[mid].serviceCertBy=currentUser.name;
+  saveProgress();
+  toast(cur?'Service cert revoked':'🌟 Service cert granted!');
+  openStaffModal(sid); // re-render
+}
+
+function saveStaffNotes(){
+  if(!sModalStaffId)return;
+  const p=getProgress(sModalStaffId);
+  p.notes=document.getElementById('smodal-notes').value;
+  saveProgress();
+}
+
+function closeStaffModal(){
+  document.getElementById('staff-modal').classList.remove('open');
+  sModalStaffId=null;
+  renderTeam();
+}
+
+function renderOverview(){
+  const total=staff.length;
+  let totalScore=0,needsAttn=0,fullCert=0;
+  const tiers=[0,0,0,0];
+  staff.forEach(s=>{
+    const score=calcReadiness(s.id);
+    totalScore+=score;
+    if(score===0)needsAttn++;
+    if(score===100)fullCert++;
+    if(score<=25)tiers[0]++;
+    else if(score<=50)tiers[1]++;
+    else if(score<=75)tiers[2]++;
+    else tiers[3]++;
+  });
+  const avg=Math.round(totalScore/total);
+  document.getElementById('overview-stats').innerHTML=`
+    <div class="stat-card"><div class="stat-num">${total}</div><div class="stat-label">Total Staff</div></div>
+    <div class="stat-card"><div class="stat-num">${avg}%</div><div class="stat-label">Avg Readiness</div></div>
+    <div class="stat-card"><div class="stat-num">${needsAttn}</div><div class="stat-label">Not Started</div></div>
+    <div class="stat-card"><div class="stat-num">${fullCert}</div><div class="stat-label">Fully Certified</div></div>`;
+
+  const tierLabels=['0–25%','25–50%','50–75%','75–100%'];
+  const tierColors=['var(--red)','var(--amber)','var(--blue)','var(--green)'];
+  document.getElementById('readiness-tiers').innerHTML=tiers.map((n,i)=>`
+    <div class="tier-row">
+      <span class="tier-label">${tierLabels[i]}</span>
+      <div class="tier-bar"><div class="tier-bar-fill" style="width:${total?Math.round(n/total*100):0}%;background:${tierColors[i]}"></div></div>
+      <span class="tier-pct">${n}</span>
+    </div>`).join('');
+
+  const attn=staff.filter(s=>calcReadiness(s.id)===0);
+  document.getElementById('attention-list').innerHTML=attn.length?attn.map(s=>`
+    <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border);font-size:14px">
+      <span>${s.first} ${s.last}</span><span style="color:var(--muted)">${s.role}</span>
+    </div>`).join(''):`<div style="color:var(--green);font-size:13px">All staff have started training 🎉</div>`;
+}
+
+function renderAnnouncements(){
+  const el=document.getElementById('announcement-list');
+  const all=announcements.filter(a=>!a.deleted).sort((a,b)=>b.ts-a.ts);
+  if(!all.length){el.innerHTML='<div style="color:var(--muted);font-size:14px">No announcements yet.</div>';return;}
+  el.innerHTML=all.map(a=>`<div class="announcement">
+    <div class="announce-text">${escHtml(a.text)}</div>
+    <div class="announce-meta" style="display:flex;justify-content:space-between">
+      <span>${fmtDate(a.ts)}</span>
+      <button onclick="deleteAnnouncement('${a.id}')" style="background:transparent;color:var(--red);font-size:12px;font-weight:600">Delete</button>
+    </div>
+  </div>`).join('');
+}
+
+function postAnnouncement(){
+  const txt=document.getElementById('announce-text').value.trim();
+  if(!txt)return;
+  announcements.push({id:uid(),text:txt,ts:Date.now(),by:currentUser.name});
+  save('announcements',announcements);
+  document.getElementById('announce-text').value='';
+  toast('📢 Posted!');
+  renderAnnouncements();
+}
+
+function deleteAnnouncement(id){
+  const a=announcements.find(x=>x.id===id);
+  if(a)a.deleted=true;
+  save('announcements',announcements);
+  renderAnnouncements();
+}
+
+// ── CONTENT MANAGER ──
+function renderContent(){
+  renderContentModules();
+  renderContentQuizzes();
+  renderSurveyList();
+}
+
+function renderContentModules(){
+  const el=document.getElementById('content-module-list');
+  el.innerHTML=modules.map(m=>`<div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+      <div>
+        <div class="card-title">${m.icon} ${m.title}</div>
+        <div class="card-sub">${m.videoUrl?'🎬 Video set':'🎬 No video'} · ${m.sections?.length||0} sections</div>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="openModuleEdit('${m.id}')">Edit</button>
+    </div>
+  </div>`).join('');
+}
+
+function openModuleEdit(mid){
+  editingModuleId=mid;
+  const m=modules.find(x=>x.id===mid);
+  document.getElementById('mod-edit-title').textContent=`Edit: ${m.title}`;
+  document.getElementById('mod-video-url').value=m.videoUrl||'';
+  document.getElementById('mod-description').value=m.description||'';
+  // sections
+  renderModSectionsEditor(m.sections||[]);
+  openModal('module-edit-modal');
+}
+
+function renderModSectionsEditor(sections){
+  const el=document.getElementById('mod-sections-editor');
+  el.innerHTML=sections.map((s,i)=>`<div class="section-block" id="ms-${i}">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">
+      <span style="font-size:12px;color:var(--muted);font-weight:700">Section ${i+1}</span>
+      <button class="btn-icon" onclick="removeModSection(${i})">🗑</button>
+    </div>
+    <input class="form-control" style="margin-bottom:6px" placeholder="Section title" id="ms-title-${i}" value="${escAttr(s.title)}">
+    <textarea class="form-control" rows="3" placeholder="Section content..." id="ms-body-${i}">${escHtml(s.body)}</textarea>
+  </div>`).join('');
+}
+
+function addModSection(){
+  const m=modules.find(x=>x.id===editingModuleId);
+  if(!m.sections)m.sections=[];
+  m.sections.push({title:'',body:''});
+  renderModSectionsEditor(m.sections);
+}
+
+function removeModSection(i){
+  const m=modules.find(x=>x.id===editingModuleId);
+  m.sections.splice(i,1);
+  renderModSectionsEditor(m.sections);
+}
+
+function saveModuleEdit(){
+  const m=modules.find(x=>x.id===editingModuleId);
+  m.videoUrl=document.getElementById('mod-video-url').value.trim();
+  m.description=document.getElementById('mod-description').value.trim();
+  // read sections
+  const count=document.querySelectorAll('[id^="ms-title-"]').length;
+  m.sections=[];
+  for(let i=0;i<count;i++){
+    const t=document.getElementById('ms-title-'+i)?.value||'';
+    const b=document.getElementById('ms-body-'+i)?.value||'';
+    m.sections.push({title:t,body:b});
+  }
+  save('modules',modules);
+  closeModal('module-edit-modal');
+  toast('✅ Module saved!');
+  renderContentModules();
+}
+
+// ── QUIZ MANAGER ──
+function renderContentQuizzes(){
+  const el=document.getElementById('content-quiz-list');
+  el.innerHTML=modules.map(m=>`<div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:${m.questions?.length?'10px':'0'}">
+      <div>
+        <div class="card-title">${m.icon} ${m.title}</div>
+        <div class="card-sub">${m.questions?.length||0} questions</div>
+      </div>
+      <button class="btn btn-secondary btn-sm" onclick="openAddQuestion('${m.id}')">+ Question</button>
+    </div>
+    <div id="ql-${m.id}">
+      ${(m.questions||[]).map((q,i)=>renderQuestionCard(m.id,q,i)).join('')}
+    </div>
+  </div>`).join('');
+}
+
+function renderQuestionCard(mid,q,i){
+  return `<div class="question-card">
+    <div class="q-num">Q${i+1}</div>
+    <div class="q-text">${escHtml(q.question)}</div>
+    <div>${q.choices.map((c,ci)=>`<div class="choice-row"><span class="${ci===q.correct?'choice-correct':'choice-wrong'}">${ci===q.correct?'✓':'·'} ${escHtml(c)}</span></div>`).join('')}</div>
+    <div style="margin-top:8px"><button class="btn btn-danger btn-sm" onclick="removeQuestion('${mid}',${i})">Remove</button></div>
+  </div>`;
+}
+
+function openAddQuestion(mid){
+  editingQuizModuleId=mid;
+  ['aq-question','aq-a','aq-b','aq-c','aq-d'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('aq-correct').value='0';
+  openModal('add-q-modal');
+}
+
+function saveQuestion(){
+  const question=document.getElementById('aq-question').value.trim();
+  const a=document.getElementById('aq-a').value.trim();
+  const b=document.getElementById('aq-b').value.trim();
+  const c=document.getElementById('aq-c').value.trim();
+  const d=document.getElementById('aq-d').value.trim();
+  const correct=parseInt(document.getElementById('aq-correct').value);
+  if(!question||!a||!b||!c||!d){toast('Fill in all fields');return;}
+  const m=modules.find(x=>x.id===editingQuizModuleId);
+  if(!m.questions)m.questions=[];
+  m.questions.push({question,choices:[a,b,c,d],correct});
+  save('modules',modules);
+  closeModal('add-q-modal');
+  toast('✅ Question added!');
+  renderContentQuizzes();
+}
+
+function removeQuestion(mid,i){
+  const m=modules.find(x=>x.id===mid);
+  m.questions.splice(i,1);
+  save('modules',modules);
+  toast('Question removed');
+  renderContentQuizzes();
+}
+
+// ── SURVEYS ──
+let surveyQCount=1;
+function addSurveyQ(){
+  if(surveyQCount>=5)return;
+  const i=surveyQCount;
+  const row=document.createElement('div');
+  row.className='survey-q-row';
+  row.style.marginBottom='10px';
+  row.innerHTML=`<input class="form-control" placeholder="Question ${i+1}" data-qi="${i}">
+    <div style="display:flex;gap:8px;align-items:center;font-size:13px;margin-top:-8px;margin-bottom:10px">
+      <label style="display:flex;gap:4px;align-items:center;cursor:pointer"><input type="radio" name="sqtype${i}" value="text" checked> Text</label>
+      <label style="display:flex;gap:4px;align-items:center;cursor:pointer"><input type="radio" name="sqtype${i}" value="rating"> Rating 1–5</label>
+    </div>`;
+  document.getElementById('survey-q-builder').appendChild(row);
+  surveyQCount++;
+}
+
+function createSurvey(){
+  const title=document.getElementById('survey-title-input').value.trim();
+  if(!title){toast('Enter a survey title');return;}
+  const qs=[];
+  document.querySelectorAll('#survey-q-builder input[data-qi]').forEach((inp,i)=>{
+    const text=inp.value.trim();
+    if(!text)return;
+    const type=document.querySelector(`input[name="sqtype${i}"]:checked`)?.value||'text';
+    qs.push({text,type});
+  });
+  if(!qs.length){toast('Add at least one question');return;}
+  surveys.push({id:uid(),title,questions:qs,active:true,ts:Date.now()});
+  save('surveys',surveys);
+  document.getElementById('survey-title-input').value='';
+  document.getElementById('survey-q-builder').innerHTML=`<div class="survey-q-row" style="margin-bottom:10px">
+    <input class="form-control" placeholder="Question 1" data-qi="0">
+    <div style="display:flex;gap:8px;align-items:center;font-size:13px;margin-top:-8px;margin-bottom:10px">
+      <label style="display:flex;gap:4px;align-items:center;cursor:pointer"><input type="radio" name="sqtype0" value="text" checked> Text</label>
+      <label style="display:flex;gap:4px;align-items:center;cursor:pointer"><input type="radio" name="sqtype0" value="rating"> Rating 1–5</label>
+    </div></div>`;
+  surveyQCount=1;
+  toast('✅ Survey created!');
+  renderSurveyList();
+}
+
+function renderSurveyList(){
+  const el=document.getElementById('survey-list');
+  if(!surveys.length){el.innerHTML='<div style="color:var(--muted);font-size:14px">No surveys yet.</div>';return;}
+  el.innerHTML=surveys.slice().reverse().map(sv=>{
+    const responseCount=Object.values(progress).filter(p=>p.surveyResponses?.[sv.id]).length;
+    return `<div class="survey-card">
+      <div class="survey-card-header">
+        <div>
+          <div class="survey-title">${escHtml(sv.title)}</div>
+          <div class="survey-meta">${sv.questions.length} questions · ${responseCount} response${responseCount!==1?'s':''}</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" ${sv.active?'checked':''} onchange="toggleSurvey('${sv.id}',this.checked)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function toggleSurvey(id,active){
+  const sv=surveys.find(s=>s.id===id);
+  if(sv){sv.active=active;save('surveys',surveys);}
+  toast(active?'Survey activated':'Survey deactivated');
+}
+
+// ═══════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════
+function escHtml(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function escAttr(s){return String(s||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
+
+// ═══════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════
+populateNameDropdown();
+</script>
+</body>
+</html>
