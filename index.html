@@ -333,11 +333,24 @@
   /* COUNTDOWN */
   .countdown-wrap { margin-bottom: 44px; }
   .countdown-label {
-    font-size: 11px;
-    letter-spacing: 5px;
+    font-size: 13px;
+    letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--red);
-    margin-bottom: 14px;
+    margin-bottom: 4px;
+    font-weight: 700;
+    font-family: 'Space Grotesk', sans-serif;
+  }
+  .countdown-label.is-open {
+    color: #4CAF50;
+  }
+  .countdown-sublabel {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 18px;
+    font-family: 'Space Grotesk', sans-serif;
   }
   .countdown {
     display: flex; gap: 12px;
@@ -1348,15 +1361,11 @@
         8340 La Palma Ave, Buena Park, CA
       </p>
 
-      <!-- COUNTDOWN -->
+      <!-- HOURS STATUS -->
       <div class="countdown-wrap">
-        <div class="countdown-label">Open for</div>
+        <div class="countdown-label" id="hoursStatusLabel">We Are Open!</div>
+        <div class="countdown-sublabel" id="hoursStatusSub">Closing in</div>
         <div class="countdown">
-          <div class="cd-block countdown-domo-wrap">
-            <div class="cd-num" id="cd-days">00</div>
-            <div class="cd-unit">Days</div>
-          </div>
-          <div class="cd-sep">:</div>
           <div class="cd-block">
             <div class="cd-num" id="cd-hours">00</div>
             <div class="cd-unit">Hours</div>
@@ -2064,39 +2073,102 @@
     bgSlides[bgCur].classList.add('active');
   }, 5000);
 
-  // ══ COUNTDOWN / COUNT-UP ══
-  const OPENING = new Date('2026-06-13T10:00:00-07:00');
-  function updateCountdown() {
-    const now = new Date();
-    const diff = OPENING - now;
-    const label = document.querySelector('.countdown-label');
-    const headline = document.querySelector('.headline');
-    const subline = document.querySelector('.subline');
-    if (diff <= 0) {
-      const elapsed = now - OPENING;
-      const d = Math.floor(elapsed / 86400000);
-      const h = Math.floor((elapsed % 86400000) / 3600000);
-      const m = Math.floor((elapsed % 3600000) / 60000);
-      const s = Math.floor((elapsed % 60000) / 1000);
-      document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
-      document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-      document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
-      document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
-      label.textContent = 'Open for';
-    } else {
-      const d = Math.floor(diff / 86400000);
-      const h = Math.floor((diff % 86400000) / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
-      document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-      document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
-      document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
-      label.textContent = 'Opening in';
+  // ══ HOURS STATUS COUNTDOWN ══
+  // Mon-Fri: 11am-8pm | Sat-Sun: 10am-8pm (America/Los_Angeles)
+  const HOURS = {
+    0: { open: 10, close: 20 }, // Sun
+    1: { open: 11, close: 20 }, // Mon
+    2: { open: 11, close: 20 }, // Tue
+    3: { open: 11, close: 20 }, // Wed
+    4: { open: 11, close: 20 }, // Thu
+    5: { open: 11, close: 20 }, // Fri
+    6: { open: 10, close: 20 }, // Sat
+  };
+
+  function getLATime() {
+    return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
+  }
+
+  function getNextOpen(from) {
+    // Find the next open time from a given LA Date
+    const d = new Date(from);
+    for (let i = 1; i <= 7; i++) {
+      d.setDate(d.getDate() + 1);
+      const day = d.getDay();
+      const h = HOURS[day];
+      const candidate = new Date(d);
+      candidate.setHours(h.open, 0, 0, 0);
+      if (candidate > from) return candidate;
     }
   }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+
+  function updateHoursStatus() {
+    const now = getLATime();
+    const day = now.getDay();
+    const h = HOURS[day];
+    const openToday  = new Date(now); openToday.setHours(h.open,  0, 0, 0);
+    const closeToday = new Date(now); closeToday.setHours(h.close, 0, 0, 0);
+
+    const label = document.getElementById('hoursStatusLabel');
+    const sub   = document.getElementById('hoursStatusSub');
+
+    let targetMs, isOpen;
+
+    if (now >= openToday && now < closeToday) {
+      // ── OPEN ──
+      isOpen = true;
+      targetMs = closeToday - now;
+      label.textContent = 'We Are Open!';
+      label.className = 'countdown-label is-open';
+      sub.textContent = 'Closing in';
+    } else {
+      // ── CLOSED ──
+      isOpen = false;
+      label.className = 'countdown-label';
+      label.textContent = 'Currently Closed';
+
+      let nextOpen;
+      if (now < openToday) {
+        // Before open today
+        nextOpen = openToday;
+      } else {
+        // After close — find tomorrow's open
+        nextOpen = getNextOpen(closeToday);
+      }
+
+      targetMs = nextOpen - now;
+
+      // Build "Opening today/tomorrow at X" label
+      const nextDay = nextOpen.getDay();
+      const nextHour = HOURS[nextDay].open;
+      const ampm = nextHour >= 12 ? 'PM' : 'AM';
+      const hr12 = nextHour > 12 ? nextHour - 12 : nextHour;
+      const nowDay = now.getDay();
+
+      let dayLabel;
+      const tomorrowDay = (nowDay + 1) % 7;
+      if (nextOpen.getDate() === new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1).getDate()) {
+        dayLabel = 'Opening tomorrow at ' + hr12 + ' ' + ampm;
+      } else if (now < openToday) {
+        dayLabel = 'Opening today at ' + hr12 + ' ' + ampm;
+      } else {
+        dayLabel = 'Opening tomorrow at ' + hr12 + ' ' + ampm;
+      }
+      sub.textContent = dayLabel;
+    }
+
+    const totalSecs = Math.max(0, Math.floor(targetMs / 1000));
+    const hh = Math.floor(totalSecs / 3600);
+    const mm = Math.floor((totalSecs % 3600) / 60);
+    const ss = totalSecs % 60;
+
+    document.getElementById('cd-hours').textContent = String(hh).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(mm).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(ss).padStart(2,'0');
+  }
+
+  updateHoursStatus();
+  setInterval(updateHoursStatus, 1000);
 
   // ══ SILHOUETTE CYCLE ══
   const silFrames = document.querySelectorAll('.sil-frame');
