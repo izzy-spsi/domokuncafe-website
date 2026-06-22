@@ -2281,7 +2281,7 @@
         method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(data)
       });
       const result = await res.json();
-      if (res.ok) { window.location.href = '/dashboard.html'; }
+      if (res.ok) { localStorage.setItem('authToken', result.token); window.location.href = '/dashboard.html'; }
       else { loginError.textContent = result.error || 'Login failed'; loginError.style.display = 'block'; btn.disabled = false; }
     } catch { loginError.textContent = 'Connection error.'; loginError.style.display = 'block'; btn.disabled = false; }
   });
