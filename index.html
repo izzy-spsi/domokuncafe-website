@@ -1445,11 +1445,15 @@
 
       <!-- CENTRAL DOMO SILHOUETTE -->
       <div class="silhouette-wrap" id="silhouetteWrap">
+        <!-- TEMP: July 4th 2026 static swap — auto-reverts at midnight PT via cron, see index.html.pre-july4-backup -->
+        <img class="sil-frame active full-color" src="domo-site-assets/domo-250th-july4-2026.jpg" alt="Happy 250th Birthday USA - Chef Domo">
+        <!--
         <img class="sil-frame active" src="domo-site-assets/cropped-chef-domo-04.png" alt="">
         <img class="sil-frame"        src="domo-site-assets/cropped-chef-domo-08.png" alt="">
         <img class="sil-frame"        src="domo-site-assets/cropped-chef-domo-12.png" alt="">
         <img class="sil-frame"        src="domo-site-assets/cropped-chef-domo-16.png" alt="">
         <img class="sil-frame"        src="domo-site-assets/cropped-chef-domo-23.png" alt="">
+        -->
       </div>
       <div class="silhouette-label">More Than a Cafe.</div>
 
@@ -2280,12 +2284,14 @@
 
   // ══ SILHOUETTE CYCLE ══
   const silFrames = document.querySelectorAll('.sil-frame');
-  let silCur = 0;
-  setInterval(() => {
-    silFrames[silCur].classList.remove('active');
-    silCur = (silCur + 1) % silFrames.length;
-    silFrames[silCur].classList.add('active');
-  }, 4000);
+  if (silFrames.length > 1) {
+    let silCur = 0;
+    setInterval(() => {
+      silFrames[silCur].classList.remove('active');
+      silCur = (silCur + 1) % silFrames.length;
+      silFrames[silCur].classList.add('active');
+    }, 4000);
+  }
 
   // ══ DAILY REVEAL ══
   (function() {
