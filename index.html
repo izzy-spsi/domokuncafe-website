@@ -1407,6 +1407,20 @@
     .early-close-banner .ecb-msg { font-size: 12.5px; }
   }
 </style>
+<script>
+  // Auto-hide today's early-close notice after 11:00 PM PT on 2026-07-28
+  (function() {
+    var EXPIRES = new Date('2026-07-28T23:00:00-07:00');
+    if (new Date() >= EXPIRES) {
+      var banner = document.getElementById('earlyCloseBanner');
+      if (banner) banner.style.display = 'none';
+      var todayRow = document.getElementById('todayHoursRow');
+      if (todayRow) todayRow.style.display = 'none';
+      var lsNote = document.getElementById('earlyCloseSeatingNote');
+      if (lsNote) lsNote.style.display = 'none';
+    }
+  })();
+</script>
 
 <!-- ═══════════════════════════════════════
      STICKY NAV
@@ -1819,7 +1833,7 @@
       <div class="hours-box fade-up delay-1">
         <h3>Hours</h3>
         <ul class="hours-list">
-          <li class="hours-row" style="background: rgba(204,34,34,0.1); margin: 0 -8px; padding: 9px 8px; border-radius: 8px; border-bottom: none;">
+          <li class="hours-row" id="todayHoursRow" style="background: rgba(204,34,34,0.1); margin: 0 -8px; padding: 9px 8px; border-radius: 8px; border-bottom: none;">
             <span class="hours-day" style="color:#CC2222; font-weight:700;">Today (Tue)</span>
             <span class="hours-time" style="color:#CC2222;"><span style="text-decoration:line-through; opacity:0.55; font-weight:400; margin-right:6px;">8:00 PM</span>7:00 PM</span>
           </li>
@@ -1832,7 +1846,7 @@
             <span class="hours-time">10:00 AM - 8:00 PM</span>
           </li>
         </ul>
-        <div class="hours-last-seating" style="color:#CC2222; font-weight:600;">
+        <div class="hours-last-seating" id="earlyCloseSeatingNote" style="color:#CC2222; font-weight:600;">
           <span class="ls-icon">⚠️</span>
           <span><strong>Closing 1 hour early today</strong> - last seating 6:30 PM</span>
         </div>
