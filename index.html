@@ -1363,66 +1363,6 @@
 <body>
 
 <!-- ═══════════════════════════════════════
-     TODAY'S NOTICE — EARLY CLOSE (temporary, remove/edit day-of)
-═══════════════════════════════════════ -->
-<div class="early-close-banner" id="earlyCloseBanner">
-  <div class="ecb-inner">
-    <span class="ecb-tag">⚠️ Today's Notice</span>
-    <span class="ecb-msg"><strong>Closing 1 hour early today</strong> — we'll be closing at <strong>7:00&nbsp;PM</strong>. Last seating at 6:30&nbsp;PM. Thanks for understanding! 🙏</span>
-  </div>
-</div>
-
-<style>
-  .early-close-banner {
-    position: relative;
-    z-index: 200;
-    background: linear-gradient(135deg, #CC2222, #a11c1c);
-    color: #FDF8F4;
-    text-align: center;
-    padding: 10px 16px;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .early-close-banner .ecb-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 6px 10px;
-  }
-  .early-close-banner .ecb-tag {
-    font-family: 'Outfit', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    opacity: 0.9;
-  }
-  .early-close-banner .ecb-msg {
-    font-size: 13.5px;
-    line-height: 1.4;
-  }
-  @media (max-width: 640px) {
-    .early-close-banner .ecb-msg { font-size: 12.5px; }
-  }
-</style>
-<script>
-  // Auto-hide today's early-close notice after 11:00 PM PT on 2026-07-28
-  (function() {
-    var EXPIRES = new Date('2026-07-28T23:00:00-07:00');
-    if (new Date() >= EXPIRES) {
-      var banner = document.getElementById('earlyCloseBanner');
-      if (banner) banner.style.display = 'none';
-      var todayRow = document.getElementById('todayHoursRow');
-      if (todayRow) todayRow.style.display = 'none';
-      var lsNote = document.getElementById('earlyCloseSeatingNote');
-      if (lsNote) lsNote.style.display = 'none';
-    }
-  })();
-</script>
-
-<!-- ═══════════════════════════════════════
      STICKY NAV
 ═══════════════════════════════════════ -->
 <nav class="site-nav" role="navigation" aria-label="Main navigation">
@@ -1833,10 +1773,6 @@
       <div class="hours-box fade-up delay-1">
         <h3>Hours</h3>
         <ul class="hours-list">
-          <li class="hours-row" id="todayHoursRow" style="background: rgba(204,34,34,0.1); margin: 0 -8px; padding: 9px 8px; border-radius: 8px; border-bottom: none;">
-            <span class="hours-day" style="color:#CC2222; font-weight:700;">Today (Tue)</span>
-            <span class="hours-time" style="color:#CC2222;"><span style="text-decoration:line-through; opacity:0.55; font-weight:400; margin-right:6px;">8:00 PM</span>7:00 PM</span>
-          </li>
           <li class="hours-row">
             <span class="hours-day">Monday - Friday</span>
             <span class="hours-time">11:00 AM - 8:00 PM</span>
@@ -1846,10 +1782,6 @@
             <span class="hours-time">10:00 AM - 8:00 PM</span>
           </li>
         </ul>
-        <div class="hours-last-seating" id="earlyCloseSeatingNote" style="color:#CC2222; font-weight:600;">
-          <span class="ls-icon">⚠️</span>
-          <span><strong>Closing 1 hour early today</strong> - last seating 6:30 PM</span>
-        </div>
         <div class="hours-last-seating">
           <span class="ls-icon">🍽️</span>
           <span><strong>Last seating at 8:00 PM</strong> - kitchen closes promptly</span>
@@ -2246,7 +2178,7 @@
 </footer>
 
 <!-- VERSION BADGE -->
-<div class="version-badge">v2.1.1</div>
+<div class="version-badge">v2.1.2</div>
 
 <!-- DOMO SKATER -->
 <img id="domoSkater" src="domo-site-assets/domo-skate.png" alt="" draggable="false" aria-hidden="true">
