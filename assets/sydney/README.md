@@ -1,3 +1,6 @@
-# Sydney visual reference assets
+# Design reference assets
 
-These images are ported from the Sydney concept repository (https://github.com/sqdni/website) for the Domo Cafe static homepage refresh. Visual concepts include the full-bleed hero carousel, playful mascot moments, striped awning rhythm, values cards, and menu feature treatment. Attribution: Sydney / sqdni.
+Visual concepts inspired by Sydney’s Domo Cafe design exploration
+(hero carousel, mascot moments, awning rhythm, values cards, menu treatment).
+
+Public site credit: “Design inspired by Sydney” in the footer.
