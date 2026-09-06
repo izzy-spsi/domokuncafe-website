@@ -208,6 +208,17 @@
     .footer-credit__sps a:hover, .footer-credit__sps a:focus-visible { border-bottom-color: #FFD98B; }
     .footer-credit__note { color: #DFC5B2; font-size: .78rem; }
     @media (max-width: 720px) { .footer-credit { text-align: left; } }
+
+    .delivery-band { background: #fff; border-bottom: 1px solid rgba(139,69,19,.12); padding: 1rem 0; }
+    .delivery-band__inner { align-items: center; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
+    .delivery-band__copy { display: grid; gap: .15rem; }
+    .delivery-band__title { color: var(--red); font: 700 1rem var(--body); letter-spacing: .04em; text-transform: uppercase; margin: 0; }
+    .delivery-band__lede { color: #694d3b; font-size: .92rem; margin: 0; }
+    .nav-order { background: var(--gold) !important; border-color: var(--gold) !important; color: var(--brown-dark) !important; }
+    .nav-order:hover, .nav-order:focus-visible { background: #b87f1f !important; border-color: #b87f1f !important; color: #fff !important; }
+    .visit__contacts { display: grid; gap: .45rem; margin: 1rem 0 0; }
+    .visit__contacts a { color: var(--red); font-weight: 700; text-decoration: none; }
+    .visit__contacts a:hover { text-decoration: underline; }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
     }
@@ -220,6 +231,7 @@
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">☰</button>
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
       <a href="#menu">Menu</a><a href="#story">Our Story</a><a href="#visit">Visit</a><a href="#faq">FAQ</a>
+      <a class="button nav-order" href="https://www.doordash.com/search/store/Domo%20Cafe%20Buena%20Park/" target="_blank" rel="noopener">Order Now <span aria-hidden="true">↗</span></a>
       <a class="button" href="https://web-production-876e2.up.railway.app" target="_blank" rel="noopener">Join CHOMPS <span aria-hidden="true">↗</span></a>
     </nav>
   </header>
@@ -237,7 +249,7 @@
           <div class="hero__kicker">Buena Park's character cafe</div>
           <h1>Come for the <span>good vibes.</span></h1>
           <p class="hero__lede">Japanese-inspired comfort food, Domo-sized joy, and a place to make your next favorite memory.</p>
-          <div class="hero__actions"><a class="button button--light" href="#menu">Explore the menu <span aria-hidden="true">↓</span></a><button class="button button--outline" type="button" id="rsvpBtn">Stay Updated</button><a class="button button--outline" href="#visit">Plan your visit</a></div>
+          <div class="hero__actions"><a class="button button--light" href="https://www.doordash.com/search/store/Domo%20Cafe%20Buena%20Park/" target="_blank" rel="noopener">Order Now on DoorDash <span aria-hidden="true">↗</span></a><a class="button button--outline" href="#menu">Explore the menu</a><button class="button button--outline" type="button" id="rsvpBtn">Stay Updated</button><a class="button button--outline" href="#visit">Plan your visit</a></div>
           <div class="hero__address">8340 La Palma Ave · Buena Park, CA 90620</div>
         </div>
         <img class="hero__mascot" src="assets/sydney/mascots/mascot-jumping.png" alt="Domo mascot jumping with joy">
@@ -249,6 +261,17 @@
       </div>
     </section>
     <div class="awning" aria-hidden="true"></div>
+    
+    <section class="delivery-band" id="delivery" aria-label="Domo Delivery">
+      <div class="container delivery-band__inner">
+        <div class="delivery-band__copy">
+          <p class="delivery-band__title">Domo Delivery is here</p>
+          <p class="delivery-band__lede">Order Domo Cafe favorites through DoorDash — starting this week.</p>
+        </div>
+        <a class="button" href="https://www.doordash.com/search/store/Domo%20Cafe%20Buena%20Park/" target="_blank" rel="noopener">Order Now on DoorDash <span aria-hidden="true">↗</span></a>
+      </div>
+    </section>
+
     <div class="marquee" aria-label="Domo Cafe highlights"><div class="marquee__track"><span>Food worth the wait</span>✦<span>Character-sized fun</span>✦<span>Made for your people</span>✦<span>Food worth the wait</span>✦<span>Character-sized fun</span>✦<span>Made for your people</span>✦</div></div>
 
     <section class="section section--cream" id="menu" aria-labelledby="menu-heading">
@@ -279,14 +302,14 @@
       </div>
     </section>
 
-    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
+    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><div class="visit__contacts"><a href="tel:4153603666">(415) 360-3666</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
 
-    <section class="section section--white" id="events" aria-labelledby="events-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Make it a thing</div><h2 id="events-heading">Good times,<br>coming soon.</h2></div><p>We're dreaming up community nights, character moments, and seasonal surprises. Keep an eye on our socials for the next drop.</p></div><div class="events-grid"><article class="event-card"><div class="icon" aria-hidden="true">🎉</div><h3>Community nights</h3><p>Good food tastes better with good people. Details soon.</p></article><article class="event-card"><div class="icon" aria-hidden="true">✨</div><h3>Seasonal drops</h3><p>Limited-time menu moments are on the way.</p></article><article class="event-card"><div class="icon" aria-hidden="true">🧸</div><h3>Character moments</h3><p>Come say hi when Domo makes an appearance.</p></article></div></div></section>
+    <section class="section section--white" id="events" aria-labelledby="events-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Make it a thing</div><h2 id="events-heading">Good times,<br>coming soon.</h2></div><p>We're dreaming up community nights, character moments, and seasonal surprises. Keep an eye on our socials for the next drop.</p></div><div class="events-grid"><article class="event-card"><div class="icon" aria-hidden="true">🎉</div><h3>Domo Community Tuesdays</h3><p>Local schools, teams, and nonprofits raise funds at Domo — Domo Shows Up for Buena Park. Community hub coming soon.</p></article><article class="event-card"><div class="icon" aria-hidden="true">✨</div><h3>Seasonal drops</h3><p>Limited-time menu moments are on the way.</p></article><article class="event-card"><div class="icon" aria-hidden="true">🧸</div><h3>Character moments</h3><p>Come say hi when Domo makes an appearance.</p></article></div></div></section>
 
-    <section class="section faq" id="faq" aria-labelledby="faq-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Need to know</div><h2 id="faq-heading">Quick answers.</h2></div><p>Still curious? <a href="mailto:info@domokuncafe.com">Send us a note</a> and our crew will help out.</p></div><div class="faq-grid"><details><summary>Do you take walk-ins?</summary><p>Yes! Walk-ins are welcome. On busy weekends, arriving early is your best bet.</p></details><details><summary>Is there parking?</summary><p>Yes, free parking is available in the large Buena Park Downtown lot.</p></details><details><summary>Can I celebrate a birthday here?</summary><p>Absolutely. Bring your people and your camera—we love a reason to celebrate.</p></details><details><summary>Where can I follow updates?</summary><p>Follow <a href="https://instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe on Instagram</a> for announcements and seasonal news.</p></details></div></div></section>
+    <section class="section faq" id="faq" aria-labelledby="faq-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Need to know</div><h2 id="faq-heading">Quick answers.</h2></div><p>Still curious? <a href="mailto:info@domokuncafe.com">Send us a note</a> and our crew will help out.</p></div><div class="faq-grid"><details><summary>Do you take walk-ins?</summary><p>Yes! Walk-ins are welcome. On busy weekends, arriving early is your best bet. For large groups (8+), call ahead at <a href="tel:4153603666">(415) 360-3666</a> so we can ready a table.</p></details><details><summary>Is there parking?</summary><p>Yes, free parking is available in the large Buena Park Downtown lot.</p></details><details><summary>Can I celebrate a birthday here?</summary><p>Absolutely — we love birthdays. For celebrations with more than 8 guests, we offer birthday packages. Call us at <a href="tel:4153603666">(415) 360-3666</a> or email <a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a> and we’ll set you up.</p></details><details><summary>Do you deliver?</summary><p><strong>Domo Delivery is here</strong> — order through DoorDash starting this week. <a href="https://www.doordash.com/search/store/Domo%20Cafe%20Buena%20Park/" target="_blank" rel="noopener">Order Now on DoorDash</a>.</p></details><details><summary>Where can I follow updates?</summary><p>Follow <a href="https://instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe on Instagram</a> for announcements and seasonal news.</p></details></div></div></section>
     <div class="nhk"><div class="container"><strong>An NHK Licensed Character Café</strong><p>Domo-kun © NHK. We're honored to bring this beloved character to life in Buena Park.</p></div></div>
   </main>
-  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand" href="#top"><img src="domo-cafe-logo-transparent.png" alt="Domo Cafe"></a><p>Japanese-inspired comfort food, character-sized joy, and a table for everyone.</p></div><div><h3>Explore</h3><ul class="footer-links"><li><a href="#menu">Menu</a></li><li><a href="#chomps">CHOMPS</a></li><li><a href="#story">Our story</a></li><li><a href="#events">Events</a></li></ul></div><div><h3>Say hi</h3><ul class="footer-links"><li><a href="https://instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></li><li><a href="#visit">8340 La Palma Ave</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 Domo Cafe · Domo-kun © NHK</span><div class="footer-credit"><span class="footer-credit__sps">Built with AI by <a href="https://superpowerstudios.ai" target="_blank" rel="noopener">Super Power Studios</a></span><span class="footer-credit__note">Design inspired by Sydney · <a class="footer__admin" href="dashboard.html">Admin Login</a></span></div></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand" href="#top"><img src="domo-cafe-logo-transparent.png" alt="Domo Cafe"></a><p>Japanese-inspired comfort food, character-sized joy, and a table for everyone.</p></div><div><h3>Explore</h3><ul class="footer-links"><li><a href="#menu">Menu</a></li><li><a href="#chomps">CHOMPS</a></li><li><a href="#story">Our story</a></li><li><a href="#events">Events</a></li></ul></div><div><h3>Say hi</h3><ul class="footer-links"><li><a href="https://instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="tel:4153603666">(415) 360-3666</a></li><li><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></li><li><a href="#visit">8340 La Palma Ave</a></li><li><a href="https://www.doordash.com/search/store/Domo%20Cafe%20Buena%20Park/" target="_blank" rel="noopener">Order on DoorDash ↗</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 Domo Cafe · Domo-kun © NHK</span><div class="footer-credit"><span class="footer-credit__sps">Built with AI by <a href="https://superpowerstudios.ai" target="_blank" rel="noopener">Super Power Studios</a></span><span class="footer-credit__note">Design inspired by Sydney · <a class="footer__admin" href="dashboard.html">Admin Login</a></span></div></div></div></footer>
 
   <div id="rsvpModal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="rsvp-title">
     <div class="modal-overlay" id="modalOverlay"></div>
