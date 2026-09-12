@@ -95,6 +95,12 @@
     .menu-card p { color: #694d3b; font-size: .9rem; margin-bottom: 0; }
     .menu-card__tag { color: var(--red); font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
     .menu-footer { margin-top: 2.2rem; text-align: center; }
+    .menu-gallery-heading { margin: 3.2rem 0 1.4rem; }
+    .menu-gallery-heading h3 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 0; }
+    .menu-gallery { display: grid; gap: 1rem; grid-template-columns: repeat(4, 1fr); }
+    .menu-shot { background: #fff; border-radius: var(--round); box-shadow: 0 8px 25px rgba(74,37,13,.08); margin: 0; overflow: hidden; }
+    .menu-shot img { aspect-ratio: 3 / 2; background: #f7efe6; object-fit: cover; object-position: center; width: 100%; }
+    .menu-shot figcaption { font-family: var(--display); font-size: 1.15rem; line-height: 1.2; padding: .85rem 1rem 1.05rem; }
     .chomps { overflow: hidden; position: relative; }
     .chomps::before, .chomps::after { border: 2px solid rgba(255,255,255,.2); border-radius: 50%; content: ""; height: 26rem; position: absolute; width: 26rem; }
     .chomps::before { left: -14rem; top: -10rem; }
@@ -167,7 +173,7 @@
       .hero, .hero__content { min-height: 650px; }
       .hero__mascot { bottom: -1rem; opacity: .64; right: -1.5rem; width: 270px; }
       .hero__shade { background: linear-gradient(90deg, rgba(43,26,18,.82), rgba(43,26,18,.5)); }
-      .menu-grid, .values-grid { grid-template-columns: repeat(2, 1fr); }
+      .menu-grid, .menu-gallery, .values-grid { grid-template-columns: repeat(2, 1fr); }
       .chomps__inner, .visit-grid { grid-template-columns: 1fr; }
       .tiers { gap: .4rem; }
       .tiers li { font-size: 1rem; min-height: 5.7rem; }
@@ -182,7 +188,9 @@
       .hero__lede { max-width: 340px; }
       .section-heading { align-items: start; flex-direction: column; gap: .8rem; }
       .menu-grid, .values-grid, .events-grid, .faq-grid { grid-template-columns: 1fr; }
+      .menu-gallery { grid-template-columns: repeat(2, 1fr); }
       .menu-card img { aspect-ratio: 1.25 / 1; }
+      .menu-shot figcaption { font-size: 1rem; padding: .7rem .8rem .9rem; }
       .tiers { grid-template-columns: repeat(2, 1fr); }
       .tiers li:nth-child(even) { transform: none; }
       .tiers li:last-child { grid-column: 1 / -1; }
@@ -288,10 +296,37 @@
       <div class="container">
         <div class="section-heading"><div><div class="eyebrow">What we're serving</div><h2 id="menu-heading">Big flavor.<br>Zero boring bites.</h2></div><p>Pull up a chair for craveable comfort food, playful drinks, and Domo favorites made for sharing.</p></div>
         <div class="menu-grid">
-          <article class="menu-card"><img src="assets/sydney/menu/katsu-curry.png" alt="Katsu curry with rice" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Domo pick</div><h3>Katsu Curry</h3><p>Crispy, saucy, and deeply cozy.</p></div></article>
-          <article class="menu-card"><img src="assets/sydney/menu/domo-yaki.png" alt="Domo-yaki dish" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Fan favorite</div><h3>Domo-yaki</h3><p>A savory stack with a little magic.</p></div></article>
-          <article class="menu-card"><img src="assets/sydney/menu/drinks.png" alt="Colorful cafe drinks" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Sip happy</div><h3>Sweet Sips</h3><p>Bright, refreshing, and photo-ready.</p></div></article>
-          <article class="menu-card"><img src="assets/sydney/menu/crispy-chicken-fries.png" alt="Crispy chicken and fries" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">For the table</div><h3>Crispy Chicken</h3><p>Golden crunch for the whole crew.</p></div></article>
+          <article class="menu-card"><img src="assets/menu/doordash/Katsu%20Curry.jpg" alt="Katsu Curry" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Domo pick</div><h3>Katsu Curry</h3><p>Crispy, saucy, and deeply cozy.</p></div></article>
+          <article class="menu-card"><img src="assets/menu/doordash/Yakisoba.jpg" alt="Yakisoba" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Fan favorite</div><h3>Yakisoba</h3><p>A savory favorite with a little magic.</p></div></article>
+          <article class="menu-card"><img src="assets/menu/doordash/Strawberry%20Matcha.jpg" alt="Strawberry Matcha" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Sip happy</div><h3>Sweet Sips</h3><p>Bright, refreshing, and photo-ready.</p></div></article>
+          <article class="menu-card"><img src="assets/menu/doordash/Crispy%20Loaded%20Fries.jpg" alt="Crispy Loaded Fries" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">For the table</div><h3>Crispy Loaded Fries</h3><p>Golden crunch for the whole crew.</p></div></article>
+        </div>
+        <div class="menu-gallery-heading">
+          <div class="eyebrow">The full lineup</div>
+          <h3>Every plate, sip, and sweet.</h3>
+        </div>
+        <div class="menu-gallery" aria-label="Menu photos">
+          <figure class="menu-shot"><img src="assets/menu/doordash/Boss%20Burger.jpg" alt="Boss Burger" loading="lazy"><figcaption>Boss Burger</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Churro%20Fries.jpg" alt="Churro Fries" loading="lazy"><figcaption>Churro Fries</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Crispy%20Loaded%20Fries.jpg" alt="Crispy Loaded Fries" loading="lazy"><figcaption>Crispy Loaded Fries</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Curry%20Mac%20%26%20Cheese.jpg" alt="Curry Mac &amp; Cheese" loading="lazy"><figcaption>Curry Mac &amp; Cheese</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Dish%20Composition.jpg" alt="Dish Composition" loading="lazy"><figcaption>Dish Composition</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Junior%20Cheeseburger.jpg" alt="Domo Junior Cheeseburger" loading="lazy"><figcaption>Domo Junior Cheeseburger</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Junior%20Nuggets.jpg" alt="Domo Junior Nuggets" loading="lazy"><figcaption>Domo Junior Nuggets</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Moco.jpg" alt="Domo Moco" loading="lazy"><figcaption>Domo Moco</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Palmer.jpg" alt="Domo Palmer" loading="lazy"><figcaption>Domo Palmer</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Style%20Fries.jpg" alt="Domo Style Fries" loading="lazy"><figcaption>Domo Style Fries</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Ice%20Cookie%20Coffee.jpg" alt="Ice Cookie Coffee" loading="lazy"><figcaption>Ice Cookie Coffee</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Katsu%20Curry.jpg" alt="Katsu Curry" loading="lazy"><figcaption>Katsu Curry</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Kimchi%20Katsu.jpg" alt="Kimchi Katsu" loading="lazy"><figcaption>Kimchi Katsu</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Mango%20Lemonade.jpg" alt="Mango Lemonade" loading="lazy"><figcaption>Mango Lemonade</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Milo%20Dinosaur.jpg" alt="Milo Dinosaur" loading="lazy"><figcaption>Milo Dinosaur</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Smash%20Burger.jpg" alt="Smash Burger" loading="lazy"><figcaption>Smash Burger</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Strawberry%20Matcha.jpg" alt="Strawberry Matcha" loading="lazy"><figcaption>Strawberry Matcha</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Strawberry%20Refresher.jpg" alt="Strawberry Refresher" loading="lazy"><figcaption>Strawberry Refresher</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Tiramisu.jpg" alt="Tiramisu" loading="lazy"><figcaption>Tiramisu</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Umami%20Pasta.jpg" alt="Umami Pasta" loading="lazy"><figcaption>Umami Pasta</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Yakisoba.jpg" alt="Yakisoba" loading="lazy"><figcaption>Yakisoba</figcaption></figure>
         </div>
         <div class="menu-footer"><a class="button button--outline" href="mailto:info@domokuncafe.com?subject=Menu%20question">Ask about the menu <span aria-hidden="true">→</span></a></div>
       </div>
