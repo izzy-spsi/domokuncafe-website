@@ -53,15 +53,11 @@
     .site-nav a { color: var(--brown-dark); font-size: .88rem; font-weight: 700; text-decoration: none; }
     .site-nav a:not(.button):hover, .site-nav a:not(.button):focus-visible { color: var(--red); }
     .nav-toggle { background: none; border: 0; color: var(--brown-dark); display: none; font-size: 1.6rem; padding: .4rem; }
-    .hero { color: #fff; min-height: min(760px, calc(100vh - 76px)); overflow: hidden; position: relative; }
+    .hero { background: #2b1a12; color: #fff; min-height: min(760px, calc(100vh - 76px)); overflow: hidden; position: relative; }
     .hero__slides, .hero__slide, .hero__slide img, .hero__shade { height: 100%; inset: 0; position: absolute; width: 100%; }
-    .hero__slide { opacity: 0; transition: opacity 1s ease; }
+    .hero__slide { background: #2b1a12; opacity: 0; transition: opacity 1s ease; }
     .hero__slide.is-active { opacity: 1; }
-    .hero__slide img { object-fit: cover; object-position: center; }
-    .hero__slide--chef-display img { object-position: center 32%; }
-    .hero__slide--photobooth img { object-position: 70% 38%; }
-    .hero__slide--photo-op img { object-position: center 35%; }
-    .hero__slide--merch img { object-position: center 28%; }
+    .hero__slide img { background: #2b1a12; object-fit: contain; object-position: center; }
     .hero__shade { background: linear-gradient(90deg, rgba(43,26,18,.78) 0%, rgba(43,26,18,.42) 47%, rgba(43,26,18,.12) 100%); }
     .hero__content { align-items: center; display: flex; min-height: min(760px, calc(100vh - 76px)); padding: 5rem 0 6rem; position: relative; z-index: 1; }
     .hero__copy { max-width: 650px; }
