@@ -306,10 +306,55 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
     }
+
+    /* National Cheeseburger Day campaign through 2026-09-18. Delete .ncd-* rules with the [data-ncd-promo] markup after the event. */
+    html.ncd-expired [data-ncd-promo] { display: none !important; }
+    .ncd-banner { background: var(--red); border-bottom: 3px solid #FFD98B; color: #fff; }
+    .ncd-banner__inner { align-items: center; display: flex; gap: 1rem 1.4rem; justify-content: space-between; padding: .85rem 0; }
+    .ncd-banner p { margin: 0; font-size: .92rem; line-height: 1.45; }
+    .ncd-banner strong { color: #FFD98B; display: inline-block; font-family: var(--display); font-size: 1.15rem; font-weight: 400; letter-spacing: .04em; margin-right: .45rem; }
+    .ncd-banner__link { background: #FFD98B; border-radius: 999px; color: var(--brown-dark); flex-shrink: 0; font-size: .78rem; font-weight: 700; letter-spacing: .06em; padding: .55rem 1rem; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+    .ncd-banner__link:hover, .ncd-banner__link:focus-visible { background: #fff; }
+    .ncd-section { background: var(--cream); padding: 2.4rem 0 1.2rem; scroll-margin-top: 76px; }
+    .ncd-card { align-items: center; background: #fff; border-radius: var(--round); box-shadow: var(--shadow); display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); overflow: hidden; }
+    .ncd-card figure { background: #f6d48a; margin: 0; }
+    .ncd-card img { height: auto; width: 100%; }
+    .ncd-card__copy { padding: clamp(1.4rem, 3vw, 2.4rem) clamp(1.3rem, 3vw, 2.2rem) 2rem; }
+    .ncd-card__copy .eyebrow { margin-bottom: .35rem; }
+    .ncd-card__copy h2 { font-size: clamp(2.1rem, 4.5vw, 3.4rem); margin-bottom: .4rem; }
+    .ncd-card__date { color: var(--red); font-weight: 700; margin-bottom: .85rem; }
+    .ncd-card__copy p { color: #694d3b; }
+    .ncd-card__fine { font-size: .9rem; margin-bottom: 0; }
+    .ncd-card__actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.3rem; }
+    @media (max-width: 850px) {
+      .ncd-banner__inner { align-items: flex-start; flex-direction: column; gap: .7rem; }
+      .ncd-card { grid-template-columns: 1fr; }
+      .ncd-section { scroll-margin-top: 68px; }
+    }
+    @media (max-width: 570px) {
+      .ncd-banner p { font-size: .86rem; }
+      .ncd-banner__link { text-align: center; width: 100%; }
+      .ncd-section { padding: 1.4rem 0 .4rem; }
+    }
   </style>
+  <script>
+    /* National Cheeseburger Day promo — auto-hides after 2026-09-18 (America/Los_Angeles). */
+    (function () {
+      if (Date.now() >= Date.parse('2026-09-19T07:00:00.000Z')) {
+        document.documentElement.classList.add('ncd-expired');
+      }
+    })();
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <!-- National Cheeseburger Day campaign (Fri Sep 18, 2026). Auto-hides after that date. Safe to delete every [data-ncd-promo] block plus .ncd-* CSS. -->
+  <div class="ncd-banner" data-ncd-promo role="region" aria-label="National Cheeseburger Day promotion">
+    <div class="container ncd-banner__inner">
+      <p><strong>DOMONATION</strong> <span class="ncd-banner__copy">National Cheeseburger Day is Friday, September 18. Buy any burger and get a free Domo Burger button pin. Limit one per entrée (Domo Jr. counts). While supplies last.</span></p>
+      <a class="ncd-banner__link" href="#ncd">Get the pin</a>
+    </div>
+  </div>
   <header class="site-header">
     <a class="brand" href="#top" aria-label="Domo Cafe home"><img src="domo-cafe-logo-transparent.png" alt="Domo Cafe"></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">☰</button>
@@ -353,6 +398,27 @@
       </div>
     </section>
     <div class="awning" aria-hidden="true"></div>
+
+    <section class="ncd-section" id="ncd" data-ncd-promo aria-labelledby="ncd-heading">
+      <div class="container">
+        <article class="ncd-card">
+          <figure>
+            <img src="assets/promos/national-cheeseburger-day-2026.png" width="480" height="599" alt="National Cheeseburger Day poster: a Domo-faced cheeseburger on a sunburst background, offering a free Domo Burger button pin with any burger.">
+          </figure>
+          <div class="ncd-card__copy">
+            <div class="eyebrow">DOMONATION</div>
+            <h2 id="ncd-heading">National Cheeseburger Day</h2>
+            <p class="ncd-card__date">Friday, September 18, 2026</p>
+            <p>Buy any burger on the menu and take home a free Domo Burger button pin.</p>
+            <p class="ncd-card__fine">Limit one per entrée — Domo Jr. counts. While supplies last.</p>
+            <div class="ncd-card__actions">
+              <a class="button" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Order a burger</a>
+              <a class="button button--outline" href="#visit">Plan your visit</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
     
     <section class="delivery-band" id="delivery" aria-label="Online ordering">
       <div class="container delivery-band__inner">
