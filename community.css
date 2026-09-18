@@ -50,7 +50,9 @@
 .stub{opacity:.92}
 .cards-2{grid-template-columns:repeat(2,1fr);max-width:760px}
 .hidden{display:none}
-.form-actions{align-items:center;display:flex;flex-wrap:wrap;gap:.8rem}
+.request-intro{margin-bottom:2.2rem;max-width:720px}
+.request-intro .red-lede{max-width:640px}
+#request .form-card{max-width:920px}
 @media(max-width:900px){
   .who-grid,.provide-grid,.steps-4,.date-grid,.faq-list{grid-template-columns:1fr 1fr}
 }

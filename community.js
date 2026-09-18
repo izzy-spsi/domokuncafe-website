@@ -114,6 +114,10 @@
         button.innerHTML = '<span class="tag">Reserved</span><strong>' + formatWeekday(date) + '</strong><small>' + (hold.organization || 'Already held') + '</small>';
       } else {
         button.innerHTML = '<span class="tag">Open</span><strong>' + formatWeekday(date) + '</strong><small>Subject to approval</small>';
+        if (selected[iso]) {
+          button.classList.add('is-selected');
+          button.setAttribute('aria-pressed', 'true');
+        }
         button.addEventListener('click', function () {
           selected[iso] = !selected[iso];
           button.classList.toggle('is-selected', selected[iso]);
@@ -123,11 +127,14 @@
       }
       dateGrid.appendChild(button);
     });
+    syncSelected();
   }
 
   function toggleSchoolField() {
     var show = SCHOOL_TYPES[orgType.value];
     schoolField.hidden = !show;
+    var input = document.getElementById('schoolAffiliation');
+    if (input) input.disabled = !show;
   }
 
   function formValues() {
@@ -204,9 +211,11 @@
   requestForm.addEventListener('submit', function (event) {
     event.preventDefault();
     syncSelected();
+    if (!requestForm.reportValidity()) return;
     if (!selectedInput.value) {
       dateError.hidden = false;
       dateGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      selectedInput.focus();
       return;
     }
     var values = formValues();

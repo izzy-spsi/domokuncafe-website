@@ -270,8 +270,8 @@
     </section>
 
     <section class="section red" id="request">
-      <div class="container form-grid">
-        <div>
+      <div class="container">
+        <div class="request-intro">
           <div class="eyebrow" style="color:#FFD98B">Request a night</div>
           <h2>Tell us about your group.</h2>
           <p class="red-lede">Choose an open Tuesday, share your contact info, and send the request. We will follow up from info@domokuncafe.com to confirm or suggest another date.</p>
@@ -295,11 +295,13 @@
             <pre class="payload" id="request-payload"></pre>
           </div>
 
-          <form class="form" id="request-form">
+          <form class="form" id="request-form" novalidate>
             <div>
               <p class="eyebrow">Requested Tuesday(s)</p>
               <div class="date-grid" id="date-grid" aria-label="Upcoming Community Tuesdays">Loading upcoming Tuesdays…</div>
-              <input type="hidden" name="requestedTuesdays" id="requestedTuesdays" value="">
+              <label>Selected Tuesday(s)
+                <input type="text" name="requestedTuesdays" id="requestedTuesdays" required readonly placeholder="Tap an open Tuesday above">
+              </label>
               <p class="date-error" id="date-error" hidden>Please select at least one open Tuesday.</p>
             </div>
 
@@ -320,10 +322,12 @@
               </label>
             </div>
 
-            <label id="school-field" hidden>School affiliation (if any)
-              <input name="schoolAffiliation" autocomplete="organization" placeholder="Buena Park High School">
-              <span class="help">Campus, district, or team the fundraiser supports.</span>
-            </label>
+            <div id="school-field" hidden>
+              <label>School affiliation (if any)
+                <input name="schoolAffiliation" id="schoolAffiliation" autocomplete="off" placeholder="Buena Park High School">
+                <span class="help">Campus, district, or team the fundraiser supports.</span>
+              </label>
+            </div>
 
             <div class="row">
               <label>Primary contact name
