@@ -133,8 +133,6 @@
   function toggleSchoolField() {
     var show = SCHOOL_TYPES[orgType.value];
     schoolField.hidden = !show;
-    var input = document.getElementById('schoolAffiliation');
-    if (input) input.disabled = !show;
   }
 
   function formValues() {
@@ -205,28 +203,42 @@
     return href;
   }
 
+  function firstMissingRequired() {
+    var names = ['requestedTuesdays', 'organization', 'orgType', 'contactName', 'contactEmail', 'contactPhone', 'purpose', 'estimatedAttendance'];
+    for (var i = 0; i < names.length; i += 1) {
+      var field = requestForm.elements[names[i]];
+      if (field && !String(field.value || '').trim()) return field;
+    }
+    var agree = requestForm.elements.agreeTerms;
+    if (agree && !agree.checked) return agree;
+    return null;
+  }
+
   orgType.addEventListener('change', toggleSchoolField);
   toggleSchoolField();
 
   requestForm.addEventListener('submit', function (event) {
     event.preventDefault();
     syncSelected();
-    if (!requestForm.reportValidity()) return;
-    if (!selectedInput.value) {
-      dateError.hidden = false;
-      dateGrid.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      selectedInput.focus();
+    var missing = firstMissingRequired();
+    if (missing) {
+      if (missing === selectedInput) dateError.hidden = false;
+      status.textContent = missing === selectedInput
+        ? 'Please select at least one open Tuesday.'
+        : 'Please complete the required fields and try again.';
+      if (missing.focus) missing.focus();
+      if (missing.scrollIntoView) missing.scrollIntoView({ behavior: 'smooth', block: 'center' });
       return;
     }
     var values = formValues();
     var body = payloadText(values);
     try { window.localStorage.setItem('domoCommunityRequest', JSON.stringify(values)); } catch (_) {}
-    openMailto(values, body);
     requestForm.hidden = true;
     successBox.classList.add('is-visible');
     payloadPre.textContent = body;
     status.textContent = 'Your email draft to ' + CONTACT_EMAIL + ' should be open. If it did not, copy the request below.';
     successBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    openMailto(values, body);
   });
 
   if (copyBtn) {
