@@ -53,6 +53,7 @@
 .request-intro{margin-bottom:2.2rem;max-width:720px}
 .request-intro .red-lede{max-width:640px}
 #request .form-card{max-width:920px}
+#requestedTuesdays{background:#fff6e4;cursor:default}
 @media(max-width:900px){
   .who-grid,.provide-grid,.steps-4,.date-grid,.faq-list{grid-template-columns:1fr 1fr}
 }
