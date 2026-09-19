@@ -1,0 +1,26 @@
+{
+  "timezone": "America/Los_Angeles",
+  "updated": "2026-09-18",
+  "note": "Edit this file to hold or release Community Tuesdays. Dates listed here render as reserved on the public request form. All other upcoming Tuesdays stay open and subject to approval.",
+  "dates": [
+    {
+      "date": "2026-10-06",
+      "status": "reserved",
+      "organization": "BPHS Tennis",
+      "profile": "community-bphs-tennis.html",
+      "note": "Example hold with a sample Community profile"
+    },
+    {
+      "date": "2026-10-20",
+      "status": "reserved",
+      "organization": "Buena Park Community Garden",
+      "note": "Example hold — full org profile coming soon"
+    },
+    {
+      "date": "2026-11-24",
+      "status": "reserved",
+      "organization": "Cafe hold",
+      "note": "Example internal hold for Thanksgiving week"
+    }
+  ]
+}
