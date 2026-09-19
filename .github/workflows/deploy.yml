@@ -10,7 +10,7 @@ on:
 jobs:
 
   # ── PRODUCTION ─────────────────────────────────────────────
-  # main branch → GitHub Pages (www.domokuncafe.com)
+  # main branch → GitHub Pages (domokuncafe.com; www redirects when DNS is set)
   deploy-production:
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
