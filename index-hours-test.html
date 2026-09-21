@@ -295,11 +295,11 @@
     width: 100%; height: 100%;
     object-fit: contain; object-position: bottom center;
     opacity: 0;
-    filter: brightness(0) invert(1);
+    filter: none; /* colored lineart only — no silhouette */
     transition: opacity 1.6s ease-in-out;
     pointer-events: none;
   }
-  .sil-frame.active { opacity: 0.82; }
+  .sil-frame.active { opacity: 1; }
   .sil-frame.full-color { filter: none; }
   .silhouette-label {
     font-family: 'DM Sans', sans-serif;
@@ -2148,7 +2148,7 @@
       wrap.style.filter = 'drop-shadow(0 0 32px rgba(204,34,34,0.85))';
       frames.forEach(f => f.classList.add('full-color'));
     } else {
-      frames.forEach(f => f.classList.remove('full-color'));
+      /* keep full-color */ frames.forEach(f => f.classList.add('full-color'));
       if (daysToGo <= 3) {
         wrap.style.clipPath = 'none';
         wrap.style.filter = 'drop-shadow(0 0 16px rgba(204,34,34,0.5))';
