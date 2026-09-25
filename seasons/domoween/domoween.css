@@ -1,0 +1,336 @@
+/*
+ * Domoween theme. Every rule is scoped to html[data-theme="domoween"], so this file
+ * does nothing unless seasons/seasons.js activates the theme.
+ *
+ * Official Domo art (.dw-art) is only ever scaled proportionally: no transforms other
+ * than translate, no filters, no rounded-corner cropping, nothing layered on top.
+ */
+html[data-theme="domoween"] {
+  --dw-night: #1B1030;
+  --dw-night-2: #24133D;
+  --dw-plum: #34205A;
+  --dw-violet: #6B3FA0;
+  --dw-ink: #120A1F;
+  --dw-pumpkin: #FF7A1A;
+  --dw-pumpkin-light: #FFA23A;
+  --dw-pumpkin-dark: #B8430A;
+  --dw-candy: #FFD166;
+  --dw-cream: #FFF4E6;
+  --dw-lilac: #D9C8F0;
+  --dw-text: #F6EEFF;
+  --dw-brown: #7B4A2E;
+  --dw-body-dark: #5A4436;
+  --dw-stripe: repeating-linear-gradient(115deg, var(--dw-pumpkin) 0 22px, var(--dw-candy) 22px 44px, var(--dw-cream) 44px 66px);
+  --display: "Chewy", "Trebuchet MS", cursive;
+}
+html[data-theme="domoween"] body { background: var(--dw-night); color: var(--dw-text); }
+html[data-theme="domoween"] ::selection { background: var(--dw-pumpkin); color: var(--dw-night); }
+html[data-theme="domoween"] :focus-visible { outline: 3px solid var(--dw-candy); outline-offset: 3px; }
+html[data-theme="domoween"] #season-slot.dw-slot { min-height: 0; }
+html[data-theme="domoween"] h1,
+html[data-theme="domoween"] h2,
+html[data-theme="domoween"] h3 { letter-spacing: 0; }
+
+/* ---------- Official art ---------- */
+html[data-theme="domoween"] .dw-art { display: flex; align-items: center; justify-content: center; height: 100%; width: 100%; }
+html[data-theme="domoween"] .dw-art__img { height: auto; max-height: 100%; max-width: 100%; object-fit: contain; width: auto; }
+
+/* ---------- Buttons ---------- */
+html[data-theme="domoween"] .dw-button,
+html[data-theme="domoween"] .button--light,
+html[data-theme="domoween"] .button--nav { background: var(--dw-pumpkin); border-color: var(--dw-pumpkin); color: var(--dw-night); }
+html[data-theme="domoween"] .dw-button:hover,
+html[data-theme="domoween"] .dw-button:focus-visible,
+html[data-theme="domoween"] .button--light:hover,
+html[data-theme="domoween"] .button--light:focus-visible,
+html[data-theme="domoween"] .button--nav:hover,
+html[data-theme="domoween"] .button--nav:focus-visible { background: var(--dw-pumpkin-light); border-color: var(--dw-pumpkin-light); box-shadow: 0 8px 22px rgba(255, 122, 26, .35); color: var(--dw-night); }
+html[data-theme="domoween"] .dw-button--ghost,
+html[data-theme="domoween"] .button--outline { background: transparent; border-color: rgba(255, 244, 230, .85); color: var(--dw-cream); }
+html[data-theme="domoween"] .dw-button--ghost:hover,
+html[data-theme="domoween"] .dw-button--ghost:focus-visible,
+html[data-theme="domoween"] .button--outline:hover,
+html[data-theme="domoween"] .button--outline:focus-visible { background: var(--dw-cream); border-color: var(--dw-cream); color: var(--dw-night); }
+
+/* ---------- Decorations (non-Domo, always aria-hidden) ---------- */
+html[data-theme="domoween"] .dw-deco { display: block; pointer-events: none; position: absolute; z-index: 0; }
+html[data-theme="domoween"] .dw-deco svg { display: block; height: auto; overflow: visible; width: 100%; }
+html[data-theme="domoween"] .dw-bat svg { fill: #0D0717; }
+html[data-theme="domoween"] .dw-bat__wing { animation: dw-flap .32s ease-in-out infinite; transform-box: view-box; transform-origin: 60px 30px; }
+html[data-theme="domoween"] .dw-glow { animation: dw-flicker 3.2s steps(1, end) infinite; }
+html[data-theme="domoween"] .dw-web { color: rgba(217, 200, 240, .3); width: clamp(130px, 17vw, 230px); }
+html[data-theme="domoween"] .dw-web--tl { left: 0; top: 0; }
+html[data-theme="domoween"] .dw-web--tr { right: 0; top: 0; transform: scaleX(-1); }
+html[data-theme="domoween"] .dw-flag { display: none; }
+html[data-theme="domoween"].dw-preview .dw-flag { background: #FFE600; border: 2px dashed #111; border-radius: 6px; color: #111; display: inline-block; font: 700 .68rem/1.25 system-ui, sans-serif; letter-spacing: .02em; margin: 0 0 .6rem; padding: .3rem .55rem; text-transform: none; }
+
+/* ---------- Hero ---------- */
+html[data-theme="domoween"] .dw-hero { background: radial-gradient(ellipse 90% 80% at 72% 18%, #4B2B7C 0%, #2E1A4F 38%, var(--dw-night) 78%); color: var(--dw-text); isolation: isolate; overflow: hidden; padding: 4.2rem 0 8.5rem; position: relative; }
+html[data-theme="domoween"] .dw-sky { inset: 0; pointer-events: none; position: absolute; z-index: -1; }
+html[data-theme="domoween"] .dw-moon { aspect-ratio: 1; background: radial-gradient(circle at 36% 34%, #FFFBE3 0, #FFE88F 55%, #F2C543 100%); border-radius: 50%; box-shadow: 0 0 70px 22px rgba(255, 226, 122, .22); left: 60%; position: absolute; top: 2%; width: clamp(80px, 10vw, 140px); }
+html[data-theme="domoween"] .dw-moon::before,
+html[data-theme="domoween"] .dw-moon::after { background: rgba(214, 170, 50, .35); border-radius: 50%; content: ""; position: absolute; }
+html[data-theme="domoween"] .dw-moon::before { height: 18%; left: 56%; top: 26%; width: 18%; }
+html[data-theme="domoween"] .dw-moon::after { height: 11%; left: 30%; top: 60%; width: 11%; }
+html[data-theme="domoween"] .dw-stars { animation: dw-twinkle 4s ease-in-out infinite alternate; background-image: radial-gradient(1.5px 1.5px at 20px 30px, #fff 50%, transparent 51%), radial-gradient(1px 1px at 90px 80px, #FFE9B0 50%, transparent 51%), radial-gradient(1.5px 1.5px at 160px 20px, #fff 50%, transparent 51%), radial-gradient(1px 1px at 230px 110px, #fff 50%, transparent 51%), radial-gradient(2px 2px at 300px 60px, #FFE9B0 50%, transparent 51%); background-size: 340px 160px; inset: 0 0 35% 0; opacity: .75; position: absolute; }
+html[data-theme="domoween"] .dw-stars--2 { animation-delay: -2s; background-position: 170px 70px; opacity: .45; }
+html[data-theme="domoween"] .dw-hero .dw-bat { animation: dw-fly 24s linear infinite; }
+html[data-theme="domoween"] .dw-bat--1 { left: 6%; top: 11%; width: 62px; }
+html[data-theme="domoween"] .dw-hero .dw-bat--2 { animation-delay: -9s; animation-duration: 30s; left: 28%; top: 30%; width: 42px; }
+html[data-theme="domoween"] .dw-hero .dw-bat--3 { animation-delay: -4s; animation-direction: reverse; animation-duration: 20s; left: 62%; top: 5%; width: 52px; }
+html[data-theme="domoween"] .dw-hero .dw-bat--4 { animation-delay: -16s; animation-direction: reverse; animation-duration: 34s; left: 84%; top: 46%; width: 34px; }
+html[data-theme="domoween"] .dw-hero__inner { align-items: center; display: grid; gap: clamp(2rem, 4vw, 3.5rem); grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); position: relative; z-index: 1; }
+html[data-theme="domoween"] .dw-hero__kicker { color: var(--dw-candy); font-size: .84rem; font-weight: 700; letter-spacing: .14em; margin: 0; text-transform: uppercase; }
+html[data-theme="domoween"] .dw-hero h1 { color: var(--dw-cream); font-size: clamp(2.3rem, 4.6vw, 3.9rem); line-height: 1; margin: .7rem 0 1.1rem; }
+html[data-theme="domoween"] .dw-wordmark { display: block; line-height: 0; }
+/* Official "Domo™ Ween" wordmark art: scale proportionally only; the glow adds legibility without recoloring. */
+html[data-theme="domoween"] .dw-wordmark__art { display: block; max-width: 34rem; }
+html[data-theme="domoween"] .dw-wordmark__img { display: block; filter: drop-shadow(0 3px 0 rgba(74, 36, 16, .85)) drop-shadow(0 0 8px rgba(255, 236, 205, .55)) drop-shadow(0 0 22px rgba(255, 150, 60, .4)); height: auto; max-width: 100%; width: 100%; }
+html[data-theme="domoween"] .dw-sr { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; white-space: nowrap; width: 1px; }
+html[data-theme="domoween"] .dw-hero__at { display: block; margin-top: .45em; }
+html[data-theme="domoween"] .dw-hero__lede { color: #E6DAF7; font-size: clamp(1.02rem, 1.6vw, 1.16rem); max-width: 31rem; }
+html[data-theme="domoween"] .dw-hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.6rem 0 1.3rem; }
+html[data-theme="domoween"] .dw-hero__links { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; margin: -.3rem 0 1.1rem; }
+html[data-theme="domoween"] .dw-hero__links a,
+html[data-theme="domoween"] .dw-hero__links button { background: none; border: 0; color: var(--dw-candy); cursor: pointer; font: 700 .95rem var(--body); padding: .2rem 0; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+html[data-theme="domoween"] .dw-hero__links a:hover,
+html[data-theme="domoween"] .dw-hero__links button:hover { color: var(--dw-pumpkin-light); }
+html[data-theme="domoween"] .dw-hero__address { color: var(--dw-lilac); font-size: .88rem; margin: 0; }
+html[data-theme="domoween"] .dw-hero__art { justify-self: end; max-width: 700px; padding-right: 2.4rem; position: relative; width: 100%; }
+html[data-theme="domoween"] .dw-poster { background: var(--dw-ink); border-radius: 22px; box-shadow: 0 0 0 4px var(--dw-pumpkin), 0 26px 60px rgba(0, 0, 0, .5), 0 0 90px rgba(255, 122, 26, .3); margin: 0; padding: 9px; position: relative; z-index: 1; }
+html[data-theme="domoween"] .dw-poster img { background: #fff; display: block; height: auto; width: 100%; }
+html[data-theme="domoween"] .dw-spider { animation: dw-dangle 3.6s ease-in-out infinite alternate; right: 0; top: -4.2rem; width: 26px; z-index: 2; }
+html[data-theme="domoween"] .dw-ground { bottom: 0; height: 130px; left: 0; pointer-events: none; position: absolute; right: 0; z-index: 0; }
+html[data-theme="domoween"] .dw-hills { bottom: 0; height: 100%; left: 0; position: absolute; width: 100%; }
+html[data-theme="domoween"] .dw-pumpkin--1 { bottom: 26px; left: 5%; width: 76px; }
+html[data-theme="domoween"] .dw-pumpkin--2 { bottom: 16px; left: 13%; width: 50px; }
+html[data-theme="domoween"] .dw-pumpkin--2 .dw-glow { animation-delay: -1.3s; }
+html[data-theme="domoween"] .dw-pumpkin--3 { bottom: 22px; right: 6%; width: 68px; }
+html[data-theme="domoween"] .dw-pumpkin--3 .dw-glow { animation-delay: -2.1s; }
+html[data-theme="domoween"] .dw-candycorn--1 { bottom: 20px; right: 15%; width: 24px; }
+html[data-theme="domoween"] .dw-candy--1 { bottom: 14px; left: 22%; width: 48px; }
+
+/* ---------- Countdown ---------- */
+html[data-theme="domoween"] .dw-countdown { background: var(--dw-ink); color: var(--dw-cream); isolation: isolate; overflow: hidden; padding: 2.8rem 0 2.4rem; position: relative; }
+html[data-theme="domoween"] .dw-countdown::before,
+html[data-theme="domoween"] .awning { background: var(--dw-stripe); }
+html[data-theme="domoween"] .dw-countdown::before { content: ""; height: 12px; left: 0; position: absolute; right: 0; top: 0; }
+html[data-theme="domoween"] .dw-countdown__inner { align-items: center; display: grid; gap: 1.5rem; grid-template-areas: "left copy right"; grid-template-columns: 1fr auto 1fr; position: relative; z-index: 1; }
+html[data-theme="domoween"] .dw-countdown__copy { grid-area: copy; text-align: center; }
+html[data-theme="domoween"] .dw-countdown__art { height: clamp(120px, 13vw, 180px); }
+html[data-theme="domoween"] .dw-countdown__art--left { grid-area: left; justify-self: end; width: clamp(120px, 13vw, 180px); }
+html[data-theme="domoween"] .dw-countdown__art--right { grid-area: right; justify-self: start; width: clamp(110px, 12vw, 165px); }
+html[data-theme="domoween"] .dw-countdown__title { color: var(--dw-candy); font-size: clamp(1.7rem, 3.2vw, 2.5rem); margin: 0 0 1rem; }
+html[data-theme="domoween"] .dw-countdown__clock { display: flex; gap: clamp(.45rem, 1.2vw, .8rem); justify-content: center; }
+html[data-theme="domoween"] .dw-countdown__clock[hidden] { display: none; }
+html[data-theme="domoween"] .dw-tile { background: linear-gradient(180deg, #FF9535 0%, #F06A0C 100%); border-radius: 20px 20px 24px 24px; box-shadow: inset 0 -6px 0 rgba(0, 0, 0, .16), 0 10px 22px rgba(0, 0, 0, .4); color: var(--dw-night); display: flex; flex-direction: column; min-width: clamp(4rem, 8vw, 5.4rem); padding: .55rem .5rem .5rem; position: relative; }
+html[data-theme="domoween"] .dw-tile::before { background: #4E8A2E; border-radius: 4px 4px 2px 2px; content: ""; height: 10px; left: calc(50% - 4px); position: absolute; top: -7px; width: 8px; }
+html[data-theme="domoween"] .dw-tile__num { font-family: var(--display); font-size: clamp(1.9rem, 4vw, 2.7rem); font-variant-numeric: tabular-nums; line-height: 1.05; }
+html[data-theme="domoween"] .dw-tile__label { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+html[data-theme="domoween"] .dw-countdown__note { color: var(--dw-lilac); font-size: .92rem; margin: 1rem 0 0; }
+html[data-theme="domoween"] .dw-countdown__note--big { color: var(--dw-cream); font-family: var(--display); font-size: clamp(1.4rem, 3vw, 2rem); }
+html[data-theme="domoween"] .dw-ghost { animation: dw-float 5s ease-in-out infinite alternate; }
+html[data-theme="domoween"] .dw-ghost--c1 { left: 2%; top: 22%; width: 44px; }
+html[data-theme="domoween"] .dw-ghost--c2 { animation-delay: -2.5s; bottom: 12%; right: 2.5%; width: 36px; }
+
+/* ---------- Shared section frame ---------- */
+html[data-theme="domoween"] .dw-section { isolation: isolate; overflow: hidden; padding: 4.8rem 0; position: relative; }
+html[data-theme="domoween"] .dw-section > .container { position: relative; z-index: 1; }
+html[data-theme="domoween"] .dw-heading { margin: 0 auto 2.6rem; max-width: 42rem; text-align: center; }
+html[data-theme="domoween"] .dw-eyebrow { color: var(--dw-pumpkin-light); font-size: .8rem; font-weight: 700; letter-spacing: .16em; margin: 0 0 .4rem; text-transform: uppercase; }
+html[data-theme="domoween"] .dw-section h2 { color: var(--dw-cream); font-size: clamp(2.3rem, 5vw, 3.7rem); margin-bottom: .6rem; }
+html[data-theme="domoween"] .dw-heading__intro { color: var(--dw-lilac); margin: 0 auto; max-width: 34rem; }
+html[data-theme="domoween"] .dw-center { margin-top: 2.2rem; text-align: center; }
+
+/* ---------- Spooky specials ---------- */
+html[data-theme="domoween"] .dw-menu { background: linear-gradient(180deg, var(--dw-night) 0%, #22123A 100%); }
+html[data-theme="domoween"] .dw-cards { display: grid; gap: 1.4rem; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin: 0 auto; max-width: 1020px; }
+html[data-theme="domoween"] .dw-card { background: var(--dw-cream); border-radius: 24px; box-shadow: 0 16px 40px rgba(0, 0, 0, .38); color: #2B1A12; display: flex; flex-direction: column; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
+html[data-theme="domoween"] .dw-card:hover { box-shadow: 0 22px 50px rgba(0, 0, 0, .45), 0 0 0 3px var(--dw-pumpkin); transform: translateY(-6px); }
+html[data-theme="domoween"] .dw-card__stage { background: radial-gradient(circle at 50% 58%, #FFFFFF 0%, #FFEBD0 52%, #FFCB8E 100%); height: 230px; padding: 1.3rem; }
+html[data-theme="domoween"] .dw-card--placeholder .dw-card__stage { background: radial-gradient(circle at 50% 58%, #FFFFFF 0%, #F1E6FF 55%, #CDB5F2 100%); }
+html[data-theme="domoween"] .dw-card__copy { padding: 1.2rem 1.35rem 1.5rem; }
+html[data-theme="domoween"] .dw-card h3 { color: #2B1A12; font-size: 1.65rem; margin: 0 0 .35rem; }
+html[data-theme="domoween"] .dw-card p { color: var(--dw-body-dark); font-size: .93rem; margin: 0; }
+html[data-theme="domoween"] .dw-card .dw-card__tag { background: var(--dw-plum); border-radius: 999px; color: var(--dw-candy); display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .1em; margin-bottom: .6rem; padding: .25rem .7rem; text-transform: uppercase; }
+html[data-theme="domoween"] .dw-card .dw-card__price { color: var(--dw-pumpkin-dark); font-size: 1.05rem; font-weight: 800; margin-top: .7rem; }
+html[data-theme="domoween"] .dw-card .dw-flag { display: none; }
+html[data-theme="domoween"].dw-preview .dw-card .dw-flag { display: table; }
+html[data-theme="domoween"] .dw-candycorn--m1 { bottom: 14%; left: 4%; width: 30px; }
+html[data-theme="domoween"] .dw-candy--m2 { right: 4%; top: 40%; width: 58px; }
+
+/* ---------- October events ---------- */
+html[data-theme="domoween"] .dw-events { background: var(--dw-night-2); }
+html[data-theme="domoween"] .dw-tickets { display: grid; gap: 1.3rem; margin: 0 auto; max-width: 900px; }
+html[data-theme="domoween"] .dw-ticket { align-items: center; background: var(--dw-cream); border-radius: 20px; box-shadow: 0 14px 34px rgba(0, 0, 0, .35); color: #2B1A12; display: grid; grid-template-columns: 150px minmax(0, 1fr) 130px; overflow: hidden; position: relative; }
+html[data-theme="domoween"] .dw-ticket__date { align-items: center; align-self: stretch; background: var(--dw-pumpkin); border-right: 3px dashed var(--dw-night); color: var(--dw-night); display: flex; flex-direction: column; font-family: var(--display); font-size: 1.45rem; justify-content: center; line-height: 1.1; padding: 1.1rem .8rem; position: relative; text-align: center; }
+html[data-theme="domoween"] .dw-ticket__date small { font-family: var(--body); font-size: .82rem; font-weight: 700; margin-top: .3rem; }
+html[data-theme="domoween"] .dw-ticket__date::before,
+html[data-theme="domoween"] .dw-ticket__date::after { background: var(--dw-night-2); border-radius: 50%; content: ""; height: 22px; position: absolute; right: -12px; width: 22px; }
+html[data-theme="domoween"] .dw-ticket__date::before { top: -11px; }
+html[data-theme="domoween"] .dw-ticket__date::after { bottom: -11px; }
+html[data-theme="domoween"] .dw-ticket__body { padding: 1.35rem 1.5rem; }
+html[data-theme="domoween"] .dw-ticket h3 { color: #2B1A12; font-size: 1.6rem; margin: 0 0 .3rem; }
+html[data-theme="domoween"] .dw-ticket p { color: var(--dw-body-dark); font-size: .93rem; margin: 0; }
+html[data-theme="domoween"] .dw-ticket__link { color: var(--dw-pumpkin-dark); display: inline-block; font-weight: 700; margin: .6rem 1rem 0 0; }
+html[data-theme="domoween"] .dw-ticket--soon .dw-ticket__date { font-size: 1.3rem; }
+html[data-theme="domoween"].dw-preview .dw-ticket .dw-flag { display: table; margin-top: .7rem; }
+html[data-theme="domoween"] .dw-ticket__art { height: 130px; padding: .7rem .9rem .7rem 0; }
+html[data-theme="domoween"] .dw-ticket .dw-flag { display: none; }
+html[data-theme="domoween"].dw-preview .dw-ticket .dw-flag { display: table; }
+html[data-theme="domoween"] .dw-ghost--e1 { left: 3%; top: 30%; width: 58px; }
+html[data-theme="domoween"] .dw-ghost--e2 { animation-delay: -3s; bottom: 16%; right: 4%; width: 44px; }
+
+/* ---------- Share callout ---------- */
+html[data-theme="domoween"] .dw-share { background: radial-gradient(ellipse 70% 90% at 15% 0%, #472877 0%, var(--dw-night) 70%); }
+html[data-theme="domoween"] .dw-share__inner { align-items: center; display: grid; gap: clamp(2rem, 4vw, 3.5rem); grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+html[data-theme="domoween"] .dw-share__copy p { color: var(--dw-lilac); max-width: 30rem; }
+html[data-theme="domoween"] .dw-share__copy strong { color: var(--dw-candy); }
+html[data-theme="domoween"] .dw-share__tag { font-size: 1.05rem; }
+html[data-theme="domoween"] .dw-share__tag .dw-flag { margin: 0 0 0 .6rem; vertical-align: middle; }
+html[data-theme="domoween"] .dw-share__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1.4rem; }
+html[data-theme="domoween"] .dw-crew { display: grid; gap: .8rem; grid-template-columns: repeat(5, minmax(0, 1fr)); list-style: none; margin: 0; padding: 0; }
+html[data-theme="domoween"] .dw-crew__item { animation: dw-bob 4.5s ease-in-out infinite alternate; aspect-ratio: 1; background: var(--dw-cream); border-radius: 18px; box-shadow: 0 10px 24px rgba(0, 0, 0, .35); padding: 10%; }
+html[data-theme="domoween"] .dw-crew__item:nth-child(2n) { animation-delay: -1.5s; }
+html[data-theme="domoween"] .dw-crew__item:nth-child(3n) { animation-delay: -3s; }
+html[data-theme="domoween"] .dw-crew__item--small .dw-art__img { max-height: min(100%, 72px); max-width: min(100%, 72px); }
+html[data-theme="domoween"] .dw-share .dw-bat { width: 40px; }
+html[data-theme="domoween"] .dw-bat--s1 { right: 6%; top: 9%; }
+html[data-theme="domoween"] .dw-bat--s2 { left: 44%; top: 5%; }
+html[data-theme="domoween"] .dw-share .dw-bat--s2 { width: 30px; }
+html[data-theme="domoween"] .dw-float { animation: dw-float 4.2s ease-in-out infinite alternate; }
+html[data-theme="domoween"] .dw-float--late { animation-delay: -2s; }
+
+/* ---------- Existing page, dressed for Domoween ---------- */
+html[data-theme="domoween"] .site-header { background: rgba(18, 10, 31, .93); border-bottom-color: rgba(255, 122, 26, .35); }
+html[data-theme="domoween"] .site-nav a { color: var(--dw-text); }
+html[data-theme="domoween"] .site-nav a:not(.button):hover,
+html[data-theme="domoween"] .site-nav a:not(.button):focus-visible { color: var(--dw-pumpkin-light); }
+html[data-theme="domoween"] .site-nav .dw-nav-link { color: var(--dw-candy); }
+html[data-theme="domoween"] .nav-toggle { color: var(--dw-text); }
+html[data-theme="domoween"] .marquee { background: var(--dw-pumpkin); color: var(--dw-night); }
+html[data-theme="domoween"] .dw-marquee-sep { color: var(--dw-violet); font-weight: 400; }
+html[data-theme="domoween"] .delivery-band { background: var(--dw-night-2); border-bottom-color: rgba(255, 255, 255, .08); }
+html[data-theme="domoween"] .delivery-band__title { color: var(--dw-pumpkin-light); }
+html[data-theme="domoween"] .delivery-band__lede { color: var(--dw-lilac); }
+html[data-theme="domoween"] .eyebrow { color: var(--dw-pumpkin-light); }
+html[data-theme="domoween"] .section-heading h2 { color: var(--dw-cream); }
+html[data-theme="domoween"] .section-heading p { color: var(--dw-lilac); }
+html[data-theme="domoween"] .section-heading p a { color: var(--dw-pumpkin-light); }
+html[data-theme="domoween"] .section--cream { background: var(--dw-night); }
+html[data-theme="domoween"] .menu-card,
+html[data-theme="domoween"] .menu-shot { background: var(--dw-cream); color: #2B1A12; }
+html[data-theme="domoween"] .menu-card p { color: var(--dw-body-dark); }
+html[data-theme="domoween"] .menu-card__tag { color: var(--dw-pumpkin-dark); }
+html[data-theme="domoween"] .menu-gallery-heading h3 { color: var(--dw-cream); }
+html[data-theme="domoween"] .chomps { background: linear-gradient(140deg, #CC2222 0%, #8F1515 100%); }
+html[data-theme="domoween"] .chomps::before,
+html[data-theme="domoween"] .chomps::after { border-color: rgba(255, 209, 102, .28); }
+html[data-theme="domoween"] .chomps h2 { color: var(--dw-candy); }
+html[data-theme="domoween"] .tiers li { background: var(--dw-cream); }
+html[data-theme="domoween"] .tiers li:nth-child(even) { background: var(--dw-candy); }
+html[data-theme="domoween"] .values { background: var(--dw-night-2); }
+html[data-theme="domoween"] .value-card { background: var(--dw-cream); }
+html[data-theme="domoween"] .value-card h3 { color: var(--dw-pumpkin-dark); }
+html[data-theme="domoween"] .value-card p { color: var(--dw-body-dark); }
+html[data-theme="domoween"] .visit::before { background: rgba(27, 16, 48, .86); }
+html[data-theme="domoween"] .visit h2 { color: var(--dw-candy); }
+html[data-theme="domoween"] .visit__card { background: var(--dw-cream); }
+html[data-theme="domoween"] .visit__card h3 { color: var(--dw-pumpkin-dark); }
+html[data-theme="domoween"] .hours strong { color: var(--dw-brown); }
+html[data-theme="domoween"] .visit__contacts a,
+html[data-theme="domoween"] .visit__card small a { color: var(--dw-pumpkin-dark); }
+html[data-theme="domoween"] .section--white { background: var(--dw-night); }
+html[data-theme="domoween"] .event-card { background: rgba(255, 255, 255, .04); border-color: rgba(217, 200, 240, .25); }
+html[data-theme="domoween"] .event-card h3 { color: var(--dw-cream); }
+html[data-theme="domoween"] .event-card p { color: var(--dw-lilac); }
+html[data-theme="domoween"] .event-card a { color: var(--dw-pumpkin-light) !important; }
+html[data-theme="domoween"] .faq { background: var(--dw-night-2); }
+html[data-theme="domoween"] .faq details { background: var(--dw-plum); }
+html[data-theme="domoween"] .faq details summary { color: var(--dw-cream); }
+html[data-theme="domoween"] .faq details summary::after { color: var(--dw-pumpkin-light); }
+html[data-theme="domoween"] .faq details p { color: var(--dw-lilac); }
+html[data-theme="domoween"] .faq details a { color: var(--dw-pumpkin-light); }
+html[data-theme="domoween"] .nhk { background: var(--dw-pumpkin); color: var(--dw-night); }
+html[data-theme="domoween"] .site-footer { background: var(--dw-ink); }
+html[data-theme="domoween"] .site-footer h3,
+html[data-theme="domoween"] .footer-credit__sps { color: var(--dw-pumpkin-light); }
+html[data-theme="domoween"] .footer-links a:hover { color: var(--dw-pumpkin-light); }
+html[data-theme="domoween"] .footer-bottom { color: #B9A8D6; }
+html[data-theme="domoween"] .dw-legal { border-top: 1px solid rgba(255, 255, 255, .15); color: #E6DAF7; font-size: .84rem; margin: 2.2rem 0 0; max-width: none; padding-top: 1.1rem; }
+html[data-theme="domoween"] .dw-legal + .footer-bottom { border-top: 0; margin-top: .4rem; padding-top: .4rem; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1180px) {
+  html[data-theme="domoween"] .dw-ghost--c1,
+  html[data-theme="domoween"] .dw-ghost--c2,
+  html[data-theme="domoween"] .dw-candycorn--m1,
+  html[data-theme="domoween"] .dw-candy--m2,
+  html[data-theme="domoween"] .dw-ghost--e1,
+  html[data-theme="domoween"] .dw-ghost--e2 { display: none; }
+}
+@media (max-width: 850px) {
+  html[data-theme="domoween"] .site-nav { background: var(--dw-night); border-bottom-color: rgba(255, 122, 26, .35); }
+  html[data-theme="domoween"] .dw-hero { padding: 2rem 0 7rem; }
+  html[data-theme="domoween"] .dw-hero__inner { grid-template-columns: 1fr; }
+  html[data-theme="domoween"] .dw-hero__art { justify-self: center; max-width: 600px; order: -1; padding-right: 0; }
+  html[data-theme="domoween"] .dw-spider { display: none; }
+  html[data-theme="domoween"] .dw-moon { display: none; }
+  html[data-theme="domoween"] .dw-share__inner { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  html[data-theme="domoween"] .dw-countdown__inner { gap: 1rem .5rem; grid-template-areas: "copy copy" "left right"; grid-template-columns: 1fr 1fr; }
+  html[data-theme="domoween"] .dw-countdown__art { height: 110px; }
+  html[data-theme="domoween"] .dw-countdown__art--left,
+  html[data-theme="domoween"] .dw-countdown__art--right { justify-self: center; width: 120px; }
+  html[data-theme="domoween"] .dw-ticket { grid-template-areas: "date date" "body art"; grid-template-columns: minmax(0, 1fr) 92px; }
+  html[data-theme="domoween"] .dw-ticket__date { border-bottom: 3px dashed var(--dw-night); border-right: 0; flex-direction: row; font-size: 1.25rem; gap: .6rem; grid-area: date; padding: .7rem 1rem; }
+  html[data-theme="domoween"] .dw-ticket__date small { margin-top: 0; }
+  html[data-theme="domoween"] .dw-ticket__date::before,
+  html[data-theme="domoween"] .dw-ticket__date::after { display: none; }
+  html[data-theme="domoween"] .dw-ticket__body { grid-area: body; padding: 1.1rem 1.1rem 1.2rem; }
+  html[data-theme="domoween"] .dw-ticket__art { grid-area: art; height: 110px; padding: .6rem .7rem .6rem 0; }
+  html[data-theme="domoween"] .dw-crew { gap: .5rem; }
+  html[data-theme="domoween"] .dw-crew__item { border-radius: 12px; }
+}
+@media (max-width: 570px) {
+  html[data-theme="domoween"] .dw-section { padding: 4rem 0; }
+  html[data-theme="domoween"] .dw-hero h1 { font-size: clamp(2.1rem, 9.5vw, 2.8rem); }
+  html[data-theme="domoween"] .dw-hero__actions .button { flex: 1 1 auto; }
+  html[data-theme="domoween"] .dw-bat--1 { width: 44px; }
+  html[data-theme="domoween"] .dw-hero .dw-bat--3 { width: 38px; }
+  html[data-theme="domoween"] .dw-pumpkin--1 { width: 56px; }
+  html[data-theme="domoween"] .dw-pumpkin--2 { left: 18%; width: 38px; }
+  html[data-theme="domoween"] .dw-pumpkin--3 { width: 52px; }
+  html[data-theme="domoween"] .dw-candy--1 { display: none; }
+  html[data-theme="domoween"] .dw-card__stage { height: 200px; }
+  html[data-theme="domoween"] .dw-web { width: 120px; }
+}
+
+/* ---------- Motion ---------- */
+@keyframes dw-flap { 50% { transform: scaleY(.35); } }
+@keyframes dw-fly {
+  0% { transform: translate(-30vw, 0); }
+  25% { transform: translate(-5vw, -18px); }
+  50% { transform: translate(20vw, 8px); }
+  75% { transform: translate(45vw, -14px); }
+  100% { transform: translate(110vw, 0); }
+}
+@keyframes dw-float { to { transform: translateY(-12px); } }
+@keyframes dw-bob { to { transform: translateY(-5px); } }
+@keyframes dw-dangle { to { transform: translateY(16px); } }
+@keyframes dw-twinkle { to { opacity: .3; } }
+@keyframes dw-flicker {
+  0%, 100% { opacity: 1; }
+  12% { opacity: .75; }
+  18% { opacity: 1; }
+  47% { opacity: .85; }
+  52% { opacity: .6; }
+  56% { opacity: 1; }
+  81% { opacity: .8; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-theme="domoween"] [class*="dw-"],
+  html[data-theme="domoween"] [class*="dw-"] * { animation: none !important; transition: none !important; }
+  html[data-theme="domoween"] .dw-card:hover { transform: none; }
+}
