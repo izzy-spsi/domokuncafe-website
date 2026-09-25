@@ -27,6 +27,7 @@ Add one of these to the end of the site address:
 | `?theme=normal` | The regular site, even during October |
 | `?theme=auto` | Back to the calendar (clears the preview) |
 | `?themeDate=2026-10-31` | Pretends today is that date in LA (testing only) |
+| add `&clean=1` | Guest look while previewing: no preview bar, no PLACEHOLDER stickers (e.g. `?theme=domoween&clean=1` for staff). Sticks for the tab; `?clean=0` brings the stickers back |
 
 Examples: `https://www.domokuncafe.com/?theme=domoween` once this is merged, or
 `http://localhost:3700/?theme=domoween` when running `npm start` locally.
@@ -38,17 +39,23 @@ theme and lets you switch. Placeholder content also gets a yellow
 
 ## Editing Domoween menu, events and hashtag
 
-Edit **one file**: [`seasons/domoween/data.js`](domoween/data.js). Instructions
-are at the top of the file. In short:
+- **Spooky specials and hashtag:** [`seasons/domoween/data.js`](domoween/data.js).
+  Each item under `menu.items` has `name`, `description`, `price`, `tag` and
+  `art`. Delete `placeholder: true` once an item is real. Set
+  `hashtag: "#YourTag"` when there is one; while it's `""` the social callout
+  only says "Tag @domokuncafe". `showMenu: false` or `showEvents: false` hides a
+  block.
+- **Events (October and every other month):**
+  [`events/events-data.js`](../events/events-data.js). It's one list for the whole
+  site. Each event has `date`, `startTime`, `endTime`, `title`, `description`, an
+  optional `link`/`linkLabel`, `series` (e.g. `"Domoween"` or
+  `"Community Tuesday"`), and optional `art`. Events automatically appear on:
+  - the `/events/` calendar, with Add to Google Calendar and a downloadable `.ics`
+  - the Domoween "October events" block on the home page (events dated Oct 1–31)
+  - the `/domoween/` page, including Event structured data for search engines
 
-- **Spooky specials:** edit `menu.items`. Each item has `name`,
-  `description`, `price`, `tag`, and `art`. Delete the `placeholder: true` line
-  once an item is real.
-- **October events:** edit `events.items`. Each event has `date`, `time`,
-  `title`, `description`, an optional `link` and `linkLabel`, and `art`.
-- **Hashtag:** set `hashtag: "#YourTag"`. While it's `""` the social callout
-  only says "Tag @domokuncafe".
-- To hide a block completely, set `showMenu: false` or `showEvents: false`.
+  With no events in a month, guests see a friendly "coming soon, follow
+  @domokuncafe" message rather than placeholder entries.
 
 Then preview with `?theme=domoween` before merging.
 
@@ -56,6 +63,19 @@ Licensor rules for copy in this file: copy can talk *about* Domo, but must never
 quote him saying anything except "Domo". Keep it cute-spooky: no alcohol,
 tobacco, drugs, religion, politics, violence or gore. Domoween blocks use
 official art only, so don't add food photos to them.
+
+## Pages
+
+- `/domoween/` (`domoween/index.html`) is a static, server-rendered landing page
+  for Halloween searches. It carries the title, description, Open Graph tags and
+  Event + Restaurant JSON-LD. It stays up all year and switches its status line
+  automatically: "Starts October 1" before the season, "Happening now" during it,
+  and "Domoween returns next October" after it. `?themeDate=` works here too.
+  **Each year:** search the file for `2026` and update the dates (including the
+  JSON-LD `startDate`/`endDate` and the `START`/`END` values in the status
+  script).
+- `/events/` (`events/index.html`) is the events calendar: a month grid on
+  desktop and a list on phones. `?month=2026-10` opens a specific month.
 
 ## Official art
 
@@ -78,10 +98,15 @@ file is, where to drop high-res originals, and the licensor's usage rules.
 ## Files
 
 ```
+events/
+  events-data.js        ← edit this: every event (feeds /events/, Domoween, /domoween/)
+  events.js             calendar, Google Calendar links, .ics, event JSON-LD
+  index.html            /events/ page
+domoween/index.html     /domoween/ landing page (static, SEO)
 seasons/
   seasons.js            date switch, preview override, loader (tiny; runs every visit)
   domoween/
-    data.js             ← edit this: menu, events, hashtag
+    data.js             ← edit this: Spooky specials menu, hashtag
     domoween.js         renders the Domoween sections + countdown
     domoween.css        Domoween look (all rules scoped to html[data-theme="domoween"])
 assets/domoween/        official Domo art, web-sized
