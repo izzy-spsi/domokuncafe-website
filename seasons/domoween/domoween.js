@@ -216,6 +216,7 @@
     var clock = slot.querySelector('[data-dw-clock]');
     if (!clock) return;
     var note = slot.querySelector('[data-dw-note]');
+    var title = slot.querySelector('.dw-countdown__title');
     var units = {};
     Array.prototype.forEach.call(clock.querySelectorAll('[data-dw-unit]'), function (el) { units[el.getAttribute('data-dw-unit')] = el; });
     var laMidnight = seasons.laMidnight || function (d) { var p = d.split('-').map(Number); return Date.UTC(p[0], p[1] - 1, p[2], 7); };
@@ -228,8 +229,10 @@
       var now = Date.now() + skew;
       var left = target - now;
       if (left <= 0) {
+        var isHalloween = now < target + 864e5;
         clock.hidden = true;
-        note.textContent = now < target + 864e5 ? "It's Halloween! Happy Domoween from all of us at Domo Cafe." : 'Thanks for a spooky-cute Domoween. See you next Halloween!';
+        if (title) title.textContent = isHalloween ? 'Happy Halloween!' : 'Thanks for a spooky-cute Domoween';
+        note.textContent = isHalloween ? 'Happy Domoween from all of us at Domo Cafe.' : 'See you next Halloween!';
         note.classList.add('dw-countdown__note--big');
         window.clearInterval(timer);
         return;
