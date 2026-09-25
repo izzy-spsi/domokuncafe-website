@@ -67,7 +67,7 @@ html[data-theme="domoween"].dw-preview .dw-flag { background: #FFE600; border: 2
 /* ---------- Hero ---------- */
 html[data-theme="domoween"] .dw-hero { background: radial-gradient(ellipse 90% 80% at 72% 18%, #4B2B7C 0%, #2E1A4F 38%, var(--dw-night) 78%); color: var(--dw-text); isolation: isolate; overflow: hidden; padding: 4.2rem 0 8.5rem; position: relative; }
 html[data-theme="domoween"] .dw-sky { inset: 0; pointer-events: none; position: absolute; z-index: -1; }
-html[data-theme="domoween"] .dw-moon { aspect-ratio: 1; background: radial-gradient(circle at 36% 34%, #FFFBE3 0, #FFE88F 55%, #F2C543 100%); border-radius: 50%; box-shadow: 0 0 70px 22px rgba(255, 226, 122, .22); left: 43%; position: absolute; top: 7%; width: clamp(80px, 10vw, 140px); }
+html[data-theme="domoween"] .dw-moon { aspect-ratio: 1; background: radial-gradient(circle at 36% 34%, #FFFBE3 0, #FFE88F 55%, #F2C543 100%); border-radius: 50%; box-shadow: 0 0 70px 22px rgba(255, 226, 122, .22); left: 60%; position: absolute; top: 2%; width: clamp(80px, 10vw, 140px); }
 html[data-theme="domoween"] .dw-moon::before,
 html[data-theme="domoween"] .dw-moon::after { background: rgba(214, 170, 50, .35); border-radius: 50%; content: ""; position: absolute; }
 html[data-theme="domoween"] .dw-moon::before { height: 18%; left: 56%; top: 26%; width: 18%; }
