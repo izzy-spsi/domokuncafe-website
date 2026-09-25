@@ -15,11 +15,13 @@
  *   ?theme=normal     force the regular site
  *   ?theme=auto       clear the override and follow the calendar again
  *   ?themeDate=2026-11-01   pretend "today" is this LA date (not sticky; QA only)
+ *   &clean=1          guest look while previewing: no preview bar, no PLACEHOLDER
+ *                     stickers (sticky; ?clean=0 or ?theme=auto turns it off)
  * See seasons/README.md.
  */
 (function () {
   var TIME_ZONE = 'America/Los_Angeles';
-  var BASE = 'seasons/';
+  var BASE = '/seasons/';
 
   // Start/end are inclusive calendar days in America/Los_Angeles.
   // To add a season, append an entry and create seasons/<id>/ with the same files.
@@ -44,6 +46,7 @@
   ];
 
   var STORAGE_KEY = 'domo-theme-override';
+  var CLEAN_KEY = 'domo-theme-clean';
   var root = document.documentElement;
   var params;
   try { params = new URLSearchParams(location.search); } catch (e) { params = { get: function () { return null; } }; }
@@ -67,16 +70,22 @@
     return null;
   }
 
-  function storage(action, value) {
+  function storage(action, value, key) {
+    key = key || STORAGE_KEY;
     try {
-      if (action === 'get') return sessionStorage.getItem(STORAGE_KEY);
-      if (action === 'set') sessionStorage.setItem(STORAGE_KEY, value);
-      if (action === 'clear') sessionStorage.removeItem(STORAGE_KEY);
+      if (action === 'get') return sessionStorage.getItem(key);
+      if (action === 'set') sessionStorage.setItem(key, value);
+      if (action === 'clear') sessionStorage.removeItem(key);
     } catch (e) {}
     return null;
   }
 
   var requested = (params.get('theme') || '').toLowerCase();
+  var cleanParam = params.get('clean');
+  if (requested === 'auto' || cleanParam === '0') storage('clear', null, CLEAN_KEY);
+  else if (cleanParam === '1') storage('set', '1', CLEAN_KEY);
+  var clean = cleanParam === '1' || (cleanParam !== '0' && requested !== 'auto' && storage('get', null, CLEAN_KEY) === '1');
+
   if (requested === 'auto') storage('clear');
   else if (requested === 'normal' || findTheme(requested)) storage('set', requested);
 
@@ -101,7 +110,8 @@
     scheduled: scheduled,
     today: today,
     timeZone: TIME_ZONE,
-    preview: !!override || isDateString(simulatedDate),
+    preview: (!!override || isDateString(simulatedDate)) && !clean,
+    clean: clean,
     base: BASE,
     /** UTC milliseconds for 00:00 on an America/Los_Angeles calendar day. */
     laMidnight: function (dateString) {

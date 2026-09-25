@@ -11,7 +11,7 @@
   var seasons = window.DomoSeasons || {};
   var theme = seasons.active || { end: '2026-10-31', start: '2026-10-01' };
   var data = window.DOMOWEEN_DATA || {};
-  var ART_DIR = 'assets/domoween/';
+  var ART_DIR = '/assets/domoween/';
   var ORDER_URL = 'https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/';
   var INSTAGRAM_URL = 'https://www.instagram.com/domokuncafe';
   var TIKTOK_URL = 'https://www.tiktok.com/@domokuncafe';
