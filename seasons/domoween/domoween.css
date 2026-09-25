@@ -22,7 +22,6 @@ html[data-theme="domoween"] {
   --dw-body-dark: #5A4436;
   --dw-stripe: repeating-linear-gradient(115deg, var(--dw-pumpkin) 0 22px, var(--dw-candy) 22px 44px, var(--dw-cream) 44px 66px);
   --display: "Chewy", "Trebuchet MS", cursive;
-  --dw-wordmark: "Griffy", "Chewy", cursive;
 }
 html[data-theme="domoween"] body { background: var(--dw-night); color: var(--dw-text); }
 html[data-theme="domoween"] ::selection { background: var(--dw-pumpkin); color: var(--dw-night); }
@@ -83,8 +82,12 @@ html[data-theme="domoween"] .dw-hero .dw-bat--4 { animation-delay: -16s; animati
 html[data-theme="domoween"] .dw-hero__inner { align-items: center; display: grid; gap: clamp(2rem, 4vw, 3.5rem); grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); position: relative; z-index: 1; }
 html[data-theme="domoween"] .dw-hero__kicker { color: var(--dw-candy); font-size: .84rem; font-weight: 700; letter-spacing: .14em; margin: 0; text-transform: uppercase; }
 html[data-theme="domoween"] .dw-hero h1 { color: var(--dw-cream); font-size: clamp(2.3rem, 4.6vw, 3.9rem); line-height: 1; margin: .7rem 0 1.1rem; }
-html[data-theme="domoween"] .dw-wordmark { color: var(--dw-pumpkin); display: block; font-family: var(--dw-wordmark); font-size: 1.62em; font-weight: 400; line-height: 1.05; text-shadow: 0 4px 0 #6E2A00, 0 0 30px rgba(255, 122, 26, .45); }
-html[data-theme="domoween"] .dw-hero__at { display: block; margin-top: .15em; }
+html[data-theme="domoween"] .dw-wordmark { display: block; line-height: 0; }
+/* Official "Domo™ Ween" wordmark art: scale proportionally only; the glow adds legibility without recoloring. */
+html[data-theme="domoween"] .dw-wordmark__art { display: block; max-width: 34rem; }
+html[data-theme="domoween"] .dw-wordmark__img { display: block; filter: drop-shadow(0 3px 0 rgba(74, 36, 16, .85)) drop-shadow(0 0 8px rgba(255, 236, 205, .55)) drop-shadow(0 0 22px rgba(255, 150, 60, .4)); height: auto; max-width: 100%; width: 100%; }
+html[data-theme="domoween"] .dw-sr { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; white-space: nowrap; width: 1px; }
+html[data-theme="domoween"] .dw-hero__at { display: block; margin-top: .45em; }
 html[data-theme="domoween"] .dw-hero__lede { color: #E6DAF7; font-size: clamp(1.02rem, 1.6vw, 1.16rem); max-width: 31rem; }
 html[data-theme="domoween"] .dw-hero__actions { display: flex; flex-wrap: wrap; gap: .75rem; margin: 1.6rem 0 1.3rem; }
 html[data-theme="domoween"] .dw-hero__links { display: flex; flex-wrap: wrap; gap: .4rem 1.4rem; margin: -.3rem 0 1.1rem; }
@@ -272,7 +275,7 @@ html[data-theme="domoween"] .dw-legal + .footer-bottom { border-top: 0; margin-t
   html[data-theme="domoween"] .dw-hero__inner { grid-template-columns: 1fr; }
   html[data-theme="domoween"] .dw-hero__art { justify-self: center; max-width: 600px; order: -1; padding-right: 0; }
   html[data-theme="domoween"] .dw-spider { display: none; }
-  html[data-theme="domoween"] .dw-moon { left: auto; right: 5%; top: 36%; width: 58px; }
+  html[data-theme="domoween"] .dw-moon { display: none; }
   html[data-theme="domoween"] .dw-share__inner { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {

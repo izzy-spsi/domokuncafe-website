@@ -81,7 +81,7 @@
         '<div class="container dw-hero__inner">' +
           '<div class="dw-hero__copy">' +
             '<p class="dw-hero__kicker">October 1 – 31, 2026 · Buena Park</p>' +
-            '<h1 id="domoween-heading"><span class="dw-wordmark">Domoween</span> <span class="dw-hero__at">at Domo Cafe</span></h1>' +
+            '<h1 id="domoween-heading"><span class="dw-wordmark"><picture class="dw-wordmark__art"><source type="image/svg+xml" srcset="/assets/domoween/domo-ween_wordmark_alt-no-hyphen.svg"><img class="dw-wordmark__img" src="/assets/domoween/domo-ween_wordmark_alt-no-hyphen.png" width="1355" height="179" alt="Domo™ Ween" fetchpriority="high"></picture><span class="dw-sr">Domoween</span></span> <span class="dw-hero__at">at Domo Cafe</span></h1>' +
             '<p class="dw-hero__lede">Domo\'s spooky-cute season is here. All October long, join us for comfort food, cozy vibes, and Halloween fun with Domo and friends.</p>' +
             '<div class="dw-hero__actions">' +
               '<a class="button dw-button" href="' + ORDER_URL + '" target="_blank" rel="noopener">Order Now</a>' +
