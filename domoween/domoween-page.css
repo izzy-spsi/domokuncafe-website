@@ -1,0 +1,42 @@
+/* /domoween/ landing page. Builds on /seasons/domoween/domoween.css (html has data-theme="domoween"). */
+html[data-theme="domoween"] [data-when] { display: none; }
+html[data-season-state="upcoming"] [data-when="upcoming"],
+html[data-season-state="live"] [data-when="live"],
+html[data-season-state="ended"] [data-when="ended"] { display: block; }
+html[data-theme="domoween"] .dwp-status { background: rgba(255, 209, 102, .12); border: 1px solid rgba(255, 209, 102, .4); border-radius: 14px; color: var(--dw-candy); font-weight: 700; margin: 0 0 1rem; max-width: 31rem; padding: .6rem .9rem; }
+html[data-theme="domoween"] .dwp-status--ended { background: var(--dw-pumpkin); border-color: var(--dw-pumpkin); color: var(--dw-night); font-size: 1.05rem; }
+html[data-theme="domoween"] .dwp-status--ended a { color: inherit; }
+
+html[data-theme="domoween"] .dwp-about { background: var(--dw-night-2); }
+html[data-theme="domoween"] .dwp-prose { max-width: 48rem; }
+html[data-theme="domoween"] .dwp-prose p { color: var(--dw-lilac); font-size: 1.05rem; }
+html[data-theme="domoween"] .dwp-link { color: var(--dw-pumpkin-dark); font-weight: 700; margin-right: .8rem; }
+html[data-theme="domoween"] .dwp-todo { max-width: 1080px; }
+html[data-theme="domoween"] .dwp-todo .dw-card p + p { margin-top: .7rem; }
+html[data-theme="domoween"] .dwp-crew { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+html[data-theme="domoween"] .dwp-ics { background: none; border: 0; cursor: pointer; font: inherit; font-weight: 700; padding: 0; }
+
+html[data-theme="domoween"] .dwp-visit { background: var(--dw-night-2); }
+html[data-theme="domoween"] .dwp-visit__grid { align-items: center; display: grid; gap: 2.5rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+html[data-theme="domoween"] .dwp-visit p { color: var(--dw-lilac); }
+html[data-theme="domoween"] .dwp-card { background: var(--dw-cream); border-radius: 24px; color: #2B1A12; padding: 1.8rem; }
+html[data-theme="domoween"] .dwp-card h3 { color: var(--dw-pumpkin-dark); font-size: 2rem; margin-bottom: .8rem; }
+html[data-theme="domoween"] .dwp-card p { color: var(--dw-body-dark); }
+html[data-theme="domoween"] .dwp-card a { color: var(--dw-pumpkin-dark); font-weight: 700; }
+html[data-theme="domoween"] .dwp-hours { border-top: 1px solid rgba(139, 69, 19, .2); list-style: none; margin: 1rem 0; padding: 0; }
+html[data-theme="domoween"] .dwp-hours li { border-bottom: 1px solid rgba(139, 69, 19, .2); display: flex; justify-content: space-between; padding: .7rem 0; }
+html[data-theme="domoween"] .dwp-hours strong { color: var(--dw-brown); }
+html[data-theme="domoween"] .dwp-small { font-size: .88rem; }
+
+html[data-theme="domoween"] .dwp-faq details { background: var(--dw-plum); border-radius: 1rem; margin-bottom: .8rem; padding: 1.05rem 1.3rem; }
+html[data-theme="domoween"] .dwp-faq summary { color: var(--dw-cream); cursor: pointer; font-weight: 700; }
+html[data-theme="domoween"] .dwp-faq details p { margin: .7rem 0 .2rem; }
+html[data-theme="domoween"] .dwp-faq a { color: var(--dw-pumpkin-light); }
+
+@media (max-width: 850px) {
+  html[data-theme="domoween"] .dwp-visit__grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 570px) {
+  html[data-theme="domoween"] .dwp-crew { gap: .6rem; }
+}
+html[data-theme="domoween"] .dwp-prose .dw-eyebrow { color: var(--dw-pumpkin-light); font-size: .8rem; }
