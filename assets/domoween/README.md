@@ -10,6 +10,7 @@ placed over them.
 
 | File | Art | Source | Size |
 | --- | --- | --- | --- |
+| `domo-ween_wordmark_alt-no-hyphen.svg` (+ `.png` fallback) | Approved "Domo™ Ween" title wordmark (no hyphen), used as the Domoween H1 on the home hero and `/domoween/`. The Domo™ part is the licensor's official logo vectors; "Ween" uses the official Domo alphabet letters | approved artwork, added unchanged | 1355×179 SVG / 3000×396 PNG |
 | `happy-halloween-domo-kun-banner.{webp,png}` | "Happy HALLOWEEN Domo-kun" scene banner (hero) | high-res original | 1600×803 |
 | `happy-halloween-domo-kun-banner-800.{webp,png}` | same, for phones | high-res original | 800×402 |
 | `wc_40_mummy.{webp,png}` | wc_40 mummy Domo | high-res original | 600×466 |

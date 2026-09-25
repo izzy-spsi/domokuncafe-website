@@ -32,7 +32,7 @@
       start: '2026-10-01',
       end: '2026-10-31',
       themeColor: '#1B1030',
-      fonts: 'https://fonts.googleapis.com/css2?family=Chewy&family=Griffy&display=swap',
+      fonts: 'https://fonts.googleapis.com/css2?family=Chewy&display=swap',
       css: ['domoween/domoween.css'],
       js: ['/events/events-data.js', '/events/events.js', 'domoween/data.js', 'domoween/domoween.js'],
       critical:
