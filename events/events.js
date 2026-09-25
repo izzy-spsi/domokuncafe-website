@@ -260,8 +260,9 @@
       gridEl.innerHTML = cells;
 
       if (!monthEvents.length) {
-        var msg = window.DomoEvents.comingSoon(month) || 'No events posted for ' + monthLabel(month) + ' yet. Follow @domokuncafe on Instagram and TikTok for the latest.';
-        listEl.innerHTML = '<div class="ev-empty"><h3>' + esc(monthLabel(month)) + '</h3><p>' + esc(msg) + '</p>' +
+        var soon = window.DomoEvents.comingSoon(month);
+        var msg = soon || 'No events posted for ' + monthLabel(month) + ' yet. Follow @domokuncafe on Instagram and TikTok for the latest.';
+        listEl.innerHTML = '<div class="ev-empty"><h3>' + (soon ? 'Coming soon' : 'Nothing on the calendar yet') + '</h3><p>' + esc(msg) + '</p>' +
           '<p class="ev-empty__links"><a class="button" href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram ↗</a> <a class="button button--outline" href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok ↗</a></p>' +
           (preview ? '<p class="ev-dev-note">Preview note: add events for this month in events/events-data.js</p>' : '') + '</div>';
       } else {
