@@ -61,3 +61,5 @@
   .who-grid,.provide-grid,.steps-4,.date-grid,.faq-list{grid-template-columns:1fr}
   .date-toolbar{align-items:start;flex-direction:column}
 }
+.foot .legal{border-top:1px solid #ffffff26;color:#F9EBDD;font-size:.86rem;margin:2.5rem 0 0;max-width:none;padding-top:1.2rem}
+.foot .legal+.bottom{border-top:0;margin-top:.9rem;padding-top:0}
