@@ -35,6 +35,7 @@ html[data-theme="domoween"] .dwp-faq a { color: var(--dw-pumpkin-light); }
 
 @media (max-width: 850px) {
   html[data-theme="domoween"] .dwp-visit__grid { grid-template-columns: 1fr; }
+  html[data-theme="domoween"] .dw-moon { display: none; }
 }
 @media (max-width: 570px) {
   html[data-theme="domoween"] .dwp-crew { gap: .6rem; }
