@@ -1,5 +1,6 @@
 /*
- * DOMOWEEN 2026 — the only file you need to edit for menu, events, and the hashtag.
+ * DOMOWEEN 2026 — edit this file for the Spooky specials menu and the hashtag.
+ * (Events live in events/events-data.js, shared with the /events/ calendar.)
  * ------------------------------------------------------------------------------
  * How to edit (the GitHub web editor is fine):
  *   - Keep the quotes and commas exactly as they are. Text goes inside "double quotes".
@@ -62,36 +63,8 @@ window.DOMOWEEN_DATA = {
         art: "wc_40_mummy"
       }
     ]
-  },
-
-  events: {
-    heading: "October events",
-    intro: "Domoween happenings will be announced here. Dates and details coming soon.",
-    items: [
-      // Real event example:
-      // { date: "Sat, Oct 00", time: "0pm – 0pm", title: "Event name",
-      //   description: "What guests can expect.", link: "", linkLabel: "",
-      //   art: "wc_43_witch-broom" },
-      {
-        placeholder: true,
-        date: "Date TBA",
-        time: "",
-        title: "October events coming soon",
-        description: "We'll post Domoween event details here and on Instagram and TikTok.",
-        link: "",
-        linkLabel: "",
-        art: "wc_53_mr-usagi-pumpkin-mask"
-      },
-      {
-        placeholder: true,
-        date: "Date TBA",
-        time: "",
-        title: "More Domoween fun TBA",
-        description: "Keep an eye on @domokuncafe for announcements.",
-        link: "",
-        linkLabel: "",
-        art: "tashanna_pumpkin-head"
-      }
-    ]
   }
+
+  // October events are NOT edited here: add them to events/events-data.js. They show up in
+  // the Domoween "October events" block, on /events/ and on /domoween/ automatically.
 };

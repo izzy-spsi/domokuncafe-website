@@ -85,9 +85,10 @@
             '<p class="dw-hero__lede">Domo\'s spooky-cute season is here. All October long, join us for comfort food, cozy vibes, and Halloween fun with Domo and friends.</p>' +
             '<div class="dw-hero__actions">' +
               '<a class="button dw-button" href="' + ORDER_URL + '" target="_blank" rel="noopener">Order Now</a>' +
+              '<a class="button dw-button dw-button--ghost" href="' + eventsUrl() + '">October events</a>' +
               '<a class="button dw-button dw-button--ghost" href="#visit">Plan your visit</a>' +
-              '<button class="button dw-button dw-button--ghost" type="button" data-dw-rsvp>Stay Updated</button>' +
             '</div>' +
+            '<p class="dw-hero__links"><a href="/domoween/">All about Domoween <span aria-hidden="true">→</span></a><button type="button" data-dw-rsvp>Stay updated <span aria-hidden="true">→</span></button></p>' +
             '<p class="dw-hero__address">8340 La Palma Ave · Buena Park, CA 90620</p>' +
           '</div>' +
           '<div class="dw-hero__art">' +
@@ -157,29 +158,40 @@
       '</section>';
   }
 
+  function eventsUrl() { return '/events/?month=' + theme.start.slice(0, 7); }
+
   function eventsHTML() {
-    var events = data.events || {};
-    var items = events.items || [];
-    if (data.showEvents === false || !items.length) return '';
+    if (data.showEvents === false) return '';
+    var lib = window.DomoEvents;
+    var items = lib ? lib.between(theme.start, theme.end) : [];
+    var soon = (lib && lib.comingSoon(theme.start.slice(0, 7))) || 'October events are coming soon! Follow @domokuncafe on Instagram and TikTok for announcements.';
+    var body = items.length ? items.slice(0, 4).map(function (item) {
+      var link = item.link ? '<a class="dw-ticket__link" href="' + esc(item.link) + '"' + (/^https?:/.test(item.link) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(item.linkLabel || 'Details') + ' <span aria-hidden="true">→</span></a>' : '';
+      return '<article class="dw-ticket">' +
+        '<div class="dw-ticket__date"><span>' + esc(lib.formatDate(item.date, { short: true })) + '</span><small>' + esc(lib.formatTime(item)) + '</small></div>' +
+        '<div class="dw-ticket__body"><h3>' + esc(item.title) + '</h3>' +
+          (item.description ? '<p>' + esc(item.description) + '</p>' : '') + link +
+          '<a class="dw-ticket__link" href="' + esc(lib.googleUrl(item)) + '" target="_blank" rel="noopener">Add to Google Calendar</a>' +
+        '</div>' +
+        (ART[item.art] ? '<div class="dw-ticket__art">' + art(item.art) + '</div>' : '') +
+      '</article>';
+    }).join('') : '<article class="dw-ticket dw-ticket--soon">' +
+        '<div class="dw-ticket__date"><span>Coming soon</span></div>' +
+        '<div class="dw-ticket__body"><h3>October events</h3><p>' + esc(soon) + '</p>' +
+          '<a class="dw-ticket__link" href="' + INSTAGRAM_URL + '" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a> ' +
+          '<a class="dw-ticket__link" href="' + TIKTOK_URL + '" target="_blank" rel="noopener">TikTok <span aria-hidden="true">↗</span></a>' +
+          '<span class="dw-flag" data-nosnippet>Preview note: add events in events/events-data.js</span>' +
+        '</div>' +
+        '<div class="dw-ticket__art">' + art('wc_53_mr-usagi-pumpkin-mask') + '</div>' +
+      '</article>';
     return '' +
       '<section class="dw-section dw-events" id="domoween-events" aria-labelledby="dw-events-heading">' +
         deco('ghost', 'dw-ghost--e1') + deco('ghost', 'dw-ghost--e2') + deco('web', 'dw-web dw-web--tr') +
         '<div class="container">' +
-          '<div class="dw-heading"><p class="dw-eyebrow">What\'s happening</p><h2 id="dw-events-heading">' + esc(events.heading || 'October events') + '</h2>' +
-            (events.intro ? '<p class="dw-heading__intro">' + esc(events.intro) + '</p>' : '') + '</div>' +
-          '<div class="dw-tickets">' +
-            items.map(function (item) {
-              var link = item.link ? '<a class="dw-ticket__link" href="' + esc(item.link) + '"' + (/^https?:/.test(item.link) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(item.linkLabel || 'Details') + ' <span aria-hidden="true">→</span></a>' : '';
-              return '<article class="dw-ticket' + (item.placeholder ? ' dw-ticket--placeholder' : '') + '">' +
-                '<div class="dw-ticket__date"><span>' + esc(item.date || 'Date TBA') + '</span>' + (item.time ? '<small>' + esc(item.time) + '</small>' : '') + '</div>' +
-                '<div class="dw-ticket__body">' + placeholderFlag(item) +
-                  '<h3>' + esc(item.title) + '</h3>' +
-                  (item.description ? '<p>' + esc(item.description) + '</p>' : '') + link +
-                '</div>' +
-                (item.art ? '<div class="dw-ticket__art">' + art(item.art) + '</div>' : '') +
-              '</article>';
-            }).join('') +
-          '</div>' +
+          '<div class="dw-heading"><p class="dw-eyebrow">What\'s happening</p><h2 id="dw-events-heading">October events</h2>' +
+            '<p class="dw-heading__intro">Domoween happenings at Domo Cafe, all in one calendar.</p></div>' +
+          '<div class="dw-tickets">' + body + '</div>' +
+          '<div class="dw-center"><a class="button dw-button" href="' + eventsUrl() + '">See the events calendar</a></div>' +
         '</div>' +
       '</section>';
   }
@@ -256,7 +268,7 @@
     var nav = document.querySelector('.site-nav');
     if (nav && !nav.querySelector('.dw-nav-link')) {
       var link = document.createElement('a');
-      link.href = '#domoween';
+      link.href = '/domoween/';
       link.className = 'dw-nav-link';
       link.textContent = 'Domoween';
       nav.insertBefore(link, nav.firstChild);
@@ -273,7 +285,7 @@
     }
 
     var footer = document.querySelector('.site-footer .container');
-    if (footer && !footer.querySelector('.dw-legal')) {
+    if (footer && !footer.querySelector('.dw-legal') && footer.textContent.indexOf('Domo Production Committee') === -1) {
       var legal = document.createElement('p');
       legal.className = 'dw-legal';
       legal.textContent = COPYRIGHT;
@@ -290,11 +302,11 @@
   }
 
   function render() {
+    dressPage();
     var slot = document.getElementById('season-slot');
     if (!slot) return;
     slot.innerHTML = heroHTML() + countdownHTML() + menuHTML() + eventsHTML() + shareHTML();
     slot.classList.add('dw-slot');
-    dressPage();
     startCountdown(slot);
   }
 
