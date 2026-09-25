@@ -34,7 +34,7 @@
       themeColor: '#1B1030',
       fonts: 'https://fonts.googleapis.com/css2?family=Chewy&family=Griffy&display=swap',
       css: ['domoween/domoween.css'],
-      js: ['domoween/data.js', 'domoween/domoween.js'],
+      js: ['/events/events-data.js', '/events/events.js', 'domoween/data.js', 'domoween/domoween.js'],
       critical:
         'html[data-theme="domoween"] body{background:#1B1030;color:#F6EEFF}' +
         'html[data-theme="domoween"] .hero{display:none}' +
@@ -146,13 +146,13 @@
     (active.css || []).forEach(function (href) {
       var link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = BASE + href;
+      link.href = href.charAt(0) === '/' ? href : BASE + href;
       link.setAttribute('blocking', 'render');
       head.appendChild(link);
     });
     (active.js || []).forEach(function (src) {
       var script = document.createElement('script');
-      script.src = BASE + src;
+      script.src = src.charAt(0) === '/' ? src : BASE + src;
       script.async = false;
       head.appendChild(script);
     });
