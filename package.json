@@ -4,7 +4,9 @@
   "description": "Domo Cafe coming soon landing page",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build:agent": "node tools/build-agent-files.js",
+    "validate:agent": "node tools/validate-jsonld.js"
   },
   "dependencies": {
     "express": "^4.18.2"

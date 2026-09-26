@@ -1,4 +1,259 @@
+# Domo Cafe (https://www.domokuncafe.com/) is a static, read-only website.
+# Reputable search and AI crawlers may read the public pages.
+# Disallowed paths are internal tools or stale drafts, not the cafe menu, hours, or visit information.
+# There is no public write API.
+
 User-agent: *
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: GPTBot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: OAI-SearchBot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: ChatGPT-User
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: PerplexityBot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: Perplexity-User
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: ClaudeBot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: Claude-User
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: Claude-SearchBot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: Google-Extended
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: Googlebot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: GoogleOther
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: Applebot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: Applebot-Extended
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: Bingbot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: Amazonbot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: FacebookBot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: Meta-ExternalAgent
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: CCBot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: anthropic-ai
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: cohere-ai
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: DuckDuckBot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
+Allow: /
+
+User-agent: YouBot
+Disallow: /dashboard
+Disallow: /dashboard.html
+Disallow: /staff
+Disallow: /staff.html
+Disallow: /index-hours-test.html
+Disallow: /preview-july4-banner.html
+Disallow: /community.html
+Disallow: /community-bphs-tennis.html
 Allow: /
 
 Sitemap: https://www.domokuncafe.com/sitemap.xml
