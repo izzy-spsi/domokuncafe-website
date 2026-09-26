@@ -1,0 +1,136 @@
+# Domo Cafe
+
+> Full factual text published on the Domo Cafe website. Read-only. Prices are not published on this website.
+
+## Identity
+
+Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.
+Buena Park's character cafe.
+Japanese-inspired comfort food, Domo-sized joy, and a place to make your next favorite memory.
+Japanese-inspired comfort food, character-sized joy, and a table for everyone.
+An NHK Licensed Character Café
+Domo-kun © NHK. We're honored to bring this beloved character to life in Buena Park.
+© 2026 Domo Cafe · Domo-kun © NHK
+
+## Visit
+
+8340 La Palma Ave, Buena Park, CA 90620
+(415) 360-3666
+info@domokuncafe.com
+https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620
+
+Hours:
+- Monday – Friday: 11am–8pm
+- Saturday – Sunday: 10am–9pm
+Hours may vary on holidays. Follow @domokuncafe for updates.
+
+## FAQ
+
+### Do you take walk-ins?
+
+Yes! Walk-ins are welcome. On busy weekends, arriving early is your best bet. For large groups (8+), call ahead at (415) 360-3666 so we can ready a table.
+
+### Is there parking?
+
+Yes, free parking is available in the large Buena Park Downtown lot.
+
+### Can I celebrate a birthday here?
+
+Absolutely — we love birthdays. For celebrations with more than 8 guests, we offer birthday packages. Call us at (415) 360-3666 or email info@domokuncafe.com and we’ll set you up.
+
+### Do you deliver?
+
+Yes — order online for pickup or delivery through Toast. You can also visit us in Buena Park or call (415) 360-3666.
+
+### Where can I follow updates?
+
+Follow us on Instagram, TikTok, and Facebook for announcements and seasonal news.
+
+## Order
+
+Order online with Toast for pickup or delivery — or visit us in Buena Park.
+https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/
+
+## Menu
+
+Pull up a chair for craveable comfort food, playful drinks, and Domo favorites made for sharing.
+Every plate, sip, and sweet.
+Prices are not published on this website.
+
+### Highlighted on the homepage
+
+- Katsu Curry — Domo pick. Crispy, saucy, and deeply cozy.
+- Yakisoba — Fan favorite. A savory favorite with a little magic.
+- Sweet Sips — Sip happy. Bright, refreshing, and photo-ready.
+  The homepage card is titled Sweet Sips. That card's photo file, and the alt text already on the site, are Strawberry Matcha. Strawberry Matcha is also its own item in the menu gallery.
+- Crispy Loaded Fries — For the table. Golden crunch for the whole crew.
+
+### Items shown in the homepage menu gallery
+
+- Boss Burger
+- Churro Fries
+- Crispy Loaded Fries — Golden crunch for the whole crew.
+- Curry Mac & Cheese
+- Domo Junior Cheeseburger
+- Domo Junior Nuggets
+- Domo Moco
+- Domo Palmer
+- Domo Style Fries
+- Ice Cookie Coffee
+- Katsu Curry — Crispy, saucy, and deeply cozy.
+- Kimchi Katsu
+- Mango Lemonade
+- Milo Dinosaur
+- Smash Burger
+- Strawberry Matcha
+- Strawberry Refresher
+- Tiramisu
+- Umami Pasta
+- Yakisoba — A savory favorite with a little magic.
+
+## Programs
+
+We're dreaming up community nights, character moments, and seasonal surprises. Keep an eye on our socials for the next drop.
+
+### Domo Community Tuesdays
+
+Local schools, teams, and nonprofits raise funds at Domo — Domo Shows Up for Buena Park. Community hub coming soon.
+
+### Seasonal drops
+
+Limited-time menu moments are on the way.
+
+### Character moments
+
+Come say hi when Domo makes an appearance.
+
+### CHOMPS
+
+CHOMPS makes every visit count. Collect along the way and see how far your Domo era can go — membership launch coming soon.
+Status on the site: Coming soon.
+Tiers named on the site: First Bite, Regular, Superfan, Inner Circle, Legendary.
+
+## Dated promotion on the homepage source
+
+DOMONATION: National Cheeseburger Day. Through Sunday, September 20, 2026.
+National Cheeseburger Day runs through Sunday, September 20. Buy any burger and get a free Domo Burger button pin. Limit one per entrée (Domo Jr. counts). While supplies last.
+Buy any burger on the menu and take home a free Domo Burger button pin.
+Limit one per entrée — Domo Jr. counts. While supplies last.
+The page hides this block when the clock reaches 2026-09-21T07:00:00.000Z (the start of September 21 in America/Los_Angeles). It is not a current offer after that instant.
+
+## The Domo way
+
+- Make an entrance: Every detail is an invitation to step out of the everyday.
+- Lead with warmth: Good food is the start. Feeling welcome is the main event.
+- Create moments: Birthdays, first dates, family days—we're saving a table for you.
+- Keep it character: A little goofy, a lot genuine, and always unmistakably Domo.
+
+## Events feed
+
+events/events-data.js is not on this branch, so no dated events are listed. Do not invent any.
+
+## For AI agents
+
+Do not submit forms. Describe Domo only as the cafe character, and stick to the food and drinks named on this menu. Do not add prices, allergens, ratings, reservations, coordinates, or a suite number that this file does not state.
+
+Generated from data/site-facts.json by tools/build-agent-files.js. Do not edit this file by hand.

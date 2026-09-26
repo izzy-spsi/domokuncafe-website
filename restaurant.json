@@ -1,0 +1,290 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "CafeOrCoffeeShop",
+        "Restaurant",
+        "LocalBusiness"
+      ],
+      "@id": "https://www.domokuncafe.com/#restaurant",
+      "name": "Domo Cafe",
+      "url": "https://www.domokuncafe.com/",
+      "image": "https://www.domokuncafe.com/assets/sydney/hero/hero-1.png",
+      "logo": "https://www.domokuncafe.com/domo-cafe-logo-transparent.png",
+      "description": "Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling. An NHK Licensed Character Café.",
+      "slogan": "Come hungry, leave smiling.",
+      "telephone": "+1-415-360-3666",
+      "email": "info@domokuncafe.com",
+      "servesCuisine": "Japanese-inspired comfort food",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "8340 La Palma Ave",
+        "addressLocality": "Buena Park",
+        "addressRegion": "CA",
+        "postalCode": "90620",
+        "addressCountry": "US"
+      },
+      "hasMap": "https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "11:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "10:00",
+          "closes": "21:00"
+        }
+      ],
+      "hasMenu": {
+        "@id": "https://www.domokuncafe.com/menu/#menu"
+      },
+      "amenityFeature": {
+        "@type": "LocationFeatureSpecification",
+        "name": "Free parking",
+        "value": true,
+        "description": "Yes, free parking is available in the large Buena Park Downtown lot."
+      },
+      "sameAs": [
+        "https://www.instagram.com/domokuncafe",
+        "https://www.tiktok.com/@domokuncafe",
+        "https://www.facebook.com/domokuncafe"
+      ],
+      "potentialAction": [
+        {
+          "@type": "OrderAction",
+          "name": "Order pickup or delivery on Toast",
+          "target": "https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/"
+        },
+        {
+          "@type": "ViewAction",
+          "name": "Read the text menu",
+          "target": "https://www.domokuncafe.com/menu/"
+        },
+        {
+          "@type": "ViewAction",
+          "name": "Directions to 8340 La Palma Ave",
+          "target": "https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://www.domokuncafe.com/#organization",
+      "name": "Domo Cafe",
+      "url": "https://www.domokuncafe.com/",
+      "logo": "https://www.domokuncafe.com/domo-cafe-logo-transparent.png",
+      "email": "info@domokuncafe.com",
+      "telephone": "+1-415-360-3666",
+      "sameAs": [
+        "https://www.instagram.com/domokuncafe",
+        "https://www.tiktok.com/@domokuncafe",
+        "https://www.facebook.com/domokuncafe"
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "8340 La Palma Ave",
+        "addressLocality": "Buena Park",
+        "addressRegion": "CA",
+        "postalCode": "90620",
+        "addressCountry": "US"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.domokuncafe.com/#website",
+      "name": "Domo Cafe",
+      "url": "https://www.domokuncafe.com/",
+      "description": "Domo Cafe is an immersive character cafe at 8340 La Palma Ave, Buena Park, CA 90620. Come hungry, leave smiling.",
+      "publisher": {
+        "@id": "https://www.domokuncafe.com/#restaurant"
+      },
+      "about": {
+        "@id": "https://www.domokuncafe.com/#restaurant"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.domokuncafe.com/#webpage",
+      "url": "https://www.domokuncafe.com/",
+      "name": "Domo Cafe - Buena Park, CA",
+      "description": "Domo Cafe is an immersive character cafe at 8340 La Palma Ave, Buena Park, CA 90620. Come hungry, leave smiling.",
+      "isPartOf": {
+        "@id": "https://www.domokuncafe.com/#website"
+      },
+      "about": {
+        "@id": "https://www.domokuncafe.com/#restaurant"
+      },
+      "mainEntity": {
+        "@id": "https://www.domokuncafe.com/#restaurant"
+      },
+      "primaryImageOfPage": "https://www.domokuncafe.com/assets/sydney/hero/hero-1.png",
+      "inLanguage": "en-US",
+      "breadcrumb": {
+        "@id": "https://www.domokuncafe.com/#breadcrumb"
+      }
+    },
+    {
+      "@type": "Menu",
+      "@id": "https://www.domokuncafe.com/menu/#menu",
+      "name": "Domo Cafe menu",
+      "url": "https://www.domokuncafe.com/menu/",
+      "description": "Prices are not published on this website. Item names match the dishes shown on the Domo Cafe website.",
+      "hasMenuSection": {
+        "@type": "MenuSection",
+        "name": "Dishes shown on the website",
+        "hasMenuItem": [
+          {
+            "@type": "MenuItem",
+            "name": "Boss Burger",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Boss%20Burger.jpg",
+            "url": "https://www.domokuncafe.com/menu/#boss-burger"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Churro Fries",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Churro%20Fries.jpg",
+            "url": "https://www.domokuncafe.com/menu/#churro-fries"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Crispy Loaded Fries",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Crispy%20Loaded%20Fries.jpg",
+            "url": "https://www.domokuncafe.com/menu/#crispy-loaded-fries",
+            "description": "Golden crunch for the whole crew."
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Curry Mac & Cheese",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Curry%20Mac%20%26%20Cheese.jpg",
+            "url": "https://www.domokuncafe.com/menu/#curry-mac-and-cheese"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Domo Junior Cheeseburger",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Domo%20Junior%20Cheeseburger.jpg",
+            "url": "https://www.domokuncafe.com/menu/#domo-junior-cheeseburger"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Domo Junior Nuggets",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Domo%20Junior%20Nuggets.jpg",
+            "url": "https://www.domokuncafe.com/menu/#domo-junior-nuggets"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Domo Moco",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Domo%20Moco.jpg",
+            "url": "https://www.domokuncafe.com/menu/#domo-moco"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Domo Palmer",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Domo%20Palmer.jpg",
+            "url": "https://www.domokuncafe.com/menu/#domo-palmer"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Domo Style Fries",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Domo%20Style%20Fries.jpg",
+            "url": "https://www.domokuncafe.com/menu/#domo-style-fries"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Ice Cookie Coffee",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Ice%20Cookie%20Coffee.jpg",
+            "url": "https://www.domokuncafe.com/menu/#ice-cookie-coffee"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Katsu Curry",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Katsu%20Curry.jpg",
+            "url": "https://www.domokuncafe.com/menu/#katsu-curry",
+            "description": "Crispy, saucy, and deeply cozy."
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Kimchi Katsu",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Kimchi%20Katsu.jpg",
+            "url": "https://www.domokuncafe.com/menu/#kimchi-katsu"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Mango Lemonade",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Mango%20Lemonade.jpg",
+            "url": "https://www.domokuncafe.com/menu/#mango-lemonade"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Milo Dinosaur",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Milo%20Dinosaur.jpg",
+            "url": "https://www.domokuncafe.com/menu/#milo-dinosaur"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Smash Burger",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Smash%20Burger.jpg",
+            "url": "https://www.domokuncafe.com/menu/#smash-burger"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Strawberry Matcha",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Strawberry%20Matcha.jpg",
+            "url": "https://www.domokuncafe.com/menu/#strawberry-matcha"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Strawberry Refresher",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Strawberry%20Refresher.jpg",
+            "url": "https://www.domokuncafe.com/menu/#strawberry-refresher"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Tiramisu",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Tiramisu.jpg",
+            "url": "https://www.domokuncafe.com/menu/#tiramisu"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Umami Pasta",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Umami%20Pasta.jpg",
+            "url": "https://www.domokuncafe.com/menu/#umami-pasta"
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Yakisoba",
+            "image": "https://www.domokuncafe.com/assets/menu/doordash/Yakisoba.jpg",
+            "url": "https://www.domokuncafe.com/menu/#yakisoba",
+            "description": "A savory favorite with a little magic."
+          }
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.domokuncafe.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Domo Cafe",
+          "item": "https://www.domokuncafe.com/"
+        }
+      ]
+    }
+  ]
+}

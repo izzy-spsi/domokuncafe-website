@@ -7,16 +7,21 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYQJZDB2MR"></script>
   <script src="/ga4.js"></script>
   <meta name="theme-color" content="#CC2222">
-  <meta name="description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
+  <meta name="description" content="Domo Cafe is an immersive character cafe at 8340 La Palma Ave, Buena Park, CA 90620. Come hungry, leave smiling.">
   <title>Domo Cafe - Buena Park, CA</title>
   <link rel="canonical" href="https://www.domokuncafe.com/">
+  <link rel="alternate" type="text/plain" href="https://www.domokuncafe.com/llms.txt" title="llms.txt">
+  <link rel="alternate" type="text/plain" href="https://www.domokuncafe.com/llms-full.txt" title="llms-full.txt">
+  <link rel="alternate" type="application/json" href="https://www.domokuncafe.com/menu.json" title="Machine-readable menu">
+  <link rel="alternate" type="application/json" href="https://www.domokuncafe.com/events.json" title="Read-only events feed">
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.domokuncafe.com/sitemap.xml">
   <link rel="icon" type="image/png" href="domo-cafe-logo-transparent.png">
   <link rel="apple-touch-icon" href="domo-cafe-logo-transparent.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Domo Cafe">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Domo Cafe - Buena Park, CA">
-  <meta property="og:description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
+  <meta property="og:description" content="Domo Cafe is an immersive character cafe at 8340 La Palma Ave, Buena Park, CA 90620. Come hungry, leave smiling.">
   <meta property="og:url" content="https://www.domokuncafe.com/">
   <meta property="og:image" content="https://www.domokuncafe.com/assets/sydney/hero/hero-1.png">
   <meta property="og:image:alt" content="Domo Cafe entrance doors painted with Domo's face">
@@ -24,48 +29,302 @@
   <meta property="og:image:height" content="605">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Domo Cafe - Buena Park, CA">
-  <meta name="twitter:description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
+  <meta name="twitter:description" content="Domo Cafe is an immersive character cafe at 8340 La Palma Ave, Buena Park, CA 90620. Come hungry, leave smiling.">
   <meta name="twitter:image" content="https://www.domokuncafe.com/assets/sydney/hero/hero-1.png">
+  <!-- AGENT-JSONLD:START -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": ["Restaurant", "LocalBusiness"],
-    "name": "Domo Cafe",
-    "url": "https://www.domokuncafe.com/",
-    "image": "https://www.domokuncafe.com/assets/sydney/hero/hero-1.png",
-    "logo": "https://www.domokuncafe.com/domo-cafe-logo-transparent.png",
-    "description": "Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.",
-    "telephone": "+1-415-360-3666",
-    "email": "info@domokuncafe.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "8340 La Palma Ave",
-      "addressLocality": "Buena Park",
-      "addressRegion": "CA",
-      "postalCode": "90620",
-      "addressCountry": "US"
-    },
-    "openingHoursSpecification": [
+    "@graph": [
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "11:00",
-        "closes": "20:00"
+        "@type": [
+          "CafeOrCoffeeShop",
+          "Restaurant",
+          "LocalBusiness"
+        ],
+        "@id": "https://www.domokuncafe.com/#restaurant",
+        "name": "Domo Cafe",
+        "url": "https://www.domokuncafe.com/",
+        "image": "https://www.domokuncafe.com/assets/sydney/hero/hero-1.png",
+        "logo": "https://www.domokuncafe.com/domo-cafe-logo-transparent.png",
+        "description": "Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling. An NHK Licensed Character Café.",
+        "slogan": "Come hungry, leave smiling.",
+        "telephone": "+1-415-360-3666",
+        "email": "info@domokuncafe.com",
+        "servesCuisine": "Japanese-inspired comfort food",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "8340 La Palma Ave",
+          "addressLocality": "Buena Park",
+          "addressRegion": "CA",
+          "postalCode": "90620",
+          "addressCountry": "US"
+        },
+        "hasMap": "https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "11:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "10:00",
+            "closes": "21:00"
+          }
+        ],
+        "hasMenu": {
+          "@id": "https://www.domokuncafe.com/menu/#menu"
+        },
+        "amenityFeature": {
+          "@type": "LocationFeatureSpecification",
+          "name": "Free parking",
+          "value": true,
+          "description": "Yes, free parking is available in the large Buena Park Downtown lot."
+        },
+        "sameAs": [
+          "https://www.instagram.com/domokuncafe",
+          "https://www.tiktok.com/@domokuncafe",
+          "https://www.facebook.com/domokuncafe"
+        ],
+        "potentialAction": [
+          {
+            "@type": "OrderAction",
+            "name": "Order pickup or delivery on Toast",
+            "target": "https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/"
+          },
+          {
+            "@type": "ViewAction",
+            "name": "Read the text menu",
+            "target": "https://www.domokuncafe.com/menu/"
+          },
+          {
+            "@type": "ViewAction",
+            "name": "Directions to 8340 La Palma Ave",
+            "target": "https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620"
+          }
+        ]
       },
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Saturday", "Sunday"],
-        "opens": "10:00",
-        "closes": "21:00"
+        "@type": "Organization",
+        "@id": "https://www.domokuncafe.com/#organization",
+        "name": "Domo Cafe",
+        "url": "https://www.domokuncafe.com/",
+        "logo": "https://www.domokuncafe.com/domo-cafe-logo-transparent.png",
+        "email": "info@domokuncafe.com",
+        "telephone": "+1-415-360-3666",
+        "sameAs": [
+          "https://www.instagram.com/domokuncafe",
+          "https://www.tiktok.com/@domokuncafe",
+          "https://www.facebook.com/domokuncafe"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "8340 La Palma Ave",
+          "addressLocality": "Buena Park",
+          "addressRegion": "CA",
+          "postalCode": "90620",
+          "addressCountry": "US"
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://www.domokuncafe.com/#website",
+        "name": "Domo Cafe",
+        "url": "https://www.domokuncafe.com/",
+        "description": "Domo Cafe is an immersive character cafe at 8340 La Palma Ave, Buena Park, CA 90620. Come hungry, leave smiling.",
+        "publisher": {
+          "@id": "https://www.domokuncafe.com/#restaurant"
+        },
+        "about": {
+          "@id": "https://www.domokuncafe.com/#restaurant"
+        },
+        "inLanguage": "en-US"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://www.domokuncafe.com/#webpage",
+        "url": "https://www.domokuncafe.com/",
+        "name": "Domo Cafe - Buena Park, CA",
+        "description": "Domo Cafe is an immersive character cafe at 8340 La Palma Ave, Buena Park, CA 90620. Come hungry, leave smiling.",
+        "isPartOf": {
+          "@id": "https://www.domokuncafe.com/#website"
+        },
+        "about": {
+          "@id": "https://www.domokuncafe.com/#restaurant"
+        },
+        "mainEntity": {
+          "@id": "https://www.domokuncafe.com/#restaurant"
+        },
+        "primaryImageOfPage": "https://www.domokuncafe.com/assets/sydney/hero/hero-1.png",
+        "inLanguage": "en-US",
+        "breadcrumb": {
+          "@id": "https://www.domokuncafe.com/#breadcrumb"
+        }
+      },
+      {
+        "@type": "Menu",
+        "@id": "https://www.domokuncafe.com/menu/#menu",
+        "name": "Domo Cafe menu",
+        "url": "https://www.domokuncafe.com/menu/",
+        "description": "Prices are not published on this website. Item names match the dishes shown on the Domo Cafe website.",
+        "hasMenuSection": {
+          "@type": "MenuSection",
+          "name": "Dishes shown on the website",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Boss Burger",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Boss%20Burger.jpg",
+              "url": "https://www.domokuncafe.com/menu/#boss-burger"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Churro Fries",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Churro%20Fries.jpg",
+              "url": "https://www.domokuncafe.com/menu/#churro-fries"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Crispy Loaded Fries",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Crispy%20Loaded%20Fries.jpg",
+              "url": "https://www.domokuncafe.com/menu/#crispy-loaded-fries",
+              "description": "Golden crunch for the whole crew."
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Curry Mac & Cheese",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Curry%20Mac%20%26%20Cheese.jpg",
+              "url": "https://www.domokuncafe.com/menu/#curry-mac-and-cheese"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Domo Junior Cheeseburger",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Domo%20Junior%20Cheeseburger.jpg",
+              "url": "https://www.domokuncafe.com/menu/#domo-junior-cheeseburger"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Domo Junior Nuggets",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Domo%20Junior%20Nuggets.jpg",
+              "url": "https://www.domokuncafe.com/menu/#domo-junior-nuggets"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Domo Moco",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Domo%20Moco.jpg",
+              "url": "https://www.domokuncafe.com/menu/#domo-moco"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Domo Palmer",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Domo%20Palmer.jpg",
+              "url": "https://www.domokuncafe.com/menu/#domo-palmer"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Domo Style Fries",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Domo%20Style%20Fries.jpg",
+              "url": "https://www.domokuncafe.com/menu/#domo-style-fries"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Ice Cookie Coffee",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Ice%20Cookie%20Coffee.jpg",
+              "url": "https://www.domokuncafe.com/menu/#ice-cookie-coffee"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Katsu Curry",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Katsu%20Curry.jpg",
+              "url": "https://www.domokuncafe.com/menu/#katsu-curry",
+              "description": "Crispy, saucy, and deeply cozy."
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Kimchi Katsu",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Kimchi%20Katsu.jpg",
+              "url": "https://www.domokuncafe.com/menu/#kimchi-katsu"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Mango Lemonade",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Mango%20Lemonade.jpg",
+              "url": "https://www.domokuncafe.com/menu/#mango-lemonade"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Milo Dinosaur",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Milo%20Dinosaur.jpg",
+              "url": "https://www.domokuncafe.com/menu/#milo-dinosaur"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Smash Burger",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Smash%20Burger.jpg",
+              "url": "https://www.domokuncafe.com/menu/#smash-burger"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Strawberry Matcha",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Strawberry%20Matcha.jpg",
+              "url": "https://www.domokuncafe.com/menu/#strawberry-matcha"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Strawberry Refresher",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Strawberry%20Refresher.jpg",
+              "url": "https://www.domokuncafe.com/menu/#strawberry-refresher"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Tiramisu",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Tiramisu.jpg",
+              "url": "https://www.domokuncafe.com/menu/#tiramisu"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Umami Pasta",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Umami%20Pasta.jpg",
+              "url": "https://www.domokuncafe.com/menu/#umami-pasta"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Yakisoba",
+              "image": "https://www.domokuncafe.com/assets/menu/doordash/Yakisoba.jpg",
+              "url": "https://www.domokuncafe.com/menu/#yakisoba",
+              "description": "A savory favorite with a little magic."
+            }
+          ]
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.domokuncafe.com/#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Domo Cafe",
+            "item": "https://www.domokuncafe.com/"
+          }
+        ]
       }
-    ],
-    "sameAs": [
-      "https://www.instagram.com/domokuncafe",
-      "https://www.tiktok.com/@domokuncafe",
-      "https://www.facebook.com/domokuncafe"
     ]
   }
   </script>
+  <!-- AGENT-JSONLD:END -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=DM+Sans:wght@400;500;600;700&family=Hubballi&display=swap" rel="stylesheet">
@@ -91,6 +350,7 @@
     body, button, a { -webkit-font-smoothing: antialiased; }
     img { max-width: 100%; display: block; }
     a { color: inherit; }
+    address { font-style: normal; }
     .skip-link { position: fixed; left: 1rem; top: -5rem; z-index: 100; background: var(--gold); color: var(--brown-dark); padding: .7rem 1rem; border-radius: 999px; font-weight: 700; }
     .skip-link:focus { top: 1rem; }
     .container { width: min(1180px, calc(100% - 2.5rem)); margin: 0 auto; }
@@ -127,6 +387,7 @@
     .hero__lede { font-size: clamp(1.05rem, 2vw, 1.28rem); max-width: 470px; }
     .hero__actions { display: flex; flex-wrap: wrap; gap: .8rem; margin: 1.8rem 0 1.6rem; }
     .hero__address { font-size: .88rem; opacity: .88; }
+    .hero__address a { color: inherit; text-decoration: underline; text-underline-offset: .18em; }
     .hero__mascot { bottom: -1.4rem; max-height: 47%; object-fit: contain; object-position: bottom right; position: absolute; right: 8%; width: min(340px, 33vw); z-index: 1; }
     .hero__controls { align-items: center; bottom: 2.1rem; display: flex; gap: 1rem; position: absolute; z-index: 2; }
     .hero__arrow { background: rgba(255,255,255,.15); border: 1px solid rgba(255,255,255,.65); border-radius: 50%; color: #fff; cursor: pointer; font-size: 1.25rem; height: 2.7rem; width: 2.7rem; }
@@ -154,7 +415,10 @@
     .menu-card h3 { font-size: 1.5rem; margin-bottom: .35rem; }
     .menu-card p { color: #694d3b; font-size: .9rem; margin-bottom: 0; }
     .menu-card__tag { color: var(--red); font-size: .7rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
-    .menu-footer { margin-top: 2.2rem; text-align: center; }
+    .menu-footer { display: flex; flex-wrap: wrap; gap: .8rem; justify-content: center; margin-top: 1rem; text-align: center; }
+    .menu-source-note { color: #694d3b; margin: 1.6rem 0 0; text-align: center; }
+    .visit__card address a { color: var(--red); font-weight: 700; text-decoration: none; }
+    .visit__card address a:hover, .visit__card address a:focus-visible { text-decoration: underline; }
     .menu-gallery-heading { margin: 3.2rem 0 1.4rem; }
     .menu-gallery-heading h3 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); margin-bottom: 0; }
     .menu-gallery { display: grid; gap: 1rem; grid-template-columns: repeat(4, 1fr); }
@@ -360,7 +624,7 @@
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">☰</button>
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
       <a href="#menu">Menu</a><a href="#story">Our Story</a><a href="#visit">Visit</a><!-- Community nav hidden until hub is ready --><a href="#faq">FAQ</a>
-      <a class="button button--nav" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Order Now</a>
+      <a class="button button--nav" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener" aria-label="Order pickup or delivery on Toast">Order on Toast</a>
       <!-- Join CHOMPS still hidden until launch -->
     </nav>
   </header>
@@ -386,8 +650,8 @@
           <div class="hero__kicker">Buena Park's character cafe</div>
           <h1>Come for the <span>good vibes.</span></h1>
           <p class="hero__lede">Japanese-inspired comfort food, Domo-sized joy, and a place to make your next favorite memory.</p>
-          <div class="hero__actions"><a class="button button--light" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Order Now</a><a class="button button--outline" href="#menu">Explore the menu</a><button class="button button--outline" type="button" id="rsvpBtn">Stay Updated</button><a class="button button--outline" href="#visit">Plan your visit</a></div>
-          <div class="hero__address">8340 La Palma Ave · Buena Park, CA 90620</div>
+          <div class="hero__actions"><a class="button button--light" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Order pickup or delivery on Toast</a><a class="button button--outline" href="#menu">Explore the menu</a><button class="button button--outline" type="button" id="rsvpBtn">Stay Updated</button><a class="button button--outline" href="#visit">Plan your visit</a></div>
+          <div class="hero__address"><a href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620">8340 La Palma Ave, Buena Park, CA 90620</a></div>
         </div>
         <img class="hero__mascot" src="assets/sydney/mascots/mascot-jumping.png" alt="Domo mascot jumping with joy">
         <div class="hero__controls" aria-label="Hero slides">
@@ -412,7 +676,7 @@
             <p>Buy any burger on the menu and take home a free Domo Burger button pin.</p>
             <p class="ncd-card__fine">Limit one per entrée — Domo Jr. counts. While supplies last.</p>
             <div class="ncd-card__actions">
-              <a class="button" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Order a burger</a>
+              <a class="button" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener" aria-label="Order a burger on Toast">Order a burger</a>
               <a class="button button--outline" href="#visit">Plan your visit</a>
             </div>
           </div>
@@ -426,7 +690,7 @@
           <p class="delivery-band__title">Domo Delivery &amp; pickup is here</p>
           <p class="delivery-band__lede">Order online with Toast for pickup or delivery — or visit us in Buena Park.</p>
         </div>
-        <a class="button button--light" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Order Now</a>
+        <a class="button button--light" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Order pickup or delivery on Toast</a>
       </div>
     </section>
 
@@ -436,38 +700,39 @@
       <div class="container">
         <div class="section-heading"><div><div class="eyebrow">What we're serving</div><h2 id="menu-heading">Big flavor.<br>Zero boring bites.</h2></div><p>Pull up a chair for craveable comfort food, playful drinks, and Domo favorites made for sharing.</p></div>
         <div class="menu-grid">
-          <article class="menu-card"><img src="assets/menu/doordash/Katsu%20Curry.jpg" alt="Katsu Curry" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Domo pick</div><h3>Katsu Curry</h3><p>Crispy, saucy, and deeply cozy.</p></div></article>
-          <article class="menu-card"><img src="assets/menu/doordash/Yakisoba.jpg" alt="Yakisoba" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Fan favorite</div><h3>Yakisoba</h3><p>A savory favorite with a little magic.</p></div></article>
-          <article class="menu-card"><img src="assets/menu/doordash/Strawberry%20Matcha.jpg" alt="Strawberry Matcha" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Sip happy</div><h3>Sweet Sips</h3><p>Bright, refreshing, and photo-ready.</p></div></article>
-          <article class="menu-card"><img src="assets/menu/doordash/Crispy%20Loaded%20Fries.jpg" alt="Crispy Loaded Fries" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">For the table</div><h3>Crispy Loaded Fries</h3><p>Golden crunch for the whole crew.</p></div></article>
+          <article class="menu-card"><img src="assets/menu/doordash/Katsu%20Curry.jpg" alt="Photo of Katsu Curry at Domo Cafe" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Domo pick</div><h3>Katsu Curry</h3><p>Crispy, saucy, and deeply cozy.</p></div></article>
+          <article class="menu-card"><img src="assets/menu/doordash/Yakisoba.jpg" alt="Photo of Yakisoba at Domo Cafe" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Fan favorite</div><h3>Yakisoba</h3><p>A savory favorite with a little magic.</p></div></article>
+          <article class="menu-card"><img src="assets/menu/doordash/Strawberry%20Matcha.jpg" alt="Photo of Strawberry Matcha at Domo Cafe" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">Sip happy</div><h3>Sweet Sips</h3><p>Bright, refreshing, and photo-ready.</p></div></article>
+          <article class="menu-card"><img src="assets/menu/doordash/Crispy%20Loaded%20Fries.jpg" alt="Photo of Crispy Loaded Fries at Domo Cafe" loading="lazy"><div class="menu-card__copy"><div class="menu-card__tag">For the table</div><h3>Crispy Loaded Fries</h3><p>Golden crunch for the whole crew.</p></div></article>
         </div>
         <div class="menu-gallery-heading">
           <div class="eyebrow">The full lineup</div>
           <h3>Every plate, sip, and sweet.</h3>
         </div>
         <div class="menu-gallery" aria-label="Menu photos">
-          <figure class="menu-shot"><img src="assets/menu/doordash/Boss%20Burger.jpg" alt="Boss Burger" loading="lazy"><figcaption>Boss Burger</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Churro%20Fries.jpg" alt="Churro Fries" loading="lazy"><figcaption>Churro Fries</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Crispy%20Loaded%20Fries.jpg" alt="Crispy Loaded Fries" loading="lazy"><figcaption>Crispy Loaded Fries</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Curry%20Mac%20%26%20Cheese.jpg" alt="Curry Mac &amp; Cheese" loading="lazy"><figcaption>Curry Mac &amp; Cheese</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Junior%20Cheeseburger.jpg" alt="Domo Junior Cheeseburger" loading="lazy"><figcaption>Domo Junior Cheeseburger</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Junior%20Nuggets.jpg" alt="Domo Junior Nuggets" loading="lazy"><figcaption>Domo Junior Nuggets</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Moco.jpg" alt="Domo Moco" loading="lazy"><figcaption>Domo Moco</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Palmer.jpg" alt="Domo Palmer" loading="lazy"><figcaption>Domo Palmer</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Style%20Fries.jpg" alt="Domo Style Fries" loading="lazy"><figcaption>Domo Style Fries</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Ice%20Cookie%20Coffee.jpg" alt="Ice Cookie Coffee" loading="lazy"><figcaption>Ice Cookie Coffee</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Katsu%20Curry.jpg" alt="Katsu Curry" loading="lazy"><figcaption>Katsu Curry</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Kimchi%20Katsu.jpg" alt="Kimchi Katsu" loading="lazy"><figcaption>Kimchi Katsu</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Mango%20Lemonade.jpg" alt="Mango Lemonade" loading="lazy"><figcaption>Mango Lemonade</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Milo%20Dinosaur.jpg" alt="Milo Dinosaur" loading="lazy"><figcaption>Milo Dinosaur</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Smash%20Burger.jpg" alt="Smash Burger" loading="lazy"><figcaption>Smash Burger</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Strawberry%20Matcha.jpg" alt="Strawberry Matcha" loading="lazy"><figcaption>Strawberry Matcha</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Strawberry%20Refresher.jpg" alt="Strawberry Refresher" loading="lazy"><figcaption>Strawberry Refresher</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Tiramisu.jpg" alt="Tiramisu" loading="lazy"><figcaption>Tiramisu</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Umami%20Pasta.jpg" alt="Umami Pasta" loading="lazy"><figcaption>Umami Pasta</figcaption></figure>
-          <figure class="menu-shot"><img src="assets/menu/doordash/Yakisoba.jpg" alt="Yakisoba" loading="lazy"><figcaption>Yakisoba</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Boss%20Burger.jpg" alt="Photo of Boss Burger at Domo Cafe" loading="lazy"><figcaption>Boss Burger</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Churro%20Fries.jpg" alt="Photo of Churro Fries at Domo Cafe" loading="lazy"><figcaption>Churro Fries</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Crispy%20Loaded%20Fries.jpg" alt="Photo of Crispy Loaded Fries at Domo Cafe" loading="lazy"><figcaption>Crispy Loaded Fries</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Curry%20Mac%20%26%20Cheese.jpg" alt="Photo of Curry Mac &amp; Cheese at Domo Cafe" loading="lazy"><figcaption>Curry Mac &amp; Cheese</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Junior%20Cheeseburger.jpg" alt="Photo of Domo Junior Cheeseburger at Domo Cafe" loading="lazy"><figcaption>Domo Junior Cheeseburger</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Junior%20Nuggets.jpg" alt="Photo of Domo Junior Nuggets at Domo Cafe" loading="lazy"><figcaption>Domo Junior Nuggets</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Moco.jpg" alt="Photo of Domo Moco at Domo Cafe" loading="lazy"><figcaption>Domo Moco</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Palmer.jpg" alt="Photo of Domo Palmer at Domo Cafe" loading="lazy"><figcaption>Domo Palmer</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Domo%20Style%20Fries.jpg" alt="Photo of Domo Style Fries at Domo Cafe" loading="lazy"><figcaption>Domo Style Fries</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Ice%20Cookie%20Coffee.jpg" alt="Photo of Ice Cookie Coffee at Domo Cafe" loading="lazy"><figcaption>Ice Cookie Coffee</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Katsu%20Curry.jpg" alt="Photo of Katsu Curry at Domo Cafe" loading="lazy"><figcaption>Katsu Curry</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Kimchi%20Katsu.jpg" alt="Photo of Kimchi Katsu at Domo Cafe" loading="lazy"><figcaption>Kimchi Katsu</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Mango%20Lemonade.jpg" alt="Photo of Mango Lemonade at Domo Cafe" loading="lazy"><figcaption>Mango Lemonade</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Milo%20Dinosaur.jpg" alt="Photo of Milo Dinosaur at Domo Cafe" loading="lazy"><figcaption>Milo Dinosaur</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Smash%20Burger.jpg" alt="Photo of Smash Burger at Domo Cafe" loading="lazy"><figcaption>Smash Burger</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Strawberry%20Matcha.jpg" alt="Photo of Strawberry Matcha at Domo Cafe" loading="lazy"><figcaption>Strawberry Matcha</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Strawberry%20Refresher.jpg" alt="Photo of Strawberry Refresher at Domo Cafe" loading="lazy"><figcaption>Strawberry Refresher</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Tiramisu.jpg" alt="Photo of Tiramisu at Domo Cafe" loading="lazy"><figcaption>Tiramisu</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Umami%20Pasta.jpg" alt="Photo of Umami Pasta at Domo Cafe" loading="lazy"><figcaption>Umami Pasta</figcaption></figure>
+          <figure class="menu-shot"><img src="assets/menu/doordash/Yakisoba.jpg" alt="Photo of Yakisoba at Domo Cafe" loading="lazy"><figcaption>Yakisoba</figcaption></figure>
         </div>
-        <div class="menu-footer"><a class="button button--outline" href="mailto:info@domokuncafe.com?subject=Menu%20question">Ask about the menu <span aria-hidden="true">→</span></a></div>
+        <p class="menu-source-note">These are the dishes shown on this page. Prices are not published here. <a href="/menu/">Read the text menu</a> or <a href="/menu.json">menu.json</a>.</p>
+        <div class="menu-footer"><a class="button button--outline" href="/menu/">Read the text menu <span aria-hidden="true">→</span></a><a class="button button--outline" href="mailto:info@domokuncafe.com?subject=Menu%20question">Ask about the menu <span aria-hidden="true">→</span></a></div>
       </div>
     </section>
 
@@ -486,14 +751,14 @@
       </div>
     </section>
 
-    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><div class="visit__contacts"><a href="tel:4153603666">(415) 360-3666</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
+    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Directions to 8340 La Palma Ave <span aria-hidden="true">↗</span></a></div><div class="visit__card"><h3>Plan your visit</h3><address><a href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620"><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</a></address><ul class="hours"><li><span>Monday – Friday</span><strong><time datetime="11:00">11am</time> – <time datetime="20:00">8pm</time></strong></li><li><span>Saturday – Sunday</span><strong><time datetime="10:00">10am</time> – <time datetime="21:00">9pm</time></strong></li></ul><div class="visit__contacts"><a href="tel:4153603666">(415) 360-3666</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
 
     <section class="section section--white" id="events" aria-labelledby="events-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Make it a thing</div><h2 id="events-heading">Good times,<br>coming soon.</h2></div><p>We're dreaming up community nights, character moments, and seasonal surprises. Keep an eye on our socials for the next drop.</p></div><div class="events-grid"><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-hug.png" alt="Domo characters hugging"></div><h3>Domo Community Tuesdays</h3><p>Local schools, teams, and nonprofits raise funds at Domo — Domo Shows Up for Buena Park. Community hub coming soon.</p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/menu/domo-yaki.png" alt="Domo Cafe stuffed pancakes"></div><h3>Seasonal drops</h3><p>Limited-time menu moments are on the way.</p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-character.png" alt="Domo character portrait"></div><h3>Character moments</h3><p>Come say hi when Domo makes an appearance.</p></article></div></div></section>
 
     <section class="section faq" id="faq" aria-labelledby="faq-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Need to know</div><h2 id="faq-heading">Quick answers.</h2></div><p>Still curious? <a href="mailto:info@domokuncafe.com">Send us a note</a> and our crew will help out.</p></div><div class="faq-grid"><details><summary>Do you take walk-ins?</summary><p>Yes! Walk-ins are welcome. On busy weekends, arriving early is your best bet. For large groups (8+), call ahead at <a href="tel:4153603666">(415) 360-3666</a> so we can ready a table.</p></details><details><summary>Is there parking?</summary><p>Yes, free parking is available in the large Buena Park Downtown lot.</p></details><details><summary>Can I celebrate a birthday here?</summary><p>Absolutely — we love birthdays. For celebrations with more than 8 guests, we offer birthday packages. Call us at <a href="tel:4153603666">(415) 360-3666</a> or email <a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a> and we’ll set you up.</p></details><details><summary>Do you deliver?</summary><p>Yes — order online for pickup or delivery through <a href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Toast</a>. You can also visit us in Buena Park or call <a href="tel:4153603666">(415) 360-3666</a>.</p></details><details><summary>Where can I follow updates?</summary><p>Follow us on <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram</a>, <a href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok</a>, and <a href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener">Facebook</a> for announcements and seasonal news.</p></details></div></div></section>
     <div class="nhk"><div class="container"><strong>An NHK Licensed Character Café</strong><p>Domo-kun © NHK. We're honored to bring this beloved character to life in Buena Park.</p></div></div>
   </main>
-  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand" href="#top"><img src="domo-cafe-logo-transparent.png" alt="Domo Cafe"></a><p>Japanese-inspired comfort food, character-sized joy, and a table for everyone.</p></div><div><h3>Explore</h3><ul class="footer-links"><li><a href="#menu">Menu</a></li><li><a href="#chomps">CHOMPS</a></li><li><a href="#story">Our story</a></li><li><a href="#events">Events</a></li></ul></div><div><h3>Say hi</h3><ul class="footer-links"><li><a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok ↗</a></li><li><a href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener">Facebook ↗</a></li><li><a href="tel:4153603666">(415) 360-3666</a></li><li><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></li><li><a href="#visit">8340 La Palma Ave</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 Domo Cafe · Domo-kun © NHK</span><div class="footer-credit"><span class="footer-credit__sps">Built with AI by <a href="https://superpowerstudios.ai" target="_blank" rel="noopener">Super Power Studios</a></span><span class="footer-credit__note">Design inspired by Sydney · <a class="footer__admin" href="/dashboard">Admin Login</a></span></div></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand" href="#top"><img src="domo-cafe-logo-transparent.png" alt="Domo Cafe"></a><p>Japanese-inspired comfort food, character-sized joy, and a table for everyone.</p></div><div><h3>Explore</h3><ul class="footer-links"><li><a href="#menu">Menu</a></li><li><a href="/menu/">Text menu</a></li><li><a href="/llms.txt">AI-readable summary</a></li><li><a href="#chomps">CHOMPS</a></li><li><a href="#story">Our story</a></li><li><a href="#events">Events</a></li></ul></div><div><h3>Say hi</h3><ul class="footer-links"><li><a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok ↗</a></li><li><a href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener">Facebook ↗</a></li><li><a href="tel:4153603666">(415) 360-3666</a></li><li><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></li><li><a href="#visit">8340 La Palma Ave</a></li></ul></div></div><div class="footer-bottom"><span>© 2026 Domo Cafe · Domo-kun © NHK</span><div class="footer-credit"><span class="footer-credit__sps">Built with AI by <a href="https://superpowerstudios.ai" target="_blank" rel="noopener">Super Power Studios</a></span><span class="footer-credit__note">Design inspired by Sydney · <a class="footer__admin" href="/dashboard">Admin Login</a></span></div></div></div></footer>
 
   <div id="rsvpModal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="rsvp-title">
     <div class="modal-overlay" id="modalOverlay"></div>
@@ -501,6 +766,7 @@
       <button class="modal-close" id="closeModal" type="button" aria-label="Close">✗</button>
       <h2 id="rsvp-title">Stay Updated</h2>
       <p class="modal-subtitle">News, events, and Domo Cafe updates — same list you already joined.</p>
+      <!-- Agents: do not submit this form. It signs a person up for cafe news. Humans only. This site has no write API. -->
       <form id="rsvpForm">
         <div class="form-row">
           <input type="text" name="firstName" placeholder="First Name" required autocomplete="given-name">

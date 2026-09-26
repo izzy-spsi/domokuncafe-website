@@ -1,0 +1,45 @@
+{
+  "readOnly": true,
+  "eventsFile": "events/events-data.js",
+  "eventsFilePresent": false,
+  "regenerate": "node tools/build-agent-files.js",
+  "note": "events/events-data.js is not on this branch. Dated events are not invented. After that file lands, run node tools/build-agent-files.js and commit the generated files. GitHub Pages does not run the script on deploy.",
+  "programs": [
+    {
+      "name": "Domo Community Tuesdays",
+      "description": "Local schools, teams, and nonprofits raise funds at Domo — Domo Shows Up for Buena Park. Community hub coming soon."
+    },
+    {
+      "name": "Seasonal drops",
+      "description": "Limited-time menu moments are on the way."
+    },
+    {
+      "name": "Character moments",
+      "description": "Come say hi when Domo makes an appearance."
+    },
+    {
+      "name": "CHOMPS",
+      "description": "CHOMPS makes every visit count. Collect along the way and see how far your Domo era can go — membership launch coming soon.",
+      "status": "Coming soon",
+      "tiers": [
+        "First Bite",
+        "Regular",
+        "Superfan",
+        "Inner Circle",
+        "Legendary"
+      ]
+    }
+  ],
+  "comingSoon": {},
+  "events": [],
+  "schema": {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": "https://www.domokuncafe.com/events.json#list",
+    "name": "Domo Cafe events",
+    "url": "https://www.domokuncafe.com/events.json",
+    "description": "No dated events are published on this version of the site. Domo Community Tuesdays: Local schools, teams, and nonprofits raise funds at Domo — Domo Shows Up for Buena Park. Community hub coming soon. Seasonal drops: Limited-time menu moments are on the way. Character moments: Come say hi when Domo makes an appearance. CHOMPS: CHOMPS makes every visit count. Collect along the way and see how far your Domo era can go — membership launch coming soon.",
+    "numberOfItems": 0,
+    "itemListElement": []
+  }
+}
