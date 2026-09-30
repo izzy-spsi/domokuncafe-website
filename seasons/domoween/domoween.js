@@ -175,6 +175,9 @@
     var hasOneOff = items.some(function (item) { return !item.repeat; });
     var soon = (lib && lib.comingSoon(theme.start.slice(0, 7))) || 'October events are coming soon! Follow @domokuncafe on Instagram, TikTok and Facebook for announcements.';
     var body = items.slice(0, 4).map(function (item) {
+      if (item.menu) {
+        return lib.menuCardHTML(item, { level: 3, footer: '<span>' + esc(lib.whenLabel(item)) + '</span><a href="' + esc(lib.googleUrl(item)) + '" target="_blank" rel="noopener">Add to Google Calendar</a><a href="/events/?month=' + item.date.slice(0, 7) + '#' + esc(item.id) + '">See it on the calendar</a>' });
+      }
       var link = item.link ? '<a class="dw-ticket__link" href="' + esc(item.link) + '"' + (/^https?:/.test(item.link) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(item.linkLabel || 'Details') + ' <span aria-hidden="true">→</span></a>' : '';
       return '<article class="dw-ticket">' +
         '<div class="dw-ticket__date"><span>' + esc(lib.shortWhen(item)) + '</span><small>' + esc(lib.formatTime(item)) + '</small></div>' +

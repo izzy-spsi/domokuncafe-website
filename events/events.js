@@ -130,6 +130,25 @@
     return d === '1,2,3,4,5' ? 'Mon–Fri' : d === '0,6' ? 'Sat–Sun' : ev.repeat.dayIndexes.map(function (i) { return DAYS[i].slice(0, 3); }).join(', ');
   }
 
+  // Dot-leader price card for events with a `menu` (e.g. Domo Hour). opts: { level: 3, footer: html }
+  function menuCardHTML(ev, opts) {
+    opts = opts || {};
+    var groups = (ev.menu || []).filter(function (g) { return g && g.heading && g.items && g.items.length; });
+    if (!groups.length) return '';
+    var level = opts.level || 3, headId = ev.id + '-menu';
+    return '<article class="dh-menu" aria-labelledby="' + esc(headId) + '"><div class="dh-menu__cols">' +
+      groups.map(function (g, i) {
+        var tag = 'h' + (i ? level + 1 : level);
+        return '<div class="dh-menu__group">' +
+          '<' + tag + ' class="dh-menu__title' + (i ? ' dh-menu__title--sub' : '') + '"' + (i ? '' : ' id="' + esc(headId) + '"') + '>' + esc(g.heading) + '</' + tag + '>' +
+          (g.note ? '<p class="dh-menu__note">' + esc(g.note) + '</p>' : '') +
+          '<ul class="dh-menu__list">' + g.items.map(function (item) {
+            return '<li><span class="dh-menu__name">' + esc(item.name) + '</span><span class="dh-menu__dots" aria-hidden="true"></span><span class="dh-menu__price">' + esc(item.price) + '</span></li>';
+          }).join('') + '</ul></div>';
+      }).join('') + '</div>' +
+      (opts.footer ? '<div class="dh-menu__foot">' + opts.footer + '</div>' : '') + '</article>';
+  }
+
   function socialLinks(className, extraClass) {
     return SOCIAL_LINKS.map(function (s, i) {
       return '<a class="' + className + (i && extraClass ? ' ' + extraClass : '') + '" href="' + s[0] + '" target="_blank" rel="noopener"' + (s[2] ? ' aria-label="' + s[2] + '"' : '') + '>' + s[1] + ' <span aria-hidden="true">↗</span></a>';
@@ -310,7 +329,7 @@
   }
 
   window.DomoEvents = {
-    list: list, between: between, occurrenceDates: occurrenceDates, formatDate: formatDate, formatTime: formatTime, whenLabel: whenLabel, shortWhen: shortWhen, socialLinks: socialLinks, googleUrl: googleUrl,
+    list: list, between: between, occurrenceDates: occurrenceDates, formatDate: formatDate, formatTime: formatTime, whenLabel: whenLabel, shortWhen: shortWhen, socialLinks: socialLinks, menuCardHTML: menuCardHTML, googleUrl: googleUrl,
     icsFor: icsFor, downloadIcs: downloadIcs, jsonLd: jsonLd, injectJsonLd: injectJsonLd, calendarButtons: calendarButtons,
     bindIcs: bindIcs, comingSoon: function (month) { return (data.comingSoon || {})[month] || ''; }, today: laToday, esc: esc, MONTHS: MONTHS
   };
@@ -382,7 +401,7 @@
                 (ev.series ? '<p class="ev-card__series">' + esc(ev.series) + '</p>' : '') +
                 '<h3>' + esc(ev.title) + '</h3>' +
                 '<p class="ev-card__when"><time datetime="' + esc(ev.date + (ev.startTime ? 'T' + ev.startTime : '')) + '">' + esc(whenLabel(ev)) + ' · ' + esc(formatTime(ev)) + '</time></p>' +
-                (ev.description ? '<p>' + esc(ev.description) + '</p>' : '') +
+                (ev.menu ? menuCardHTML(ev, { level: 4 }) : ev.description ? '<p>' + esc(ev.description) + '</p>' : '') +
                 '<div class="ev-card__actions">' +
                   (ev.link ? '<a class="ev-btn ev-btn--primary" href="' + esc(ev.link) + '"' + (/^https?:/.test(ev.link) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(ev.linkLabel || 'Details') + '</a>' : '') +
                   calendarButtons(ev) +

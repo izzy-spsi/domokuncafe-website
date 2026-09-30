@@ -113,6 +113,7 @@
   <link rel="stylesheet" href="/assets/site-shell.css">
   <link rel="stylesheet" href="/seasons/domoween/domoween.css">
   <link rel="stylesheet" href="/domoween/domoween-page.css">
+  <link rel="stylesheet" href="/events/menu-card.css">
   <link rel="preload" as="image" type="image/webp" href="/assets/domoween/happy-halloween-domo-kun-banner.webp" imagesrcset="/assets/domoween/happy-halloween-domo-kun-banner-800.webp 800w, /assets/domoween/happy-halloween-domo-kun-banner.webp 1600w" imagesizes="(max-width: 850px) 94vw, 660px">
   <script src="/events/events-data.js" defer></script>
   <script src="/events/events.js" defer></script>
@@ -201,7 +202,7 @@
         <div class="dw-tickets" data-domoween-events>
           <article class="dw-ticket dw-ticket--soon">
             <div class="dw-ticket__date"><span>Coming soon</span></div>
-            <div class="dw-ticket__body"><h3>October events</h3><p>Domo Hour, weekdays 3 to 6 PM. More October events are coming soon! Follow @domokuncafe on Instagram, TikTok and Facebook for announcements.</p><a class="dw-ticket__link" href="/events/?month=2026-10">Events calendar <span aria-hidden="true">→</span></a> <a class="dw-ticket__link" href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram ↗</a> <a class="dw-ticket__link" href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok ↗</a> <a class="dw-ticket__link" href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener" aria-label="Domo Cafe on Facebook">Facebook ↗</a></div>
+            <div class="dw-ticket__body"><h3>October events</h3><p>Domo Hour: Weekdays • 4–6 PM. More October events are coming soon! Follow @domokuncafe on Instagram, TikTok and Facebook for announcements.</p><a class="dw-ticket__link" href="/events/?month=2026-10">Events calendar <span aria-hidden="true">→</span></a> <a class="dw-ticket__link" href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram ↗</a> <a class="dw-ticket__link" href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok ↗</a> <a class="dw-ticket__link" href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener" aria-label="Domo Cafe on Facebook">Facebook ↗</a></div>
             <div class="dw-ticket__art"><picture class="dw-art"><source type="image/webp" srcset="/assets/domoween/tashanna_pumpkin-head.webp"><img class="dw-art__img" src="/assets/domoween/tashanna_pumpkin-head.png" width="432" height="600" loading="lazy" alt="Tashanna wearing a jack-o'-lantern hat"></picture></div>
           </article>
         </div>
@@ -279,6 +280,9 @@
           if (events.length) {
             var hasOneOff = events.some(function (ev) { return !ev.repeat; });
             box.innerHTML = events.map(function (ev) {
+              if (ev.menu) {
+                return lib.menuCardHTML(ev, { level: 3, footer: '<span>' + lib.esc(lib.whenLabel(ev)) + '</span><a href="' + lib.esc(lib.googleUrl(ev)) + '" target="_blank" rel="noopener">Add to Google Calendar</a><button type="button" data-ics="' + lib.esc(ev.id) + '">Download .ics</button>' });
+              }
               return '<article class="dw-ticket"><div class="dw-ticket__date"><span>' + lib.esc(lib.shortWhen(ev)) + '</span><small>' + lib.esc(lib.formatTime(ev)) + '</small></div>' +
                 '<div class="dw-ticket__body"><h3>' + lib.esc(ev.title) + '</h3>' +
                 (ev.repeat ? '<p class="dw-ticket__when">' + lib.esc(lib.whenLabel(ev)) + '</p>' : '') +
@@ -286,7 +290,7 @@
                 (ev.link ? '<a class="dw-ticket__link" href="' + lib.esc(ev.link) + '" target="_blank" rel="noopener">' + lib.esc(ev.linkLabel || 'Details') + ' →</a>' : '') +
                 '<a class="dw-ticket__link" href="' + lib.esc(lib.googleUrl(ev)) + '" target="_blank" rel="noopener">Add to Google Calendar</a>' +
                 '<button class="dw-ticket__link dwp-ics" type="button" data-ics="' + lib.esc(ev.id) + '">Download .ics</button></div></article>';
-            }).join('') + (hasOneOff ? '' : soonTicket.replace('<h3>October events</h3><p>Domo Hour, weekdays 3 to 6 PM. More', '<h3>More October events</h3><p>More'));
+            }).join('') + (hasOneOff ? '' : soonTicket.replace('<h3>October events</h3><p>Domo Hour: Weekdays • 4–6 PM. More', '<h3>More October events</h3><p>More'));
             lib.bindIcs(box, events);
             // One-off October events are part of Domoween; recurring listings (e.g. Domo Hour) stand on their own.
             lib.injectJsonLd(events.map(function (ev) { if (!ev.repeat) ev.series = ev.series || 'Domoween'; return ev; }));
