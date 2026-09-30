@@ -15,6 +15,7 @@
   var ORDER_URL = 'https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/';
   var INSTAGRAM_URL = 'https://www.instagram.com/domokuncafe';
   var TIKTOK_URL = 'https://www.tiktok.com/@domokuncafe';
+  var FACEBOOK_URL = 'https://www.facebook.com/domokuncafe';
   var COPYRIGHT = 'Domo©NHK-TYO1998-2026. Domo Animation©Domo Production Committee. All rights reserved.';
 
   // lowres: screenshot crops (PNG only) until the official high-res files arrive.
@@ -56,7 +57,8 @@
 
   var SVG = {
     bat: '<svg viewBox="0 0 120 60" aria-hidden="true" focusable="false"><g class="dw-bat__wing dw-bat__wing--l"><path d="M58 30C46 14 30 10 6 16c10 4 14 10 12 18 8-6 16-4 20 4 4-8 12-10 20-8z"/></g><g class="dw-bat__wing dw-bat__wing--r"><path d="M62 30c12-16 28-20 52-14-10 4-14 10-12 18-8-6-16-4-20 4-4-8-12-10-20-8z"/></g><ellipse cx="60" cy="32" rx="9" ry="11"/><path d="M53 23l2-9 4 7h2l4-7 2 9z"/><circle cx="56.5" cy="29" r="1.8" fill="#FFD166"/><circle cx="63.5" cy="29" r="1.8" fill="#FFD166"/></svg>',
-    ghost: '<svg viewBox="0 0 80 96" aria-hidden="true" focusable="false"><path d="M40 4C20 4 8 20 8 40v48l10-8 10 8 12-8 12 8 10-8 10 8V40C72 20 60 4 40 4z" fill="#F4EEFF"/><ellipse cx="30" cy="40" rx="4.5" ry="6" fill="#2A1846"/><ellipse cx="50" cy="40" rx="4.5" ry="6" fill="#2A1846"/><ellipse cx="40" cy="54" rx="4" ry="3" fill="#2A1846"/><ellipse cx="22" cy="50" rx="5" ry="3" fill="#FFB3C7" opacity=".7"/><ellipse cx="58" cy="50" rx="5" ry="3" fill="#FFB3C7" opacity=".7"/></svg>',
+    // Soft translucent ghost modeled on the official Happy Halloween Domo-kun art: rounded body with a wispy tail, dot eyes, small mouth.
+    ghost: '<svg viewBox="0 0 92 104" aria-hidden="true" focusable="false"><g fill="#FFFFFF" opacity=".8"><path d="M44 6c19 0 32 14 32 32 0 9-2 16-2 24 0 9 5 16 13 21 3 2 2 6-2 6-13 1-25-3-34-10-9 1-19 0-27-6C15 67 10 56 12 43 14 21 26 6 44 6z"/><ellipse cx="13" cy="50" rx="8" ry="4.5" transform="rotate(-32 13 50)"/><ellipse cx="77" cy="45" rx="8" ry="4.5" transform="rotate(28 77 45)"/></g><path d="M58 66c3 8 9 14 18 18-10 1-19-2-26-8 3-2 6-5 8-10z" fill="#DAD5EA" opacity=".55"/><circle cx="35" cy="36" r="3.4" fill="#141414"/><circle cx="53" cy="36" r="3.4" fill="#141414"/><ellipse cx="44" cy="47" rx="3.2" ry="2.6" fill="#141414"/></svg>',
     pumpkin: '<svg viewBox="0 0 100 90" aria-hidden="true" focusable="false"><path d="M50 18c-3-8 0-14 7-16l3 4c-5 2-6 6-5 12z" fill="#4E8A2E"/><ellipse cx="30" cy="52" rx="24" ry="30" fill="#E86A10"/><ellipse cx="70" cy="52" rx="24" ry="30" fill="#E86A10"/><ellipse cx="50" cy="52" rx="24" ry="33" fill="#FF8A1F"/><g class="dw-glow" fill="#FFE27A"><path d="M30 44l8-10 8 10z"/><path d="M54 44l8-10 8 10z"/><path d="M26 58c8 12 40 12 48 0l-6 2-4-5-5 6-5-6-5 6-5-6-4 5z"/></g></svg>',
     candy: '<svg viewBox="0 0 90 40" aria-hidden="true" focusable="false"><path d="M22 20L4 6v28z" fill="#B983FF"/><path d="M68 20L86 6v28z" fill="#B983FF"/><circle cx="45" cy="20" r="20" fill="#FF7A1A"/><path d="M32 8c6 6 6 18 0 24M45 1c6 8 6 30 0 38M58 8c-6 6-6 18 0 24" stroke="#FFD166" stroke-width="4" fill="none"/></svg>',
     candycorn: '<svg viewBox="0 0 40 50" aria-hidden="true" focusable="false"><path d="M20 2C12 2 2 36 4 44c2 5 30 5 32 0 2-8-8-42-16-42z" fill="#FFF4E6"/><path d="M8 26c-2 8-4 14-4 18 2 5 30 5 32 0 0-4-2-10-4-18z" fill="#FFD166"/><path d="M5 38c-1 3-1 5-1 6 2 5 30 5 32 0 0-1 0-3-1-6z" fill="#FF7A1A"/></svg>',
@@ -160,30 +162,40 @@
 
   function eventsUrl() { return '/events/?month=' + theme.start.slice(0, 7); }
 
+  function socialTicketLinks() {
+    return '<a class="dw-ticket__link" href="' + INSTAGRAM_URL + '" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a> ' +
+      '<a class="dw-ticket__link" href="' + TIKTOK_URL + '" target="_blank" rel="noopener">TikTok <span aria-hidden="true">↗</span></a> ' +
+      '<a class="dw-ticket__link" href="' + FACEBOOK_URL + '" target="_blank" rel="noopener" aria-label="Domo Cafe on Facebook">Facebook <span aria-hidden="true">↗</span></a>';
+  }
+
   function eventsHTML() {
     if (data.showEvents === false) return '';
     var lib = window.DomoEvents;
     var items = lib ? lib.between(theme.start, theme.end) : [];
-    var soon = (lib && lib.comingSoon(theme.start.slice(0, 7))) || 'October events are coming soon! Follow @domokuncafe on Instagram and TikTok for announcements.';
-    var body = items.length ? items.slice(0, 4).map(function (item) {
+    var hasOneOff = items.some(function (item) { return !item.repeat; });
+    var soon = (lib && lib.comingSoon(theme.start.slice(0, 7))) || 'October events are coming soon! Follow @domokuncafe on Instagram, TikTok and Facebook for announcements.';
+    var body = items.slice(0, 4).map(function (item) {
       var link = item.link ? '<a class="dw-ticket__link" href="' + esc(item.link) + '"' + (/^https?:/.test(item.link) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(item.linkLabel || 'Details') + ' <span aria-hidden="true">→</span></a>' : '';
       return '<article class="dw-ticket">' +
-        '<div class="dw-ticket__date"><span>' + esc(lib.formatDate(item.date, { short: true })) + '</span><small>' + esc(lib.formatTime(item)) + '</small></div>' +
+        '<div class="dw-ticket__date"><span>' + esc(lib.shortWhen(item)) + '</span><small>' + esc(lib.formatTime(item)) + '</small></div>' +
         '<div class="dw-ticket__body"><h3>' + esc(item.title) + '</h3>' +
+          (item.repeat ? '<p class="dw-ticket__when">' + esc(lib.whenLabel(item)) + '</p>' : '') +
           (item.description ? '<p>' + esc(item.description) + '</p>' : '') + link +
           '<a class="dw-ticket__link" href="' + esc(lib.googleUrl(item)) + '" target="_blank" rel="noopener">Add to Google Calendar</a>' +
         '</div>' +
         (ART[item.art] ? '<div class="dw-ticket__art">' + art(item.art) + '</div>' : '') +
       '</article>';
-    }).join('') : '<article class="dw-ticket dw-ticket--soon">' +
+    }).join('');
+    if (!hasOneOff) {
+      body += '<article class="dw-ticket dw-ticket--soon">' +
         '<div class="dw-ticket__date"><span>Coming soon</span></div>' +
-        '<div class="dw-ticket__body"><h3>October events</h3><p>' + esc(soon) + '</p>' +
-          '<a class="dw-ticket__link" href="' + INSTAGRAM_URL + '" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a> ' +
-          '<a class="dw-ticket__link" href="' + TIKTOK_URL + '" target="_blank" rel="noopener">TikTok <span aria-hidden="true">↗</span></a>' +
+        '<div class="dw-ticket__body"><h3>' + (items.length ? 'More October events' : 'October events') + '</h3><p>' + esc(soon) + '</p>' +
+          socialTicketLinks() +
           '<span class="dw-flag" data-nosnippet>Preview note: add events in events/events-data.js</span>' +
         '</div>' +
         '<div class="dw-ticket__art">' + art('wc_53_mr-usagi-pumpkin-mask') + '</div>' +
       '</article>';
+    }
     return '' +
       '<section class="dw-section dw-events" id="domoween-events" aria-labelledby="dw-events-heading">' +
         deco('ghost', 'dw-ghost--e1') + deco('ghost', 'dw-ghost--e2') + deco('web', 'dw-web dw-web--tr') +
@@ -208,11 +220,12 @@
           '<div class="dw-share__copy">' +
             '<p class="dw-eyebrow">Share the spooky-cute</p>' +
             '<h2 id="dw-share-heading">Show us your Domoween</h2>' +
-            '<p>Snapped a spooky-cute photo at Domo Cafe? Post it on Instagram or TikTok so we can see it.</p>' +
+            '<p>Snapped a spooky-cute photo at Domo Cafe? Post it on Instagram, TikTok or Facebook so we can see it.</p>' +
             tagLine +
             '<div class="dw-share__actions">' +
               '<a class="button dw-button" href="' + INSTAGRAM_URL + '" target="_blank" rel="noopener">Instagram <span aria-hidden="true">↗</span></a>' +
               '<a class="button dw-button dw-button--ghost" href="' + TIKTOK_URL + '" target="_blank" rel="noopener">TikTok <span aria-hidden="true">↗</span></a>' +
+              '<a class="button dw-button dw-button--ghost" href="' + FACEBOOK_URL + '" target="_blank" rel="noopener" aria-label="Domo Cafe on Facebook">Facebook <span aria-hidden="true">↗</span></a>' +
             '</div>' +
           '</div>' +
           '<ul class="dw-crew" aria-label="The Domoween costume crew">' +
