@@ -33,7 +33,7 @@
       end: '2026-10-31',
       themeColor: '#1B1030',
       fonts: 'https://fonts.googleapis.com/css2?family=Chewy&display=swap',
-      css: ['domoween/domoween.css'],
+      css: ['domoween/domoween.css', '/events/menu-card.css'],
       js: ['/events/events-data.js', '/events/events.js', 'domoween/data.js', 'domoween/domoween.js'],
       critical:
         'html[data-theme="domoween"] body{background:#1B1030;color:#F6EEFF}' +
