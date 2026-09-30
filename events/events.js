@@ -20,6 +20,12 @@
   };
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  var RRULE_DAYS = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
+  var SOCIAL_LINKS = [
+    ['https://www.instagram.com/domokuncafe', 'Instagram', ''],
+    ['https://www.tiktok.com/@domokuncafe', 'TikTok', ''],
+    ['https://www.facebook.com/domokuncafe', 'Facebook', 'Domo Cafe on Facebook']
+  ];
   var data = window.DOMO_EVENTS || {};
 
   function esc(value) {
@@ -45,22 +51,90 @@
     return 'ev-' + ev.date + '-' + String(ev.title).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 40);
   }
 
+  function weekday(date) { var p = parts(date); return new Date(Date.UTC(p[0], p[1] - 1, p[2])).getUTCDay(); }
+  function shiftDate(date, days) { var p = parts(date); var d = new Date(Date.UTC(p[0], p[1] - 1, p[2] + days)); return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate()); }
+
+  // repeat: { days: ["Mon", ...], from: "YYYY-MM-DD", until: "YYYY-MM-DD" } → weekday indexes (0 = Sunday).
+  function repeatDays(repeat) {
+    if (!repeat || !isDate(repeat.from) || !isDate(repeat.until) || repeat.until < repeat.from || !repeat.days || !repeat.days.length) return null;
+    var days = [];
+    repeat.days.forEach(function (d) {
+      var i = DAYS.map(function (x) { return x.slice(0, 3).toLowerCase(); }).indexOf(String(d).slice(0, 3).toLowerCase());
+      if (i > -1 && days.indexOf(i) === -1) days.push(i);
+    });
+    return days.length ? days.sort() : null;
+  }
+
+  function occurrenceDates(ev) {
+    if (!ev.repeat) return [ev.date];
+    var out = [];
+    for (var d = ev.repeat.from; d <= ev.repeat.until; d = shiftDate(d, 1)) if (ev.repeat.dayIndexes.indexOf(weekday(d)) > -1) out.push(d);
+    return out;
+  }
+
+  function occursOn(ev, date) {
+    if (!ev.repeat) return ev.date === date;
+    return date >= ev.repeat.from && date <= ev.repeat.until && ev.repeat.dayIndexes.indexOf(weekday(date)) > -1;
+  }
+
+  // One item per event; a recurring event is one item whose `date` is its first occurrence and `until` its last.
   function list() {
-    return (data.events || []).filter(function (ev) { return ev && isDate(ev.date) && ev.title; }).map(function (ev) {
+    var out = [];
+    (data.events || []).forEach(function (ev) {
+      if (!ev || !ev.title) return;
       var copy = {};
       for (var k in ev) copy[k] = ev[k];
-      copy.id = slug(ev);
       if (!isTime(copy.startTime)) copy.startTime = '';
       if (!isTime(copy.endTime) || !copy.startTime) copy.endTime = '';
-      return copy;
-    }).sort(function (a, b) { return (a.date + (a.startTime || '00:00')).localeCompare(b.date + (b.startTime || '00:00')); });
+      var dayIndexes = repeatDays(ev.repeat);
+      if (dayIndexes) {
+        copy.repeat = { from: ev.repeat.from, until: ev.repeat.until, dayIndexes: dayIndexes };
+        var dates = occurrenceDates(copy);
+        if (!dates.length) return;
+        copy.date = dates[0];
+        copy.until = dates[dates.length - 1];
+      } else {
+        if (!isDate(ev.date)) return;
+        delete copy.repeat;
+        copy.until = copy.date;
+      }
+      copy.id = slug({ date: copy.repeat ? copy.repeat.from : copy.date, title: copy.title });
+      out.push(copy);
+    });
+    return out.sort(function (a, b) { return (a.date + (a.startTime || '00:00')).localeCompare(b.date + (b.startTime || '00:00')); });
   }
 
   function between(start, end) {
-    return list().filter(function (ev) { return ev.date >= start && ev.date <= end; });
+    return list().filter(function (ev) { return ev.date <= end && ev.until >= start; });
   }
 
-  function weekday(date) { var p = parts(date); return new Date(Date.UTC(p[0], p[1] - 1, p[2])).getUTCDay(); }
+  function daysLabel(ev) {
+    var d = ev.repeat.dayIndexes;
+    if (d.join() === '1,2,3,4,5') return 'Weekdays (Mon–Fri)';
+    if (d.join() === '0,6') return 'Weekends (Sat–Sun)';
+    return 'Every ' + d.map(function (i) { return DAYS[i].slice(0, 3); }).join(', ');
+  }
+
+  function rangeLabel(from, until) {
+    var a = parts(from), b = parts(until);
+    if (a[0] === b[0] && a[1] === b[1]) return MONTHS[a[1] - 1] + ' ' + a[2] + ' – ' + b[2];
+    return MONTHS[a[1] - 1] + ' ' + a[2] + ' – ' + MONTHS[b[1] - 1] + ' ' + b[2];
+  }
+
+  // "Saturday, October 17" or "Weekdays (Mon–Fri), October 1 – 31"
+  function whenLabel(ev) { return ev.repeat ? daysLabel(ev) + ', ' + rangeLabel(ev.repeat.from, ev.repeat.until) : formatDate(ev.date); }
+  // Compact badge text: "Sat, October 17" or "Mon–Fri"
+  function shortWhen(ev) {
+    if (!ev.repeat) return formatDate(ev.date, { short: true });
+    var d = ev.repeat.dayIndexes.join();
+    return d === '1,2,3,4,5' ? 'Mon–Fri' : d === '0,6' ? 'Sat–Sun' : ev.repeat.dayIndexes.map(function (i) { return DAYS[i].slice(0, 3); }).join(', ');
+  }
+
+  function socialLinks(className, extraClass) {
+    return SOCIAL_LINKS.map(function (s, i) {
+      return '<a class="' + className + (i && extraClass ? ' ' + extraClass : '') + '" href="' + s[0] + '" target="_blank" rel="noopener"' + (s[2] ? ' aria-label="' + s[2] + '"' : '') + '>' + s[1] + ' <span aria-hidden="true">↗</span></a>';
+    }).join(' ');
+  }
 
   function formatDate(date, opts) {
     var p = parts(date);
@@ -112,6 +186,19 @@
     return dst ? '-07:00' : '-08:00';
   }
 
+  function utcStamp(point) {
+    var p = parts(point.date), hm = (point.time || '23:59').split(':').map(Number);
+    var off = offset(point), sign = off.charAt(0) === '-' ? 1 : -1, oh = Number(off.slice(1, 3));
+    var d = new Date(Date.UTC(p[0], p[1] - 1, p[2], hm[0] + sign * oh, hm[1], point.time ? 0 : 59));
+    return d.toISOString().replace(/[-:]/g, '').replace(/\.\d+/, '');
+  }
+
+  function rrule(ev) {
+    var s = span(ev);
+    var until = s.allDay ? ev.until.replace(/-/g, '') : utcStamp({ date: ev.until, time: s.end.time && s.end.date === ev.date ? s.end.time : '' });
+    return 'FREQ=WEEKLY;BYDAY=' + ev.repeat.dayIndexes.map(function (i) { return RRULE_DAYS[i]; }).join(',') + ';UNTIL=' + until;
+  }
+
   function details(ev) {
     return [ev.description, ev.link ? ev.link : '', SITE + '/events/?month=' + ev.date.slice(0, 7)].filter(Boolean).join('\n\n');
   }
@@ -126,6 +213,7 @@
       location: VENUE.full
     };
     if (!s.allDay) q.ctz = TZ;
+    if (ev.repeat) q.recur = 'RRULE:' + rrule(ev);
     return 'https://calendar.google.com/calendar/render?' + Object.keys(q).map(function (k) { return k + '=' + encodeURIComponent(q[k]); }).join('&');
   }
 
@@ -149,6 +237,7 @@
     lines.push('BEGIN:VEVENT', 'UID:' + ev.id + '@domokuncafe.com', 'DTSTAMP:' + stamp);
     if (s.allDay) lines.push('DTSTART;VALUE=DATE:' + compact(s.start), 'DTEND;VALUE=DATE:' + compact(s.end));
     else lines.push('DTSTART;TZID=' + TZ + ':' + compact(s.start), 'DTEND;TZID=' + TZ + ':' + compact(s.end));
+    if (ev.repeat) lines.push('RRULE:' + rrule(ev));
     lines.push('SUMMARY:' + icsText(ev.title + ' at Domo Cafe'), 'DESCRIPTION:' + icsText(details(ev)), 'LOCATION:' + icsText(VENUE.full),
       'URL:' + (ev.link || SITE + '/events/?month=' + ev.date.slice(0, 7)), 'END:VEVENT', 'END:VCALENDAR');
     return lines.map(fold).join('\r\n') + '\r\n';
@@ -181,6 +270,19 @@
     };
     if (ev.description) node.description = ev.description;
     if (ev.series === 'Domoween') node.superEvent = { '@id': SITE + '/domoween/#event' };
+    if (ev.repeat) {
+      var last = span({ date: ev.until, startTime: ev.startTime, endTime: ev.endTime });
+      node.endDate = s.allDay ? ev.until : iso(last.end);
+      node.eventSchedule = {
+        '@type': 'Schedule',
+        repeatFrequency: 'P1W',
+        byDay: ev.repeat.dayIndexes.map(function (i) { return 'https://schema.org/' + DAYS[i]; }),
+        startDate: ev.repeat.from,
+        endDate: ev.repeat.until,
+        scheduleTimezone: TZ
+      };
+      if (!s.allDay) { node.eventSchedule.startTime = ev.startTime + ':00'; node.eventSchedule.endTime = s.end.time + ':00'; }
+    }
     return node;
   }
 
@@ -208,7 +310,7 @@
   }
 
   window.DomoEvents = {
-    list: list, between: between, formatDate: formatDate, formatTime: formatTime, googleUrl: googleUrl,
+    list: list, between: between, occurrenceDates: occurrenceDates, formatDate: formatDate, formatTime: formatTime, whenLabel: whenLabel, shortWhen: shortWhen, socialLinks: socialLinks, googleUrl: googleUrl,
     icsFor: icsFor, downloadIcs: downloadIcs, jsonLd: jsonLd, injectJsonLd: injectJsonLd, calendarButtons: calendarButtons,
     bindIcs: bindIcs, comingSoon: function (month) { return (data.comingSoon || {})[month] || ''; }, today: laToday, esc: esc, MONTHS: MONTHS
   };
@@ -236,7 +338,9 @@
     var next = app.querySelector('[data-cal-next]');
 
     function render() {
-      var monthEvents = events.filter(function (ev) { return ev.date.slice(0, 7) === month; });
+      var monthEnd = month + '-' + pad(new Date(Date.UTC(+month.slice(0, 4), +month.slice(5, 7), 0)).getUTCDate());
+      var monthEvents = events.filter(function (ev) { return ev.date <= monthEnd && ev.until >= month + '-01'; });
+      var hasOneOff = monthEvents.some(function (ev) { return !ev.repeat; });
       titleEl.textContent = monthLabel(month);
       prev.disabled = month <= first;
       next.disabled = month >= last;
@@ -251,7 +355,7 @@
       for (var i = 0; i < lead; i++) cells += '<li class="cal-day cal-day--blank"></li>';
       for (var day = 1; day <= days; day++) {
         var date = month + '-' + pad(day);
-        var dayEvents = monthEvents.filter(function (ev) { return ev.date === date; });
+        var dayEvents = monthEvents.filter(function (ev) { return occursOn(ev, date); });
         cells += '<li class="cal-day' + (date === today ? ' cal-day--today' : '') + (dayEvents.length ? ' cal-day--has' : '') + '"><span class="cal-num">' + day + '</span>' +
           dayEvents.map(function (ev) {
             return '<a class="cal-chip" tabindex="-1" href="#' + ev.id + '"><span class="cal-chip__time">' + esc(ev.startTime ? formatTime({ startTime: ev.startTime }) : 'All day') + '</span> ' + esc(ev.title) + '</a>';
@@ -261,20 +365,23 @@
 
       if (!monthEvents.length) {
         var soon = window.DomoEvents.comingSoon(month);
-        var msg = soon || 'No events posted for ' + monthLabel(month) + ' yet. Follow @domokuncafe on Instagram and TikTok for the latest.';
+        var msg = soon || 'No events posted for ' + monthLabel(month) + ' yet. Follow @domokuncafe on Instagram, TikTok and Facebook for the latest.';
         listEl.innerHTML = '<div class="ev-empty"><h3>' + (soon ? 'Coming soon' : 'Nothing on the calendar yet') + '</h3><p>' + esc(msg) + '</p>' +
-          '<p class="ev-empty__links"><a class="button" href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram ↗</a> <a class="button button--outline" href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok ↗</a></p>' +
+          '<p class="ev-empty__links">' + socialLinks('button', 'button--outline') + '</p>' +
           (preview ? '<p class="ev-dev-note">Preview note: add events for this month in events/events-data.js</p>' : '') + '</div>';
       } else {
         listEl.innerHTML = '<h3 class="ev-list__title">' + monthEvents.length + (monthEvents.length === 1 ? ' event' : ' events') + ' in ' + esc(monthLabel(month)) + '</h3>' +
           monthEvents.map(function (ev) {
-            var p2 = parts(ev.date);
+            var p2 = parts(ev.repeat ? ev.repeat.from : ev.date), p3 = parts(ev.repeat ? ev.repeat.until : ev.until);
+            var badge = ev.repeat
+              ? '<span>' + esc(shortWhen(ev)) + '</span><strong>' + MONTHS[p2[1] - 1].slice(0, 3) + '</strong><span>' + p2[2] + '–' + p3[2] + '</span>'
+              : '<span>' + DAYS[weekday(ev.date)].slice(0, 3) + '</span><strong>' + p2[2] + '</strong><span>' + MONTHS[p2[1] - 1].slice(0, 3) + '</span>';
             return '<article class="ev-card" id="' + esc(ev.id) + '">' +
-              '<div class="ev-card__date" aria-hidden="true"><span>' + DAYS[weekday(ev.date)].slice(0, 3) + '</span><strong>' + p2[2] + '</strong><span>' + MONTHS[p2[1] - 1].slice(0, 3) + '</span></div>' +
+              '<div class="ev-card__date" aria-hidden="true">' + badge + '</div>' +
               '<div class="ev-card__body">' +
                 (ev.series ? '<p class="ev-card__series">' + esc(ev.series) + '</p>' : '') +
                 '<h3>' + esc(ev.title) + '</h3>' +
-                '<p class="ev-card__when"><time datetime="' + esc(ev.date + (ev.startTime ? 'T' + ev.startTime : '')) + '">' + esc(formatDate(ev.date)) + ' · ' + esc(formatTime(ev)) + '</time></p>' +
+                '<p class="ev-card__when"><time datetime="' + esc(ev.date + (ev.startTime ? 'T' + ev.startTime : '')) + '">' + esc(whenLabel(ev)) + ' · ' + esc(formatTime(ev)) + '</time></p>' +
                 (ev.description ? '<p>' + esc(ev.description) + '</p>' : '') +
                 '<div class="ev-card__actions">' +
                   (ev.link ? '<a class="ev-btn ev-btn--primary" href="' + esc(ev.link) + '"' + (/^https?:/.test(ev.link) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(ev.linkLabel || 'Details') + '</a>' : '') +
@@ -282,7 +389,10 @@
                 '</div>' +
               '</div>' +
             '</article>';
-          }).join('');
+          }).join('') +
+          (!hasOneOff && window.DomoEvents.comingSoon(month)
+            ? '<div class="ev-empty ev-empty--more"><h3>More coming soon</h3><p>' + esc(window.DomoEvents.comingSoon(month)) + '</p><p class="ev-empty__links">' + socialLinks('button', 'button--outline') + '</p></div>'
+            : '');
       }
     }
 

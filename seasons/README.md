@@ -56,6 +56,11 @@ theme and lets you switch. Placeholder content also gets a yellow
 
   With no events in a month, guests see a friendly "coming soon, follow
   @domokuncafe" message rather than placeholder entries.
+- **Recurring listings** (e.g. Domo Hour, weekdays 3 to 6 PM in October 2026)
+  use `repeat: { days: ["Mon", ...], from, until }` instead of `date`. They
+  appear on every matching day in the calendar grid but as one card in the
+  lists. Their Google Calendar/.ics invites repeat weekly, and their Event
+  JSON-LD carries a schema.org `Schedule`.
 
 Then preview with `?theme=domoween` before merging.
 
