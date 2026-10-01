@@ -1,0 +1,27 @@
+{
+  "timezone": "America/Los_Angeles",
+  "updated": "2026-09-18",
+  "note": "Edit this file to hold or release Community Tuesdays. Dates listed here render as reserved on the public request form, except entries with \"example\": true, which are demos only and never block a date. All other upcoming Tuesdays stay open and subject to approval.",
+  "dates": [
+    {
+      "date": "2026-10-06",
+      "status": "example",
+      "example": true,
+      "organization": "Example High School Tennis",
+      "profile": "community-example-tennis.html",
+      "note": "Example only, not a real booking. Fictional school for the sample profile; never blocks Oct 6 on the request form."
+    },
+    {
+      "date": "2026-10-20",
+      "status": "reserved",
+      "organization": "Buena Park Community Garden",
+      "note": "Example hold — full org profile coming soon"
+    },
+    {
+      "date": "2026-11-24",
+      "status": "reserved",
+      "organization": "Cafe hold",
+      "note": "Example internal hold for Thanksgiving week"
+    }
+  ]
+}

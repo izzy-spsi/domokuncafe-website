@@ -1,0 +1,85 @@
+/* /events/ calendar. Colors are variables so seasonal themes can recolor the page. */
+:root {
+  --ev-page: var(--cream);
+  --ev-hero: var(--cream-deep);
+  --ev-card: #fff;
+  --ev-text: var(--ink);
+  --ev-muted: #694d3b;
+  --ev-line: rgba(139, 69, 19, .14);
+  --ev-accent: var(--red);
+  --ev-chip: #FBE3DD;
+  --ev-chip-text: #8E1616;
+  --ev-today: #FFE6A8;
+  --ev-date-bg: var(--red);
+  --ev-date-text: #fff;
+}
+html[data-theme="domoween"] {
+  --ev-page: #1B1030;
+  --ev-hero: #24133D;
+  --ev-card: #2A1846;
+  --ev-text: #F6EEFF;
+  --ev-muted: #D9C8F0;
+  --ev-line: rgba(217, 200, 240, .18);
+  --ev-accent: #FFA23A;
+  --ev-chip: #FF7A1A;
+  --ev-chip-text: #1B1030;
+  --ev-today: #4B2B7C;
+  --ev-date-bg: #FF7A1A;
+  --ev-date-text: #1B1030;
+}
+body { background: var(--ev-page); }
+
+.ev-hero { background: var(--ev-hero); color: var(--ev-text); padding: 4rem 0 3rem; }
+.ev-hero h1 { font-size: clamp(2.6rem, 6vw, 4.6rem); margin: .3rem 0 .8rem; }
+.ev-hero__lede { color: var(--ev-muted); font-size: 1.08rem; max-width: 38rem; }
+.ev-callout { background: linear-gradient(120deg, #2A1846 0%, #4B2B7C 60%, #7A3A1A 100%); border-radius: var(--round); box-shadow: var(--shadow); color: #FFF4E6; display: inline-grid; gap: .15rem; margin-top: .8rem; padding: 1rem 1.4rem; text-decoration: none; transition: transform .2s ease; }
+.ev-callout:hover, .ev-callout:focus-visible { transform: translateY(-3px); }
+.ev-callout__kicker { color: #FFD166; font-size: .74rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.ev-callout__title { color: #FF9A3D; font: 1.6rem/1.1 var(--display); }
+.ev-callout__more { font-size: .9rem; font-weight: 700; }
+
+.ev-calendar { color: var(--ev-text); padding: 2.5rem 0 5rem; }
+.cal-card { background: var(--ev-card); border: 1px solid var(--ev-line); border-radius: var(--round); box-shadow: var(--shadow); padding: clamp(1rem, 2.5vw, 1.8rem); }
+.cal-toolbar { align-items: center; display: flex; gap: 1rem; justify-content: space-between; margin-bottom: 1.2rem; }
+.cal-title { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0; text-align: center; }
+.cal-nav { background: transparent; border: 2px solid var(--ev-accent); border-radius: 50%; color: var(--ev-accent); cursor: pointer; flex-shrink: 0; font-size: 1.2rem; height: 2.8rem; width: 2.8rem; }
+.cal-nav:hover:not(:disabled), .cal-nav:focus-visible { background: var(--ev-accent); color: var(--ev-card); }
+.cal-nav:disabled { cursor: default; opacity: .3; }
+
+.cal-grid { display: grid; gap: 4px; grid-template-columns: repeat(7, minmax(0, 1fr)); list-style: none; margin: 0 0 1.8rem; padding: 0; }
+.cal-dow { color: var(--ev-muted); font-size: .74rem; font-weight: 700; letter-spacing: .1em; padding: .3rem .4rem; text-transform: uppercase; }
+.cal-day { border: 1px solid var(--ev-line); border-radius: .8rem; display: flex; flex-direction: column; gap: .25rem; min-height: 6.2rem; padding: .4rem; }
+.cal-day--blank { border-color: transparent; }
+.cal-day--today { background: var(--ev-today); }
+.cal-num { color: var(--ev-muted); font-size: .85rem; font-weight: 700; }
+.cal-day--has .cal-num { color: var(--ev-accent); }
+.cal-chip { background: var(--ev-chip); border-radius: .5rem; color: var(--ev-chip-text); display: block; font-size: .74rem; font-weight: 700; line-height: 1.25; overflow: hidden; padding: .25rem .4rem; text-decoration: none; }
+.cal-chip:hover { filter: brightness(.95); }
+.cal-chip__time { font-weight: 500; opacity: .85; }
+
+.ev-list__title { font-size: 1.6rem; margin: 0 0 1rem; }
+.ev-card { border-top: 1px solid var(--ev-line); display: grid; gap: 1.2rem; grid-template-columns: 4.6rem minmax(0, 1fr); padding: 1.3rem 0; scroll-margin-top: 90px; }
+.ev-card:target { background: var(--ev-today); border-radius: 1rem; padding-left: .8rem; padding-right: .8rem; }
+.ev-card__date { align-items: center; align-self: start; background: var(--ev-date-bg); border-radius: 1rem; color: var(--ev-date-text); display: flex; flex-direction: column; font-size: .72rem; font-weight: 700; letter-spacing: .08em; line-height: 1.1; padding: .55rem .3rem; text-transform: uppercase; }
+.ev-card__date strong { font: 2rem/1 var(--display); letter-spacing: 0; }
+.ev-card h3 { font-size: 1.7rem; margin: 0 0 .25rem; }
+.ev-card p { color: var(--ev-muted); margin-bottom: .5rem; }
+.ev-card__series { color: var(--ev-accent) !important; font-size: .74rem; font-weight: 700; letter-spacing: .12em; margin-bottom: .2rem !important; text-transform: uppercase; }
+.ev-card__when { color: var(--ev-text) !important; font-weight: 700; }
+.ev-card__actions { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .6rem; }
+.ev-btn { align-items: center; background: transparent; border: 2px solid var(--ev-accent); border-radius: 999px; color: var(--ev-accent); cursor: pointer; display: inline-flex; font: 700 .8rem var(--body); min-height: 2.5rem; padding: .4rem .95rem; text-decoration: none; }
+.ev-btn:hover, .ev-btn:focus-visible, .ev-btn--primary { background: var(--ev-accent); color: var(--ev-card); }
+
+.ev-empty { border-top: 1px solid var(--ev-line); padding: 1.6rem 0 .4rem; text-align: center; }
+.ev-empty h3 { font-size: 1.8rem; margin-bottom: .4rem; }
+.ev-empty p { color: var(--ev-muted); margin: 0 auto .8rem; max-width: 34rem; }
+.ev-empty__links { display: flex; flex-wrap: wrap; gap: .6rem; justify-content: center; }
+.ev-dev-note { background: #FFE600; border: 2px dashed #111; border-radius: 6px; color: #111 !important; display: inline-block; font: 700 .75rem system-ui, sans-serif; padding: .3rem .6rem; }
+.ev-note { color: var(--ev-muted); font-size: .88rem; margin-top: 1.2rem; text-align: center; }
+.ev-note a { color: var(--ev-accent); }
+
+@media (max-width: 760px) {
+  .cal-grid { display: none; }
+  .ev-hero { padding: 2.6rem 0 2rem; }
+  .ev-callout { display: grid; }
+}
