@@ -38,6 +38,8 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.08; l
 .site-nav a { color: var(--brown-dark); font-size: .88rem; font-weight: 700; text-decoration: none; }
 .site-nav a:not(.button):hover, .site-nav a:not(.button):focus-visible, .site-nav a[aria-current="page"] { color: var(--red); }
 .nav-toggle { background: none; border: 0; color: var(--brown-dark); cursor: pointer; display: none; font-size: 1.6rem; padding: .4rem; }
+.site-nav .nav-hl { background: #FFD98B; border-radius: 999px; color: var(--brown-dark); padding: .42rem .9rem; }
+.site-nav a.nav-hl:hover, .site-nav a.nav-hl:focus-visible { background: var(--red); color: #fff; }
 .nhk { background: var(--gold); color: var(--brown-dark); padding: 1.4rem 0; text-align: center; }
 .nhk p { margin: .2rem auto 0; max-width: 750px; }
 .site-footer { background: var(--brown-dark); color: #F9EBDD; padding: 3.5rem 0 1.5rem; }
@@ -55,6 +57,15 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.08; l
 .footer-credit__sps a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(255,217,139,.45); }
 .footer-credit__note { color: #DFC5B2; font-size: .78rem; }
 .footer-credit__note a { color: inherit; }
+@media (min-width: 851px) and (max-width: 959px) {
+  /* Compact desktop nav: priority links + Order Now stay visible; the ☰ menu shows every link. */
+  .nav-toggle { display: block; margin-left: .3rem; order: 3; }
+  .site-nav { margin-left: auto; }
+  .site-nav > a:not(.nav-priority):not(.button) { display: none; }
+  .site-nav.is-open { align-items: stretch; background: var(--cream); border-bottom: 1px solid rgba(139,69,19,.15); flex-direction: column; gap: 0; left: 0; padding: .6rem max(1.25rem, calc((100% - 1180px) / 2)) 1.1rem; position: absolute; right: 0; top: 76px; }
+  .site-nav.is-open > a:not(.nav-priority):not(.button), .site-nav.is-open > a { display: block; padding: .65rem 0; }
+  .site-nav.is-open .nav-hl { align-self: flex-start; padding: .42rem .9rem; }
+}
 @media (max-width: 850px) {
   .site-header { height: 68px; }
   .brand img { height: 48px; }
