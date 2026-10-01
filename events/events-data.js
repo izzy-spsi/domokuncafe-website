@@ -34,8 +34,8 @@ window.DOMO_EVENTS = {
   events: [
     {
       title: "Domo Hour",
-      description: "Monday–Friday • 4–6 PM",
-      startTime: "16:00",
+      description: "Monday–Friday • 3–6 PM",
+      startTime: "15:00",
       endTime: "18:00",
       repeat: { days: ["Mon", "Tue", "Wed", "Thu", "Fri"], from: "2026-10-01", until: "2026-10-31" },
       // Menu and prices live in domo-hour/domo-hour-data.js (one source of truth).

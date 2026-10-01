@@ -10,8 +10,8 @@ window.DOMO_HOUR = {
   eyebrow: "NEW AT DOMO CAFE",
   title: "DOMO HOUR",
   tagline: "THE BEST HOUR JUST GOT DOMO-FIED.",
-  schedule: "Monday–Friday • 4–6 PM",
-  scheduleShort: "MON–FRI • 4–6 PM",          // shown instead of `schedule` on small phones
+  schedule: "Monday–Friday • 3–6 PM",
+  scheduleShort: "MON–FRI • 3–6 PM",          // shown instead of `schedule` on small phones
   sub: "Japanese-inspired bites, Domo favorites, and special-priced sips made for sharing.",
 
   offers: [
@@ -45,7 +45,7 @@ window.DOMO_HOUR = {
       ]
     }
   ],
-  availability: "Available Monday–Friday • 4–6 PM",
+  availability: "Available Monday–Friday • 3–6 PM",
 
   // Photo collage. The first photo is shown large. `temporary: true` marks a stand-in
   // photo until a real one exists; replace `src`/`alt` and delete `temporary` when it does.
