@@ -66,3 +66,7 @@
 .nav .nav-hl{background:var(--y);border-radius:999px;color:var(--d);padding:.42rem .9rem}
 .nav a.nav-hl:hover,.nav a.nav-hl:focus-visible{background:var(--r);color:#fff}
 @media(max-width:900px){.nav .nav-hl{align-self:flex-start}}
+.example-badge{background:var(--y);border-radius:999px;color:var(--d);display:inline-block;font:700 .7rem/1 var(--s);letter-spacing:.1em;margin-top:.45rem;padding:.35rem .65rem;text-transform:uppercase;width:max-content}
+.card .date .example-badge{display:block}
+.example-flag{background:#fff3;border:1px dashed var(--y);border-radius:14px;color:#fff;font-size:.92rem;line-height:1.45;margin:0 0 1rem;max-width:34rem;padding:.65rem .85rem}
+.example-flag .example-badge{margin:0 .5rem 0 0;vertical-align:middle}

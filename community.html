@@ -79,7 +79,7 @@
             <div class="eyebrow">What it is</div>
             <h2>Dinner that does some good.</h2>
           </div>
-          <p>Domo Community Tuesdays are a recurring fundraiser night at our Buena Park cafe. Your group gets the spotlight. Your people come for a meal. The neighborhood gets a reason to show up. This is not Domo Hour — that weekday 3–6 bite-and-drink set is a separate cafe offering.</p>
+          <p>Domo Community Tuesdays are a recurring fundraiser night at our Buena Park cafe. Your group gets the spotlight. Your people come for a meal. The neighborhood gets a reason to show up. This is not Domo Hour — that weekday bite-and-drink set (<span data-domo-hour-schedule>Monday–Friday • 3–6 PM</span>) is a separate cafe offering.</p>
         </div>
         <div class="who-grid">
           <article class="who-card">
@@ -237,10 +237,10 @@
         <p class="profile-note">Coming soon: every confirmed organization gets a public Community page with its code, purpose, and share links. Until then, booked groups still receive a code and QR to use the night of.</p>
         <div class="cards cards-2">
           <article class="card">
-            <div class="date"><small>Tuesday · Oct 6, 2026</small><strong>BPHS Tennis</strong></div>
+            <div class="date"><small>Tuesday · Oct 6, 2026</small><strong>Example High School Tennis</strong><span class="example-badge">Example only</span></div>
             <div class="card-body">
-              <p>Sample profile for Buena Park High School Tennis — code, story, and how guests can help.</p>
-              <a class="btn" href="community-bphs-tennis.html">View sample profile →</a>
+              <p>Example only, not a real booking. A sample profile for a fictional school team — code, story, and how guests can help.</p>
+              <a class="btn" href="community-example-tennis.html">View sample profile →</a>
             </div>
           </article>
           <article class="card stub">
@@ -267,7 +267,7 @@
           <p>Select one or more open Tuesdays in the request form. Reserved cards stay visible so you can see what is already booked.</p>
           <a class="btn" href="#request">Continue to the form</a>
         </div>
-        <p class="note">We seed a few example holds (including BPHS Tennis on Oct 6) so you can see how reserved nights look. Cafe leadership can update <code>community-dates.json</code> anytime.</p>
+        <p class="note">We seed a few example holds so you can see how reserved nights look. The Example High School Tennis sample is example only, not a real booking, and Oct 6 stays open to request. Cafe leadership can update <code>community-dates.json</code> anytime.</p>
       </div>
     </section>
 
@@ -326,7 +326,7 @@
 
             <div id="school-field" hidden>
               <label>School affiliation (if any)
-                <input name="schoolAffiliation" id="schoolAffiliation" autocomplete="off" placeholder="Buena Park High School">
+                <input name="schoolAffiliation" id="schoolAffiliation" autocomplete="off" placeholder="Example High School">
                 <span class="help">Campus, district, or team the fundraiser supports.</span>
               </label>
             </div>
@@ -404,7 +404,7 @@
           </details>
           <details>
             <summary>Is this the same as Domo Hour?</summary>
-            <p>No. Domo Hour is a separate weekday 3–6 bite-and-drink set. Community Tuesday is a fundraiser night for a featured organization. Booking one does not include the other.</p>
+            <p>No. Domo Hour is a separate weekday bite-and-drink set (<span data-domo-hour-schedule>Monday–Friday • 3–6 PM</span>). Community Tuesday is a fundraiser night for a featured organization. Booking one does not include the other.</p>
           </details>
           <details>
             <summary>Can we reserve a large party or timed seating?</summary>
@@ -428,7 +428,7 @@
           </details>
           <details>
             <summary>Will our group get a webpage?</summary>
-            <p>Yes. A Domo Community profile per organization is part of the program. Full profiles are coming soon; booked groups still receive a code and QR for the night itself. See the <a href="community-bphs-tennis.html">BPHS Tennis sample</a>.</p>
+            <p>Yes. A Domo Community profile per organization is part of the program. Full profiles are coming soon; booked groups still receive a code and QR for the night itself. See the <a href="community-example-tennis.html">example profile</a> (Example High School Tennis is fictional).</p>
           </details>
           <details>
             <summary>What if our date is already reserved?</summary>
@@ -452,7 +452,7 @@
             <li><a href="#about">How it works</a></li>
             <li><a href="#tuesdays">Open Tuesdays</a></li>
             <li><a href="#request">Request a night</a></li>
-            <li><a href="community-bphs-tennis.html">Sample profile</a></li>
+            <li><a href="community-example-tennis.html">Sample profile</a></li>
           </ul>
         </div>
         <div>
@@ -476,6 +476,7 @@
       </div>
     </div>
   </footer>
-  <script src="community.js?v=2"></script>
+  <script src="/domo-hour/domo-hour-data.js"></script>
+  <script src="community.js?v=3"></script>
 </body>
 </html>

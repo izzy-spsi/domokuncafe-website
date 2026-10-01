@@ -11,7 +11,7 @@ function sendHtml(name) {
 }
 
 app.get(['/community', '/community/'], sendHtml('community.html'));
-app.get(['/community-bphs-tennis', '/community-bphs-tennis/'], sendHtml('community-bphs-tennis.html'));
+app.get(['/community-example-tennis', '/community-example-tennis/'], sendHtml('community-example-tennis.html'));
 app.get(['/dashboard', '/dashboard/'], sendHtml('dashboard.html'));
 app.get(['/staff', '/staff/'], sendHtml('staff.html'));
 

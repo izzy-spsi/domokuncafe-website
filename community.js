@@ -256,12 +256,17 @@
     });
   }
 
+  if (window.DOMO_HOUR && window.DOMO_HOUR.schedule) {
+    Array.prototype.forEach.call(document.querySelectorAll('[data-domo-hour-schedule]'), function (el) { el.textContent = window.DOMO_HOUR.schedule; });
+  }
+
   fetch(DATES_URL, { cache: 'no-store' })
     .then(function (res) { return res.ok ? res.json() : { dates: [] }; })
     .catch(function () { return { dates: [] }; })
     .then(function (data) {
       (data.dates || []).forEach(function (item) {
-        if (item && item.date) reservedByDate[item.date] = item;
+        // Example entries only demonstrate the sample profile; they never block a real date.
+        if (item && item.date && !item.example && item.status !== 'example') reservedByDate[item.date] = item;
       });
       renderDates();
     });

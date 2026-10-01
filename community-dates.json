@@ -1,14 +1,15 @@
 {
   "timezone": "America/Los_Angeles",
   "updated": "2026-09-18",
-  "note": "Edit this file to hold or release Community Tuesdays. Dates listed here render as reserved on the public request form. All other upcoming Tuesdays stay open and subject to approval.",
+  "note": "Edit this file to hold or release Community Tuesdays. Dates listed here render as reserved on the public request form, except entries with \"example\": true, which are demos only and never block a date. All other upcoming Tuesdays stay open and subject to approval.",
   "dates": [
     {
       "date": "2026-10-06",
-      "status": "reserved",
-      "organization": "BPHS Tennis",
-      "profile": "community-bphs-tennis.html",
-      "note": "Example hold with a sample Community profile"
+      "status": "example",
+      "example": true,
+      "organization": "Example High School Tennis",
+      "profile": "community-example-tennis.html",
+      "note": "Example only, not a real booking. Fictional school for the sample profile; never blocks Oct 6 on the request form."
     },
     {
       "date": "2026-10-20",
