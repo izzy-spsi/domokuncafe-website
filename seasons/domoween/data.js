@@ -32,35 +32,44 @@ window.DOMOWEEN_DATA = {
   showEvents: true,
 
   menu: {
-    heading: "Spooky specials",
-    intro: "Limited-time Domoween treats are brewing. Check back soon for the big reveal.",
-    items: [
-      // Real item example (copy this shape, then delete the placeholders below):
-      // { name: "Item name", description: "One short, tasty sentence.", price: "$0.00",
-      //   tag: "Domoween special", art: "wc_41_jack-o-lantern" },
+    heading: "October menu",
+    intro: "Limited-time treats for Domoween, available all October while supplies last.",
+    items: [],
+    groups: [
       {
-        placeholder: true,
-        name: "Mystery special",
-        description: "Spooky specials coming soon. Follow @domokuncafe for the reveal.",
-        price: "",
-        tag: "Coming soon",
-        art: "wc_44_frankenstein"
+        tag: "Limited time",
+        name: "Domo\u2019s Monster Burger",
+        description: "Two wagyu smash patties, American cheese, bacon, spicy mayo, and crispy onions on a seasonal red brioche bun.",
+        photos: [
+          { src: "/assets/domoween/lto/monster-burger-onions-bacon.jpg", alt: "Domo\u2019s Monster Burger with crispy onions and bacon on a red bun", caption: "With crispy onions and bacon" },
+          { src: "/assets/domoween/lto/monster-burger-onions.jpg", alt: "Domo\u2019s Monster Burger with crispy onions", caption: "With crispy onions" },
+          { src: "/assets/domoween/lto/monster-burger.jpg", alt: "Domo\u2019s Monster Burger", caption: "The Monster Burger" }
+        ]
       },
       {
-        placeholder: true,
-        name: "Mystery special",
-        description: "Spooky specials coming soon. Follow @domokuncafe for the reveal.",
-        price: "",
-        tag: "Coming soon",
-        art: "wc_41_jack-o-lantern"
+        tag: "Limited time",
+        name: "Domo Bites Back",
+        description: "Crispy breaded cauliflower bites tossed in your choice of sauce.",
+        list: ["Sweet and Spicy", "Spicy Gochujang", "House Buffalo"],
+        photos: [
+          { src: "/assets/domoween/lto/bites-back-sweet-and-spicy.jpg", alt: "Domo Bites Back breaded cauliflower bites in Sweet and Spicy sauce", caption: "Sweet and Spicy" },
+          { src: "/assets/domoween/lto/bites-back-gochujang.jpg", alt: "Domo Bites Back breaded cauliflower bites in Spicy Gochujang sauce", caption: "Spicy Gochujang" },
+          { src: "/assets/domoween/lto/bites-back-buffalo.jpg", alt: "Domo Bites Back breaded cauliflower bites in House Buffalo sauce", caption: "House Buffalo" }
+        ]
       },
       {
-        placeholder: true,
-        name: "Mystery special",
-        description: "Spooky specials coming soon. Follow @domokuncafe for the reveal.",
-        price: "",
-        tag: "Coming soon",
-        art: "wc_40_mummy"
+        tag: "Limited time",
+        name: "October drinks",
+        description: "Fall flavors to sip all month.",
+        list: [
+          "Domo\u2019s Pumpkin Brew: our signature iced coffee with house-made pumpkin spice cold foam",
+          "Cookies & Scream Matcha: matcha, milk, and crushed chocolate cookies",
+          "Domo\u2019s Dream-sicle: lemonade, sweetened condensed milk, and your choice of strawberry or mango, topped with cold foam and real fruit"
+        ],
+        photos: [
+          { src: "/assets/domoween/lto/october-drinks-1.jpg", alt: "Two of Domo Cafe\u2019s October drinks", caption: "" },
+          { src: "/assets/domoween/lto/october-drinks-2.jpg", alt: "Two of Domo Cafe\u2019s October drinks, another view", caption: "" }
+        ]
       }
     ]
   }

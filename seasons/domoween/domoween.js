@@ -135,14 +135,29 @@
   function menuHTML() {
     var menu = data.menu || {};
     var items = menu.items || [];
-    if (data.showMenu === false || !items.length) return '';
+    var groups = menu.groups || [];
+    if (data.showMenu === false || (!items.length && !groups.length)) return '';
+    var groupsHTML = groups.map(function (g) {
+      return '<article class="dw-lto">' +
+        '<div class="dw-lto__copy"><p class="dw-card__tag">' + esc(g.tag || 'Limited time') + '</p>' +
+          '<h3>' + esc(g.name) + '</h3>' +
+          (g.description ? '<p>' + esc(g.description) + '</p>' : '') +
+          (g.list && g.list.length ? '<ul>' + g.list.map(function (li) { return '<li>' + esc(li) + '</li>'; }).join('') + '</ul>' : '') +
+        '</div>' +
+        '<div class="dw-lto__photos">' + (g.photos || []).map(function (ph) {
+          return '<figure><img src="' + esc(ph.src) + '" alt="' + esc(ph.alt) + '" loading="lazy" decoding="async">' +
+            (ph.caption ? '<figcaption>' + esc(ph.caption) + '</figcaption>' : '') + '</figure>';
+        }).join('') + '</div>' +
+      '</article>';
+    }).join('');
     return '' +
       '<section class="dw-section dw-menu" id="domoween-menu" aria-labelledby="dw-menu-heading">' +
         deco('web', 'dw-web dw-web--tl') + deco('candycorn', 'dw-candycorn--m1') + deco('candy', 'dw-candy--m2') +
         '<div class="container">' +
           '<div class="dw-heading"><p class="dw-eyebrow">Domoween menu</p><h2 id="dw-menu-heading">' + esc(menu.heading || 'Spooky specials') + '</h2>' +
             (menu.intro ? '<p class="dw-heading__intro">' + esc(menu.intro) + '</p>' : '') + '</div>' +
-          '<div class="dw-cards">' +
+          (groups.length ? '<div class="dw-ltos">' + groupsHTML + '</div>' : '') +
+          (items.length ? '<div class="dw-cards">' +
             items.map(function (item) {
               return '<article class="dw-card' + (item.placeholder ? ' dw-card--placeholder' : '') + '">' +
                 '<div class="dw-card__stage">' + art(item.art) + '</div>' +
@@ -154,7 +169,7 @@
                 '</div>' +
               '</article>';
             }).join('') +
-          '</div>' +
+          '</div>' : '') +
           '<div class="dw-center"><a class="button dw-button" href="' + ORDER_URL + '" target="_blank" rel="noopener">Order online</a></div>' +
         '</div>' +
       '</section>';
