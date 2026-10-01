@@ -10,7 +10,7 @@ window.DOMO_HOUR = {
   // ONE switch for the menu. false = hide the "See the Domo Hour menu" button, the menu panel AND the
   // price callouts everywhere (they are left out of the page entirely, not just hidden).
   // Set to true once staff confirm the menu. The menu data below stays here either way.
-  showMenu: false,
+  showMenu: true,
 
   eyebrow: "NEW AT DOMO CAFE",
   title: "DOMO HOUR",
