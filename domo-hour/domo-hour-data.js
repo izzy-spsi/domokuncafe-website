@@ -7,23 +7,31 @@
  * or alcohol wording. Photos must be existing approved Domo Cafe photography.
  */
 window.DOMO_HOUR = {
+  // ONE switch for the menu. false = hide the "See the Domo Hour menu" button, the menu panel AND the
+  // price callouts everywhere (they are left out of the page entirely, not just hidden).
+  // Set to true once staff confirm the menu. The menu data below stays here either way.
+  showMenu: false,
+
   eyebrow: "NEW AT DOMO CAFE",
   title: "DOMO HOUR",
   tagline: "THE BEST HOUR JUST GOT DOMO-FIED.",
   schedule: "Monday–Friday • 3–6 PM",
   scheduleShort: "MON–FRI • 3–6 PM",          // shown instead of `schedule` on small phones
+  hoursNote: "Available Monday–Friday • 3–6 PM. Excluding holidays.",   // always shown
   sub: "Japanese-inspired bites, Domo favorites, and special-priced sips made for sharing.",
 
+  // Price callouts: only shown when showMenu is true.
   offers: [
     { label: "EATS FROM", price: "$8" },
     { label: "SIPS FROM", price: "$6" },
     { label: "DOMO SINGLE SMASH", price: "$12", hero: true }
   ],
 
-  menuButton: "SEE THE DOMO HOUR MENU",
+  menuButton: "SEE THE DOMO HOUR MENU",        // only shown when showMenu is true
   visitButton: "PLAN YOUR VISIT",
   visitHref: "#visit",                           // existing hours / location / directions section
 
+  // Menu: only shown when showMenu is true.
   menu: [
     {
       heading: "EATS",

@@ -34,6 +34,9 @@
 .dh__tagline { color: var(--dh-accent); font-size: clamp(.95rem, 1.6vw, 1.15rem); font-weight: 800; letter-spacing: .08em; margin: 0 0 1rem; order: 3; }
 .dh__schedule { align-self: flex-start; background: var(--dh-pill-bg); border-radius: 999px; box-shadow: 0 8px 20px rgba(0, 0, 0, .25); color: var(--dh-pill-text); font-size: 1.02rem; font-weight: 800; letter-spacing: .06em; margin: 0 0 1rem; order: 4; padding: .55rem 1.15rem; }
 .dh__schedule-short { display: none; }
+.dh__hours-note { color: var(--dh-text); font-size: .95rem; font-weight: 700; letter-spacing: .02em; margin: -.3rem 0 1rem; order: 4; }
+.dh .dh__visit.dh__visit--primary { background: var(--dh-cta-bg); border-color: var(--dh-cta-bg); color: var(--dh-cta-text); }
+.dh .dh__visit.dh__visit--primary:hover, .dh .dh__visit.dh__visit--primary:focus-visible { background: #fff; border-color: #fff; color: var(--dh-cta-text); }
 .dh__sub { color: var(--dh-muted); font-size: 1.06rem; margin: 0; max-width: 32rem; order: 5; }
 .dh__offers { display: grid; gap: .8rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); list-style: none; margin: 1.5rem 0 1.7rem; order: 6; padding: 0; }
 .dh__offer { background: var(--dh-card); border-radius: 1.1rem; box-shadow: 0 12px 28px rgba(0, 0, 0, .28); color: var(--dh-card-text); display: flex; flex-direction: column; gap: .2rem; justify-content: center; min-height: 7.2rem; padding: .95rem 1rem; }
@@ -43,6 +46,7 @@
 .dh__offer--hero .dh__offer-price { color: var(--dh-hero-price); font-size: clamp(3rem, 5.2vw, 4.2rem); }
 .dh__offer--hero .dh__offer-label { color: var(--dh-hero-text); font-size: .82rem; }
 .dh__ctas { display: flex; flex-wrap: wrap; gap: .75rem; order: 7; }
+.dh__sub + .dh__ctas { margin-top: 1.6rem; }
 .dh .dh__menu-btn { background: var(--dh-cta-bg); border-color: var(--dh-cta-bg); color: var(--dh-cta-text); }
 .dh .dh__menu-btn:hover, .dh .dh__menu-btn:focus-visible { background: #fff; border-color: #fff; color: var(--dh-cta-text); }
 .dh__chev { display: inline-block; transition: transform .2s ease; }
@@ -81,6 +85,7 @@
   /* Offer first: title → schedule → prices, then the rest. */
   .dh__title { font-size: clamp(2.6rem, 14.6vw, 4.2rem); margin: .3rem 0 .6rem; white-space: nowrap; }
   .dh__schedule { font-size: 1.05rem; margin-bottom: .85rem; order: 3; }
+  .dh__hours-note { font-size: .92rem; margin: -.2rem 0 .9rem; order: 3; }
   .dh__schedule-long { clip: rect(0 0 0 0); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
   .dh__schedule-short { display: inline; }
   .dh__offers { gap: .6rem; grid-template-columns: 1fr 1fr; margin: 0 0 1.1rem; order: 4; }
@@ -90,6 +95,7 @@
   .dh__tagline { margin-bottom: .6rem; order: 5; }
   .dh__sub { font-size: 1rem; margin-bottom: 1.2rem; order: 6; }
   .dh__ctas .button { width: 100%; }
+  .dh__sub + .dh__ctas { margin-top: 0; }
   .dh__photos { gap: .55rem; }
   .dh__photo { border-width: 3px; border-radius: .9rem; }
   .dh__menu-cols { grid-template-columns: 1fr; }
