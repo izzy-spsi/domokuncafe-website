@@ -50,7 +50,7 @@ window.DOMOWEEN_DATA = {
         description: "Crispy breaded cauliflower bites tossed in your choice of sauce.",
         list: ["Sweet and Spicy Gochujang", "House Buffalo"],
         photos: [
-          { src: "/assets/domoween/lto/bites-back-sweet-and-spicy.jpg", alt: "Domo Bites Back breaded cauliflower bites in Sweet and Spicy Gochujang sauce", caption: "Sweet and Spicy Gochujang" },
+          { src: "/assets/domoween/lto/bites-back-gochujang.jpg", alt: "Domo Bites Back breaded cauliflower bites in Sweet and Spicy Gochujang sauce", caption: "Sweet and Spicy Gochujang" },
           { src: "/assets/domoween/lto/bites-back-buffalo.jpg", alt: "Domo Bites Back breaded cauliflower bites in House Buffalo sauce", caption: "House Buffalo" }
         ]
       },
