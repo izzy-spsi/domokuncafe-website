@@ -1,6 +1,6 @@
 # Domo Hour
 
-Domo Hour is a permanent weekday program (Monday–Friday, 4–6 PM). It has its own
+Domo Hour is a permanent weekday program (Monday–Friday, 3–6 PM). It has its own
 section on the home page, right before "What we're serving", and it shows in every
 theme. During Domo-ween it gets a seasonal skin; on the normal site it doesn't.
 
