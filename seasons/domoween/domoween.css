@@ -262,7 +262,41 @@ html[data-theme="domoween"] .footer-bottom { color: #B9A8D6; }
 html[data-theme="domoween"] .dw-legal { border-top: 1px solid rgba(255, 255, 255, .15); color: #E6DAF7; font-size: .84rem; margin: 2.2rem 0 0; max-width: none; padding-top: 1.1rem; }
 html[data-theme="domoween"] .dw-legal + .footer-bottom { border-top: 0; margin-top: .4rem; padding-top: .4rem; }
 
+/* ---------- Domo Hour: Domo-ween Edition ----------
+   Seasonal skin for the permanent Domo Hour section (domo-hour/). Delete this block (and the
+   `seasonal.domoween` badge in domo-hour/domo-hour-data.js) to remove the October treatment. */
+html[data-theme="domoween"] .dh {
+  --dh-bg-1: #2E1A4F;
+  --dh-bg-2: var(--dw-night);
+  --dh-glow: rgba(255, 122, 26, .3);
+  --dh-text: var(--dw-cream);
+  --dh-muted: var(--dw-lilac);
+  --dh-accent: var(--dw-candy);
+  --dh-pill-bg: var(--dw-pumpkin);
+  --dh-pill-text: var(--dw-night);
+  --dh-card: var(--dw-cream);
+  --dh-card-muted: var(--dw-body-dark);
+  --dh-price: var(--dw-pumpkin-dark);
+  --dh-hero-bg: linear-gradient(135deg, #FF9535 0%, #E8630A 100%);
+  --dh-hero-price: var(--dw-night);
+  --dh-hero-text: var(--dw-night);
+  --dh-cta-bg: var(--dw-pumpkin);
+  --dh-cta-text: var(--dw-night);
+}
+html[data-theme="domoween"] .dh__title { font-size: clamp(3.6rem, 8.5vw, 6.8rem); }
+@media (max-width: 640px) { html[data-theme="domoween"] .dh__title { font-size: clamp(3rem, 17vw, 4.6rem); } }
+html[data-theme="domoween"] .dh::before { background: var(--dw-stripe); content: ""; height: 10px; left: 0; position: absolute; right: 0; top: 0; }
+html[data-theme="domoween"] .dh__badge { background: rgba(255, 122, 26, .16); border-color: var(--dw-pumpkin); color: var(--dw-candy); }
+html[data-theme="domoween"] .dh .dh__menu-btn:hover,
+html[data-theme="domoween"] .dh .dh__menu-btn:focus-visible { background: var(--dw-pumpkin-light); border-color: var(--dw-pumpkin-light); }
+html[data-theme="domoween"] .site-nav .nav-hl { background: rgba(255, 209, 102, .14); box-shadow: inset 0 0 0 1.5px var(--dw-candy); color: var(--dw-candy); }
+html[data-theme="domoween"] .site-nav a.nav-hl:hover,
+html[data-theme="domoween"] .site-nav a.nav-hl:focus-visible { background: var(--dw-pumpkin); box-shadow: none; color: var(--dw-night); }
+
 /* ---------- Responsive ---------- */
+@media (min-width: 851px) and (max-width: 959px) {
+  html[data-theme="domoween"] .site-nav.is-open { background: var(--dw-night); border-bottom-color: rgba(255, 122, 26, .35); }
+}
 @media (max-width: 1180px) {
   html[data-theme="domoween"] .dw-ghost--c1,
   html[data-theme="domoween"] .dw-ghost--c2,
