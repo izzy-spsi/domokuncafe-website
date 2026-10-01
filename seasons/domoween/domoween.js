@@ -82,7 +82,7 @@
         '</div>' +
         '<div class="container dw-hero__inner">' +
           '<div class="dw-hero__copy">' +
-            '<p class="dw-hero__kicker">October 1 – 31, 2026 · Buena Park</p>' +
+            '<p class="dw-hero__kicker">Oct 1 – Nov 1, 2026 · Buena Park</p>' +
             '<h1 id="domoween-heading"><span class="dw-wordmark"><picture class="dw-wordmark__art"><source type="image/svg+xml" srcset="/assets/domoween/domo-ween_wordmark_alt-no-hyphen.svg"><img class="dw-wordmark__img" src="/assets/domoween/domo-ween_wordmark_alt-no-hyphen.png" width="1355" height="179" alt="Domo™ Ween" fetchpriority="high"></picture><span class="dw-sr">Domoween</span></span> <span class="dw-hero__at">at Domo Cafe</span></h1>' +
             '<p class="dw-hero__lede">Domo\'s spooky-cute season is here. All October long, join us for comfort food, cozy vibes, and Halloween fun with Domo and friends.</p>' +
             '<div class="dw-hero__actions">' +
@@ -175,15 +175,11 @@
     var hasOneOff = items.some(function (item) { return !item.repeat; });
     var soon = (lib && lib.comingSoon(theme.start.slice(0, 7))) || 'October events are coming soon! Follow @domokuncafe on Instagram, TikTok and Facebook for announcements.';
     var body = items.slice(0, 4).map(function (item) {
-      if (item.menu) {
-        return lib.menuCardHTML(item, { level: 3, footer: '<span>' + esc(lib.whenLabel(item)) + '</span><a href="' + esc(lib.googleUrl(item)) + '" target="_blank" rel="noopener">Add to Google Calendar</a><a href="/events/?month=' + item.date.slice(0, 7) + '#' + esc(item.id) + '">See it on the calendar</a>' });
-      }
       var link = item.link ? '<a class="dw-ticket__link" href="' + esc(item.link) + '"' + (/^https?:/.test(item.link) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(item.linkLabel || 'Details') + ' <span aria-hidden="true">→</span></a>' : '';
       return '<article class="dw-ticket">' +
         '<div class="dw-ticket__date"><span>' + esc(lib.shortWhen(item)) + '</span><small>' + esc(lib.formatTime(item)) + '</small></div>' +
         '<div class="dw-ticket__body"><h3>' + esc(item.title) + '</h3>' +
-          (item.repeat ? '<p class="dw-ticket__when">' + esc(lib.whenLabel(item)) + '</p>' : '') +
-          (item.description ? '<p>' + esc(item.description) + '</p>' : '') + link +
+          (item.repeat ? '<p class="dw-ticket__when">' + esc(lib.whenLabel(item)) + '</p>' : item.description ? '<p>' + esc(item.description) + '</p>' : '') + link +
           '<a class="dw-ticket__link" href="' + esc(lib.googleUrl(item)) + '" target="_blank" rel="noopener">Add to Google Calendar</a>' +
         '</div>' +
         (ART[item.art] ? '<div class="dw-ticket__art">' + art(item.art) + '</div>' : '') +
@@ -248,7 +244,8 @@
     var units = {};
     Array.prototype.forEach.call(clock.querySelectorAll('[data-dw-unit]'), function (el) { units[el.getAttribute('data-dw-unit')] = el; });
     var laMidnight = seasons.laMidnight || function (d) { var p = d.split('-').map(Number); return Date.UTC(p[0], p[1] - 1, p[2], 7); };
-    var target = laMidnight(theme.end);
+    var target = laMidnight(theme.halloween || theme.end);
+    var seasonOver = laMidnight(theme.end) + 864e5;
     var simulated = /^\d{4}-\d{2}-\d{2}$/.test(new URLSearchParams(location.search).get('themeDate') || '');
     var skew = simulated ? laMidnight(seasons.today) + 12 * 3600e3 - Date.now() : 0;
     var timer;
@@ -257,7 +254,7 @@
       var now = Date.now() + skew;
       var left = target - now;
       if (left <= 0) {
-        var isHalloween = now < target + 864e5;
+        var isHalloween = now < seasonOver;
         clock.hidden = true;
         if (title) title.textContent = isHalloween ? 'Happy Halloween!' : 'Thanks for a spooky-cute Domoween';
         note.textContent = isHalloween ? 'Happy Domoween from all of us at Domo Cafe.' : 'See you next Halloween!';
@@ -285,9 +282,10 @@
     if (nav && !nav.querySelector('.dw-nav-link')) {
       var link = document.createElement('a');
       link.href = '/domoween/';
-      link.className = 'dw-nav-link';
+      link.className = 'dw-nav-link nav-priority';
       link.textContent = 'Domoween';
-      nav.insertBefore(link, nav.firstChild);
+      var after = nav.querySelector('.nav-hl');
+      nav.insertBefore(link, after ? after.nextSibling : nav.firstChild);
     }
 
     Array.prototype.forEach.call(document.querySelectorAll('a[href="#top"]'), function (a) { a.setAttribute('href', '#domoween'); });

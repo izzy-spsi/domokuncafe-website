@@ -1,14 +1,17 @@
 # Seasonal themes
 
 The home page (`index.html`) can switch into a seasonal "takeover" theme on a
-schedule. Right now there is one theme: **Domoween**, **October 1–31, 2026**.
+schedule. Right now there is one theme: **Domoween**, **October 1 – November 1, 2026**
+(Halloween is celebrated through the weekend, Sunday Nov 1). The normal site returns Monday Nov 2.
 
 ## How the date switch works
 
 - `seasons/seasons.js` runs at the end of `<head>` on `index.html`. It gets
   today's date **in America/Los_Angeles** (not the visitor's own time zone) and
   checks it against each theme's `start`/`end` in the `THEMES` list.
-- Domoween is on from **12:00 am Oct 1** through **11:59 pm Oct 31** Pacific time.
+- Domoween is on from **12:00 am Oct 1** through **11:59 pm Sun Nov 1** Pacific time.
+  The countdown still targets Halloween itself (`halloween: '2026-10-31'`), and the
+  "Happy Halloween" greeting shows on Oct 31 and Nov 1.
   At 12:00 am Nov 1 the page loads exactly as it does today. There's nothing to
   turn off by hand.
 - Outside a theme window the script only adds `data-theme="normal"` to `<html>`
@@ -51,12 +54,13 @@ theme and lets you switch. Placeholder content also gets a yellow
   optional `link`/`linkLabel`, `series` (e.g. `"Domoween"` or
   `"Community Tuesday"`), and optional `art`. Events automatically appear on:
   - the `/events/` calendar, with Add to Google Calendar and a downloadable `.ics`
-  - the Domoween "October events" block on the home page (events dated Oct 1–31)
+  - the Domoween "October events" block on the home page (events dated Oct 1 – Nov 1)
   - the `/domoween/` page, including Event structured data for search engines
 
   With no events in a month, guests see a friendly "coming soon, follow
   @domokuncafe" message rather than placeholder entries.
-- **Recurring listings** (e.g. Domo Hour, weekdays 4–6 PM in October 2026, with its menu card)
+- **Recurring listings** (e.g. Domo Hour, weekdays 4–6 PM, listed Oct 1–31, 2026; its menu lives in
+  `domo-hour/domo-hour-data.js`, see `domo-hour/DOMO-HOUR.md`)
   use `repeat: { days: ["Mon", ...], from, until }` instead of `date`. They
   appear on every matching day in the calendar grid but as one card in the
   lists. Their Google Calendar/.ics invites repeat weekly, and their Event
@@ -97,7 +101,9 @@ file is, where to drop high-res originals, and the licensor's usage rules.
    lists, and a small `critical` CSS string that hides whatever the theme
    replaces. A commented `harvest` example is already there.
 3. The windows shouldn't overlap. If they do, the first match in the list wins.
-4. For next October, copy the Domoween entry and change the year in `start` and
+4. Domo Hour (`domo-hour/`) is not part of any theme; it shows all year and only picks up
+   a seasonal skin. See `domo-hour/DOMO-HOUR.md`.
+5. For next October, copy the Domoween entry and change the year in `start` and
    `end`. The countdown targets the theme's `end` date automatically.
 
 ## Files

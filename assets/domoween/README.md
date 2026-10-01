@@ -69,3 +69,9 @@ distorts it.
 4. Don't mix line art and photos in the same scene or composition.
 5. No alcohol, tobacco, drugs, religion, politics, violence or gore themes. Keep
    it cute-spooky.
+
+## Domo Hour
+
+Domo Hour is a separate, permanent section (`domo-hour/`) that uses existing food photography,
+not Domo art. To remove its Domo-ween badge and skin, edit the menu, or swap photos, see
+[`domo-hour/DOMO-HOUR.md`](../../domo-hour/DOMO-HOUR.md).
