@@ -63,3 +63,6 @@
 }
 .foot .legal{border-top:1px solid #ffffff26;color:#F9EBDD;font-size:.86rem;margin:2.5rem 0 0;max-width:none;padding-top:1.2rem}
 .foot .legal+.bottom{border-top:0;margin-top:.9rem;padding-top:0}
+.nav .nav-hl{background:var(--y);border-radius:999px;color:var(--d);padding:.42rem .9rem}
+.nav a.nav-hl:hover,.nav a.nav-hl:focus-visible{background:var(--r);color:#fff}
+@media(max-width:900px){.nav .nav-hl{align-self:flex-start}}
