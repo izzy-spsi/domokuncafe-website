@@ -1,0 +1,97 @@
+/* Domo Hour section (normal theme). Seasonal looks live in the season's own stylesheet,
+   e.g. seasons/domoween/domoween.css → "Domo Hour: Domo-ween Edition". */
+.dh {
+  --dh-bg-1: #4A250D;
+  --dh-bg-2: #2B1A12;
+  --dh-glow: rgba(204, 34, 34, .5);
+  --dh-text: #FDF6EE;
+  --dh-muted: #E9D6C4;
+  --dh-accent: #FFD98B;
+  --dh-pill-bg: var(--red, #CC2222);
+  --dh-pill-text: #fff;
+  --dh-card: #FDF6EE;
+  --dh-card-text: #2B1A12;
+  --dh-card-muted: #694d3b;
+  --dh-price: var(--red, #CC2222);
+  --dh-hero-bg: linear-gradient(135deg, #CC2222 0%, #971919 100%);
+  --dh-hero-price: #FFD98B;
+  --dh-hero-text: #fff;
+  --dh-cta-bg: #FFD98B;
+  --dh-cta-text: #4A250D;
+  background: radial-gradient(ellipse 70% 60% at 90% 0%, var(--dh-glow), transparent 65%), linear-gradient(160deg, var(--dh-bg-1) 0%, var(--dh-bg-2) 100%);
+  color: var(--dh-text);
+  overflow: hidden;
+  padding: 5.5rem 0;
+  position: relative;
+  scroll-margin-top: 76px;
+}
+.dh__inner { align-items: center; display: grid; gap: clamp(2rem, 4vw, 3.5rem); grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); }
+.dh__copy { display: flex; flex-direction: column; }
+.dh__top { align-items: center; display: flex; flex-wrap: wrap; gap: .5rem .7rem; order: 1; }
+.dh__eyebrow { color: var(--dh-accent); font-size: .8rem; font-weight: 700; letter-spacing: .18em; margin: 0; text-transform: uppercase; }
+.dh__badge { background: rgba(255, 255, 255, .1); border: 1px solid currentColor; border-radius: 999px; color: var(--dh-accent); font-size: .72rem; font-weight: 700; letter-spacing: .05em; padding: .22rem .7rem; text-transform: uppercase; }
+.dh__title { color: var(--dh-text); font-family: var(--display); font-size: clamp(3.4rem, 6.4vw, 5.4rem); letter-spacing: .01em; line-height: .95; margin: .4rem 0 .55rem; order: 2; }
+.dh__tagline { color: var(--dh-accent); font-size: clamp(.95rem, 1.6vw, 1.15rem); font-weight: 800; letter-spacing: .08em; margin: 0 0 1rem; order: 3; }
+.dh__schedule { align-self: flex-start; background: var(--dh-pill-bg); border-radius: 999px; box-shadow: 0 8px 20px rgba(0, 0, 0, .25); color: var(--dh-pill-text); font-size: 1.02rem; font-weight: 800; letter-spacing: .06em; margin: 0 0 1rem; order: 4; padding: .55rem 1.15rem; }
+.dh__schedule-short { display: none; }
+.dh__sub { color: var(--dh-muted); font-size: 1.06rem; margin: 0; max-width: 32rem; order: 5; }
+.dh__offers { display: grid; gap: .8rem; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.3fr); list-style: none; margin: 1.5rem 0 1.7rem; order: 6; padding: 0; }
+.dh__offer { background: var(--dh-card); border-radius: 1.1rem; box-shadow: 0 12px 28px rgba(0, 0, 0, .28); color: var(--dh-card-text); display: flex; flex-direction: column; gap: .2rem; justify-content: center; min-height: 7.2rem; padding: .95rem 1rem; }
+.dh__offer-label { color: var(--dh-card-muted); font-size: .74rem; font-weight: 800; letter-spacing: .12em; line-height: 1.25; }
+.dh__offer-price { color: var(--dh-price); font: 400 clamp(2.5rem, 4.4vw, 3.5rem)/1 var(--display); }
+.dh__offer--hero { background: var(--dh-hero-bg); color: var(--dh-hero-text); }
+.dh__offer--hero .dh__offer-price { color: var(--dh-hero-price); font-size: clamp(3rem, 5.2vw, 4.2rem); }
+.dh__offer--hero .dh__offer-label { color: var(--dh-hero-text); font-size: .82rem; }
+.dh__ctas { display: flex; flex-wrap: wrap; gap: .75rem; order: 7; }
+.dh .dh__menu-btn { background: var(--dh-cta-bg); border-color: var(--dh-cta-bg); color: var(--dh-cta-text); }
+.dh .dh__menu-btn:hover, .dh .dh__menu-btn:focus-visible { background: #fff; border-color: #fff; color: var(--dh-cta-text); }
+.dh__chev { display: inline-block; transition: transform .2s ease; }
+.dh__menu-btn[aria-expanded="true"] .dh__chev { transform: rotate(180deg); }
+.dh .dh__visit { border-color: rgba(253, 246, 238, .85); color: var(--dh-text); }
+.dh .dh__visit:hover, .dh .dh__visit:focus-visible { background: var(--dh-text); border-color: var(--dh-text); color: var(--dh-bg-2); }
+.dh :focus-visible { outline: 3px solid var(--dh-accent); outline-offset: 3px; }
+
+.dh__photos { display: grid; gap: .8rem; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.dh__photo { aspect-ratio: 4 / 3; background: #f7efe6; border: 4px solid var(--dh-card); border-radius: 1.2rem; box-shadow: 0 16px 34px rgba(0, 0, 0, .35); margin: 0; overflow: hidden; }
+.dh__photo img { height: 100%; object-fit: cover; width: 100%; }
+.dh__photo--1 { aspect-ratio: 16 / 10; grid-column: 1 / -1; transform: rotate(-1.2deg); }
+.dh__photo--2 { transform: rotate(1.5deg); }
+.dh__photo--3 { transform: rotate(-1deg) translateY(6px); }
+.dh__photo--4 { transform: rotate(2deg); }
+
+.dh__menu { animation: dh-reveal .3s ease; background: var(--dh-card); border-radius: var(--round, 1.35rem); box-shadow: 0 18px 45px rgba(0, 0, 0, .35); color: var(--dh-card-text); margin-top: 2.6rem; padding: clamp(1.2rem, 3vw, 2.2rem) clamp(1.1rem, 3.5vw, 2.4rem); scroll-margin-top: 90px; }
+.dh__menu[hidden] { display: none; }
+.dh__menu-title { color: var(--dh-price); font: 400 clamp(1.9rem, 4vw, 2.6rem)/1 var(--display); margin: 0 0 1rem; }
+.dh__menu-cols { display: grid; gap: 1rem 3rem; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
+.dh__menu-heading { color: var(--dh-card-muted); font: 800 .82rem var(--body); letter-spacing: .16em; margin: 0 0 .3rem; }
+.dh__menu-list { list-style: none; margin: 0; padding: 0; }
+.dh__menu-list li { align-items: baseline; border-bottom: 1px solid rgba(139, 69, 19, .12); display: flex; font-size: 1.06rem; gap: .5rem; min-height: 3rem; padding: .7rem 0; }
+.dh__menu-name { font-weight: 700; }
+.dh__menu-dots { border-bottom: 2px dotted rgba(139, 69, 19, .35); flex: 1 1 1rem; min-width: 1rem; transform: translateY(-.3em); }
+.dh__menu-price { color: var(--dh-price); font-size: 1.15rem; font-variant-numeric: tabular-nums; font-weight: 800; white-space: nowrap; }
+.dh__menu-when { border-top: 2px dashed rgba(139, 69, 19, .3); color: var(--dh-card-text); font-weight: 800; letter-spacing: .04em; margin: 1.2rem 0 0; padding-top: 1rem; text-align: center; }
+@keyframes dh-reveal { from { opacity: 0; transform: translateY(8px); } }
+
+@media (max-width: 850px) {
+  .dh { padding: 3.2rem 0 3.6rem; scroll-margin-top: 68px; }
+  .dh__inner { grid-template-columns: 1fr; }
+  .dh__menu { scroll-margin-top: 80px; }
+}
+@media (max-width: 640px) {
+  /* Offer first: title → schedule → prices, then the rest. */
+  .dh__title { font-size: clamp(2.6rem, 14.6vw, 4.2rem); margin: .3rem 0 .6rem; white-space: nowrap; }
+  .dh__schedule { font-size: 1.05rem; margin-bottom: .85rem; order: 3; }
+  .dh__schedule-long { clip: rect(0 0 0 0); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
+  .dh__schedule-short { display: inline; }
+  .dh__offers { gap: .6rem; grid-template-columns: 1fr 1fr; margin: 0 0 1.1rem; order: 4; }
+  .dh__offer { min-height: 5.4rem; padding: .7rem .85rem; }
+  .dh__offer--hero { align-items: center; flex-direction: row; gap: .75rem; grid-column: 1 / -1; min-height: 0; }
+  .dh__offer--hero .dh__offer-price { font-size: 3rem; }
+  .dh__tagline { margin-bottom: .6rem; order: 5; }
+  .dh__sub { font-size: 1rem; margin-bottom: 1.2rem; order: 6; }
+  .dh__ctas .button { width: 100%; }
+  .dh__photos { gap: .55rem; }
+  .dh__photo { border-width: 3px; border-radius: .9rem; }
+  .dh__menu-cols { grid-template-columns: 1fr; }
+  .dh__menu-list li { font-size: 1.05rem; }
+}
