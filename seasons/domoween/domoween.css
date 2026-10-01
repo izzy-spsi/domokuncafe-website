@@ -379,6 +379,7 @@ html[data-theme="domoween"] .dw-lto p { color: var(--dw-body-dark); margin: 0 0 
 html[data-theme="domoween"] .dw-lto ul { color: var(--dw-body-dark); margin: .2rem 0 0; padding-left: 1.2rem; }
 html[data-theme="domoween"] .dw-lto li { margin: .3rem 0; }
 html[data-theme="domoween"] .dw-lto__photos { display: grid; gap: .8rem; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); }
+html[data-theme="domoween"] .dw-lto__photos:has(> figure:only-child) { grid-template-columns: minmax(0, min(100%, 340px)); justify-content: center; }
 html[data-theme="domoween"] .dw-lto__photos figure { margin: 0; }
 html[data-theme="domoween"] .dw-lto__photos img { aspect-ratio: 3 / 4; border-radius: 16px; display: block; height: auto; object-fit: cover; width: 100%; }
 html[data-theme="domoween"] .dw-lto__photos figcaption { color: #2B1A12; font-size: .85rem; font-weight: 700; margin-top: .35rem; text-align: center; }

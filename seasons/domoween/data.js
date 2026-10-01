@@ -41,19 +41,16 @@ window.DOMOWEEN_DATA = {
         name: "Domo\u2019s Monster Burger",
         description: "Two wagyu smash patties, American cheese, bacon, spicy mayo, and crispy onions on a seasonal red brioche bun.",
         photos: [
-          { src: "/assets/domoween/lto/monster-burger-onions-bacon.jpg", alt: "Domo\u2019s Monster Burger with crispy onions and bacon on a red bun", caption: "With crispy onions and bacon" },
-          { src: "/assets/domoween/lto/monster-burger-onions.jpg", alt: "Domo\u2019s Monster Burger with crispy onions", caption: "With crispy onions" },
-          { src: "/assets/domoween/lto/monster-burger.jpg", alt: "Domo\u2019s Monster Burger", caption: "The Monster Burger" }
+          { src: "/assets/domoween/lto/monster-burger-onions.jpg", alt: "The Monster Burger", caption: "The Monster Burger" }
         ]
       },
       {
         tag: "Limited time",
         name: "Domo Bites Back",
         description: "Crispy breaded cauliflower bites tossed in your choice of sauce.",
-        list: ["Sweet and Spicy", "Spicy Gochujang", "House Buffalo"],
+        list: ["Sweet and Spicy Gochujang", "House Buffalo"],
         photos: [
-          { src: "/assets/domoween/lto/bites-back-sweet-and-spicy.jpg", alt: "Domo Bites Back breaded cauliflower bites in Sweet and Spicy sauce", caption: "Sweet and Spicy" },
-          { src: "/assets/domoween/lto/bites-back-gochujang.jpg", alt: "Domo Bites Back breaded cauliflower bites in Spicy Gochujang sauce", caption: "Spicy Gochujang" },
+          { src: "/assets/domoween/lto/bites-back-gochujang.jpg", alt: "Domo Bites Back breaded cauliflower bites in Sweet and Spicy Gochujang sauce", caption: "Sweet and Spicy Gochujang" },
           { src: "/assets/domoween/lto/bites-back-buffalo.jpg", alt: "Domo Bites Back breaded cauliflower bites in House Buffalo sauce", caption: "House Buffalo" }
         ]
       },
