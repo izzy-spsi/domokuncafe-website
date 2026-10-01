@@ -292,7 +292,7 @@
 
     var track = document.querySelector('.marquee__track');
     if (track) {
-      var phrases = ['Happy Domoween', 'Spooky-cute all October', 'Trick or treat yourself', 'Domo & friends in costume'];
+      var phrases = ['Happy Domoween', 'Spooky-cute all October', 'Trick or treat yourself', 'Domo & friends in Halloween art'];
       var html = '';
       for (var r = 0; r < 2; r++) phrases.forEach(function (p) { html += '<span>' + p + '</span><b class="dw-marquee-sep" aria-hidden="true">✦</b>'; });
       track.innerHTML = html;
