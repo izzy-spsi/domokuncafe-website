@@ -130,25 +130,6 @@
     return d === '1,2,3,4,5' ? 'Mon–Fri' : d === '0,6' ? 'Sat–Sun' : ev.repeat.dayIndexes.map(function (i) { return DAYS[i].slice(0, 3); }).join(', ');
   }
 
-  // Dot-leader price card for events with a `menu` (e.g. Domo Hour). opts: { level: 3, footer: html }
-  function menuCardHTML(ev, opts) {
-    opts = opts || {};
-    var groups = (ev.menu || []).filter(function (g) { return g && g.heading && g.items && g.items.length; });
-    if (!groups.length) return '';
-    var level = opts.level || 3, headId = ev.id + '-menu';
-    return '<article class="dh-menu" aria-labelledby="' + esc(headId) + '"><div class="dh-menu__cols">' +
-      groups.map(function (g, i) {
-        var tag = 'h' + (i ? level + 1 : level);
-        return '<div class="dh-menu__group">' +
-          '<' + tag + ' class="dh-menu__title' + (i ? ' dh-menu__title--sub' : '') + '"' + (i ? '' : ' id="' + esc(headId) + '"') + '>' + esc(g.heading) + '</' + tag + '>' +
-          (g.note ? '<p class="dh-menu__note">' + esc(g.note) + '</p>' : '') +
-          '<ul class="dh-menu__list">' + g.items.map(function (item) {
-            return '<li><span class="dh-menu__name">' + esc(item.name) + '</span><span class="dh-menu__dots" aria-hidden="true"></span><span class="dh-menu__price">' + esc(item.price) + '</span></li>';
-          }).join('') + '</ul></div>';
-      }).join('') + '</div>' +
-      (opts.footer ? '<div class="dh-menu__foot">' + opts.footer + '</div>' : '') + '</article>';
-  }
-
   function socialLinks(className, extraClass) {
     return SOCIAL_LINKS.map(function (s, i) {
       return '<a class="' + className + (i && extraClass ? ' ' + extraClass : '') + '" href="' + s[0] + '" target="_blank" rel="noopener"' + (s[2] ? ' aria-label="' + s[2] + '"' : '') + '>' + s[1] + ' <span aria-hidden="true">↗</span></a>';
@@ -218,8 +199,10 @@
     return 'FREQ=WEEKLY;BYDAY=' + ev.repeat.dayIndexes.map(function (i) { return RRULE_DAYS[i]; }).join(',') + ';UNTIL=' + until;
   }
 
+  function absUrl(link) { return /^https?:/.test(link) ? link : SITE + (link.charAt(0) === '/' ? '' : '/') + link; }
+
   function details(ev) {
-    return [ev.description, ev.link ? ev.link : '', SITE + '/events/?month=' + ev.date.slice(0, 7)].filter(Boolean).join('\n\n');
+    return [ev.description, ev.link ? absUrl(ev.link) : '', SITE + '/events/?month=' + ev.date.slice(0, 7)].filter(Boolean).join('\n\n');
   }
 
   function googleUrl(ev) {
@@ -258,7 +241,7 @@
     else lines.push('DTSTART;TZID=' + TZ + ':' + compact(s.start), 'DTEND;TZID=' + TZ + ':' + compact(s.end));
     if (ev.repeat) lines.push('RRULE:' + rrule(ev));
     lines.push('SUMMARY:' + icsText(ev.title + ' at Domo Cafe'), 'DESCRIPTION:' + icsText(details(ev)), 'LOCATION:' + icsText(VENUE.full),
-      'URL:' + (ev.link || SITE + '/events/?month=' + ev.date.slice(0, 7)), 'END:VEVENT', 'END:VCALENDAR');
+      'URL:' + (ev.link ? absUrl(ev.link) : SITE + '/events/?month=' + ev.date.slice(0, 7)), 'END:VEVENT', 'END:VCALENDAR');
     return lines.map(fold).join('\r\n') + '\r\n';
   }
 
@@ -285,7 +268,7 @@
       location: { '@type': 'Restaurant', '@id': SITE + '/#restaurant', name: VENUE.name, address: { '@type': 'PostalAddress', streetAddress: VENUE.street, addressLocality: VENUE.city, addressRegion: VENUE.region, postalCode: VENUE.zip, addressCountry: 'US' } },
       organizer: { '@type': 'Organization', name: VENUE.name, url: SITE + '/' },
       image: [SITE + (ev.series === 'Domoween' ? '/assets/domoween/happy-halloween-domo-kun-banner.png' : '/domo-cafe-logo-transparent.png')],
-      url: ev.link || SITE + '/events/?month=' + ev.date.slice(0, 7) + '#' + ev.id
+      url: ev.link ? absUrl(ev.link) : SITE + '/events/?month=' + ev.date.slice(0, 7) + '#' + ev.id
     };
     if (ev.description) node.description = ev.description;
     if (ev.series === 'Domoween') node.superEvent = { '@id': SITE + '/domoween/#event' };
@@ -329,7 +312,7 @@
   }
 
   window.DomoEvents = {
-    list: list, between: between, occurrenceDates: occurrenceDates, formatDate: formatDate, formatTime: formatTime, whenLabel: whenLabel, shortWhen: shortWhen, socialLinks: socialLinks, menuCardHTML: menuCardHTML, googleUrl: googleUrl,
+    list: list, between: between, occurrenceDates: occurrenceDates, formatDate: formatDate, formatTime: formatTime, whenLabel: whenLabel, shortWhen: shortWhen, socialLinks: socialLinks, googleUrl: googleUrl,
     icsFor: icsFor, downloadIcs: downloadIcs, jsonLd: jsonLd, injectJsonLd: injectJsonLd, calendarButtons: calendarButtons,
     bindIcs: bindIcs, comingSoon: function (month) { return (data.comingSoon || {})[month] || ''; }, today: laToday, esc: esc, MONTHS: MONTHS
   };
@@ -401,7 +384,7 @@
                 (ev.series ? '<p class="ev-card__series">' + esc(ev.series) + '</p>' : '') +
                 '<h3>' + esc(ev.title) + '</h3>' +
                 '<p class="ev-card__when"><time datetime="' + esc(ev.date + (ev.startTime ? 'T' + ev.startTime : '')) + '">' + esc(whenLabel(ev)) + ' · ' + esc(formatTime(ev)) + '</time></p>' +
-                (ev.menu ? menuCardHTML(ev, { level: 4 }) : ev.description ? '<p>' + esc(ev.description) + '</p>' : '') +
+                (ev.description && !ev.repeat ? '<p>' + esc(ev.description) + '</p>' : '') +
                 '<div class="ev-card__actions">' +
                   (ev.link ? '<a class="ev-btn ev-btn--primary" href="' + esc(ev.link) + '"' + (/^https?:/.test(ev.link) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(ev.linkLabel || 'Details') + '</a>' : '') +
                   calendarButtons(ev) +

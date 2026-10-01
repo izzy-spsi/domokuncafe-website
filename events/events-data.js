@@ -17,9 +17,6 @@
  *                { days: ["Mon", "Tue", "Wed", "Thu", "Fri"], from: "YYYY-MM-DD", until: "YYYY-MM-DD" }
  *                It shows on every matching day in the calendar grid, but as ONE card in the lists,
  *                and its calendar invite repeats weekly until the `until` date.
- *   menu:        optional menu card, a list of sections:
- *                { heading: "SECTION NAME", note: "optional line under it", items: [{ name: "Item", price: "$0" }] }
- *                Shown as a dot-leader price card on the home page, /domoween/ and /events/.
  *   art:         optional official Domo art for the card (Domoween events only), one of:
  *                wc_44_frankenstein, wc_40_mummy, wc_41_jack-o-lantern, wc_43_witch-broom,
  *                wc_53_mr-usagi-pumpkin-mask, tashanna_pumpkin-head
@@ -37,32 +34,13 @@ window.DOMO_EVENTS = {
   events: [
     {
       title: "Domo Hour",
-      description: "Weekdays • 4–6 PM",
+      description: "Monday–Friday • 4–6 PM",
       startTime: "16:00",
       endTime: "18:00",
       repeat: { days: ["Mon", "Tue", "Wed", "Thu", "Fri"], from: "2026-10-01", until: "2026-10-31" },
-      menu: [
-        {
-          heading: "DOMO HOUR",
-          note: "Weekdays • 4–6 PM",
-          items: [
-            { name: "Domo Style Fries", price: "$8" },
-            { name: "Curry Mac & Cheese", price: "$9" },
-            { name: "Domo Hour Yakisoba", price: "$10" },
-            { name: "Katsu Bites", price: "$10" },
-            { name: "Domo Single Smash", price: "$12" },
-            { name: "Crispy Chicken Loaded Fries", price: "$14" },
-            { name: "Churro Fries", price: "$8" }
-          ]
-        },
-        {
-          heading: "DOMO HOUR SIPS",
-          items: [
-            { name: "Classic Sips", price: "$6" },
-            { name: "Premium Sips", price: "$7" }
-          ]
-        }
-      ]
+      // Menu and prices live in domo-hour/domo-hour-data.js (one source of truth).
+      link: "/#domo-hour-menu",
+      linkLabel: "See the Domo Hour menu"
     },
 
     // {
