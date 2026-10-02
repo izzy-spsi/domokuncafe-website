@@ -69,7 +69,10 @@
 .dh__menu-cols { display: grid; gap: 1rem 3rem; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
 .dh__menu-heading { color: var(--dh-card-muted); font: 800 .82rem var(--body); letter-spacing: .16em; margin: 0 0 .3rem; }
 .dh__menu-list { list-style: none; margin: 0; padding: 0; }
-.dh__menu-list li { align-items: baseline; border-bottom: 1px solid rgba(139, 69, 19, .12); display: flex; font-size: 1.06rem; gap: .5rem; min-height: 3rem; padding: .7rem 0; }
+.dh__menu-list li { border-bottom: 1px solid rgba(139, 69, 19, .12); font-size: 1.06rem; min-height: 3rem; padding: .7rem 0; }
+.dh__menu-row { align-items: baseline; display: flex; gap: .5rem; }
+.dh__menu-desc, .dh__menu-add { color: var(--dh-card-muted); font-size: .92rem; line-height: 1.45; margin: .25rem 0 0; max-width: 34rem; }
+.dh__menu-add { color: var(--dh-price); font-weight: 700; }
 .dh__menu-name { font-weight: 700; }
 .dh__menu-dots { border-bottom: 2px dotted rgba(139, 69, 19, .35); flex: 1 1 1rem; min-width: 1rem; transform: translateY(-.3em); }
 .dh__menu-price { color: var(--dh-price); font-size: 1.15rem; font-variant-numeric: tabular-nums; font-weight: 800; white-space: nowrap; }
