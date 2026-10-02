@@ -37,7 +37,9 @@
   var menu = (showMenu ? data.menu || [] : []).map(function (group) {
     return '<div class="dh__menu-group"><h3 class="dh__menu-heading">' + esc(group.heading) + '</h3><ul class="dh__menu-list">' +
       (group.items || []).map(function (item) {
-        return '<li><span class="dh__menu-name">' + esc(item.name) + '</span><span class="dh__menu-dots" aria-hidden="true"></span><span class="dh__menu-price">' + esc(item.price) + '</span></li>';
+        return '<li><div class="dh__menu-row"><span class="dh__menu-name">' + esc(item.name) + '</span><span class="dh__menu-dots" aria-hidden="true"></span><span class="dh__menu-price">' + esc(item.price) + '</span></div>' +
+          (item.desc ? '<p class="dh__menu-desc">' + esc(item.desc) + '</p>' : '') +
+          (item.add ? '<p class="dh__menu-add">' + esc(item.add) + '</p>' : '') + '</li>';
       }).join('') + '</ul></div>';
   }).join('');
 

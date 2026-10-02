@@ -16,11 +16,12 @@ theme. During Domo-ween it gets a seasonal skin; on the normal site it doesn't.
 
 ## Menu on/off switch (`showMenu`)
 
-The menu is **switched off** until staff confirm it. The setting is `showMenu: false` at the top of
-`domo-hour/domo-hour-data.js`.
+The menu is **switched on** (`showMenu: true` at the top of `domo-hour/domo-hour-data.js`) with the
+final menu from the kitchen staff.
 
-- **When it's `false`,** the "See the Domo Hour menu" button, the menu panel and the three price
-  callouts (Eats from $8, Sips from $6, $12 Domo Single Smash) are left out of the page entirely.
+- **When it's `true`,** the section shows the three price callouts (Eats from $8, Sips from $6,
+  $12 Single Smash Burger), the "See the Domo Hour menu" button and the menu panel.
+- **When it's `false`,** the button, the menu panel and the price callouts are left out of the page entirely.
   They aren't hidden; they're never written to the page in any theme, so no menu names or prices
   appear in the rendered HTML or structured data. A `/#domo-hour-menu` link just scrolls to the
   section.
@@ -29,7 +30,9 @@ The menu is **switched off** until staff confirm it. The setting is `showMenu: f
   "Plan your visit", the nav pill, the Domo-ween layer, and the `/events/` listing with its
   calendar invites.
 
-**To turn the menu back on:**
+**To turn the menu off again,** set `showMenu: false`.
+
+**To turn it back on:**
 
 1. Set `showMenu: true`.
 2. Optionally, in `events/events-data.js`, set the Domo Hour entry's `link` to `"/#domo-hour-menu"`
@@ -42,12 +45,16 @@ unconfirmed items out of that file until they're approved.
 
 ## Edit the menu or prices
 
-Open `domo-hour/domo-hour-data.js` and change `menu` (the item names and prices
-under `EATS` and `SIPS`) or `offers` (the three big callouts). Both only show
-while `showMenu` is `true`. Keep the approved
-names and prices exactly; don't add descriptions, restrictions or alcohol wording.
-The `/events/` listing and `/domoween/` link to this menu, so there's nothing else
-to update.
+Open `domo-hour/domo-hour-data.js` and change `menu` (the items under `BITES` and
+`SIPS`) or `offers` (the three big callouts). Both only show while `showMenu` is
+`true`. Each item has a `name` and `price`, plus an optional `desc` (shown under
+the item) and `add` (an add-on line, such as "Add bulgogi beef +$8"). Keep the
+names, prices and descriptions exactly as the kitchen staff approved them; don't
+write descriptions of your own, and no alcohol wording. If a price changes,
+check that the callouts still match the menu (Eats from = the lowest bite price,
+Sips from = the lowest sip price). `availability` is the line at the bottom of
+the menu panel. The `/events/` listing and `/domoween/` link to this menu, so
+there's nothing else to update.
 
 ## Swap photos
 
@@ -57,9 +64,8 @@ what's actually in the photo).
 
 Temporary stand-ins are marked `temporary: true`:
 
-- **Domo Single Smash:** `Smash Burger.jpg` is standing in for it.
+- **Single Smash Burger:** `Smash Burger.jpg` is standing in for it.
 - **Domo Hour Sips:** `Strawberry Refresher.jpg` is standing in for them.
-- **Katsu Bites:** there's no photo yet, so it isn't pictured.
 
 When a real photo exists, add it under `assets/` and update `src` and `alt`. Then
 delete `temporary` and `standInFor`.
