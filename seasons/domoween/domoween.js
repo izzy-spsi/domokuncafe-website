@@ -90,7 +90,10 @@
               '<a class="button dw-button dw-button--ghost" href="' + eventsUrl() + '">October events</a>' +
               '<a class="button dw-button dw-button--ghost" href="#visit">Plan your visit</a>' +
             '</div>' +
-            '<p class="dw-hero__links"><a href="/domoween/">All about Domoween <span aria-hidden="true">→</span></a><button type="button" data-dw-rsvp>Stay updated <span aria-hidden="true">→</span></button></p>' +
+            '<div class="dw-hero__signup">' +
+              '<button type="button" class="button dw-button" data-dw-rsvp>Stay Updated</button>' +
+            '</div>' +
+            '<p class="dw-hero__links"><a href="/domoween/">All about Domoween <span aria-hidden="true">→</span></a></p>' +
             '<p class="dw-hero__address">8340 La Palma Ave · Buena Park, CA 90620</p>' +
           '</div>' +
           '<div class="dw-hero__art">' +
@@ -311,6 +314,16 @@
       var html = '';
       for (var r = 0; r < 2; r++) phrases.forEach(function (p) { html += '<span>' + p + '</span><b class="dw-marquee-sep" aria-hidden="true">✦</b>'; });
       track.innerHTML = html;
+    }
+
+    var eventsHeading = document.getElementById('events-heading');
+    if (eventsHeading && !eventsHeading.parentNode.querySelector('[data-dw-rsvp]')) {
+      var eventsSignup = document.createElement('button');
+      eventsSignup.type = 'button';
+      eventsSignup.className = 'button dw-button dw-events-signup';
+      eventsSignup.setAttribute('data-dw-rsvp', '');
+      eventsSignup.textContent = 'Stay Updated';
+      eventsHeading.insertAdjacentElement('afterend', eventsSignup);
     }
 
     var footer = document.querySelector('.site-footer .container');
