@@ -1,4 +1,16 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.domokuncafe.com/sitemap.xml
+# Admin, staff, the unpublished community hub, design previews, and the sample
+# profile. Prefix rules cover the extensionless and .html URLs GitHub Pages
+# serves (/dashboard and /dashboard.html, /staff and /staff.html).
+# /community also covers /community.html, /community-dates.json, and
+# /community-example-tennis.html (Example High School Tennis). That sample HTML
+# is not in the repo; the live URL 404s.
+Disallow: /dashboard
+Disallow: /staff
+Disallow: /community
+Disallow: /preview-july4-banner.html
+Disallow: /index-hours-test.html
+
+Sitemap: https://domokuncafe.com/sitemap.xml

@@ -9,7 +9,7 @@
 (function () {
   if (window.DomoEvents) return;
   var TZ = 'America/Los_Angeles';
-  var SITE = 'https://www.domokuncafe.com';
+  var SITE = 'https://domokuncafe.com';
   var VENUE = {
     name: 'Domo Cafe',
     street: '8340 La Palma Ave',

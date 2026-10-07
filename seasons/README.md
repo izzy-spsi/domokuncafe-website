@@ -32,7 +32,7 @@ Add one of these to the end of the site address:
 | `?themeDate=2026-10-31` | Pretends today is that date in LA (testing only) |
 | add `&clean=1` | Guest look while previewing: no preview bar, no PLACEHOLDER stickers (e.g. `?theme=domoween&clean=1` for staff). Sticks for the tab; `?clean=0` brings the stickers back |
 
-Examples: `https://www.domokuncafe.com/?theme=domoween` once this is merged, or
+Examples: `https://domokuncafe.com/?theme=domoween` once this is merged, or
 `http://localhost:3700/?theme=domoween` when running `npm start` locally.
 
 A preview choice sticks for that browser tab until you pick another option or
@@ -75,6 +75,12 @@ official art only, so don't add food photos to them.
 
 ## Pages
 
+- The homepage nav includes a static Domoween link, and a crawlable teaser
+  (`[data-season-teaser]` in `index.html`) reads "Halloween in Buena Park:
+  Domoween at Domo Cafe, Oct 1 – Nov 1, 2026". A small script hides that teaser
+  outside Oct 1–Nov 1, 2026 in America/Los_Angeles (same window as `THEMES`,
+  and `?themeDate=` works). After the season, delete the aside, its script,
+  and the `.season-teaser` rules in `index.html` and `seasons/domoween/domoween.css`.
 - `/domoween/` (`domoween/index.html`) is a static, server-rendered landing page
   for Halloween searches. It carries the title, description, Open Graph tags and
   Event + Restaurant JSON-LD. It stays up all year and switches its status line

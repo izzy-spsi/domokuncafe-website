@@ -3,13 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Google tag (gtag.js) G-MYQJZDB2MR — shared include; live www only -->
+  <!-- Google tag (gtag.js) G-MYQJZDB2MR — shared include; live site only -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYQJZDB2MR"></script>
   <script src="/ga4.js"></script>
   <meta name="theme-color" content="#CC2222">
   <meta name="description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
   <title>Domo Cafe - Buena Park, CA</title>
-  <link rel="canonical" href="https://www.domokuncafe.com/">
+  <link rel="canonical" href="https://domokuncafe.com/">
   <link rel="icon" type="image/png" href="domo-cafe-logo-transparent.png">
   <link rel="apple-touch-icon" href="domo-cafe-logo-transparent.png">
   <meta property="og:type" content="website">
@@ -17,24 +17,26 @@
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Domo Cafe - Buena Park, CA">
   <meta property="og:description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
-  <meta property="og:url" content="https://www.domokuncafe.com/">
-  <meta property="og:image" content="https://www.domokuncafe.com/assets/sydney/hero/hero-1.png">
+  <meta property="og:url" content="https://domokuncafe.com/">
+  <meta property="og:image" content="https://domokuncafe.com/assets/sydney/hero/hero-1.png">
   <meta property="og:image:alt" content="Domo Cafe entrance doors painted with Domo's face">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="605">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Domo Cafe - Buena Park, CA">
   <meta name="twitter:description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
-  <meta name="twitter:image" content="https://www.domokuncafe.com/assets/sydney/hero/hero-1.png">
+  <meta name="twitter:image" content="https://domokuncafe.com/assets/sydney/hero/hero-1.png">
+  <!-- TODO(Izzy): add hasMap and geo (latitude/longitude) once the exact pin for 8340 La Palma Ave is confirmed. The only coordinates in the repo are an approximate Buena Park ZIP center in dashboard.html (33.8753, -118.0109), not the cafe. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": ["Restaurant", "LocalBusiness"],
-    "@id": "https://www.domokuncafe.com/#restaurant",
+    "@id": "https://domokuncafe.com/#restaurant",
     "name": "Domo Cafe",
-    "url": "https://www.domokuncafe.com/",
-    "image": "https://www.domokuncafe.com/assets/sydney/hero/hero-1.png",
-    "logo": "https://www.domokuncafe.com/domo-cafe-logo-transparent.png",
+    "alternateName": "Domo Kun Cafe",
+    "url": "https://domokuncafe.com/",
+    "image": "https://domokuncafe.com/assets/sydney/hero/hero-1.png",
+    "logo": "https://domokuncafe.com/domo-cafe-logo-transparent.png",
     "description": "Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.",
     "telephone": "+1-415-360-3666",
     "email": "info@domokuncafe.com",
@@ -307,6 +309,11 @@
     .footer-credit__note { color: #DFC5B2; font-size: .78rem; }
     @media (max-width: 720px) { .footer-credit { text-align: left; } }
 
+    /* Domoween teaser (Oct 1–Nov 1, 2026). Delete with the [data-season-teaser] block after the season. */
+    .season-teaser { background: var(--brown-dark); color: #FFD98B; padding: .8rem 0; }
+    .season-teaser p { color: #FFD98B; font-size: .95rem; margin: 0; max-width: none; }
+    .season-teaser a { color: #fff; font-weight: 700; text-decoration: none; }
+    .season-teaser a:hover, .season-teaser a:focus-visible { color: #FFD98B; }
     .delivery-band { background: #fff; border-bottom: 1px solid rgba(139,69,19,.12); padding: 1rem 0; }
     .delivery-band__inner { align-items: center; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; }
     .delivery-band__copy { display: grid; gap: .15rem; }
@@ -324,7 +331,7 @@
   <link rel="stylesheet" href="/domo-hour/domo-hour.css">
   <script src="/domo-hour/domo-hour-data.js" defer></script>
   <script src="/domo-hour/domo-hour.js" defer></script>
-  <!-- Seasonal themes (Domoween Oct 1–31, 2026). Preview: ?theme=domoween | ?theme=normal | ?theme=auto. See seasons/README.md -->
+  <!-- Seasonal themes (Domoween Oct 1–Nov 1, 2026). Preview: ?theme=domoween | ?theme=normal | ?theme=auto. See seasons/README.md -->
   <script src="seasons/seasons.js"></script>
 </head>
 <body>
@@ -333,7 +340,7 @@
     <a class="brand" href="#top" aria-label="Domo Cafe home"><img src="domo-cafe-logo-transparent.png" alt="Domo Cafe"></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">☰</button>
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-      <a class="nav-hl nav-priority" href="#domo-hour">Domo Hour</a><a class="nav-priority" href="/events/">Events</a><a href="#menu">Menu</a><a href="#story">Our Story</a><a href="#visit">Visit</a><!-- Community nav hidden until hub is ready --><a href="#faq">FAQ</a>
+      <a class="nav-hl nav-priority" href="#domo-hour">Domo Hour</a><a class="dw-nav-link nav-priority" href="/domoween/">Domoween</a><a class="nav-priority" href="/events/">Events</a><a href="#menu">Menu</a><a href="#story">Our Story</a><a href="#visit">Visit</a><!-- Community nav hidden until hub is ready --><a href="#faq">FAQ</a>
       <a class="button button--nav" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Order Now</a>
       <!-- Join CHOMPS still hidden until launch -->
     </nav>
@@ -373,7 +380,29 @@
       </div>
     </section>
     <div class="awning" aria-hidden="true"></div>
-    
+
+    <!-- Domoween teaser for crawlers. Dates match seasons/seasons.js (Oct 1–Nov 1, 2026, America/Los_Angeles). The script hides it outside that window; delete this aside, the script, and .season-teaser after the season. -->
+    <aside class="season-teaser" data-season-teaser data-start="2026-10-01" data-end="2026-11-01">
+      <div class="container">
+        <p><a href="/domoween/">Halloween in Buena Park: Domoween at Domo Cafe, Oct 1 – Nov 1, 2026</a></p>
+      </div>
+    </aside>
+    <script>
+      (function () {
+        var el = document.querySelector('[data-season-teaser]');
+        if (!el) return;
+        var start = el.getAttribute('data-start'), end = el.getAttribute('data-end'), today, test;
+        try {
+          var p = {};
+          new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+          today = p.year + '-' + p.month + '-' + p.day;
+        } catch (e) { today = new Date(Date.now() - 8 * 3600e3).toISOString().slice(0, 10); }
+        test = (location.search.match(/[?&]themeDate=(\d{4}-\d{2}-\d{2})/) || [])[1];
+        if (test) today = test;
+        if (today < start || today > end) el.hidden = true;
+      })();
+    </script>
+
     <section class="delivery-band" id="delivery" aria-label="Online ordering">
       <div class="container delivery-band__inner">
         <div class="delivery-band__copy">
