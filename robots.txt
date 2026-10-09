@@ -14,3 +14,6 @@ Disallow: /preview-july4-banner.html
 Disallow: /index-hours-test.html
 
 Sitemap: https://domokuncafe.com/sitemap.xml
+
+# Machine-readable summary for AI systems (not a crawl rule):
+# https://domokuncafe.com/llms.txt

@@ -7,65 +7,188 @@
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MYQJZDB2MR"></script>
   <script src="/ga4.js"></script>
   <meta name="theme-color" content="#CC2222">
-  <meta name="description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
-  <title>Domo Cafe - Buena Park, CA</title>
+  <meta name="description" content="Domo Cafe is a character cafe at 8340 La Palma Ave, Buena Park, CA 90620. Japanese-inspired comfort food. Mon–Fri 11am–8pm, Sat–Sun 10am–9pm. Plan a visit.">
+  <title>Domo Cafe in Buena Park | Character Cafe, Hours &amp; Menu</title>
   <link rel="canonical" href="https://domokuncafe.com/">
   <link rel="icon" type="image/png" href="domo-cafe-logo-transparent.png">
   <link rel="apple-touch-icon" href="domo-cafe-logo-transparent.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Domo Cafe">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Domo Cafe - Buena Park, CA">
-  <meta property="og:description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
+  <meta property="og:title" content="Domo Cafe in Buena Park | Character Cafe, Hours &amp; Menu">
+  <meta property="og:description" content="Domo Cafe is a character cafe at 8340 La Palma Ave, Buena Park, CA 90620. Japanese-inspired comfort food. Mon–Fri 11am–8pm, Sat–Sun 10am–9pm. Plan a visit.">
   <meta property="og:url" content="https://domokuncafe.com/">
   <meta property="og:image" content="https://domokuncafe.com/assets/sydney/hero/hero-1.png">
   <meta property="og:image:alt" content="Domo Cafe entrance doors painted with Domo's face">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="605">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Domo Cafe - Buena Park, CA">
-  <meta name="twitter:description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
+  <meta name="twitter:title" content="Domo Cafe in Buena Park | Character Cafe, Hours &amp; Menu">
+  <meta name="twitter:description" content="Domo Cafe is a character cafe at 8340 La Palma Ave, Buena Park, CA 90620. Japanese-inspired comfort food. Mon–Fri 11am–8pm, Sat–Sun 10am–9pm. Plan a visit.">
   <meta name="twitter:image" content="https://domokuncafe.com/assets/sydney/hero/hero-1.png">
+  <meta name="twitter:image:alt" content="Domo Cafe entrance doors painted with Domo's face">
   <!-- TODO(Izzy): add hasMap and geo (latitude/longitude) once the exact pin for 8340 La Palma Ave is confirmed. The only coordinates in the repo are an approximate Buena Park ZIP center in dashboard.html (33.8753, -118.0109), not the cafe. -->
+  <!-- TODO(Izzy): priceRange is omitted until a verified range exists. Do not copy a range from Toast, Yelp, or any other listing. -->
+  <!-- TODO(Izzy): confirm official X and LinkedIn profiles before adding them to sameAs. -->
+  <!-- FAQPage matches the visible questions for schema.org and non-Google AI systems. Google retired FAQ rich results in May 2026; this markup is not aimed at that feature. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": ["Restaurant", "LocalBusiness"],
-    "@id": "https://domokuncafe.com/#restaurant",
-    "name": "Domo Cafe",
-    "alternateName": "Domo Kun Cafe",
-    "url": "https://domokuncafe.com/",
-    "image": "https://domokuncafe.com/assets/sydney/hero/hero-1.png",
-    "logo": "https://domokuncafe.com/domo-cafe-logo-transparent.png",
-    "description": "Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.",
-    "telephone": "+1-415-360-3666",
-    "email": "info@domokuncafe.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "8340 La Palma Ave",
-      "addressLocality": "Buena Park",
-      "addressRegion": "CA",
-      "postalCode": "90620",
-      "addressCountry": "US"
-    },
-    "openingHoursSpecification": [
+    "@graph": [
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "11:00",
-        "closes": "20:00"
+        "@type": "WebSite",
+        "@id": "https://domokuncafe.com/#website",
+        "name": "Domo Cafe",
+        "url": "https://domokuncafe.com/",
+        "publisher": {
+          "@id": "https://domokuncafe.com/#restaurant"
+        }
       },
       {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Saturday", "Sunday"],
-        "opens": "10:00",
-        "closes": "21:00"
+        "@type": [
+          "Restaurant",
+          "LocalBusiness"
+        ],
+        "@id": "https://domokuncafe.com/#restaurant",
+        "name": "Domo Cafe",
+        "alternateName": "Domo Kun Cafe",
+        "url": "https://domokuncafe.com/",
+        "image": "https://domokuncafe.com/assets/sydney/hero/hero-1.png",
+        "logo": "https://domokuncafe.com/domo-cafe-logo-transparent.png",
+        "description": "Domo Cafe, also called Domo Kun Cafe, is a character cafe at 8340 La Palma Ave, Buena Park, CA 90620. We serve Japanese-inspired comfort food.",
+        "telephone": "+1-415-360-3666",
+        "email": "info@domokuncafe.com",
+        "servesCuisine": "Japanese-inspired",
+        "hasMenu": "https://domokuncafe.com/#menu",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "8340 La Palma Ave",
+          "addressLocality": "Buena Park",
+          "addressRegion": "CA",
+          "postalCode": "90620",
+          "addressCountry": "US"
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "11:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "10:00",
+            "closes": "21:00"
+          }
+        ],
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+1-415-360-3666",
+          "email": "info@domokuncafe.com",
+          "contactType": "customer service"
+        },
+        "sameAs": [
+          "https://www.instagram.com/domokuncafe",
+          "https://www.tiktok.com/@domokuncafe",
+          "https://www.facebook.com/domokuncafe"
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://domokuncafe.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Domo Cafe?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Domo Cafe, also called Domo Kun Cafe, is a character cafe at 8340 La Palma Ave, Buena Park, CA 90620. We serve Japanese-inspired comfort food. Hours are Monday through Friday, 11am to 8pm, and Saturday and Sunday, 10am to 9pm. Call (415) 360-3666. Walk-ins are welcome."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What are Domo Cafe's hours?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Monday through Friday, 11am to 8pm. Saturday and Sunday, 10am to 9pm. Hours may vary on holidays."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is Domo Cafe?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "8340 La Palma Ave, Buena Park, CA 90620. Free parking is available in the large Buena Park Downtown lot."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "What is Domoween?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Domoween is Domo Cafe's Halloween event in Buena Park, October 1 through November 1, 2026, during regular cafe hours. Details are on the Domoween page."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can my school or team host a fundraiser?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Community Tuesday fundraiser nights for schools, teams, and nonprofits are coming soon. Follow our socials for updates."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you take walk-ins?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes! Walk-ins are welcome. On busy weekends, arriving early is your best bet. For large groups (8+), call ahead at (415) 360-3666 so we can ready a table."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there parking?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, free parking is available in the large Buena Park Downtown lot."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I celebrate a birthday here?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Absolutely — we love birthdays. For celebrations with more than 8 guests, we offer birthday packages. Call us at (415) 360-3666 or email info@domokuncafe.com and we’ll set you up."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do you deliver?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Order online for pickup through Toast, or get delivery on DoorDash and Grubhub. You can also visit us in Buena Park or call (415) 360-3666."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where can I follow updates?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Follow us on Instagram, TikTok, and Facebook for announcements and seasonal news."
+            }
+          }
+        ]
       }
-    ],
-    "sameAs": [
-      "https://www.instagram.com/domokuncafe",
-      "https://www.tiktok.com/@domokuncafe",
-      "https://www.facebook.com/domokuncafe"
     ]
   }
   </script>
@@ -365,9 +488,9 @@
       </div>
       <div class="container hero__content">
         <div class="hero__copy">
-          <div class="hero__kicker">Buena Park's character cafe</div>
+          <div class="hero__kicker">Domo Cafe · Buena Park</div>
           <h1>Come for the <span>good vibes.</span></h1>
-          <p class="hero__lede">Japanese-inspired comfort food, Domo-sized joy, and a place to make your next favorite memory.</p>
+          <p class="hero__lede">Domo Cafe is a character cafe in Buena Park, California, with Japanese-inspired comfort food. Come hungry, leave smiling.</p>
           <div class="hero__actions"><a class="button button--light" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Order Now</a><a class="button button--outline" href="#menu">Explore the menu</a><button class="button button--outline" type="button" id="rsvpBtn">Stay Updated</button><a class="button button--outline" href="#visit">Plan your visit</a></div>
           <div class="hero__address">8340 La Palma Ave · Buena Park, CA 90620</div>
         </div>
@@ -472,11 +595,11 @@
       </div>
     </section>
 
-    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><div class="visit__contacts"><a href="tel:4153603666">(415) 360-3666</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
+    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><h3>What is Domo Cafe?</h3><p>Domo Cafe, also called Domo Kun Cafe, is a character cafe at 8340 La Palma Ave, Buena Park, CA 90620. We serve Japanese-inspired comfort food. Hours are Monday through Friday, 11am to 8pm, and Saturday and Sunday, 10am to 9pm. Call <a href="tel:4153603666">(415) 360-3666</a>. Walk-ins are welcome.</p><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><div class="visit__contacts"><a href="tel:4153603666">(415) 360-3666</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
 
-    <section class="section section--white" id="events" aria-labelledby="events-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Make it a thing</div><h2 id="events-heading">Good times,<br>coming soon.</h2></div><p>We're dreaming up community nights, character moments, and seasonal surprises. Keep an eye on our socials for the next drop.</p></div><div class="events-grid"><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-hug.png" alt="Domo characters hugging"></div><h3>Domo Community Tuesdays</h3><p>Local schools, teams, and nonprofits raise funds at Domo. Separate from Domo Hour. <strong style="color:var(--red)">Coming soon.</strong></p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/menu/domo-yaki.png" alt="Domo Cafe stuffed pancakes"></div><h3>Seasonal drops</h3><p>Limited-time menu moments are on the way.</p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-character.png" alt="Domo character portrait"></div><h3>Character moments</h3><p>Come say hi when Domo makes an appearance.</p></article></div></div></section>
+    <section class="section section--white" id="events" aria-labelledby="events-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Make it a thing</div><h2 id="events-heading">Good times,<br>on the calendar.</h2></div><p><a href="/domoween/">Domoween</a>, a Halloween event in Buena Park, runs October 1 through November 1, 2026. See the <a href="/events/">events calendar</a> for what is posted. Community nights are still coming soon.</p></div><div class="events-grid"><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-hug.png" alt="Domo characters hugging"></div><h3>Domo Community Tuesdays</h3><p>Local schools, teams, and nonprofits raise funds at Domo. Separate from Domo Hour. <strong style="color:var(--red)">Coming soon.</strong></p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/menu/domo-yaki.png" alt="Domo Cafe stuffed pancakes"></div><h3>Seasonal drops</h3><p>Limited-time menu moments are on the way.</p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-character.png" alt="Domo character portrait"></div><h3>Character moments</h3><p>Come say hi when Domo makes an appearance.</p></article></div></div></section>
 
-    <section class="section faq" id="faq" aria-labelledby="faq-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Need to know</div><h2 id="faq-heading">Quick answers.</h2></div><p>Still curious? <a href="mailto:info@domokuncafe.com">Send us a note</a> and our crew will help out.</p></div><div class="faq-grid"><details><summary>Can my school or team host a fundraiser?</summary><p>Community Tuesday fundraiser nights for schools, teams, and nonprofits are coming soon. Follow our socials for updates.</p></details><details><summary>Do you take walk-ins?</summary><p>Yes! Walk-ins are welcome. On busy weekends, arriving early is your best bet. For large groups (8+), call ahead at <a href="tel:4153603666">(415) 360-3666</a> so we can ready a table.</p></details><details><summary>Is there parking?</summary><p>Yes, free parking is available in the large Buena Park Downtown lot.</p></details><details><summary>Can I celebrate a birthday here?</summary><p>Absolutely — we love birthdays. For celebrations with more than 8 guests, we offer birthday packages. Call us at <a href="tel:4153603666">(415) 360-3666</a> or email <a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a> and we’ll set you up.</p></details><details><summary>Do you deliver?</summary><p>Yes. Order online for pickup through <a href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Toast</a>, or get delivery on DoorDash and Grubhub. You can also visit us in Buena Park or call <a href="tel:4153603666">(415) 360-3666</a>.</p></details><details><summary>Where can I follow updates?</summary><p>Follow us on <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram</a>, <a href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok</a>, and <a href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener">Facebook</a> for announcements and seasonal news.</p></details></div></div></section>
+    <section class="section faq" id="faq" aria-labelledby="faq-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Need to know</div><h2 id="faq-heading">Quick answers.</h2></div><p>Still curious? <a href="mailto:info@domokuncafe.com">Send us a note</a> and our crew will help out.</p></div><div class="faq-grid"><details><summary>What are Domo Cafe's hours?</summary><p>Monday through Friday, 11am to 8pm. Saturday and Sunday, 10am to 9pm. Hours may vary on holidays.</p></details><details><summary>Where is Domo Cafe?</summary><p>8340 La Palma Ave, Buena Park, CA 90620. Free parking is available in the large Buena Park Downtown lot.</p></details><details><summary>What is Domoween?</summary><p>Domoween is Domo Cafe's Halloween event in Buena Park, October 1 through November 1, 2026, during regular cafe hours. Details are on the <a href="/domoween/">Domoween page</a>.</p></details><details><summary>Can my school or team host a fundraiser?</summary><p>Community Tuesday fundraiser nights for schools, teams, and nonprofits are coming soon. Follow our socials for updates.</p></details><details><summary>Do you take walk-ins?</summary><p>Yes! Walk-ins are welcome. On busy weekends, arriving early is your best bet. For large groups (8+), call ahead at <a href="tel:4153603666">(415) 360-3666</a> so we can ready a table.</p></details><details><summary>Is there parking?</summary><p>Yes, free parking is available in the large Buena Park Downtown lot.</p></details><details><summary>Can I celebrate a birthday here?</summary><p>Absolutely — we love birthdays. For celebrations with more than 8 guests, we offer birthday packages. Call us at <a href="tel:4153603666">(415) 360-3666</a> or email <a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a> and we’ll set you up.</p></details><details><summary>Do you deliver?</summary><p>Yes. Order online for pickup through <a href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Toast</a>, or get delivery on DoorDash and Grubhub. You can also visit us in Buena Park or call <a href="tel:4153603666">(415) 360-3666</a>.</p></details><details><summary>Where can I follow updates?</summary><p>Follow us on <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram</a>, <a href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok</a>, and <a href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener">Facebook</a> for announcements and seasonal news.</p></details></div></div></section>
     <div class="nhk"><div class="container"><strong>An NHK Licensed Character Café</strong><p>Domo-kun © NHK. We're honored to bring this beloved character to life in Buena Park.</p></div></div>
   </main>
   <footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand" href="#top"><img src="domo-cafe-logo-transparent.png" alt="Domo Cafe"></a><p>Japanese-inspired comfort food, character-sized joy, and a table for everyone.</p></div><div><h3>Explore</h3><ul class="footer-links"><li><a href="#menu">Menu</a></li><li><a href="#chomps">CHOMPS</a></li><li><a href="#story">Our story</a></li><li><a href="#domo-hour">Domo Hour</a></li><li><a href="/events/">Events calendar</a></li><li><a href="/domoween/">Domoween</a></li></ul></div><div><h3>Say hi</h3><ul class="footer-links"><li><a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok ↗</a></li><li><a href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener">Facebook ↗</a></li><li><a href="tel:4153603666">(415) 360-3666</a></li><li><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></li><li><a href="#visit">8340 La Palma Ave</a></li></ul></div></div><p class="footer-legal">Domo©NHK-TYO1998-2026. Domo Animation©Domo Production Committee. All rights reserved.</p><div class="footer-bottom"><span>© 2026 Domo Cafe</span><div class="footer-credit"><span class="footer-credit__sps">Built with AI by <a href="https://superpowerstudios.ai" target="_blank" rel="noopener">Super Power Studios</a></span><span class="footer-credit__note">Design inspired by Sydney · <a class="footer__admin" href="/dashboard">Admin Login</a></span></div></div></div></footer>
