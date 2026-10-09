@@ -36,7 +36,7 @@ Top issues:
 | Issue | Impact | Evidence | What we did | Priority |
 | --- | --- | --- | --- | --- |
 | Homepage title was 26 characters and the description was 95, with no address or hours | High | `Domo Cafe - Buena Park, CA` | Title is now `Domo Cafe in Buena Park | Character Cafe, Hours & Menu` (54 characters). Description is 155 characters and includes the address and verified hours. Open Graph and Twitter tags match. | Fixed |
-| Homepage H1 is still "Come for the good vibes." | Low, accepted | The H1 is the display headline | Left it so the hero layout does not change. The kicker, lede, title, and a "What is Domo Cafe?" heading carry the name, city, address, and hours. | Deliberate |
+| Off-season homepage H1 is still "Come for the good vibes." During Domoween the theme hides that hero and shows a Domoween H1. | Low, accepted | `seasons.js` sets `.hero{display:none}` from Oct 1 through Nov 1 | Left both headlines so the layouts do not change. The seasonal lede and the off-season lede, title, and "What is Domo Cafe?" heading carry the name, city, and hours. | Deliberate |
 | Homepage events heading said "coming soon" while Domoween is on the calendar | High | Section `#events` | Heading is now "Good times, on the calendar." The paragraph names Domoween (October 1–November 1, 2026) and links to `/domoween/` and `/events/`. Community nights stay "coming soon." | Fixed |
 | Domoween title was already 50 characters and included Halloween and Buena Park | — | Existing title kept | Description rewritten to 151 characters so it names the address and "Halloween event in Buena Park." | Fixed |
 | Events title was 42 characters and did not mention Domoween | Medium | Old title | Now `Events at Domo Cafe in Buena Park | Domoween Calendar` (53). Description includes the address, Domoween dates, and cafe hours (157 characters). The callout includes the year 2026. | Fixed |
@@ -93,7 +93,7 @@ The `directory-submissions` skill is written for software directories (Product H
 ## What changed
 
 - Titles, meta descriptions, and matching Open Graph / Twitter tags on `/`, `/domoween/`, and `/events/`.
-- Homepage kicker, lede, events intro, visit definition, and three FAQ items.
+- Homepage kicker, lede, events intro, visit definition, and three FAQ items. From October 1 through November 1 the visible homepage hero is the Domoween theme in `seasons/domoween/domoween.js` (the regular hero is hidden). That seasonal lede now states the Domoween dates, Buena Park, and the verified cafe hours, and links to `/domoween/` with the anchor "Halloween at Domo Cafe."
 - Domoween "What is Domoween?" answer paragraph.
 - Events page year on the Domoween callout, plus a static NAP / hours / Domo Hour sentence.
 - JSON-LD: `WebSite` on the homepage, Restaurant fields (`servesCuisine`, `hasMenu`, `contactPoint`) on the three public pages, Restaurant node on `/events/`, `FAQPage` on `/` and `/domoween/`.
