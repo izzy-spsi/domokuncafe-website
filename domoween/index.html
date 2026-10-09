@@ -8,7 +8,7 @@
   <script src="/ga4.js"></script>
   <meta name="theme-color" content="#1B1030">
   <title>Domoween: Halloween at Domo Cafe in Buena Park, CA</title>
-  <meta name="description" content="Domoween is Domo Cafe's spooky-cute Halloween season, Oct 1–Nov 1, 2026 in Buena Park. A Halloween-themed cafe in Orange County with Domo and friends in costume.">
+  <meta name="description" content="Domoween is Domo Cafe's Halloween event in Buena Park, October 1–November 1, 2026. Spooky-cute costumes at 8340 La Palma Ave during regular cafe hours.">
   <link rel="canonical" href="https://domokuncafe.com/domoween/">
   <link rel="icon" type="image/png" href="/domo-cafe-logo-transparent.png">
   <link rel="apple-touch-icon" href="/domo-cafe-logo-transparent.png">
@@ -16,7 +16,7 @@
   <meta property="og:site_name" content="Domo Cafe">
   <meta property="og:locale" content="en_US">
   <meta property="og:title" content="Domoween: Halloween at Domo Cafe in Buena Park, CA">
-  <meta property="og:description" content="A spooky-cute Halloween season with Domo and friends, October 1–November 1, 2026 at Domo Cafe in Buena Park, Orange County.">
+  <meta property="og:description" content="Domoween is Domo Cafe's Halloween event in Buena Park, October 1–November 1, 2026. Spooky-cute costumes at 8340 La Palma Ave during regular cafe hours.">
   <meta property="og:url" content="https://domokuncafe.com/domoween/">
   <meta property="og:image" content="https://domokuncafe.com/assets/domoween/happy-halloween-domo-kun-banner.png">
   <meta property="og:image:alt" content="Official Happy Halloween Domo-kun artwork: Domo in Halloween costumes with friends, ghosts, bats and a haunted house under a yellow moon">
@@ -24,25 +24,29 @@
   <meta property="og:image:height" content="803">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Domoween: Halloween at Domo Cafe in Buena Park, CA">
-  <meta name="twitter:description" content="A spooky-cute Halloween season with Domo and friends, October 1–November 1, 2026 at Domo Cafe in Buena Park, Orange County.">
+  <meta name="twitter:description" content="Domoween is Domo Cafe's Halloween event in Buena Park, October 1–November 1, 2026. Spooky-cute costumes at 8340 La Palma Ave during regular cafe hours.">
   <meta name="twitter:image" content="https://domokuncafe.com/assets/domoween/happy-halloween-domo-kun-banner.png">
   <meta name="twitter:image:alt" content="Official Happy Halloween Domo-kun artwork: Domo in Halloween costumes with friends, ghosts, bats and a haunted house under a yellow moon">
   <!-- TODO(Izzy): add hasMap and geo (latitude/longitude) once the exact pin for 8340 La Palma Ave is confirmed. The only coordinates in the repo are an approximate Buena Park ZIP center in dashboard.html (33.8753, -118.0109), not the cafe. -->
   <!-- TODO(Izzy): add Event offers (price, priceCurrency, availability, url) and isAccessibleForFree only after confirming whether Domoween has a cover charge or is included with a regular visit. -->
+  <!-- FAQPage matches the visible questions for schema.org and non-Google AI systems. Google retired FAQ rich results in May 2026; this markup is not aimed at that feature. -->
   <!-- TODO(Izzy): add performer (name and url) only for a confirmed appearance. No dated October appearances are posted in events/events-data.js. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["Restaurant", "LocalBusiness"],
+        "@type": [
+          "Restaurant",
+          "LocalBusiness"
+        ],
         "@id": "https://domokuncafe.com/#restaurant",
         "name": "Domo Cafe",
         "alternateName": "Domo Kun Cafe",
         "url": "https://domokuncafe.com/",
         "image": "https://domokuncafe.com/assets/sydney/hero/hero-1.png",
         "logo": "https://domokuncafe.com/domo-cafe-logo-transparent.png",
-        "description": "Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.",
+        "description": "Domo Cafe, also called Domo Kun Cafe, is a character cafe at 8340 La Palma Ave, Buena Park, CA 90620. We serve Japanese-inspired comfort food.",
         "telephone": "+1-415-360-3666",
         "email": "info@domokuncafe.com",
         "address": {
@@ -54,14 +58,41 @@
           "addressCountry": "US"
         },
         "openingHoursSpecification": [
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"], "opens": "11:00", "closes": "20:00" },
-          { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Saturday", "Sunday"], "opens": "10:00", "closes": "21:00" }
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday"
+            ],
+            "opens": "11:00",
+            "closes": "20:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Saturday",
+              "Sunday"
+            ],
+            "opens": "10:00",
+            "closes": "21:00"
+          }
         ],
         "sameAs": [
           "https://www.instagram.com/domokuncafe",
           "https://www.tiktok.com/@domokuncafe",
           "https://www.facebook.com/domokuncafe"
-        ]
+        ],
+        "servesCuisine": "Japanese-inspired",
+        "hasMenu": "https://domokuncafe.com/#menu",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+1-415-360-3666",
+          "email": "info@domokuncafe.com",
+          "contactType": "customer service"
+        }
       },
       {
         "@type": "Event",
@@ -91,14 +122,80 @@
           "name": "Domo Cafe",
           "url": "https://domokuncafe.com/"
         },
-        "image": ["https://domokuncafe.com/assets/domoween/happy-halloween-domo-kun-banner.png"],
+        "image": [
+          "https://domokuncafe.com/assets/domoween/happy-halloween-domo-kun-banner.png"
+        ],
         "url": "https://domokuncafe.com/domoween/"
       },
       {
         "@type": "BreadcrumbList",
         "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Domo Cafe", "item": "https://domokuncafe.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Domoween", "item": "https://domokuncafe.com/domoween/" }
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Domo Cafe",
+            "item": "https://domokuncafe.com/"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Domoween",
+            "item": "https://domokuncafe.com/domoween/"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://domokuncafe.com/domoween/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "What is Domoween?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Domoween is Domo Cafe's Halloween event in Buena Park. It runs October 1 through November 1, 2026, during regular cafe hours at 8340 La Palma Ave, Buena Park, CA 90620. The cafe is open Monday–Friday 11am–8pm and Saturday–Sunday 10am–9pm. Walk-ins are welcome."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "When is Domoween at Domo Cafe?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "October 1 through Sunday, November 1, 2026, during regular cafe hours: 11am–8pm Monday to Friday and 10am–9pm Saturday and Sunday. Hours may vary on holidays."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Where is Domo Cafe?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "8340 La Palma Ave, Buena Park, CA 90620, in Orange County. Free parking is available in the large Buena Park Downtown lot."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is Domoween scary?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Not at all. Domoween is all about cute, not creepy: Domo-kun's official Halloween artwork, with friendly ghosts and jack-o'-lanterns. We're adding more costumed Domo to the cafe through October, so check our socials for what's new."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need a reservation?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Walk-ins are welcome. On busy weekends, arriving early is your best bet. For groups of 8 or more, call (415) 360-3666 so we can ready a table."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I order for pickup or delivery?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes. Order online for pickup through Toast, or get delivery from Domo Cafe on DoorDash and Grubhub."
+            }
+          }
         ]
       }
     ]
@@ -203,7 +300,8 @@
     <section class="dw-section dwp-about" aria-labelledby="about-heading">
       <div class="container dwp-prose">
         <p class="dw-eyebrow">Halloween in Buena Park</p>
-        <h2 id="about-heading">A spooky-cute Halloween cafe in Orange County</h2>
+        <h2 id="about-heading">What is Domoween?</h2>
+        <p>Domoween is Domo Cafe's Halloween event in Buena Park. It runs October 1 through November 1, 2026, during regular cafe hours at 8340 La Palma Ave, Buena Park, CA 90620. The cafe is open Monday–Friday 11am–8pm and Saturday–Sunday 10am–9pm. Walk-ins are welcome.</p>
         <p>Looking for Halloween things to do in Buena Park that are more cute than creepy? From October 1 through Sunday, November 1, 2026, Domo Cafe celebrates Domoween, our Halloween season starring Domo, the beloved NHK character, in official Halloween artwork as a witch, a mummy, Frankenstein's monster and a jack-o'-lantern, with friends Mr. Usagi and Tashanna in their pumpkin looks. We're bringing more costumed Domo to the cafe as it's ready.</p>
         <p>Domo Cafe is a Halloween-themed cafe stop for the whole month: come hungry for Japanese-inspired comfort food and playful drinks, snap photos with friends, and check the October events calendar for Domoween happenings. It's an easy Halloween outing for friends and families across Orange County and the greater Los Angeles area.</p>
         <p>You'll find us at 8340 La Palma Ave in Buena Park, with free parking in the large Buena Park Downtown lot. Walk-ins are welcome, and you can order online for pickup, or get delivery on DoorDash and Grubhub.</p>

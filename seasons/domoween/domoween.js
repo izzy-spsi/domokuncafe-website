@@ -84,7 +84,7 @@
           '<div class="dw-hero__copy">' +
             '<p class="dw-hero__kicker">Oct 1 – Nov 1, 2026 · Buena Park</p>' +
             '<h1 id="domoween-heading"><span class="dw-wordmark"><picture class="dw-wordmark__art"><source type="image/svg+xml" srcset="/assets/domoween/domo-ween_wordmark_alt-no-hyphen.svg"><img class="dw-wordmark__img" src="/assets/domoween/domo-ween_wordmark_alt-no-hyphen.png" width="1355" height="179" alt="Domo™ Ween" fetchpriority="high"></picture><span class="dw-sr">Domoween</span></span> <span class="dw-hero__at">at Domo Cafe</span></h1>' +
-            '<p class="dw-hero__lede">Domo\'s spooky-cute season is here. All October long, join us for comfort food, cozy vibes, and Halloween fun with Domo and friends.</p>' +
+            '<p class="dw-hero__lede">Domoween is Domo Cafe\'s Halloween event in Buena Park, October 1 through November 1, 2026. Japanese-inspired comfort food. Monday–Friday 11am–8pm and Saturday–Sunday 10am–9pm.</p>' +
             '<div class="dw-hero__actions">' +
               '<a class="button dw-button" href="' + ORDER_URL + '" target="_blank" rel="noopener">Order Now</a>' +
               '<a class="button dw-button dw-button--ghost" href="' + eventsUrl() + '">October events</a>' +
@@ -93,7 +93,7 @@
             '<div class="dw-hero__signup">' +
               '<button type="button" class="button dw-button" data-dw-rsvp>Stay Updated</button>' +
             '</div>' +
-            '<p class="dw-hero__links"><a href="/domoween/">All about Domoween <span aria-hidden="true">→</span></a></p>' +
+            '<p class="dw-hero__links"><a href="/domoween/">Halloween at Domo Cafe <span aria-hidden="true">→</span></a></p>' +
             '<p class="dw-hero__address">8340 La Palma Ave · Buena Park, CA 90620</p>' +
           '</div>' +
           '<div class="dw-hero__art">' +
@@ -218,7 +218,7 @@
         deco('ghost', 'dw-ghost--e1') + deco('ghost', 'dw-ghost--e2') + deco('web', 'dw-web dw-web--tr') +
         '<div class="container">' +
           '<div class="dw-heading"><p class="dw-eyebrow">What\'s happening</p><h2 id="dw-events-heading">October events</h2>' +
-            '<p class="dw-heading__intro">Domoween happenings at Domo Cafe, all in one calendar.</p></div>' +
+            '<p class="dw-heading__intro">Domoween at Domo Cafe in Buena Park, October 1 through November 1, 2026. See the calendar for what is posted.</p></div>' +
           '<div class="dw-tickets">' + body + '</div>' +
           '<div class="dw-center"><a class="button dw-button" href="' + eventsUrl() + '">See the events calendar</a></div>' +
         '</div>' +

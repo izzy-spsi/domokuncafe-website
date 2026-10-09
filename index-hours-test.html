@@ -1675,13 +1675,10 @@
           </li>
           <li class="hours-row">
             <span class="hours-day">Saturday – Sunday</span>
-            <span class="hours-time">10:00 AM – 8:00 PM</span>
+            <span class="hours-time">10:00 AM – 9:00 PM</span>
           </li>
         </ul>
-        <div class="hours-last-seating">
-          <span class="ls-icon">🍽️</span>
-          <span><strong>Last seating at 8:00 PM</strong> — kitchen closes promptly</span>
-        </div>
+        <!-- TODO(Izzy): last seating and kitchen-close time are not verified. Do not publish a time until you confirm it. -->
         <div class="hours-note">
           Holiday hours may vary. Follow <a href="https://instagram.com/domokuncafe" target="_blank">@domokuncafe</a> for updates.
         </div>
@@ -1947,7 +1944,7 @@
         </li>
         <li>
           <span class="cd-icon">⏰</span>
-          <div>Mon–Fri 11am–8pm · Sat–Sun 10am–8pm</div>
+          <div>Mon–Fri 11am–8pm · Sat–Sun 10am–9pm</div>
         </li>
       </ul>
       <div class="contact-social">
@@ -2066,15 +2063,15 @@
   }, 5000);
 
   // ══ HOURS STATUS COUNTDOWN ══
-  // Mon-Fri: 11am-8pm | Sat-Sun: 10am-8pm (America/Los_Angeles)
+  // Mon-Fri: 11am-8pm | Sat-Sun: 10am-9pm (America/Los_Angeles)
   const HOURS = {
-    0: { open: 10, close: 20 }, // Sun
+    0: { open: 10, close: 21 }, // Sun
     1: { open: 11, close: 20 }, // Mon
     2: { open: 11, close: 20 }, // Tue
     3: { open: 11, close: 20 }, // Wed
     4: { open: 11, close: 20 }, // Thu
     5: { open: 11, close: 20 }, // Fri
-    6: { open: 10, close: 20 }, // Sat
+    6: { open: 10, close: 21 }, // Sat
   };
   function getLATime() {
     return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles' }));
