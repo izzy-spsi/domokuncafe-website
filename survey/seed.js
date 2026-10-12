@@ -6,6 +6,7 @@ const { parsePacificLocal } = require('./time');
 
 const SURVEY_ID = '11111111-1111-4111-8111-111111111111';
 const SURVEY_VERSION_ID = '22222222-2222-4222-8222-222222222222';
+const SURVEY_VERSION_REPLACEMENT_ID = '22222222-2222-4222-8222-222222222223';
 
 const PROMOS = [
   {
@@ -109,6 +110,40 @@ const PROMOS = [
   }
 ];
 
+function surveySchemaIsStale(schema) {
+  const questions = (schema && schema.questions) || [];
+  return questions.some((question) => question.help) || questions.some((question) => (
+    question.id === 'q_live' && (question.options || []).some((option) => option.id === 'us' || option.id === 'prefer_not')
+  ));
+}
+
+async function replaceStaleTestSurvey(client) {
+  const current = await client.query(
+    `SELECT v.id, v.version_number, v.schema
+     FROM surveys s
+     JOIN survey_versions v ON v.id = s.current_version_id
+     WHERE s.id = $1`,
+    [SURVEY_ID]
+  );
+  if (!current.rowCount || !surveySchemaIsStale(current.rows[0].schema)) {
+    return current.rowCount ? current.rows[0].id : SURVEY_VERSION_ID;
+  }
+  const nextNumber = Number(current.rows[0].version_number) + 1;
+  await client.query(
+    `INSERT INTO survey_versions (id, survey_id, version_number, state, title, intro, schema, published_at)
+     VALUES ($1,$2,$3,'published',$4,$5,$6, now())
+     ON CONFLICT (id) DO NOTHING`,
+    [SURVEY_VERSION_REPLACEMENT_ID, SURVEY_ID, nextNumber, defaultSurvey.title, defaultSurvey.intro, defaultSurvey.schema]
+  );
+  await client.query('UPDATE surveys SET current_version_id = $2, updated_at = now() WHERE id = $1', [SURVEY_ID, SURVEY_VERSION_REPLACEMENT_ID]);
+  await client.query(
+    `UPDATE campaigns SET survey_version_id = $2
+     WHERE test_data = true AND survey_version_id = $1`,
+    [current.rows[0].id, SURVEY_VERSION_REPLACEMENT_ID]
+  );
+  return SURVEY_VERSION_REPLACEMENT_ID;
+}
+
 async function seed() {
   await migrate();
   await withTransaction(async (client) => {
@@ -129,6 +164,7 @@ async function seed() {
        WHERE id = $1 AND current_version_id IS NULL`,
       [SURVEY_ID, SURVEY_VERSION_ID]
     );
+    const surveyVersionId = await replaceStaleTestSurvey(client);
 
     for (const promo of PROMOS) {
       await client.query(
@@ -168,7 +204,7 @@ async function seed() {
           `INSERT INTO campaigns (slug, name, promotion_id, promotion_version_id, survey_version_id, channel, placement, utm, test_data)
            VALUES ($1,$2,$3,$4,$5,$6,$7,'{}'::jsonb,true)
            ON CONFLICT (slug) DO NOTHING`,
-          [promo.campaign.slug, promo.campaign.name, promo.id, promo.versionId, SURVEY_VERSION_ID, promo.campaign.channel, promo.campaign.placement]
+          [promo.campaign.slug, promo.campaign.name, promo.id, promo.versionId, surveyVersionId, promo.campaign.channel, promo.campaign.placement]
         );
       }
     }

@@ -35,9 +35,10 @@ test('A01 A02 A03 A05 first-time, returning, location, and idempotent submit', a
   assert.equal(first.submitted.status, 200);
   assert.equal(first.submitted.data.reward.status, 'issued');
   assert.ok(first.submitted.data.signupToken);
-  const row = await query('SELECT postal_code, first_visit, locality FROM survey_responses WHERE id = $1', [first.submitted.data.responseId]);
+  const row = await query('SELECT postal_code, first_visit, locality, country_code FROM survey_responses WHERE id = $1', [first.submitted.data.responseId]);
   assert.equal(row.rows[0].postal_code, '02108');
   assert.equal(row.rows[0].locality, 'Boston');
+  assert.equal(row.rows[0].country_code, 'US');
   assert.equal(row.rows[0].first_visit, 'first_time');
 
   const again = await http(base, '/api/survey-responses', {

@@ -28,10 +28,28 @@ test('other text is plain and limited to 200 characters', () => {
 test('location can be skipped, and a ZIP stays text', () => {
   const skipped = validateAnswers(schema, base({ q_live: { choice: 'skipped' } }));
   assert.equal(skipped.ok, true);
+  const blank = validateAnswers(schema, base({ q_live: { choice: 'us', zip: '' } }));
+  assert.equal(blank.ok, true);
+  assert.equal(blank.answers.q_live.choice, 'skipped');
+  const missing = validateAnswers(schema, base({ q_live: null }));
+  assert.equal(missing.ok, true);
+  assert.equal(missing.answers.q_live.choice, 'skipped');
   const zip = validateAnswers(schema, base({ q_live: { choice: 'us', zip: '02108' } }));
   assert.equal(zip.answers.q_live.zip, '02108');
+  assert.equal(typeof zip.answers.q_live.zip, 'string');
   const bad = validateAnswers(schema, base({ q_live: { choice: 'us', zip: '2108' } }));
   assert.equal(bad.ok, false);
+  const outside = validateAnswers(schema, base({ q_live: { choice: 'outside_us', city: 'Lyon', countryCode: 'fr' } }));
+  assert.equal(outside.ok, true);
+  assert.equal(outside.answers.q_live.countryCode, 'FR');
+  const usCountry = validateAnswers(schema, base({ q_live: { choice: 'outside_us', city: 'Boston', countryCode: 'US' } }));
+  assert.equal(usCountry.ok, false);
+  const prefer = validateAnswers(schema, base({ q_live: { choice: 'prefer_not' } }));
+  assert.equal(prefer.ok, true);
+  assert.equal(prefer.answers.q_live.choice, 'prefer_not');
+  const location = schema.questions.find((question) => question.id === 'q_live');
+  assert.equal(location.help, undefined);
+  assert.equal(location.options, undefined);
 });
 
 test('exclusive client choices clear the other selections', () => {

@@ -109,7 +109,6 @@
     if (state.notice) parts.push(banner(state.notice, 'bad'));
     if (state.ctx.survey) {
       parts.push(el('p', { class: 'lede', text: state.ctx.survey.intro }));
-      parts.push(el('p', { text: 'Answer about yourself unless the question asks about your party. The first-visit answer and home location describe you, not every person in the group.' }));
     }
     if (offer) {
       const card = el('section', { class: 'card' }, [
@@ -206,14 +205,12 @@
     if (!question) return null;
     const field = el('fieldset', { class: 'field', id: 'field-' + question.id });
     field.appendChild(el('legend', { class: 'field-label', text: question.label }));
-    if (question.help) field.appendChild(el('p', { class: 'help', id: question.id + '-help', text: question.help }));
     const error = state.draft.errors && state.draft.errors[question.id];
     if (question.type === 'single') field.appendChild(choices(question, false));
     if (question.type === 'multi') field.appendChild(choices(question, true));
     if (question.type === 'integer') {
       const input = el('input', {
-        class: 'text-input', id: question.id, inputmode: 'numeric', type: 'text',
-        'aria-describedby': question.id + '-help', autocomplete: 'off',
+        class: 'text-input', id: question.id, inputmode: 'numeric', type: 'text', autocomplete: 'off',
         value: answer(question.id) == null ? '' : String(answer(question.id))
       });
       input.addEventListener('input', () => {
@@ -278,31 +275,42 @@
   }
 
   function locationField(question) {
-    const current = answer(question.id) || { choice: '' };
+    const current = answer(question.id) || {};
+    const outside = current.choice === 'outside_us';
     const wrap = el('div', {});
-    question.options.forEach((option) => {
-      const input = el('input', { type: 'radio', name: question.id, value: option.id });
-      input.checked = current.choice === option.id;
-      input.addEventListener('change', () => {
-        setAnswer(question.id, { choice: option.id });
-        showStep();
+    if (!outside) {
+      const zip = el('input', {
+        class: 'text-input', id: question.id + '-zip', inputmode: 'numeric', maxlength: '5',
+        autocomplete: 'postal-code', 'aria-label': 'Home ZIP code', placeholder: 'Home ZIP code',
+        value: current.choice === 'us' ? (current.zip || '') : ''
       });
-      wrap.appendChild(el('label', { class: 'choice' }, [input, el('span', { text: option.label })]));
-    });
-    wrap.appendChild(el('button', { class: 'btn btn-secondary', type: 'button', text: 'Skip this question', onclick: () => { setAnswer(question.id, { choice: 'skipped' }); showStep(); } }));
-    if (current.choice === 'us') {
-      const zip = el('input', { class: 'text-input', inputmode: 'numeric', maxlength: '5', 'aria-label': 'Home ZIP code', value: current.zip || '', placeholder: 'Home ZIP code' });
-      zip.addEventListener('input', () => setAnswer(question.id, { choice: 'us', zip: zip.value }));
-      wrap.appendChild(el('label', { class: 'field-label', text: 'Home ZIP code' }));
+      zip.addEventListener('input', () => {
+        const digits = zip.value.replace(/\D/g, '').slice(0, 5);
+        if (digits !== zip.value) zip.value = digits;
+        setAnswer(question.id, digits ? { choice: 'us', zip: digits } : { choice: 'skipped' });
+      });
+      wrap.appendChild(el('label', { class: 'sub-label', for: question.id + '-zip', text: 'Home ZIP code' }));
       wrap.appendChild(zip);
     }
-    if (current.choice === 'outside_us') {
-      const city = el('input', { class: 'text-input', 'aria-label': 'Home city', value: current.city || '', placeholder: 'Home city' });
+    const toggle = el('input', { type: 'checkbox', id: question.id + '-outside' });
+    toggle.checked = outside;
+    toggle.addEventListener('change', () => {
+      if (toggle.checked) setAnswer(question.id, { choice: 'outside_us', city: current.city || '', countryCode: current.countryCode || '' });
+      else setAnswer(question.id, { choice: 'skipped' });
+      showStep();
+    });
+    wrap.appendChild(el('label', { class: 'choice' }, [toggle, el('span', { text: 'I live outside the United States' })]));
+    if (outside) {
+      const city = el('input', { class: 'text-input', id: question.id + '-city', 'aria-label': 'Home city', value: current.city || '', placeholder: 'Home city' });
       city.addEventListener('input', () => setAnswer(question.id, Object.assign({}, answer(question.id), { choice: 'outside_us', city: city.value })));
-      wrap.appendChild(el('label', { class: 'field-label', text: 'Home city' }));
+      wrap.appendChild(el('label', { class: 'sub-label', for: question.id + '-city', text: 'Home city' }));
       wrap.appendChild(city);
       wrap.appendChild(countryPicker(current.countryCode || ''));
     }
+    wrap.appendChild(el('button', {
+      class: 'quiet-skip', type: 'button', text: 'Skip',
+      onclick: () => { setAnswer(question.id, { choice: 'skipped' }); showStep(); }
+    }));
     return wrap;
   }
 
@@ -313,7 +321,7 @@
     const list = el('ul', { class: 'country-list', id: 'country-list', role: 'listbox' });
     function paint(filter) {
       list.replaceChildren();
-      countries.filter((country) => country.name.toLowerCase().includes(filter.toLowerCase())).slice(0, 12).forEach((country) => {
+      countries.filter((country) => country.code !== 'US' && country.name.toLowerCase().includes(filter.toLowerCase())).slice(0, 8).forEach((country) => {
         list.appendChild(el('li', {}, [el('button', { type: 'button', role: 'option', text: country.name, onclick: () => {
           setAnswer('q_live', Object.assign({}, answer('q_live'), { choice: 'outside_us', countryCode: country.code }));
           showStep();
@@ -349,8 +357,8 @@
       const question = questionById(id);
       const value = answer(id);
       if (question.type === 'location') {
-        if (!value || !value.choice || value.choice === 'skipped') return;
-        if (value.choice === 'us' && !/^\d{5}$/.test(value.zip || '')) errors[id] = 'Enter a 5-digit ZIP code, or skip this question.';
+        if (!value || !value.choice || value.choice === 'skipped' || value.choice === 'prefer_not') return;
+        if (value.choice === 'us' && value.zip && !/^\d{5}$/.test(value.zip)) errors[id] = 'Enter a 5-digit ZIP code, or skip this question.';
         if (value.choice === 'outside_us' && (!(value.city || '').trim() || !value.countryCode)) errors[id] = 'Enter a city and country, or skip this question.';
         return;
       }

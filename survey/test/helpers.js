@@ -20,7 +20,7 @@ let passwordHash;
 
 function answers(overrides = {}) {
   return Object.assign({
-    q_live: { choice: 'prefer_not' },
+    q_live: { choice: 'skipped' },
     q_party: 3,
     q_first: { optionId: 'first_time' },
     q_discovery: { optionId: 'tiktok' },

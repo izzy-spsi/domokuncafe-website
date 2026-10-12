@@ -48,7 +48,12 @@ h2 { font-size: 1.35rem; }
 .progress-track span { flex: 1; height: 8px; border-radius: 99px; background: #eadfD2; border: 1px solid var(--line); }
 .progress-track span[data-state="done"], .progress-track span[data-state="current"] { background: var(--brand); border-color: var(--brand); }
 .field { margin: 0 0 18px; }
-.field-label { display: block; font-weight: 700; margin-bottom: 8px; }
+.field-label, .sub-label { display: block; font-weight: 700; margin-bottom: 8px; }
+.sub-label { font-weight: 600; margin-top: 8px; }
+.quiet-skip {
+  background: none; border: 0; padding: 8px 0; min-height: 44px; color: var(--muted);
+  text-decoration: underline; cursor: pointer; font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
 .choice { display: flex; gap: 12px; align-items: center; min-height: 48px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 12px; margin: 8px 0; background: white; }
 .choice input { width: 22px; height: 22px; flex: 0 0 auto; }
 .choice:has(input:checked) { border-color: var(--brand); background: #fff7f4; }

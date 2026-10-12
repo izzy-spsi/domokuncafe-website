@@ -13,13 +13,7 @@ const defaultSurvey = {
         type: 'location',
         reportKey: 'location',
         required: false,
-        label: 'Where do you live?',
-        help: 'Answer about yourself. You can skip this question and still receive the reward.',
-        options: [
-          { id: 'us', label: 'United States' },
-          { id: 'outside_us', label: 'Outside the United States' },
-          { id: 'prefer_not', label: 'Prefer not to say' }
-        ]
+        label: 'Where do you live?'
       },
       {
         id: 'q_party',
@@ -27,7 +21,6 @@ const defaultSurvey = {
         reportKey: 'party_size',
         required: true,
         label: 'How many people are in your party today, including you?',
-        help: 'Include children. This describes the party, not only the person answering.',
         min: 1,
         max: 99
       },
@@ -37,7 +30,6 @@ const defaultSurvey = {
         reportKey: 'first_visit',
         required: true,
         label: 'Is this your first visit to Domo Cafe?',
-        help: 'Answer about yourself.',
         options: [
           { id: 'first_time', label: 'Yes, this is my first visit' },
           { id: 'returning', label: 'No, I have visited before' }
@@ -49,7 +41,6 @@ const defaultSurvey = {
         reportKey: 'discovery',
         required: true,
         label: 'Where did you first hear about Domo Cafe?',
-        help: 'This is how you first discovered Domo Cafe. It is separate from the link or QR code you used today.',
         options: [
           { id: 'tiktok', label: 'TikTok' },
           { id: 'instagram', label: 'Instagram' },
@@ -112,7 +103,6 @@ const defaultSurvey = {
         required: true,
         maxChoices: 3,
         label: 'What would you be most excited to see at Domo Cafe?',
-        help: 'Choose up to three.',
         options: [
           { id: 'merch', label: 'New or exclusive merchandise' },
           { id: 'food', label: 'New food items' },

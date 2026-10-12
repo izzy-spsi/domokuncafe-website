@@ -56,11 +56,8 @@ function validateSurveySchema(schema) {
         errors.push(`${question.label || 'A choice question'} needs options.`);
       }
     }
-    if (question.type === 'location') {
-      const optionIds = (question.options || []).map((option) => option.id);
-      LOCATION_IDS.forEach((id) => {
-        if (!optionIds.includes(id)) errors.push('The location question must keep United States, Outside the United States, and Prefer not to say.');
-      });
+    if (question.type === 'location' && question.options && !Array.isArray(question.options)) {
+      errors.push('The location question options are not a list.');
     }
   });
   const placed = new Set();
@@ -217,22 +214,25 @@ function validateAnswers(schema, raw) {
 }
 
 function validateLocation(question, value) {
-  if (value == null || value === '' || value.choice == null || value.choice === '' || value.choice === 'skipped') {
-    return { value: { choice: 'skipped' } };
-  }
+  if (value == null || value === '' || typeof value !== 'object') return { value: { choice: 'skipped' } };
   const choice = value.choice;
-  if (!LOCATION_IDS.includes(choice)) return { error: 'Choose a location option or skip this question.' };
-  if (choice === 'prefer_not') return { value: { choice } };
+  if (choice == null || choice === '' || choice === 'skipped') return { value: { choice: 'skipped' } };
+  if (choice === 'prefer_not') return { value: { choice: 'prefer_not' } };
   if (choice === 'us') {
-    const zip = String(value.zip || '').trim();
+    const zip = String(value.zip == null ? '' : value.zip).trim();
+    if (!zip) return { value: { choice: 'skipped' } };
     if (!/^\d{5}$/.test(zip)) return { error: 'Enter a 5-digit ZIP code, or skip this question.' };
-    return { value: { choice, zip } };
+    return { value: { choice: 'us', zip } };
   }
-  const city = plainText(value.city, 80);
-  if (city.error || !city.value) return { error: city.error || 'Enter your home city, or skip this question.' };
-  const countryCode = String(value.countryCode || '').trim().toUpperCase();
-  if (!COUNTRY_CODES.has(countryCode)) return { error: 'Choose a country, or skip this question.' };
-  return { value: { choice, city: city.value, countryCode } };
+  if (choice === 'outside_us') {
+    const city = plainText(value.city, 80);
+    if (city.error || !city.value) return { error: city.error || 'Enter your home city, or skip this question.' };
+    const countryCode = String(value.countryCode || '').trim().toUpperCase();
+    if (countryCode === 'US') return { error: 'Use the home ZIP code for a United States address.' };
+    if (!COUNTRY_CODES.has(countryCode)) return { error: 'Choose a country, or skip this question.' };
+    return { value: { choice: 'outside_us', city: city.value, countryCode } };
+  }
+  return { error: 'Enter a ZIP code, or skip this question.' };
 }
 
 function summarize(schema, answers) {
