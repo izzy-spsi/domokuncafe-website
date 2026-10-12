@@ -132,10 +132,10 @@ async function seed() {
 
     for (const promo of PROMOS) {
       await client.query(
-        `INSERT INTO promotions (id, slug, lifecycle, current_version_id, is_default, test_data)
-         VALUES ($1,$2,$3,$4,$5,true)
+        `INSERT INTO promotions (id, slug, lifecycle, is_default, test_data)
+         VALUES ($1,$2,$3,$4,true)
          ON CONFLICT (id) DO NOTHING`,
-        [promo.id, promo.slug, promo.lifecycle, promo.versionId, promo.isDefault]
+        [promo.id, promo.slug, promo.lifecycle, promo.isDefault]
       );
       await client.query(
         `INSERT INTO promotion_versions (
@@ -152,6 +152,10 @@ async function seed() {
           promo.expiryRule, promo.totalCap, promo.dailyCap, promo.physicalSupply,
           { onePerPartyPerVisit: true, stacking: 'none' }, SURVEY_ID
         ]
+      );
+      await client.query(
+        `UPDATE promotions SET current_version_id = $2 WHERE id = $1 AND current_version_id IS NULL`,
+        [promo.id, promo.versionId]
       );
       await client.query(
         `INSERT INTO capacity_ledger (promotion_id, total_cap, daily_cap, physical_supply)
