@@ -1,8 +1,10 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const crypto = require('crypto');
 const { validateAnswers, stabilizeSchema, validatePromotionDraft } = require('../validate');
 const { toggleMulti } = require('../public/logic');
 const { defaultSurvey } = require('../data/default-survey');
+const { reset, makeUser, startServer, stopServer, http, login } = require('./helpers');
 
 const schema = defaultSurvey.schema;
 
@@ -89,6 +91,52 @@ test('promotion percentages and currency are constrained', () => {
     expiryRule: { type: 'duration', hours: 1, minutes: 0 }, eligibility: { dineIn: true }
   });
   assert.equal(bogo.ok, false);
+});
+
+test('an 8-character staff password succeeds and a 7-character one returns 400', async () => {
+  const started = await startServer();
+  try {
+    await reset();
+    const admin = await makeUser('admin');
+    const session = await login(started.base, admin);
+    const email = `eight.${crypto.randomUUID()}@example.test`;
+    const created = await http(started.base, '/api/admin/staff', {
+      method: 'POST',
+      cookie: session.cookie,
+      body: { name: 'Eight Char', email, role: 'staff', password: 'abcd1234' }
+    });
+    assert.equal(created.status, 201);
+    const signedIn = await login(started.base, { email, password: 'abcd1234' });
+    assert.equal(signedIn.status, 200);
+
+    const rejected = await http(started.base, '/api/admin/staff', {
+      method: 'POST',
+      cookie: session.cookie,
+      body: { name: 'Seven Char', email: `seven.${crypto.randomUUID()}@example.test`, role: 'staff', password: 'abcd123' }
+    });
+    assert.equal(rejected.status, 400);
+    assert.match(rejected.data.message, /at least 8 characters/);
+    assert.match(rejected.data.fields.password, /at least 8 characters/);
+
+    const resetShort = await http(started.base, '/api/admin/staff/' + created.data.id, {
+      method: 'PATCH',
+      cookie: session.cookie,
+      body: { password: 'short12' }
+    });
+    assert.equal(resetShort.status, 400);
+    assert.match(resetShort.data.message, /at least 8 characters/);
+
+    const resetOk = await http(started.base, '/api/admin/staff/' + created.data.id, {
+      method: 'PATCH',
+      cookie: session.cookie,
+      body: { password: 'reset123' }
+    });
+    assert.equal(resetOk.status, 200);
+    const signedInReset = await login(started.base, { email, password: 'reset123' });
+    assert.equal(signedInReset.status, 200);
+  } finally {
+    await stopServer(started.server);
+  }
 });
 
 function base(overrides) {

@@ -402,7 +402,7 @@ async function createStaffUser(body, actor) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) throw new HttpError(400, 'validation_error', 'Enter an email.', { fields: { email: 'Enter a valid email.' } });
   if (!name.value) throw new HttpError(400, 'validation_error', 'Enter a name.', { fields: { name: 'Enter a name.' } });
   if (!['staff', 'manager', 'admin'].includes(body.role)) throw new HttpError(400, 'validation_error', 'Choose a role.', { fields: { role: 'Choose staff, manager, or admin.' } });
-  if (!body.password || String(body.password).length < 10) throw new HttpError(400, 'validation_error', 'Use a password of at least 10 characters.', { fields: { password: 'Use at least 10 characters.' } });
+  if (!body.password || String(body.password).length < 8) throw new HttpError(400, 'validation_error', 'Use a password of at least 8 characters.', { fields: { password: 'Use at least 8 characters.' } });
   const passwordHash = await hashPassword(body.password);
   return withTransaction(async (client) => {
     const inserted = await client.query(
@@ -423,7 +423,7 @@ async function updateStaffUser(id, body, actor) {
     const active = body.active == null ? before.rows[0].active : Boolean(body.active);
     const updated = await client.query('UPDATE staff_users SET role = $2, active = $3 WHERE id = $1 RETURNING id, email, name, role, active', [id, role, active]);
     if (body.password) {
-      if (String(body.password).length < 10) throw new HttpError(400, 'validation_error', 'Use a password of at least 10 characters.', { fields: { password: 'Use at least 10 characters.' } });
+      if (String(body.password).length < 8) throw new HttpError(400, 'validation_error', 'Use a password of at least 8 characters.', { fields: { password: 'Use at least 8 characters.' } });
       await client.query('UPDATE staff_users SET password_hash = $2 WHERE id = $1', [id, await hashPassword(body.password)]);
     }
     await audit(client, actor, 'staff_updated', 'staff_user', id, before.rows[0], { role, active });

@@ -12,7 +12,7 @@ async function main() {
   const name = arg('name');
   const role = arg('role');
   const password = process.env.SURVEY_STAFF_PASSWORD || '';
-  if (!email || !name || !['staff', 'manager', 'admin'].includes(role) || password.length < 10) {
+  if (!email || !name || !['staff', 'manager', 'admin'].includes(role) || password.length < 8) {
     console.error('Usage: SURVEY_STAFF_PASSWORD="…" node survey/create-staff.js --email you@domokuncafe.com --name "Name" --role admin');
     console.error('Roles: staff, manager, admin. The password is read from SURVEY_STAFF_PASSWORD and is not stored in the repo.');
     process.exit(1);
