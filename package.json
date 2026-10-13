@@ -4,9 +4,16 @@
   "description": "Domo Cafe coming soon landing page",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test --test-concurrency=1 survey/test/*.test.js",
+    "migrate": "node survey/migrate.js",
+    "seed": "node survey/seed.js",
+    "create-staff": "node survey/create-staff.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "luxon": "^3.5.0",
+    "pg": "^8.13.0",
+    "qrcode": "^1.5.4"
   }
 }
