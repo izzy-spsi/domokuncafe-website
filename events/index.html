@@ -53,6 +53,14 @@
   <link rel="stylesheet" href="/assets/site-shell.css">
   <link rel="stylesheet" href="/events/events.css">
   <script src="/seasons/seasons.js"></script>
+  <script>
+    /* Spooky Dinner with Domo — auto-hides after Oct 31, 2026 (America/Los_Angeles). */
+    (function () {
+      if (Date.now() >= Date.parse('2026-11-01T07:00:00.000Z')) {
+        document.documentElement.classList.add('sdd-expired');
+      }
+    })();
+  </script>
   <script src="/events/events-data.js" defer></script>
   <script src="/events/events.js" defer></script>
 </head>
@@ -73,11 +81,19 @@
         <p class="eyebrow">Domo Cafe · Buena Park</p>
         <h1 id="events-heading">Events at Domo Cafe</h1>
         <p class="ev-hero__lede">Seasonal celebrations, community nights and character moments at our Buena Park cafe. Tap any event to add it to your calendar.</p>
-        <a class="ev-callout" href="/domoween/">
-          <span class="ev-callout__kicker">Oct 1 – Nov 1</span>
-          <span class="ev-callout__title">Domoween at Domo Cafe</span>
-          <span class="ev-callout__more">All about our Halloween season <span aria-hidden="true">→</span></span>
-        </a>
+        <div class="ev-hero__promos">
+          <article class="ev-callout ev-feature" data-sdd-promo aria-labelledby="spooky-dinner-heading">
+            <span class="ev-callout__kicker">Sat, Oct 31, 2026 · 7:30–9:00 PM Pacific · From $50</span>
+            <h2 class="ev-callout__title" id="spooky-dinner-heading">Spooky Dinner with Domo</h2>
+            <p class="ev-feature__note">Private ticketed dinner. Every guest needs a ticket — this is not a walk-in. Cafe walk-ins are still welcome outside the event.</p>
+            <a class="ev-btn ev-btn--primary" href="https://toast.app/r/domo-cafe-8340-la-palma-avenue/events/dine-with-domo?deeplink=true" target="_blank" rel="noopener">Get tickets</a>
+          </article>
+          <a class="ev-callout" href="/domoween/">
+            <span class="ev-callout__kicker">Oct 1 – Nov 1</span>
+            <span class="ev-callout__title">Domoween at Domo Cafe</span>
+            <span class="ev-callout__more">All about our Halloween season <span aria-hidden="true">→</span></span>
+          </a>
+        </div>
       </div>
     </section>
 

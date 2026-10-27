@@ -33,6 +33,17 @@ window.DOMO_EVENTS = {
 
   events: [
     {
+      date: "2026-10-31",
+      startTime: "19:30",
+      endTime: "21:00",
+      title: "Spooky Dinner with Domo",
+      description: "From $50. Private ticketed dinner — every guest needs a ticket. This is not a walk-in. Cafe walk-ins are still welcome outside the event.",
+      link: "https://toast.app/r/domo-cafe-8340-la-palma-avenue/events/dine-with-domo?deeplink=true",
+      linkLabel: "Get tickets",
+      series: "Domoween",
+      art: "wc_41_jack-o-lantern"
+    },
+    {
       title: "Domo Hour",
       description: "Monday–Friday • 3–6 PM",
       startTime: "15:00",
