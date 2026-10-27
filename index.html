@@ -327,7 +327,31 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
     }
+    /* Spooky Dinner with Domo (Sat Oct 31, 2026). Same strip pattern as the homepage promo banners, in the Domoween palette. Delete [data-sdd-promo] after the night. */
+    html.sdd-expired [data-sdd-promo] { display: none !important; }
+    .sdd-banner { background: linear-gradient(120deg, #2A1846 0%, #4B2B7C 60%, #7A3A1A 100%); border-bottom: 3px solid #FFD166; color: #FFF4E6; }
+    .sdd-banner__inner { align-items: center; display: flex; gap: 1rem 1.4rem; justify-content: space-between; padding: .9rem 0; }
+    .sdd-banner p { margin: 0; font-size: .92rem; line-height: 1.45; }
+    .sdd-banner strong { color: #FFD166; display: inline-block; font-family: var(--display); font-size: 1.15rem; font-weight: 400; letter-spacing: .04em; margin-right: .45rem; }
+    .sdd-banner__note { display: block; margin-top: .15rem; }
+    .sdd-banner__link { background: #FFD166; border-radius: 999px; color: #1B1030; flex-shrink: 0; font-size: .78rem; font-weight: 700; letter-spacing: .06em; padding: .55rem 1rem; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+    .sdd-banner__link:hover, .sdd-banner__link:focus-visible { background: #fff; }
+    @media (max-width: 850px) {
+      .sdd-banner__inner { align-items: flex-start; flex-direction: column; gap: .7rem; }
+    }
+    @media (max-width: 570px) {
+      .sdd-banner p { font-size: .86rem; }
+      .sdd-banner__link { text-align: center; width: 100%; }
+    }
   </style>
+  <script>
+    /* Spooky Dinner with Domo — auto-hides after Oct 31, 2026 (America/Los_Angeles). */
+    (function () {
+      if (Date.now() >= Date.parse('2026-11-01T07:00:00.000Z')) {
+        document.documentElement.classList.add('sdd-expired');
+      }
+    })();
+  </script>
   <link rel="stylesheet" href="/domo-hour/domo-hour.css">
   <script src="/domo-hour/domo-hour-data.js" defer></script>
   <script src="/domo-hour/domo-hour.js" defer></script>
@@ -346,6 +370,12 @@
     </nav>
   </header>
   <main id="main">
+    <div class="sdd-banner" data-sdd-promo role="region" aria-label="Spooky Dinner with Domo">
+      <div class="container sdd-banner__inner">
+        <p><strong>Spooky Dinner with Domo</strong> Saturday, October 31, 2026 · 7:30–9:00 PM Pacific · From $50. <span class="sdd-banner__note">Private ticketed dinner — every guest needs a ticket. This is not a walk-in. Cafe walk-ins are still welcome outside the event.</span></p>
+        <a class="sdd-banner__link" href="https://toast.app/r/domo-cafe-8340-la-palma-avenue/events/dine-with-domo?deeplink=true" target="_blank" rel="noopener">Get tickets</a>
+      </div>
+    </div>
     <div id="season-slot"></div>
     <section class="hero" id="top" aria-label="Welcome to Domo Cafe">
       <div class="hero__slides" aria-hidden="true">
@@ -474,7 +504,7 @@
 
     <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><div class="visit__contacts"><a href="tel:4153603666">(415) 360-3666</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
 
-    <section class="section section--white" id="events" aria-labelledby="events-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Make it a thing</div><h2 id="events-heading">Good times,<br>coming soon.</h2></div><p>We're dreaming up community nights, character moments, and seasonal surprises. Keep an eye on our socials for the next drop.</p></div><div class="events-grid"><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-hug.png" alt="Domo characters hugging"></div><h3>Domo Community Tuesdays</h3><p>Local schools, teams, and nonprofits raise funds at Domo. Separate from Domo Hour. <strong style="color:var(--red)">Coming soon.</strong></p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/menu/domo-yaki.png" alt="Domo Cafe stuffed pancakes"></div><h3>Seasonal drops</h3><p>Limited-time menu moments are on the way.</p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-character.png" alt="Domo character portrait"></div><h3>Character moments</h3><p>Come say hi when Domo makes an appearance.</p></article></div></div></section>
+    <section class="section section--white" id="events" aria-labelledby="events-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Make it a thing</div><h2 id="events-heading">Good times,<br>on the calendar.</h2></div><p>Community nights and seasonal surprises are still taking shape. Spooky Dinner with Domo is already ticketed for Halloween night.</p></div><div class="events-grid"><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-hug.png" alt="Domo characters hugging"></div><h3>Domo Community Tuesdays</h3><p>Local schools, teams, and nonprofits raise funds at Domo. Separate from Domo Hour. <strong style="color:var(--red)">Coming soon.</strong></p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/menu/domo-yaki.png" alt="Domo Cafe stuffed pancakes"></div><h3>Seasonal drops</h3><p>Limited-time menu moments are on the way.</p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-character.png" alt="Domo character portrait"></div><h3>Character moments</h3><p>Spooky Dinner with Domo is Saturday, October 31, 7:30–9:00 PM Pacific, from $50. Private tickets only — every guest needs a ticket. <a href="https://toast.app/r/domo-cafe-8340-la-palma-avenue/events/dine-with-domo?deeplink=true" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">Get tickets →</a></p></article></div></div></section>
 
     <section class="section faq" id="faq" aria-labelledby="faq-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Need to know</div><h2 id="faq-heading">Quick answers.</h2></div><p>Still curious? <a href="mailto:info@domokuncafe.com">Send us a note</a> and our crew will help out.</p></div><div class="faq-grid"><details><summary>Can my school or team host a fundraiser?</summary><p>Community Tuesday fundraiser nights for schools, teams, and nonprofits are coming soon. Follow our socials for updates.</p></details><details><summary>Do you take walk-ins?</summary><p>Yes! Walk-ins are welcome. On busy weekends, arriving early is your best bet. For large groups (8+), call ahead at <a href="tel:4153603666">(415) 360-3666</a> so we can ready a table.</p></details><details><summary>Is there parking?</summary><p>Yes, free parking is available in the large Buena Park Downtown lot.</p></details><details><summary>Can I celebrate a birthday here?</summary><p>Absolutely — we love birthdays. For celebrations with more than 8 guests, we offer birthday packages. Call us at <a href="tel:4153603666">(415) 360-3666</a> or email <a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a> and we’ll set you up.</p></details><details><summary>Do you deliver?</summary><p>Yes. Order online for pickup through <a href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Toast</a>, or get delivery on DoorDash and Grubhub. You can also visit us in Buena Park or call <a href="tel:4153603666">(415) 360-3666</a>.</p></details><details><summary>Where can I follow updates?</summary><p>Follow us on <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram</a>, <a href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok</a>, and <a href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener">Facebook</a> for announcements and seasonal news.</p></details></div></div></section>
     <div class="nhk"><div class="container"><strong>An NHK Licensed Character Café</strong><p>Domo-kun © NHK. We're honored to bring this beloved character to life in Buena Park.</p></div></div>
