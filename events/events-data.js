@@ -40,7 +40,6 @@ window.DOMO_EVENTS = {
       description: "From $50. Private ticketed dinner — every guest needs a ticket. This is not a walk-in. Cafe walk-ins are still welcome outside the event.",
       link: "https://toast.app/r/domo-cafe-8340-la-palma-avenue/events/dine-with-domo?deeplink=true",
       linkLabel: "Get tickets",
-      series: "Domoween",
       art: "wc_41_jack-o-lantern"
     },
     {
