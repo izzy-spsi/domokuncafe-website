@@ -75,20 +75,15 @@ official art only, so don't add food photos to them.
 
 ## Pages
 
-- The homepage nav includes a static Domoween link, and a crawlable teaser
-  (`[data-season-teaser]` in `index.html`) reads "Halloween in Buena Park:
-  Domoween at Domo Cafe, Oct 1 – Nov 1, 2026". A small script hides that teaser
-  outside Oct 1–Nov 1, 2026 in America/Los_Angeles (same window as `THEMES`,
-  and `?themeDate=` works). After the season, delete the aside, its script,
-  and the `.season-teaser` rules in `index.html` and `seasons/domoween/domoween.css`.
-- `/domoween/` (`domoween/index.html`) is a static, server-rendered landing page
-  for Halloween searches. It carries the title, description, Open Graph tags and
-  Event + Restaurant JSON-LD. It stays up all year and switches its status line
-  automatically: "Starts October 1" before the season, "Happening now" during it,
-  and "Domoween returns next October" after it. `?themeDate=` works here too.
-  **Each year:** search the file for `2026` and update the dates (including the
-  JSON-LD `startDate`/`endDate` and the `START`/`END` values in the status
-  script).
+- The homepage nav, footer, and season teaser do not mention Domoween. Those
+  hard-coded links were removed after November 1, 2026. While the theme is on
+  (the calendar window, or `?theme=domoween`), `seasons/domoween/domoween.js`
+  can still insert a `.dw-nav-link`. It does not run on a normal visit after
+  the end date.
+- `/domoween/` (`domoween/index.html`) redirects to `/`. GitHub Pages has no
+  server redirects, so the file is a meta refresh plus `location.replace("/")`.
+  It is not a landing page and is omitted from `sitemap.xml`. Before the next
+  season, restore the landing from git history and add the URL back to the sitemap.
 - `/events/` (`events/index.html`) is the events calendar: a month grid on
   desktop and a list on phones. `?month=2026-10` opens a specific month.
 
@@ -119,7 +114,7 @@ events/
   events-data.js        ← edit this: every event (feeds /events/, Domoween, /domoween/)
   events.js             calendar, Google Calendar links, .ics, event JSON-LD
   index.html            /events/ page
-domoween/index.html     /domoween/ landing page (static, SEO)
+domoween/index.html     /domoween/ redirects home (meta refresh; not a landing page)
 seasons/
   seasons.js            date switch, preview override, loader (tiny; runs every visit)
   domoween/
