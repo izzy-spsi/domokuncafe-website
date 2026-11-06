@@ -43,6 +43,7 @@ window.DOMO_EVENTS = {
       series: "Domoween",
       art: "wc_41_jack-o-lantern"
     },
+    /* Weekday promo unpublished while it is revamped. Uncomment to list it on the calendar again.
     {
       title: "Domo Hour",
       description: "Monday–Friday • 3–6 PM",
@@ -55,6 +56,7 @@ window.DOMO_EVENTS = {
       link: "/#domo-hour",
       linkLabel: "Domo Hour details"
     },
+    */
 
     // {
     //   date: "2026-10-00",
