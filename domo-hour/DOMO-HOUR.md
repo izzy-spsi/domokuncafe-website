@@ -1,6 +1,17 @@
 # Domo Hour
 
-Domo Hour is a permanent weekday program (Monday–Friday, 3–6 PM). It has its own
+> **Unpublished (November 2026).** The homepage section, nav and footer links, and the
+> events-calendar listing are commented out while this program is revamped. The files in
+> this folder are unchanged. `robots.txt` asks crawlers to skip `/domo-hour/`.
+>
+> To publish it again:
+> 1. Uncomment the stylesheet and scripts in `index.html`.
+> 2. Uncomment the `<section class="dh" id="domo-hour">` block in `index.html`.
+> 3. Put the nav and footer links back (see git history for this change).
+> 4. Uncomment the listing in `events/events-data.js`.
+> 5. Remove `Disallow: /domo-hour` from `robots.txt`.
+
+Domo Hour is a weekday program (Monday–Friday, 3–6 PM). When it is published it has its own
 section on the home page, right before "What we're serving", and it shows in every
 theme. During Domo-ween it gets a seasonal skin; on the normal site it doesn't.
 
@@ -24,10 +35,10 @@ The menu is **switched off** until staff confirm it. The setting is `showMenu: f
   They aren't hidden; they're never written to the page in any theme, so no menu names or prices
   appear in the rendered HTML or structured data. A `/#domo-hour-menu` link just scrolls to the
   section.
-- **These always show:** the heading, the "Monday–Friday • 3–6 PM" hours pill, the line
+- **When the section is published, these show:** the heading, the "Monday–Friday • 3–6 PM" hours pill, the line
   "Available Monday–Friday • 3–6 PM. Excluding holidays." (`hoursNote`), the copy, the photos,
   "Plan your visit", the nav pill, the Domo-ween layer, and the `/events/` listing with its
-  calendar invites.
+  calendar invites. Right now the whole section is commented out, so none of this is on the site.
 
 **To turn the menu back on:**
 
@@ -93,8 +104,8 @@ The section works on its own; the seasonal look is a removable layer.
 
 ## Navigation
 
-"Domo Hour" is the first, highlighted nav item on every page. It's followed by
-"Domoween" (during the season) and "Events", then the rest of the links.
+When the program is published, "Domo Hour" is the first, highlighted nav item on every page. It's followed by
+"Domoween" (during the season) and "Events", then the rest of the links. Those links are removed while it is unpublished.
 
 - **851–959px wide:** only those priority links and Order Now show inline; the ☰
   button opens every link.
