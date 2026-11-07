@@ -256,9 +256,11 @@
     });
   }
 
+  /* Weekday promo schedule filler unpublished. Uncomment with the data-domo-hour-schedule spans.
   if (window.DOMO_HOUR && window.DOMO_HOUR.schedule) {
     Array.prototype.forEach.call(document.querySelectorAll('[data-domo-hour-schedule]'), function (el) { el.textContent = window.DOMO_HOUR.schedule; });
   }
+  */
 
   fetch(DATES_URL, { cache: 'no-store' })
     .then(function (res) { return res.ok ? res.json() : { dates: [] }; })
