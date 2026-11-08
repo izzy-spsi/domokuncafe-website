@@ -118,6 +118,8 @@
     .nav-toggle { background: none; border: 0; color: var(--brown-dark); display: none; font-size: 1.6rem; padding: .4rem; }
     .site-nav .nav-hl { background: #FFD98B; border-radius: 999px; color: var(--brown-dark); padding: .42rem .9rem; }
     .site-nav a.nav-hl:hover, .site-nav a.nav-hl:focus-visible { background: var(--red); color: #fff; }
+    .site-nav a.nav-shop { border: 2px solid var(--gold); border-radius: 999px; padding: .28rem .85rem; }
+    .site-nav a.nav-shop:hover, .site-nav a.nav-shop:focus-visible, .site-nav a.nav-shop[aria-current="page"] { background: #FFD98B; color: var(--brown-dark); }
     .hero { background: #2b1a12; color: #fff; min-height: min(760px, calc(100vh - 76px)); overflow: hidden; position: relative; }
     .hero__slides, .hero__slide, .hero__slide img, .hero__shade { height: 100%; inset: 0; position: absolute; width: 100%; }
     .hero__slide { background: #2b1a12; opacity: 0; transition: opacity 1s ease; }
@@ -233,10 +235,10 @@
       /* Compact desktop nav: priority links + Order Now stay visible; the ☰ menu shows every link. */
       .nav-toggle { display: block; margin-left: .3rem; order: 3; }
       .site-nav { margin-left: auto; }
-      .site-nav > a:not(.nav-priority):not(.button) { display: none; }
+      .site-nav > a:not(.nav-priority):not(.button):not(.nav-shop) { display: none; }
       .site-nav.is-open { align-items: stretch; background: var(--cream); border-bottom: 1px solid rgba(139,69,19,.15); flex-direction: column; gap: 0; left: 0; padding: .6rem max(1.25rem, calc((100% - 1180px) / 2)) 1.1rem; position: absolute; right: 0; top: 76px; }
       .site-nav.is-open > a:not(.nav-priority):not(.button), .site-nav.is-open > a { display: block; padding: .65rem 0; }
-      .site-nav.is-open .nav-hl { align-self: flex-start; padding: .42rem .9rem; }
+      .site-nav.is-open .nav-hl, .site-nav.is-open .nav-shop { align-self: flex-start; padding: .42rem .9rem; }
     }
     @media (max-width: 850px) {
       .site-header { height: 68px; }
@@ -245,6 +247,7 @@
       .site-nav { align-items: stretch; background: var(--cream); border-bottom: 1px solid rgba(139,69,19,.15); display: none; flex-direction: column; gap: 0; left: 0; padding: .6rem 1.25rem 1.1rem; position: absolute; right: 0; top: 68px; }
       .site-nav.is-open { display: flex; }
       .site-nav a { padding: .65rem 0; }
+      .site-nav.is-open .nav-shop { align-self: flex-start; padding: .42rem .9rem; }
       .site-nav .button { width: 100%; }
       .hero, .hero__content { min-height: 650px; }
       .hero__mascot { bottom: 0; max-width: min(200px, 42%); opacity: .64; right: 0; width: min(200px, 42vw); }
@@ -314,6 +317,17 @@
     .delivery-band__copy { display: grid; gap: .15rem; }
     .delivery-band__title { color: var(--red); font: 700 1rem var(--body); letter-spacing: .04em; text-transform: uppercase; margin: 0; }
     .delivery-band__lede { color: #694d3b; font-size: .92rem; margin: 0; }
+    .merch-home { background: var(--brown-dark); color: #F9EBDD; padding: 3.2rem 0; }
+    .merch-home__inner { align-items: center; display: flex; gap: 1.5rem; justify-content: space-between; }
+    .merch-home .eyebrow { color: #FFD98B; }
+    .merch-home h2 { color: #fff; font-size: clamp(2.2rem, 5vw, 3.6rem); margin-bottom: .55rem; }
+    .merch-home p { color: #F9EBDD; margin: 0; max-width: 40rem; }
+    .merch-home__cta { background: #FFD98B; border-color: #FFD98B; color: var(--brown-dark); flex-shrink: 0; }
+    .merch-home__cta:hover, .merch-home__cta:focus-visible { background: #fff; border-color: #fff; color: var(--brown-dark); }
+    @media (max-width: 720px) {
+      .merch-home__inner { align-items: flex-start; flex-direction: column; }
+      .merch-home__cta { width: 100%; }
+    }
     .nav-order { background: var(--gold) !important; border-color: var(--gold) !important; color: var(--brown-dark) !important; }
     .nav-order:hover, .nav-order:focus-visible { background: #b87f1f !important; border-color: #b87f1f !important; color: #fff !important; }
     .visit__contacts { display: grid; gap: .45rem; margin: 1rem 0 0; }
@@ -362,6 +376,7 @@
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">☰</button>
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
       <a class="nav-priority" href="/events/">Events</a><a href="#menu">Menu</a><a href="#story">Our Story</a><a href="#visit">Visit</a><!-- Community nav hidden until hub is ready --><a href="#faq">FAQ</a>
+      <a class="nav-shop" href="/shop/">Shop</a>
       <a class="button button--nav" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Order Now</a>
       <!-- Join CHOMPS still hidden until launch -->
     </nav>
@@ -463,6 +478,17 @@
       </div>
     </section>
 
+    <section class="merch-home" id="shop-home" aria-labelledby="merch-home-heading">
+      <div class="container merch-home__inner">
+        <div>
+          <p class="eyebrow">Merch · not a food order</p>
+          <h2 id="merch-home-heading">Take Domo home.</h2>
+          <p>Domo Cafe Keycap Keychains — pink classic or white chef. $12.99 a set. Ship in the US, or pick up free at the cafe.</p>
+        </div>
+        <a class="button merch-home__cta" href="/shop/">Shop keychains</a>
+      </div>
+    </section>
+
     <section class="section section--red chomps" id="chomps" aria-labelledby="chomps-heading">
       <div class="container chomps__inner"><div><div class="eyebrow" style="color:#FFD98B">CHOMPS</div><h2 id="chomps-heading">Eat. Collect.<br>Level Up.</h2><p class="chomps__lede">CHOMPS makes every visit count. Collect along the way and see how far your Domo era can go — membership launch coming soon.</p><span class="button button--light" style="cursor:default;opacity:.92">Coming soon</span></div><ol class="tiers" aria-label="CHOMPS tiers"><li>First Bite</li><li>Regular</li><li>Superfan</li><li>Inner Circle</li><li>Legendary</li></ol></div>
     </section>
@@ -485,7 +511,7 @@
     <section class="section faq" id="faq" aria-labelledby="faq-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Need to know</div><h2 id="faq-heading">Quick answers.</h2></div><p>Still curious? <a href="mailto:info@domokuncafe.com">Send us a note</a> and our crew will help out.</p></div><div class="faq-grid"><details><summary>Can my school or team host a fundraiser?</summary><p>Community Tuesday fundraiser nights for schools, teams, and nonprofits are coming soon. Follow our socials for updates.</p></details><details><summary>Do you take walk-ins?</summary><p>Yes! Walk-ins are welcome. On busy weekends, arriving early is your best bet. For large groups (8+), call ahead at <a href="tel:4153603666">(415) 360-3666</a> so we can ready a table.</p></details><details><summary>Is there parking?</summary><p>Yes, free parking is available in the large Buena Park Downtown lot.</p></details><details><summary>Can I celebrate a birthday here?</summary><p>Absolutely — we love birthdays. For celebrations with more than 8 guests, we offer birthday packages. Call us at <a href="tel:4153603666">(415) 360-3666</a> or email <a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a> and we’ll set you up.</p></details><details><summary>Do you deliver?</summary><p>Yes. Order online for pickup through <a href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Toast</a>, or get delivery on DoorDash and Grubhub. You can also visit us in Buena Park or call <a href="tel:4153603666">(415) 360-3666</a>.</p></details><details><summary>Where can I follow updates?</summary><p>Follow us on <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram</a>, <a href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok</a>, and <a href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener">Facebook</a> for announcements and seasonal news.</p></details></div></div></section>
     <div class="nhk"><div class="container"><strong>An NHK Licensed Character Café</strong><p>Domo-kun © NHK. We're honored to bring this beloved character to life in Buena Park.</p></div></div>
   </main>
-  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand" href="#top"><img src="domo-cafe-logo-transparent.png" alt="Domo Cafe"></a><p>Japanese-inspired comfort food, character-sized joy, and a table for everyone.</p></div><div><h3>Explore</h3><ul class="footer-links"><li><a href="#menu">Menu</a></li><li><a href="#chomps">CHOMPS</a></li><li><a href="#story">Our story</a></li><li><a href="/events/">Events calendar</a></li></ul></div><div><h3>Say hi</h3><ul class="footer-links"><li><a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok ↗</a></li><li><a href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener">Facebook ↗</a></li><li><a href="tel:4153603666">(415) 360-3666</a></li><li><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></li><li><a href="#visit">8340 La Palma Ave</a></li></ul></div></div><p class="footer-legal">Domo©NHK-TYO1998-2026. Domo Animation©Domo Production Committee. All rights reserved.</p><div class="footer-bottom"><span>© 2026 Domo Cafe</span><div class="footer-credit"><span class="footer-credit__sps">Built with AI by <a href="https://superpowerstudios.ai" target="_blank" rel="noopener">Super Power Studios</a></span><span class="footer-credit__note">Design inspired by Sydney · <a class="footer__admin" href="/dashboard">Admin Login</a></span></div></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-grid"><div><a class="brand" href="#top"><img src="domo-cafe-logo-transparent.png" alt="Domo Cafe"></a><p>Japanese-inspired comfort food, character-sized joy, and a table for everyone.</p></div><div><h3>Explore</h3><ul class="footer-links"><li><a href="#menu">Menu</a></li><li><a href="#chomps">CHOMPS</a></li><li><a href="#story">Our story</a></li><li><a href="/events/">Events calendar</a></li><li><a href="/shop/">Shop merch</a></li></ul></div><div><h3>Say hi</h3><ul class="footer-links"><li><a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">Instagram ↗</a></li><li><a href="https://www.tiktok.com/@domokuncafe" target="_blank" rel="noopener">TikTok ↗</a></li><li><a href="https://www.facebook.com/domokuncafe" target="_blank" rel="noopener">Facebook ↗</a></li><li><a href="tel:4153603666">(415) 360-3666</a></li><li><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></li><li><a href="#visit">8340 La Palma Ave</a></li></ul></div></div><p class="footer-legal">Domo©NHK-TYO1998-2026. Domo Animation©Domo Production Committee. All rights reserved.</p><div class="footer-bottom"><span>© 2026 Domo Cafe</span><div class="footer-credit"><span class="footer-credit__sps">Built with AI by <a href="https://superpowerstudios.ai" target="_blank" rel="noopener">Super Power Studios</a></span><span class="footer-credit__note">Design inspired by Sydney · <a class="footer__admin" href="/dashboard">Admin Login</a></span></div></div></div></footer>
 
   <div id="rsvpModal" class="modal hidden" aria-hidden="true" role="dialog" aria-labelledby="rsvp-title">
     <div class="modal-overlay" id="modalOverlay"></div>

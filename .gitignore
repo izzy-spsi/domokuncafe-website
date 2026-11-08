@@ -1,3 +1,5 @@
 node_modules/
 .env
 .DS_Store
+shop-server/data/*.json
+shop-server/data/*.tmp

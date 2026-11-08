@@ -40,6 +40,9 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.08; l
 .nav-toggle { background: none; border: 0; color: var(--brown-dark); cursor: pointer; display: none; font-size: 1.6rem; padding: .4rem; }
 .site-nav .nav-hl { background: #FFD98B; border-radius: 999px; color: var(--brown-dark); padding: .42rem .9rem; }
 .site-nav a.nav-hl:hover, .site-nav a.nav-hl:focus-visible { background: var(--red); color: #fff; }
+.site-nav a.nav-shop { border: 2px solid var(--gold); border-radius: 999px; padding: .28rem .85rem; }
+.site-nav a.nav-shop:hover, .site-nav a.nav-shop:focus-visible, .site-nav a.nav-shop[aria-current="page"] { background: #FFD98B; color: var(--brown-dark); }
+.nav-cart span[data-cart-count] { background: #FFD98B; border-radius: 999px; display: inline-block; font-size: .72rem; line-height: 1.4; margin-left: .15rem; min-width: 1.35rem; padding: 0 .35rem; text-align: center; }
 .nhk { background: var(--gold); color: var(--brown-dark); padding: 1.4rem 0; text-align: center; }
 .nhk p { margin: .2rem auto 0; max-width: 750px; }
 .site-footer { background: var(--brown-dark); color: #F9EBDD; padding: 3.5rem 0 1.5rem; }
@@ -61,10 +64,10 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.08; l
   /* Compact desktop nav: priority links + Order Now stay visible; the ☰ menu shows every link. */
   .nav-toggle { display: block; margin-left: .3rem; order: 3; }
   .site-nav { margin-left: auto; }
-  .site-nav > a:not(.nav-priority):not(.button) { display: none; }
+  .site-nav > a:not(.nav-priority):not(.button):not(.nav-shop):not(.nav-cart) { display: none; }
   .site-nav.is-open { align-items: stretch; background: var(--cream); border-bottom: 1px solid rgba(139,69,19,.15); flex-direction: column; gap: 0; left: 0; padding: .6rem max(1.25rem, calc((100% - 1180px) / 2)) 1.1rem; position: absolute; right: 0; top: 76px; }
   .site-nav.is-open > a:not(.nav-priority):not(.button), .site-nav.is-open > a { display: block; padding: .65rem 0; }
-  .site-nav.is-open .nav-hl { align-self: flex-start; padding: .42rem .9rem; }
+  .site-nav.is-open .nav-hl, .site-nav.is-open .nav-shop { align-self: flex-start; padding: .42rem .9rem; }
 }
 @media (max-width: 850px) {
   .site-header { height: 68px; }
@@ -73,6 +76,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.08; l
   .site-nav { align-items: stretch; background: var(--cream); border-bottom: 1px solid rgba(139,69,19,.15); display: none; flex-direction: column; gap: 0; left: 0; padding: .6rem 1.25rem 1.1rem; position: absolute; right: 0; top: 68px; }
   .site-nav.is-open { display: flex; }
   .site-nav a { padding: .65rem 0; }
+  .site-nav.is-open .nav-shop { align-self: flex-start; padding: .42rem .9rem; }
   .site-nav .button { width: 100%; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .footer-grid > :first-child { grid-column: 1 / -1; }
