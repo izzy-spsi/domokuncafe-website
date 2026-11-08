@@ -338,6 +338,25 @@
       .sdd-banner p { font-size: .86rem; }
       .sdd-banner__link { text-align: center; width: 100%; }
     }
+    /* Veterans Day open notice (Wed Nov 11, 2026). Date and open status only — special hours were not confirmed. Auto-hides after that date in America/Los_Angeles. Delete [data-vd-open] after the day. */
+    html.vd-expired [data-vd-open] { display: none !important; }
+    .vd-banner { background: var(--brown-dark); border-bottom: 3px solid var(--gold); color: var(--cream); }
+    .vd-banner__inner { align-items: center; display: flex; gap: 1rem 1.4rem; justify-content: space-between; padding: .9rem 0; }
+    .vd-banner p { margin: 0; font-size: .95rem; line-height: 1.45; }
+    .vd-banner strong { color: #FFD98B; display: inline-block; font-family: var(--display); font-size: 1.2rem; font-weight: 400; letter-spacing: .03em; margin-right: .45rem; }
+    .vd-banner__note { display: block; margin-top: .15rem; }
+    .vd-banner__link { background: var(--cream); border-radius: 999px; color: var(--red); flex-shrink: 0; font-size: .78rem; font-weight: 700; letter-spacing: .06em; padding: .55rem 1rem; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
+    .vd-banner__link:hover, .vd-banner__link:focus-visible { background: #fff; outline: 2px solid #FFD98B; outline-offset: 2px; }
+    .vd-hours-note { background: rgba(200,146,42,.12); border-left: 3px solid var(--gold); border-radius: .45rem; font-size: .92rem; line-height: 1.45; margin: 0 0 1rem; padding: .65rem .85rem; }
+    .vd-hours-note strong { color: var(--brown-dark); }
+    @media (max-width: 850px) {
+      .vd-banner__inner { align-items: flex-start; flex-direction: column; gap: .7rem; }
+    }
+    @media (max-width: 570px) {
+      .vd-banner p { font-size: .86rem; }
+      .vd-banner strong { display: block; margin: 0 0 .1rem; }
+      .vd-banner__link { text-align: center; width: 100%; }
+    }
   </style>
   <script>
     /* Spooky Dinner with Domo — auto-hides after Oct 31, 2026 (America/Los_Angeles). */
@@ -354,6 +373,16 @@
   -->
   <!-- Seasonal themes (Domoween Oct 1–Nov 1, 2026). Preview: ?theme=domoween | ?theme=normal | ?theme=auto. See seasons/README.md -->
   <script src="seasons/seasons.js"></script>
+  <script>
+    /* Veterans Day open notice — visible through Wed Nov 11, 2026, then hidden.
+       Uses the America/Los_Angeles calendar date from seasons.js (including ?themeDate=).
+       Fallback instant is Nov 12, 2026 00:00 PST = 2026-11-12T08:00:00.000Z. */
+    (function () {
+      var today = window.DomoSeasons && window.DomoSeasons.today;
+      var hide = today ? today > '2026-11-11' : Date.now() >= Date.parse('2026-11-12T08:00:00.000Z');
+      if (hide) document.documentElement.classList.add('vd-expired');
+    })();
+  </script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
@@ -367,6 +396,12 @@
     </nav>
   </header>
   <main id="main">
+    <div class="vd-banner" data-vd-open role="region" aria-label="Veterans Day opening">
+      <div class="container vd-banner__inner">
+        <p><strong>Open Veterans Day</strong> Wednesday, November 11, 2026. <span class="vd-banner__note">Domo Cafe is open in Buena Park. Walk-ins are welcome.</span></p>
+        <a class="vd-banner__link" href="#visit">Plan your visit</a>
+      </div>
+    </div>
     <div class="sdd-banner" data-sdd-promo role="region" aria-label="Spooky Dinner with Domo">
       <div class="container sdd-banner__inner">
         <p><strong>Spooky Dinner with Domo</strong> Saturday, October 31, 2026 · 7:30–9:00 PM Pacific · From $50. <span class="sdd-banner__note">Private ticketed dinner — every guest needs a ticket. This is not a walk-in. Cafe walk-ins are still welcome outside the event.</span></p>
@@ -478,7 +513,7 @@
       </div>
     </section>
 
-    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><div class="visit__contacts"><a href="tel:4153603666">(415) 360-3666</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
+    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><p class="vd-hours-note" data-vd-open><strong>Open Wednesday, November 11, 2026</strong> — Veterans Day.</p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><div class="visit__contacts"><a href="tel:4153603666">(415) 360-3666</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
 
     <section class="section section--white" id="events" aria-labelledby="events-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Make it a thing</div><h2 id="events-heading">Good times,<br>on the calendar.</h2></div><p>Community nights and seasonal surprises are still taking shape. Spooky Dinner with Domo is already ticketed for Halloween night.</p></div><div class="events-grid"><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-hug.png" alt="Domo characters hugging"></div><h3>Domo Community Tuesdays</h3><p>Local schools, teams, and nonprofits raise funds at Domo. <strong style="color:var(--red)">Coming soon.</strong></p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/menu/domo-yaki.png" alt="Domo Cafe stuffed pancakes"></div><h3>Seasonal drops</h3><p>Limited-time menu moments are on the way.</p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-character.png" alt="Domo character portrait"></div><h3>Character moments</h3><p>Spooky Dinner with Domo is Saturday, October 31, 7:30–9:00 PM Pacific, from $50. Private tickets only — every guest needs a ticket. <a href="https://toast.app/r/domo-cafe-8340-la-palma-avenue/events/dine-with-domo?deeplink=true" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">Get tickets →</a></p></article></div></div></section>
 
