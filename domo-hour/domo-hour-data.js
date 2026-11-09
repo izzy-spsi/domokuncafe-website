@@ -1,81 +1,74 @@
 /*
  * DOMO HOUR — the one file for Domo Hour copy, menu, prices and photos.
  * Rendered by /domo-hour/domo-hour.js into <section id="domo-hour"> on the home page.
- * See domo-hour/DOMO-HOUR.md for how to edit, swap photos, or remove the Domo-ween badge.
+ * See domo-hour/DOMO-HOUR.md.
  *
- * Rules: keep menu names, prices and descriptions exactly as the kitchen staff approved them;
- * don't add descriptions of your own, and no alcohol wording. Photos must be existing approved
- * Domo Cafe photography.
+ * Menu names, prices and descriptions must match the approved Domo Hour menu.
+ * Do not add items, prices or descriptions that are not on that menu.
  */
 window.DOMO_HOUR = {
-  // ONE switch for the menu. false = hide the "See the Domo Hour menu" button, the menu panel AND the
-  // price callouts everywhere (they are left out of the page entirely, not just hidden).
-  // Set to true once staff confirm the menu. The menu data below stays here either way.
+  // false leaves the price callouts, menu button and menu panel out of the page.
   showMenu: true,
 
-  eyebrow: "NEW AT DOMO CAFE",
   title: "DOMO HOUR",
-  tagline: "THE BEST HOUR JUST GOT DOMO-FIED.",
-  schedule: "Monday–Friday • 3–6 PM",
-  scheduleShort: "MON–FRI • 3–6 PM",          // shown instead of `schedule` on small phones
-  hoursNote: "Available Monday–Friday • 3–6 PM. Excluding holidays.",   // always shown
-  sub: "Japanese-inspired bites, Domo favorites, and special-priced sips made for sharing.",
+  schedule: "Mon–Fri · 3–6 PM",
+  scheduleShort: "Mon–Fri · 3–6 PM",
+  hoursNote: "Not available on holidays or during special events.",
+  availability: "Mon–Fri · 3–6 PM. Not available on holidays or during special events.",
 
-  // Price callouts: only shown when showMenu is true.
+  // Lowest bite and sip prices, plus the named burger, from the menu below.
   offers: [
-    { label: "EATS FROM", price: "$8" },
-    { label: "SIPS FROM", price: "$6" },
-    { label: "SINGLE SMASH BURGER", price: "$12", hero: true }
+    { label: "BITES FROM", price: "$5" },
+    { label: "SIPS FROM", price: "$4" },
+    { label: "SINGLE SMASH BURGER", price: "$10", hero: true }
   ],
 
-  menuButton: "SEE THE DOMO HOUR MENU",        // only shown when showMenu is true
+  menuButton: "SEE THE DOMO HOUR MENU",
   visitButton: "PLAN YOUR VISIT",
-  visitHref: "#visit",                           // existing hours / location / directions section
+  visitHref: "#visit",
 
-  // Menu: only shown when showMenu is true. Final staff menu. `desc` and `add` are optional and
-  // shown under the item; use only wording the kitchen staff supplied.
   menu: [
     {
-      heading: "BITES",
+      heading: "Bites",
       items: [
-        { name: "Single Smash Burger", price: "$12", desc: "Single wagyu smash patty, melted American cheese, pickles, caramelized onions and yum yum sauce on a toasted Domo brioche bun. Served with furikake waffle fries." },
-        { name: "Domo Sliders", price: "$10", desc: "Two sliders with a beef patty, lettuce, tomato, ketchup and mayo." },
-        { name: "Domo Bites Back", price: "$10", desc: "Crispy breaded cauliflower bites. Option to sub karaage chicken." },
-        { name: "Domo Style Fries", price: "$8", desc: "Melted American cheese, caramelized onions and house sauce on furikake waffle fries." },
-        { name: "Yakisoba Noodles", price: "$10", desc: "Springy noodles, shiitake, stir-fry vegetables, yakisoba glaze, furikake, seaweed, scallions and a signature Domo egg.", add: "Add bulgogi beef +$8" },
-        { name: "Side Curry Mac & Cheese", price: "$8" },
-        { name: "Domo Churro Fries", price: "$8" }
+        {
+          name: "Single Smash Burger",
+          price: "$10",
+          description: "Single wagyu smash patty, melted American cheese, pickles, caramelized onions and yum yum sauce on a toasted Domo brioche bun. Served with furikake waffle fries."
+        },
+        {
+          name: "Domo Bites Back",
+          price: "$6",
+          description: "Crispy breaded cauliflower bites tossed in sweet & spicy gochujang or house buffalo sauce."
+        },
+        {
+          name: "Domo Style Fries",
+          price: "$5",
+          description: "Melted American cheese, caramelized onions and house sauce on furikake waffle fries."
+        },
+        { name: "Side Curry Mac & Cheese", price: "$5" },
+        { name: "Domo Churro Fries", price: "$6" }
       ]
     },
     {
-      heading: "SIPS",
+      heading: "Sips",
       items: [
-        { name: "Strawberry Matcha", price: "$7" },
-        { name: "Cinnamon Roll Matcha", price: "$7" },
-        { name: "Sparkling Strawberry Lime Refresher", price: "$7" },
-        { name: "Dirty Soda", price: "$6", desc: "Paradise Fizz or Berry Bliss" },
-        { name: "Mango Lemonade", price: "$6" },
-        { name: "Domo's Iced Cookie Coffee", price: "$6" },
-        { name: "Strawberry Lemonade", price: "$6" },
-        { name: "Milo Dinosaur", price: "$6" },
-        { name: "Domo Palmer", price: "$6" }
+        { name: "Sparkling Strawberry Lime Refresher", price: "$5" },
+        { name: "Dirty Soda", price: "$5", description: "Paradise Fizz or Berry Bliss" },
+        { name: "Mango Lemonade", price: "$4" },
+        { name: "Domo's Iced Cookie Coffee", price: "$4" },
+        { name: "Strawberry Lemonade", price: "$4" },
+        { name: "Milo Dinosaur", price: "$4" },
+        { name: "Domo Palmer", price: "$4" }
       ]
     }
   ],
-  availability: "Available Monday–Friday • 3–6 PM. Not available on holidays or special events.",
 
-  // Photo collage. The first photo is shown large. `temporary: true` marks a stand-in
-  // photo until a real one exists; replace `src`/`alt` and delete `temporary` when it does.
+  // Existing Domo Cafe food photography. The first photo is shown large.
   images: [
-    { src: "/assets/menu/doordash/Smash%20Burger.jpg", alt: "Smash burger with a Domo-face bun, avocado and waffle fries on a skillet", standInFor: "Single Smash Burger", temporary: true },
+    { src: "/assets/menu/doordash/Smash%20Burger.jpg", alt: "Smash burger with a Domo-face bun, avocado and waffle fries on a skillet" },
     { src: "/assets/menu/doordash/Domo%20Style%20Fries.jpg", alt: "Domo Style Fries: sauced waffle fries in a Domo Cafe paper-lined skillet" },
     { src: "/assets/menu/doordash/Churro%20Fries.jpg", alt: "Churro fries with a chocolate dipping sauce in a Domo Cafe paper-lined skillet" },
-    { src: "/assets/menu/doordash/Strawberry%20Refresher.jpg", alt: "Strawberry refresher in a Domo Cafe cup", standInFor: "Domo Hour Sips", temporary: true }
-  ],
-
-  // Seasonal badge, shown only while that seasonal theme is active (html[data-theme]).
-  // Delete the `domoween` entry to remove the badge; styling lives in seasons/domoween/domoween.css.
-  seasonal: {
-    domoween: { badge: "Domo-ween Edition • All October" }
-  }
+    { src: "/assets/domoween/lto/bites-back-gochujang.jpg", alt: "Domo Bites Back breaded cauliflower bites in sweet and spicy gochujang sauce" }
+  ]
 };

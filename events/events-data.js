@@ -43,20 +43,16 @@ window.DOMO_EVENTS = {
       series: "Domoween",
       art: "wc_41_jack-o-lantern"
     },
-    /* Weekday promo unpublished while it is revamped. Uncomment to list it on the calendar again.
     {
       title: "Domo Hour",
-      description: "Monday–Friday • 3–6 PM",
+      description: "Not available on holidays or during special events.",
       startTime: "15:00",
       endTime: "18:00",
-      repeat: { days: ["Mon", "Tue", "Wed", "Thu", "Fri"], from: "2026-10-01", until: "2026-10-31" },
-      // Menu and prices live in domo-hour/domo-hour-data.js (one source of truth). While its menu is
-      // switched off (showMenu: false) this links to the section; once on, it can be "/#domo-hour-menu"
-      // with linkLabel "See the Domo Hour menu".
-      link: "/#domo-hour",
-      linkLabel: "Domo Hour details"
+      // Relaunch Monday, Nov 9, 2026. The menu has no end date, so this listing stays ongoing.
+      repeat: { days: ["Mon", "Tue", "Wed", "Thu", "Fri"], from: "2026-11-09" },
+      link: "/#domo-hour-menu",
+      linkLabel: "See the Domo Hour menu"
     },
-    */
 
     // {
     //   date: "2026-10-00",

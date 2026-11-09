@@ -71,6 +71,8 @@ html.sdd-expired [data-sdd-promo] { display: none !important; }
 .ev-card:target { background: var(--ev-today); border-radius: 1rem; padding-left: .8rem; padding-right: .8rem; }
 .ev-card__date { align-items: center; align-self: start; background: var(--ev-date-bg); border-radius: 1rem; color: var(--ev-date-text); display: flex; flex-direction: column; font-size: .72rem; font-weight: 700; letter-spacing: .08em; line-height: 1.1; padding: .55rem .3rem; text-transform: uppercase; }
 .ev-card__date strong { font: 2rem/1 var(--display); letter-spacing: 0; }
+.ev-card__date--ongoing { letter-spacing: .02em; }
+.ev-card__date--ongoing strong { font-size: 1.35rem; }
 .ev-card h3 { font-size: 1.7rem; margin: 0 0 .25rem; }
 .ev-card p { color: var(--ev-muted); margin-bottom: .5rem; }
 .ev-card__series { color: var(--ev-accent) !important; font-size: .74rem; font-weight: 700; letter-spacing: .12em; margin-bottom: .2rem !important; text-transform: uppercase; }

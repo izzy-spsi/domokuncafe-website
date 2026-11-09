@@ -1,8 +1,4 @@
 User-agent: *
 Allow: /
 
-# Weekday promo files stay in the repo while the offer is revamped. Remove this
-# line when the homepage section is published again.
-Disallow: /domo-hour
-
 Sitemap: https://www.domokuncafe.com/sitemap.xml
