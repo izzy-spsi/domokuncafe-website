@@ -1,0 +1,110 @@
+/* Permanent reservations announcement and mobile reserve bar. */
+html.reserve-banner-dismissed [data-reserve-banner] { display: none !important; }
+
+.rsv-new {
+  background: #FFD98B;
+  border-radius: 999px;
+  color: #4A250D;
+  display: inline-block;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  line-height: 1.2;
+  margin-right: .35rem;
+  padding: .15rem .45rem;
+  text-transform: uppercase;
+  vertical-align: .12em;
+}
+
+.rsv-banner { background: var(--red, #CC2222); border-bottom: 3px solid #FFD98B; color: #fff; }
+.rsv-banner__inner { align-items: center; display: flex; gap: .9rem 1.2rem; justify-content: space-between; padding: .85rem 0; }
+.rsv-banner p { font-size: .95rem; line-height: 1.45; margin: 0; }
+.rsv-banner strong { font-weight: 700; }
+.rsv-banner__actions { align-items: center; display: flex; flex-shrink: 0; flex-wrap: wrap; gap: .45rem; }
+.rsv-banner__primary,
+.rsv-banner__secondary {
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .04em;
+  min-height: 2.75rem;
+  padding: .5rem .95rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+.rsv-banner__primary { background: #fff; color: #CC2222; }
+.rsv-banner__primary:hover,
+.rsv-banner__primary:focus-visible { background: #FFD98B; color: #4A250D; outline: 2px solid #fff; outline-offset: 2px; }
+.rsv-banner__secondary { background: transparent; border: 2px solid #fff; color: #fff; }
+.rsv-banner__secondary:hover,
+.rsv-banner__secondary:focus-visible { background: #fff; color: #CC2222; outline: 2px solid #FFD98B; outline-offset: 2px; }
+.rsv-banner__dismiss {
+  background: transparent;
+  border: 0;
+  border-radius: 999px;
+  color: #fff;
+  cursor: pointer;
+  font: 700 1.35rem/1 var(--body, system-ui, sans-serif);
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+}
+.rsv-banner__dismiss:hover,
+.rsv-banner__dismiss:focus-visible { background: rgba(255,255,255,.16); outline: 2px solid #FFD98B; outline-offset: 2px; }
+
+.site-nav a.nav-reserve {
+  background: var(--red, #CC2222);
+  border-radius: 999px;
+  color: #fff;
+  padding: .42rem .85rem;
+}
+.site-nav a.nav-reserve:hover,
+.site-nav a.nav-reserve:focus-visible,
+.site-nav a.nav-reserve[aria-current="page"] { background: var(--red-dark, #971919); color: #fff; }
+
+.rsv-dock { display: none; }
+
+@media (max-width: 850px) {
+  .rsv-banner { position: relative; }
+  .rsv-banner__inner { align-items: stretch; flex-direction: column; padding-right: 2.4rem; }
+  .rsv-banner__actions { width: 100%; }
+  .rsv-banner__primary,
+  .rsv-banner__secondary { flex: 1 1 8rem; }
+  .rsv-banner__dismiss { position: absolute; right: .2rem; top: .15rem; }
+  .rsv-dock {
+    background: rgba(253,246,238,.97);
+    border-top: 1px solid rgba(139,69,19,.18);
+    bottom: 0;
+    display: grid;
+    gap: .5rem;
+    grid-template-columns: 1fr 1fr;
+    left: 0;
+    padding: .55rem .75rem calc(.55rem + env(safe-area-inset-bottom));
+    position: fixed;
+    right: 0;
+    z-index: 30;
+  }
+  .rsv-dock a {
+    align-items: center;
+    border-radius: 999px;
+    display: flex;
+    font-size: .82rem;
+    font-weight: 700;
+    justify-content: center;
+    min-height: 2.75rem;
+    padding: .45rem .6rem;
+    text-align: center;
+    text-decoration: none;
+  }
+  .rsv-dock__primary { background: #CC2222; color: #fff; }
+  .rsv-dock__primary:hover,
+  .rsv-dock__primary:focus-visible { background: #971919; outline: 2px solid #4A250D; outline-offset: 2px; }
+  .rsv-dock__secondary { background: #fff; border: 2px solid #CC2222; color: #CC2222; }
+  .rsv-dock__secondary:hover,
+  .rsv-dock__secondary:focus-visible { background: #FDF6EE; outline: 2px solid #4A250D; outline-offset: 2px; }
+  body { padding-bottom: calc(4.4rem + env(safe-area-inset-bottom)); }
+}
+
+@media (max-width: 420px) {
+  .rsv-banner__actions { align-items: stretch; flex-direction: column; }
+}
