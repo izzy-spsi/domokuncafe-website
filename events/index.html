@@ -41,6 +41,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Darumadrop+One&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/site-shell.css">
   <link rel="stylesheet" href="/events/events.css">
+  <link rel="stylesheet" href="/assets/reserve-highlight.css">
+  <script src="/assets/reserve-highlight.js"></script>
   <script src="/seasons/seasons.js"></script>
   <script>
     /* Spooky Dinner with Domo — auto-hides after Oct 31, 2026 (America/Los_Angeles). */
@@ -59,12 +61,22 @@
     <a class="brand" href="/" aria-label="Domo Cafe home"><img src="/domo-cafe-logo-transparent.png" alt="Domo Cafe"></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">☰</button>
     <nav class="site-nav" id="site-nav" aria-label="Main navigation">
-      <a class="nav-priority" href="/events/" aria-current="page">Events</a><a href="/reservations/">Reservations</a><a href="/waitlist/">Waitlist</a><a href="/#menu">Menu</a><a href="/#story">Our Story</a><a href="/#visit">Visit</a><a href="/#faq">FAQ</a>
+      <a class="nav-priority" href="/events/" aria-current="page">Events</a><a class="nav-priority nav-reserve" href="/reservations/">Reserve <span class="rsv-new">New</span></a><a class="nav-priority" href="/waitlist/">Waitlist</a><a href="/#menu">Menu</a><a href="/#story">Our Story</a><a href="/#visit">Visit</a><a href="/#faq">FAQ</a>
       <a class="button button--nav" href="https://www.toasttab.com/domo-cafe-8340-la-palma-avenue/" target="_blank" rel="noopener">Order Now</a>
     </nav>
   </header>
 
   <main id="main">
+    <div class="rsv-banner" data-reserve-banner role="region" aria-label="Online reservations">
+      <div class="container rsv-banner__inner">
+        <p><span class="rsv-new">New</span> <strong>Now taking reservations online!</strong> Reserve a table or join our waitlist.</p>
+        <div class="rsv-banner__actions">
+          <a class="rsv-banner__primary" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/findTime" target="_blank" rel="noopener noreferrer">Reserve a Table <span class="sr-only">on Toast. Books a future time.</span><span aria-hidden="true">↗</span></a>
+          <a class="rsv-banner__secondary" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/joinWaitlist" target="_blank" rel="noopener noreferrer">Join Waitlist <span class="sr-only">on Toast. Adds you to today's line. This does not reserve a table.</span><span aria-hidden="true">↗</span></a>
+          <button class="rsv-banner__dismiss" type="button" data-reserve-dismiss aria-label="Dismiss reservations announcement">×</button>
+        </div>
+      </div>
+    </div>
     <section class="ev-hero" aria-labelledby="events-heading">
       <div class="container">
         <p class="eyebrow">Domo Cafe · Buena Park</p>
@@ -113,5 +125,9 @@
       toggle.addEventListener('click', function () { var open = nav.classList.toggle('is-open'); toggle.setAttribute('aria-expanded', open); toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu'); });
     })();
   </script>
+  <nav class="rsv-dock" aria-label="Reserve or join the waitlist">
+    <a class="rsv-dock__primary" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/findTime" target="_blank" rel="noopener noreferrer">Reserve a Table <span class="sr-only">on Toast. Books a future time.</span></a>
+    <a class="rsv-dock__secondary" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/joinWaitlist" target="_blank" rel="noopener noreferrer">Join Waitlist <span class="sr-only">on Toast. Adds you to today's line. This does not reserve a table.</span></a>
+  </nav>
 </body>
 </html>
