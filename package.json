@@ -4,7 +4,8 @@
   "description": "Domo Cafe coming soon landing page",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "node --test reservations/booking.test.js"
   },
   "dependencies": {
     "express": "^4.18.2"
