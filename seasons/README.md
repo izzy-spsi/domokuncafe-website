@@ -59,8 +59,10 @@ theme and lets you switch. Placeholder content also gets a yellow
 
   With no events in a month, guests see a friendly "coming soon, follow
   @domokuncafe" message rather than placeholder entries.
-- **Recurring listings** use `repeat: { days: ["Mon", ...], from, until }` instead of `date`. They
-  appear on every matching day in the calendar grid but as one card in the
+- **Recurring listings** (Domo Hour is weekdays 3–6 PM from Nov 9, 2026, with no end date;
+  its menu lives in `domo-hour/domo-hour-data.js`) use
+  `repeat: { days: ["Mon", ...], from, until }`. Leave `until` off when the listing is ongoing.
+  They appear on every matching day in the calendar grid but as one card in the
   lists. Their Google Calendar/.ics invites repeat weekly, and their Event
   JSON-LD carries a schema.org `Schedule`.
 
@@ -100,9 +102,8 @@ file is, where to drop high-res originals, and the licensor's usage rules.
    lists, and a small `critical` CSS string that hides whatever the theme
    replaces. A commented `harvest` example is already there.
 3. The windows shouldn't overlap. If they do, the first match in the list wins.
-4. The weekday promo module (`domo-hour/`) is not part of any theme. It is unpublished
-   right now; see `domo-hour/DOMO-HOUR.md`. When it is on, it shows all year and only picks up
-   a seasonal skin.
+4. Domo Hour (`domo-hour/`) is not part of any theme. It shows all year. See `domo-hour/DOMO-HOUR.md`.
+   A seasonal skin can still recolor it; the October "Domo-ween Edition" badge is gone.
 5. For next October, copy the Domoween entry and change the year in `start` and
    `end`. The countdown targets the theme's `end` date automatically.
 

@@ -69,10 +69,12 @@
 .dh__menu-cols { display: grid; gap: 1rem 3rem; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); }
 .dh__menu-heading { color: var(--dh-card-muted); font: 800 .82rem var(--body); letter-spacing: .16em; margin: 0 0 .3rem; }
 .dh__menu-list { list-style: none; margin: 0; padding: 0; }
-.dh__menu-list li { align-items: baseline; border-bottom: 1px solid rgba(139, 69, 19, .12); display: flex; font-size: 1.06rem; gap: .5rem; min-height: 3rem; padding: .7rem 0; }
-.dh__menu-name { font-weight: 700; }
+.dh__menu-item { border-bottom: 1px solid rgba(139, 69, 19, .12); padding: .85rem 0 1rem; }
+.dh__menu-line { align-items: baseline; display: flex; font-size: 1.06rem; gap: .5rem; }
+.dh__menu-name { font-weight: 700; min-width: 0; }
 .dh__menu-dots { border-bottom: 2px dotted rgba(139, 69, 19, .35); flex: 1 1 1rem; min-width: 1rem; transform: translateY(-.3em); }
 .dh__menu-price { color: var(--dh-price); font-size: 1.15rem; font-variant-numeric: tabular-nums; font-weight: 800; white-space: nowrap; }
+.dh__menu-desc { color: var(--dh-card-text); font-size: 1rem; font-weight: 500; line-height: 1.45; margin: .4rem 0 0; max-width: 40rem; }
 .dh__menu-when { border-top: 2px dashed rgba(139, 69, 19, .3); color: var(--dh-card-text); font-weight: 800; letter-spacing: .04em; margin: 1.2rem 0 0; padding-top: 1rem; text-align: center; }
 @keyframes dh-reveal { from { opacity: 0; transform: translateY(8px); } }
 
@@ -80,6 +82,7 @@
   .dh { padding: 3.2rem 0 3.6rem; scroll-margin-top: 68px; }
   .dh__inner { grid-template-columns: 1fr; }
   .dh__menu { scroll-margin-top: 80px; }
+  .dh__menu-cols { grid-template-columns: 1fr; }
 }
 @media (max-width: 640px) {
   /* Offer first: title → schedule → prices, then the rest. */
@@ -99,5 +102,25 @@
   .dh__photos { gap: .55rem; }
   .dh__photo { border-width: 3px; border-radius: .9rem; }
   .dh__menu-cols { grid-template-columns: 1fr; }
-  .dh__menu-list li { font-size: 1.05rem; }
+  .dh__menu-line { font-size: 1.05rem; }
+  .dh__ctas .button { min-height: 3.1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .dh__menu { animation: none; }
+  .dh__chev { transition: none; }
+  .dh__photo { transform: none; }
+}
+
+/* Homepage callout. Sits above the hero and links to the section. */
+.dh-banner { background: #4A250D; color: #FDF6EE; }
+.dh-banner__inner { align-items: center; display: flex; gap: 1rem 1.5rem; justify-content: space-between; padding-bottom: .9rem; padding-top: .9rem; }
+.dh-banner p { font-size: 1.02rem; line-height: 1.4; margin: 0; }
+.dh-banner strong { color: #FFD98B; display: inline-block; font-family: var(--display); font-size: 1.45rem; font-weight: 400; letter-spacing: .04em; margin-right: .35rem; }
+.dh-banner__note { display: block; margin-top: .15rem; }
+.dh-banner__link { align-items: center; background: #FFD98B; border-radius: 999px; color: #4A250D; display: inline-flex; flex-shrink: 0; font-size: .78rem; font-weight: 800; justify-content: center; letter-spacing: .06em; min-height: 44px; padding: .55rem 1.05rem; text-decoration: none; text-transform: uppercase; }
+.dh-banner__link:hover, .dh-banner__link:focus-visible { background: #fff; }
+.dh-banner :focus-visible { outline: 3px solid #FFD98B; outline-offset: 3px; }
+@media (max-width: 850px) {
+  .dh-banner__inner { align-items: stretch; flex-direction: column; gap: .75rem; }
+  .dh-banner__link { width: 100%; }
 }
