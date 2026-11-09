@@ -110,17 +110,3 @@
   .dh__chev { transition: none; }
   .dh__photo { transform: none; }
 }
-
-/* Homepage callout. Sits above the hero and links to the section. */
-.dh-banner { background: #4A250D; color: #FDF6EE; }
-.dh-banner__inner { align-items: center; display: flex; gap: 1rem 1.5rem; justify-content: space-between; padding-bottom: .9rem; padding-top: .9rem; }
-.dh-banner p { font-size: 1.02rem; line-height: 1.4; margin: 0; }
-.dh-banner strong { color: #FFD98B; display: inline-block; font-family: var(--display); font-size: 1.45rem; font-weight: 400; letter-spacing: .04em; margin-right: .35rem; }
-.dh-banner__note { display: block; margin-top: .15rem; }
-.dh-banner__link { align-items: center; background: #FFD98B; border-radius: 999px; color: #4A250D; display: inline-flex; flex-shrink: 0; font-size: .78rem; font-weight: 800; justify-content: center; letter-spacing: .06em; min-height: 44px; padding: .55rem 1.05rem; text-decoration: none; text-transform: uppercase; }
-.dh-banner__link:hover, .dh-banner__link:focus-visible { background: #fff; }
-.dh-banner :focus-visible { outline: 3px solid #FFD98B; outline-offset: 3px; }
-@media (max-width: 850px) {
-  .dh-banner__inner { align-items: stretch; flex-direction: column; gap: .75rem; }
-  .dh-banner__link { width: 100%; }
-}

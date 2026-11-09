@@ -4,9 +4,8 @@ Domo Hour is back on the site starting Monday, November 9, 2026. It is a weekday
 program: **Mon–Fri · 3–6 PM**. It is not available on holidays or during special events.
 The menu has no end date.
 
-It has a callout at the top of the home page, its own section just before "What we're
-serving", a highlighted **Domo Hour** link in the nav and footer, a link from the menu
-section, and a weekday listing on `/events/`.
+It has its own section just before "What we're serving", a highlighted **Domo Hour**
+link in the nav and footer, a link from the menu section, and a weekday listing on `/events/`.
 
 ## Files
 
@@ -14,7 +13,7 @@ section, and a weekday listing on `/events/`.
 | --- | --- |
 | `domo-hour/domo-hour-data.js` | **Edit this.** Schedule, menu, prices, descriptions, photos |
 | `domo-hour/domo-hour.js` | Renders the section into `<section id="domo-hour">` and runs the menu toggle |
-| `domo-hour/domo-hour.css` | Styles for the section and the homepage callout |
+| `domo-hour/domo-hour.css` | Styles for the section |
 | `events/events-data.js` → "Domo Hour" | Weekday listing on `/events/` (links to the menu here) |
 | `index.html` noscript block | Same menu text for browsers with JavaScript off |
 
@@ -47,7 +46,7 @@ back on this program. A Domoween color skin still lives in
 
 ## Links
 
-- `/#domo-hour` scrolls to the section. The nav, footer, homepage callout and menu section use it.
+- `/#domo-hour` scrolls to the section. The nav, footer, and menu section use it.
 - `/#domo-hour-menu` scrolls to the menu and opens it. The `/events/` listing uses it.
 - **Plan your visit** goes to the existing `#visit` hours and location section. Cafe hours are unchanged.
 
