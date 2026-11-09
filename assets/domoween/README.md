@@ -70,8 +70,8 @@ distorts it.
 5. No alcohol, tobacco, drugs, religion, politics, violence or gore themes. Keep
    it cute-spooky.
 
-## Weekday promo (unpublished)
+## Domo Hour
 
-The `domo-hour/` section is hidden while that program is revamped. It uses existing food photography,
-not Domo art. To restore it, edit the menu, or swap photos, see
-[`domo-hour/DOMO-HOUR.md`](../../domo-hour/DOMO-HOUR.md).
+Domo Hour is a separate weekday section (`domo-hour/`). It uses existing food photography,
+not Domo art, and it does not use the October "Domo-ween Edition" badge. To edit the menu
+or swap photos, see [`domo-hour/DOMO-HOUR.md`](../../domo-hour/DOMO-HOUR.md).

@@ -17,6 +17,7 @@
  *                { days: ["Mon", "Tue", "Wed", "Thu", "Fri"], from: "YYYY-MM-DD", until: "YYYY-MM-DD" }
  *                It shows on every matching day in the calendar grid, but as ONE card in the lists,
  *                and its calendar invite repeats weekly until the `until` date.
+ *                Leave `until` off for an ongoing listing (no end date is invented).
  *   art:         optional official Domo art for the card (Domoween events only), one of:
  *                wc_44_frankenstein, wc_40_mummy, wc_41_jack-o-lantern, wc_43_witch-broom,
  *                wc_53_mr-usagi-pumpkin-mask, tashanna_pumpkin-head
@@ -42,20 +43,16 @@ window.DOMO_EVENTS = {
       linkLabel: "Get tickets",
       art: "wc_41_jack-o-lantern"
     },
-    /* Weekday promo unpublished while it is revamped. Uncomment to list it on the calendar again.
     {
       title: "Domo Hour",
-      description: "Monday–Friday • 3–6 PM",
+      description: "Not available on holidays or during special events.",
       startTime: "15:00",
       endTime: "18:00",
-      repeat: { days: ["Mon", "Tue", "Wed", "Thu", "Fri"], from: "2026-10-01", until: "2026-10-31" },
-      // Menu and prices live in domo-hour/domo-hour-data.js (one source of truth). While its menu is
-      // switched off (showMenu: false) this links to the section; once on, it can be "/#domo-hour-menu"
-      // with linkLabel "See the Domo Hour menu".
-      link: "/#domo-hour",
-      linkLabel: "Domo Hour details"
+      // Relaunch Monday, Nov 9, 2026. No end date on the menu, so this stays ongoing.
+      repeat: { days: ["Mon", "Tue", "Wed", "Thu", "Fri"], from: "2026-11-09" },
+      link: "/#domo-hour-menu",
+      linkLabel: "See the Domo Hour menu"
     },
-    */
 
     // {
     //   date: "2026-10-00",
