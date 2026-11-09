@@ -158,32 +158,20 @@
 
   function payloadText(values) {
     return [
-      'DOMO COMMUNITY TUESDAY REQUEST',
-      'Submitted: ' + values.submittedAt,
-      '',
-      'ORGANIZATION',
-      'Name: ' + values.organization,
+      'Community Tuesday request',
+      'Organization: ' + values.organization,
       'Type: ' + values.orgType,
-      'School affiliation: ' + (values.schoolAffiliation || 'n/a'),
+      'School: ' + (values.schoolAffiliation || 'n/a'),
       'Website: ' + (values.website || 'n/a'),
       'Socials: ' + (values.socials || 'n/a'),
-      '',
-      'PRIMARY CONTACT',
-      'Name: ' + values.contactName,
+      'Contact: ' + values.contactName,
       'Email: ' + values.contactEmail,
       'Phone: ' + values.contactPhone,
-      '',
-      'REQUEST',
-      'Requested Tuesday(s): ' + values.requestedTuesdays,
-      'Estimated attendance: ' + values.estimatedAttendance,
-      'Fundraising goal: ' + (values.fundraisingGoal || 'n/a'),
+      'Tuesdays: ' + values.requestedTuesdays,
+      'Attendance: ' + values.estimatedAttendance,
+      'Goal: ' + (values.fundraisingGoal || 'n/a'),
       'Purpose: ' + values.purpose,
-      '',
-      'AGREEMENT',
-      'Agreed to Community Tuesday terms: ' + (values.agreedToTerms ? 'yes' : 'no'),
-      '',
-      'JSON',
-      JSON.stringify(values, null, 2)
+      'Agreed: ' + (values.agreedToTerms ? 'yes' : 'no')
     ].join('\n');
   }
 
@@ -236,7 +224,7 @@
     requestForm.hidden = true;
     successBox.classList.add('is-visible');
     payloadPre.textContent = body;
-    status.textContent = 'Your email draft to ' + CONTACT_EMAIL + ' should be open. If it did not, copy the request below.';
+    status.textContent = 'Hit Send in your email app to finish the request to ' + CONTACT_EMAIL + '. If a draft did not open, copy the request below.';
     successBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
     openMailto(values, body);
   });
