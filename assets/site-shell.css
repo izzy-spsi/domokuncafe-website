@@ -21,6 +21,7 @@ img { max-width: 100%; display: block; }
 a { color: inherit; }
 h1, h2, h3, p { margin-top: 0; }
 h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.08; letter-spacing: -.02em; }
+.sr-only { border: 0; clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; white-space: nowrap; width: 1px; }
 .skip-link { position: fixed; left: 1rem; top: -5rem; z-index: 100; background: var(--gold); color: var(--brown-dark); padding: .7rem 1rem; border-radius: 999px; font-weight: 700; }
 .skip-link:focus { top: 1rem; }
 .container { width: min(1180px, calc(100% - 2.5rem)); margin: 0 auto; }
@@ -64,7 +65,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.08; l
   .site-nav > a:not(.nav-priority):not(.button) { display: none; }
   .site-nav.is-open { align-items: stretch; background: var(--cream); border-bottom: 1px solid rgba(139,69,19,.15); flex-direction: column; gap: 0; left: 0; padding: .6rem max(1.25rem, calc((100% - 1180px) / 2)) 1.1rem; position: absolute; right: 0; top: 76px; }
   .site-nav.is-open > a:not(.nav-priority):not(.button), .site-nav.is-open > a { display: block; padding: .65rem 0; }
-  .site-nav.is-open .nav-hl { align-self: flex-start; padding: .42rem .9rem; }
+  .site-nav.is-open .nav-hl, .site-nav.is-open .nav-reserve { align-self: flex-start; padding: .42rem .9rem; }
 }
 @media (max-width: 850px) {
   .site-header { height: 68px; }
