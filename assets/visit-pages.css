@@ -1,0 +1,18 @@
+/* Reservations and waitlist pages. Scoped so the shared shell is unchanged. */
+.vp-hero { background: var(--cream-deep); padding: 3.6rem 0 2.2rem; }
+.vp-hero h1 { font-size: clamp(2.6rem, 6vw, 4.4rem); margin: .25rem 0 .7rem; }
+.vp-lede { color: #694d3b; font-size: 1.08rem; max-width: 40rem; }
+.vp-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.4rem; }
+.vp-body { padding: 2.2rem 0 4.5rem; }
+.vp-card { background: #fff; border-radius: var(--round); box-shadow: var(--shadow); max-width: 46rem; padding: clamp(1.2rem, 3vw, 2rem); }
+.vp-card h2 { font-size: clamp(1.7rem, 3vw, 2.3rem); margin-bottom: .7rem; }
+.vp-card p, .vp-card li { color: #694d3b; }
+.vp-card a:not(.button) { color: var(--red); font-weight: 700; }
+.vp-policy { margin: .4rem 0 0; padding-left: 1.15rem; }
+.vp-policy li { margin: .55rem 0; }
+.vp-draft { color: var(--brown); font-size: .78rem; font-weight: 700; letter-spacing: .12em; margin-bottom: .4rem; text-transform: uppercase; }
+@media (max-width: 570px) {
+  .vp-hero { padding: 2.6rem 0 1.6rem; }
+  .vp-actions { align-items: stretch; flex-direction: column; }
+  .vp-actions .button { width: 100%; }
+}
