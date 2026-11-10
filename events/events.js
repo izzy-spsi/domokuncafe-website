@@ -55,8 +55,10 @@
   function shiftDate(date, days) { var p = parts(date); var d = new Date(Date.UTC(p[0], p[1] - 1, p[2] + days)); return d.getUTCFullYear() + '-' + pad(d.getUTCMonth() + 1) + '-' + pad(d.getUTCDate()); }
 
   // repeat: { days: ["Mon", ...], from: "YYYY-MM-DD", until: "YYYY-MM-DD" } → weekday indexes (0 = Sunday).
+  // `until` may be omitted for an ongoing listing. A dated listing still needs both ends.
   function repeatDays(repeat) {
-    if (!repeat || !isDate(repeat.from) || !isDate(repeat.until) || repeat.until < repeat.from || !repeat.days || !repeat.days.length) return null;
+    if (!repeat || !isDate(repeat.from) || !repeat.days || !repeat.days.length) return null;
+    if (repeat.until && (!isDate(repeat.until) || repeat.until < repeat.from)) return null;
     var days = [];
     repeat.days.forEach(function (d) {
       var i = DAYS.map(function (x) { return x.slice(0, 3).toLowerCase(); }).indexOf(String(d).slice(0, 3).toLowerCase());
@@ -65,8 +67,21 @@
     return days.length ? days.sort() : null;
   }
 
+  function firstOccurrence(from, dayIndexes) {
+    var d = from;
+    for (var i = 0; i < 7; i++) {
+      if (dayIndexes.indexOf(weekday(d)) > -1) return d;
+      d = shiftDate(d, 1);
+    }
+    return null;
+  }
+
   function occurrenceDates(ev) {
     if (!ev.repeat) return [ev.date];
+    if (!ev.repeat.until) {
+      var first = firstOccurrence(ev.repeat.from, ev.repeat.dayIndexes);
+      return first ? [first] : [];
+    }
     var out = [];
     for (var d = ev.repeat.from; d <= ev.repeat.until; d = shiftDate(d, 1)) if (ev.repeat.dayIndexes.indexOf(weekday(d)) > -1) out.push(d);
     return out;
@@ -74,8 +89,12 @@
 
   function occursOn(ev, date) {
     if (!ev.repeat) return ev.date === date;
-    return date >= ev.repeat.from && date <= ev.repeat.until && ev.repeat.dayIndexes.indexOf(weekday(date)) > -1;
+    if (date < ev.repeat.from) return false;
+    if (ev.repeat.until && date > ev.repeat.until) return false;
+    return ev.repeat.dayIndexes.indexOf(weekday(date)) > -1;
   }
+
+  function seriesEnd(ev) { return ev.until || '9999-12-31'; }
 
   // One item per event; a recurring event is one item whose `date` is its first occurrence and `until` its last.
   function list() {
@@ -88,11 +107,13 @@
       if (!isTime(copy.endTime) || !copy.startTime) copy.endTime = '';
       var dayIndexes = repeatDays(ev.repeat);
       if (dayIndexes) {
-        copy.repeat = { from: ev.repeat.from, until: ev.repeat.until, dayIndexes: dayIndexes };
+        var open = !isDate(ev.repeat.until);
+        copy.repeat = { from: ev.repeat.from, until: open ? '' : ev.repeat.until, dayIndexes: dayIndexes };
         var dates = occurrenceDates(copy);
         if (!dates.length) return;
         copy.date = dates[0];
-        copy.until = dates[dates.length - 1];
+        if (open) delete copy.until;
+        else copy.until = dates[dates.length - 1];
       } else {
         if (!isDate(ev.date)) return;
         delete copy.repeat;
@@ -105,7 +126,7 @@
   }
 
   function between(start, end) {
-    return list().filter(function (ev) { return ev.date <= end && ev.until >= start; });
+    return list().filter(function (ev) { return ev.date <= end && seriesEnd(ev) >= start; });
   }
 
   function daysLabel(ev) {
@@ -121,8 +142,12 @@
     return MONTHS[a[1] - 1] + ' ' + a[2] + ' – ' + MONTHS[b[1] - 1] + ' ' + b[2];
   }
 
-  // "Saturday, October 17" or "Weekdays (Mon–Fri), October 1 – 31"
-  function whenLabel(ev) { return ev.repeat ? daysLabel(ev) + ', ' + rangeLabel(ev.repeat.from, ev.repeat.until) : formatDate(ev.date); }
+  // "Saturday, October 17", "Weekdays (Mon–Fri), October 1 – 31", or "Weekdays (Mon–Fri)" when ongoing.
+  function whenLabel(ev) {
+    if (!ev.repeat) return formatDate(ev.date);
+    if (!ev.repeat.until) return daysLabel(ev);
+    return daysLabel(ev) + ', ' + rangeLabel(ev.repeat.from, ev.repeat.until);
+  }
   // Compact badge text: "Sat, October 17" or "Mon–Fri"
   function shortWhen(ev) {
     if (!ev.repeat) return formatDate(ev.date, { short: true });
@@ -194,9 +219,11 @@
   }
 
   function rrule(ev) {
+    var byday = 'FREQ=WEEKLY;BYDAY=' + ev.repeat.dayIndexes.map(function (i) { return RRULE_DAYS[i]; }).join(',');
+    if (!ev.repeat.until) return byday;
     var s = span(ev);
     var until = s.allDay ? ev.until.replace(/-/g, '') : utcStamp({ date: ev.until, time: s.end.time && s.end.date === ev.date ? s.end.time : '' });
-    return 'FREQ=WEEKLY;BYDAY=' + ev.repeat.dayIndexes.map(function (i) { return RRULE_DAYS[i]; }).join(',') + ';UNTIL=' + until;
+    return byday + ';UNTIL=' + until;
   }
 
   function absUrl(link) { return /^https?:/.test(link) ? link : SITE + (link.charAt(0) === '/' ? '' : '/') + link; }
@@ -273,16 +300,18 @@
     if (ev.description) node.description = ev.description;
     if (ev.series === 'Domoween') node.superEvent = { '@id': SITE + '/domoween/#event' };
     if (ev.repeat) {
-      var last = span({ date: ev.until, startTime: ev.startTime, endTime: ev.endTime });
-      node.endDate = s.allDay ? ev.until : iso(last.end);
       node.eventSchedule = {
         '@type': 'Schedule',
         repeatFrequency: 'P1W',
         byDay: ev.repeat.dayIndexes.map(function (i) { return 'https://schema.org/' + DAYS[i]; }),
         startDate: ev.repeat.from,
-        endDate: ev.repeat.until,
         scheduleTimezone: TZ
       };
+      if (ev.repeat.until) {
+        var last = span({ date: ev.until, startTime: ev.startTime, endTime: ev.endTime });
+        node.endDate = s.allDay ? ev.until : iso(last.end);
+        node.eventSchedule.endDate = ev.repeat.until;
+      }
       if (!s.allDay) { node.eventSchedule.startTime = ev.startTime + ':00'; node.eventSchedule.endTime = s.end.time + ':00'; }
     }
     return node;
@@ -341,7 +370,7 @@
 
     function render() {
       var monthEnd = month + '-' + pad(new Date(Date.UTC(+month.slice(0, 4), +month.slice(5, 7), 0)).getUTCDate());
-      var monthEvents = events.filter(function (ev) { return ev.date <= monthEnd && ev.until >= month + '-01'; });
+      var monthEvents = events.filter(function (ev) { return ev.date <= monthEnd && seriesEnd(ev) >= month + '-01'; });
       var hasOneOff = monthEvents.some(function (ev) { return !ev.repeat; });
       titleEl.textContent = monthLabel(month);
       prev.disabled = month <= first;
@@ -374,17 +403,23 @@
       } else {
         listEl.innerHTML = '<h3 class="ev-list__title">' + monthEvents.length + (monthEvents.length === 1 ? ' event' : ' events') + ' in ' + esc(monthLabel(month)) + '</h3>' +
           monthEvents.map(function (ev) {
-            var p2 = parts(ev.repeat ? ev.repeat.from : ev.date), p3 = parts(ev.repeat ? ev.repeat.until : ev.until);
-            var badge = ev.repeat
+            var p2 = parts(ev.repeat ? ev.repeat.from : ev.date), p3 = parts(ev.repeat && ev.repeat.until ? ev.repeat.until : (ev.until || ev.date));
+            var badge = ev.repeat && !ev.repeat.until && ev.startTime && ev.endTime
+              ? (function () {
+                  var start = clock(ev.startTime), end = clock(ev.endTime);
+                  var ampm = start.ampm === end.ampm ? start.ampm : start.ampm + '–' + end.ampm;
+                  return '<span>' + esc(shortWhen(ev)) + '</span><strong>' + esc(start.text + '–' + end.text) + '</strong><span>' + esc(ampm.toUpperCase()) + '</span>';
+                })()
+              : ev.repeat
               ? '<span>' + esc(shortWhen(ev)) + '</span><strong>' + MONTHS[p2[1] - 1].slice(0, 3) + '</strong><span>' + p2[2] + '–' + p3[2] + '</span>'
               : '<span>' + DAYS[weekday(ev.date)].slice(0, 3) + '</span><strong>' + p2[2] + '</strong><span>' + MONTHS[p2[1] - 1].slice(0, 3) + '</span>';
             return '<article class="ev-card" id="' + esc(ev.id) + '">' +
-              '<div class="ev-card__date" aria-hidden="true">' + badge + '</div>' +
+              '<div class="ev-card__date' + (ev.repeat && !ev.repeat.until ? ' ev-card__date--ongoing' : '') + '" aria-hidden="true">' + badge + '</div>' +
               '<div class="ev-card__body">' +
                 (ev.series ? '<p class="ev-card__series">' + esc(ev.series) + '</p>' : '') +
                 '<h3>' + esc(ev.title) + '</h3>' +
                 '<p class="ev-card__when"><time datetime="' + esc(ev.date + (ev.startTime ? 'T' + ev.startTime : '')) + '">' + esc(whenLabel(ev)) + ' · ' + esc(formatTime(ev)) + '</time></p>' +
-                (ev.description && !ev.repeat ? '<p>' + esc(ev.description) + '</p>' : '') +
+                (ev.description ? '<p>' + esc(ev.description) + '</p>' : '') +
                 '<div class="ev-card__actions">' +
                   (ev.link ? '<a class="ev-btn ev-btn--primary" href="' + esc(ev.link) + '"' + (/^https?:/.test(ev.link) ? ' target="_blank" rel="noopener"' : '') + '>' + esc(ev.linkLabel || 'Details') + '</a>' : '') +
                   calendarButtons(ev) +

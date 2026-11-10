@@ -65,7 +65,7 @@ h1, h2, h3 { font-family: var(--display); font-weight: 400; line-height: 1.08; l
   .site-nav > a:not(.nav-priority):not(.button) { display: none; }
   .site-nav.is-open { align-items: stretch; background: var(--cream); border-bottom: 1px solid rgba(139,69,19,.15); flex-direction: column; gap: 0; left: 0; padding: .6rem max(1.25rem, calc((100% - 1180px) / 2)) 1.1rem; position: absolute; right: 0; top: 76px; }
   .site-nav.is-open > a:not(.nav-priority):not(.button), .site-nav.is-open > a { display: block; padding: .65rem 0; }
-  .site-nav.is-open .nav-hl { align-self: flex-start; padding: .42rem .9rem; }
+  .site-nav.is-open .nav-hl, .site-nav.is-open .nav-reserve { align-self: flex-start; padding: .42rem .9rem; }
 }
 @media (max-width: 850px) {
   .site-header { height: 68px; }
