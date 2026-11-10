@@ -94,6 +94,7 @@
     body, button, a { -webkit-font-smoothing: antialiased; }
     img { max-width: 100%; display: block; }
     a { color: inherit; }
+    .sr-only { border: 0; clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; white-space: nowrap; width: 1px; }
     .skip-link { position: fixed; left: 1rem; top: -5rem; z-index: 100; background: var(--gold); color: var(--brown-dark); padding: .7rem 1rem; border-radius: 999px; font-weight: 700; }
     .skip-link:focus { top: 1rem; }
     .container { width: min(1180px, calc(100% - 2.5rem)); margin: 0 auto; }
@@ -326,6 +327,10 @@
     .sr-only { border: 0; clip: rect(0 0 0 0); clip-path: inset(50%); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; white-space: nowrap; width: 1px; }
     .visit__contacts a { color: var(--red); font-weight: 700; text-decoration: none; }
     .visit__contacts a:hover { text-decoration: underline; }
+    .visit__actions { display: flex; flex-wrap: wrap; gap: .7rem; }
+    .visit__waitlist-note { font-size: .92rem; margin: .85rem 0 0; max-width: 36rem; }
+    .visit__waitlist-note a { color: #FFD98B; font-weight: 700; }
+    .visit__waitlist-note a:hover, .visit__waitlist-note a:focus-visible { color: #fff; }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; }
     }
@@ -345,18 +350,20 @@
       .sdd-banner p { font-size: .86rem; }
       .sdd-banner__link { text-align: center; width: 100%; }
     }
-    /* Veterans Day (Wed Nov 11, 2026): open 11am–8pm Pacific, complimentary Domo Dessert with a meal for veterans and active-duty military. Weekly hours are unchanged. Auto-hides after that date in America/Los_Angeles. */
+    /* Veterans Day (Wed Nov 11, 2026): open 11am–8pm Pacific. 20% off one entrée plus a complimentary Domo Dessert for veterans and active-duty military. Weekly hours are unchanged. Auto-hides after that date in America/Los_Angeles. Delete [data-vd-open] after the day. */
     html.vd-expired [data-vd-open] { display: none !important; }
     .vd-banner { background: var(--brown-dark); border-bottom: 3px solid var(--gold); color: var(--cream); }
     .vd-banner__inner { align-items: center; display: flex; gap: 1rem 1.4rem; justify-content: space-between; padding: .9rem 0; }
     .vd-banner p { margin: 0; font-size: .95rem; line-height: 1.45; }
     .vd-banner strong { color: #FFD98B; display: inline-block; font-family: var(--display); font-size: 1.2rem; font-weight: 400; letter-spacing: .03em; margin-right: .45rem; }
     .vd-banner__note { display: block; margin-top: .15rem; }
+    .vd-banner__fine { color: #FDF6EE; display: block; font-size: .78rem; font-weight: 500; line-height: 1.4; margin-top: .35rem; }
     .vd-banner__hours { white-space: nowrap; }
     .vd-banner__link { background: var(--cream); border-radius: 999px; color: var(--red); flex-shrink: 0; font-size: .78rem; font-weight: 700; letter-spacing: .06em; padding: .55rem 1rem; text-decoration: none; text-transform: uppercase; white-space: nowrap; }
     .vd-banner__link:hover, .vd-banner__link:focus-visible { background: #fff; outline: 2px solid #FFD98B; outline-offset: 2px; }
     .vd-hours-note { background: rgba(200,146,42,.12); border-left: 3px solid var(--gold); border-radius: .45rem; font-size: .92rem; line-height: 1.45; margin: 0 0 1rem; padding: .65rem .85rem; }
     .vd-hours-note strong { color: var(--brown-dark); display: block; margin-bottom: .2rem; }
+    .vd-hours-fine { color: #694d3b; display: block; font-size: .78rem; font-weight: 500; line-height: 1.4; margin-top: .4rem; }
     @media (max-width: 850px) {
       .vd-banner__inner { align-items: flex-start; flex-direction: column; gap: .7rem; }
     }
@@ -380,7 +387,9 @@
   <!-- Seasonal themes (Domoween Oct 1–Nov 1, 2026). Preview: ?theme=domoween | ?theme=normal | ?theme=auto. See seasons/README.md -->
   <script src="seasons/seasons.js"></script>
   <script>
-    /* Veterans Day offer — visible through Wed Nov 11, 2026, then hidden (America/Los_Angeles, including ?themeDate=). */
+    /* Veterans Day offer — visible through Wed Nov 11, 2026, then hidden.
+       Uses the America/Los_Angeles calendar date from seasons.js (including ?themeDate=).
+       Fallback instant is Nov 12, 2026 00:00 PST = 2026-11-12T08:00:00.000Z. */
     (function () {
       var today = window.DomoSeasons && window.DomoSeasons.today;
       var hide = today ? today > '2026-11-11' : Date.now() >= Date.parse('2026-11-12T08:00:00.000Z');
@@ -414,7 +423,7 @@
     </div>
     <div class="vd-banner" data-vd-open role="region" aria-label="Veterans Day offer">
       <div class="container vd-banner__inner">
-        <p><strong>Happy Veterans Day</strong> <span class="vd-banner__when">Wednesday, November 11, 2026 · <span class="vd-banner__hours">Open 11am – 8pm Pacific.</span></span> <span class="vd-banner__note">Celebrate lunch or dinner and receive a complimentary Domo Dessert with purchase of a meal. For veterans and active-duty military. Thank you for your service!</span></p>
+        <p><strong>Happy Veterans Day</strong> <span class="vd-banner__when">Wednesday, November 11, 2026 · <span class="vd-banner__hours">Open 11am – 8pm Pacific.</span></span> <span class="vd-banner__note">20% off one entrée plus a complimentary Domo Dessert for veterans and active-duty military. Thank you for your service!</span> <span class="vd-banner__fine">For veterans &amp; active-duty military with valid ID. One entrée and one dessert per guest. Dine-in, Nov 11 only. Not valid with other offers.</span></p>
         <a class="vd-banner__link" href="#visit">Plan your visit</a>
       </div>
     </div>
@@ -564,7 +573,7 @@
       </div>
     </section>
 
-    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><div class="visit__actions"><a class="button" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/findTime" target="_blank" rel="noopener noreferrer">Reserve a Table <span class="sr-only">on Toast. Books a future time.</span><span aria-hidden="true">↗</span></a><a class="button button--light" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/joinWaitlist" target="_blank" rel="noopener noreferrer">Join Waitlist <span class="sr-only">on Toast. Adds you to today's line. This does not reserve a table.</span><span aria-hidden="true">↗</span></a><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><p class="visit__waitlist-note">Reserve a Table books a future time. Join Waitlist adds you to today's line and does not reserve a table. Walk-ins are welcome. <a href="/reservations/">Reservation details</a> · <a href="/waitlist/">Waitlist details</a></p></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><p class="vd-hours-note" data-vd-open><strong>Wednesday, November 11, 2026 · Open 11am – 8pm Pacific.</strong> Happy Veterans Day. Celebrate lunch or dinner and receive a complimentary Domo Dessert with purchase of a meal. For veterans and active-duty military. Thank you for your service!</p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><div class="visit__contacts"><a href="tel:4153603666">(415) 360-3666</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
+    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><div class="visit__actions"><a class="button" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/findTime" target="_blank" rel="noopener noreferrer">Reserve a Table <span class="sr-only">on Toast. Books a future time.</span><span aria-hidden="true">↗</span></a><a class="button button--light" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/joinWaitlist" target="_blank" rel="noopener noreferrer">Join Waitlist <span class="sr-only">on Toast. Adds you to today's line. This does not reserve a table.</span><span aria-hidden="true">↗</span></a><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><p class="visit__waitlist-note">Reserve a Table books a future time. Join Waitlist adds you to today's line and does not reserve a table. Walk-ins are welcome. <a href="/reservations/">Reservation details</a> · <a href="/waitlist/">Waitlist details</a></p></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><p class="vd-hours-note" data-vd-open><strong>Wednesday, November 11, 2026 · Open 11am – 8pm Pacific.</strong> Happy Veterans Day. 20% off one entrée plus a complimentary Domo Dessert for veterans and active-duty military. Thank you for your service! <span class="vd-hours-fine">For veterans &amp; active-duty military with valid ID. One entrée and one dessert per guest. Dine-in, Nov 11 only. Not valid with other offers.</span></p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><div class="visit__contacts"><a href="tel:4153603666">(415) 360-3666</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
 
     <section class="section section--white" id="events" aria-labelledby="events-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Make it a thing</div><h2 id="events-heading">Good times,<br>on the calendar.</h2></div><p>Community nights and seasonal surprises are still taking shape. Spooky Dinner with Domo is already ticketed for Halloween night.</p></div><div class="events-grid"><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-hug.png" alt="Domo characters hugging"></div><h3>Domo Community Tuesdays</h3><p>Local schools, teams, and nonprofits raise funds at Domo. Separate from Domo Hour. <strong style="color:var(--red)">Coming soon.</strong></p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/menu/domo-yaki.png" alt="Domo Cafe stuffed pancakes"></div><h3>Seasonal drops</h3><p>Limited-time menu moments are on the way.</p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-character.png" alt="Domo character portrait"></div><h3>Character moments</h3><p>Spooky Dinner with Domo is Saturday, October 31, 7:30–9:00 PM Pacific, from $50. Private tickets only — every guest needs a ticket. <a href="https://toast.app/r/domo-cafe-8340-la-palma-avenue/events/dine-with-domo?deeplink=true" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">Get tickets →</a></p></article></div></div></section>
 
@@ -657,5 +666,9 @@
 
     }());
   </script>
+  <nav class="rsv-dock" aria-label="Reserve or join the waitlist">
+    <a class="rsv-dock__primary" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/findTime" target="_blank" rel="noopener noreferrer">Reserve a Table <span class="sr-only">on Toast. Books a future time.</span></a>
+    <a class="rsv-dock__secondary" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/joinWaitlist" target="_blank" rel="noopener noreferrer">Join Waitlist <span class="sr-only">on Toast. Adds you to today's line. This does not reserve a table.</span></a>
+  </nav>
 </body>
 </html>
