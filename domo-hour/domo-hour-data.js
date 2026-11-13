@@ -11,6 +11,8 @@ window.DOMO_HOUR = {
   showMenu: true,
 
   title: "DOMO HOUR",
+  tagline: "Domo Hour — Our Daily Happy Hour, 3–6 PM",
+  sub: "Happy hour in Buena Park, every day from 3–6 PM.",
   schedule: "Domo Hour runs every day 3–6 PM.",
   scheduleShort: "Domo Hour runs every day 3–6 PM.",
   weekendNote: "For a limited time, Domo Hour is now available on weekends too!",
