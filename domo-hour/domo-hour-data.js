@@ -11,10 +11,11 @@ window.DOMO_HOUR = {
   showMenu: true,
 
   title: "DOMO HOUR",
-  schedule: "Mon–Fri · 3–6 PM",
-  scheduleShort: "Mon–Fri · 3–6 PM",
+  schedule: "Domo Hour runs every day 3–6 PM.",
+  scheduleShort: "Domo Hour runs every day 3–6 PM.",
+  weekendNote: "For a limited time, Domo Hour is now available on weekends too!",
   hoursNote: "Not available on holidays or during special events.",
-  availability: "Mon–Fri · 3–6 PM. Not available on holidays or during special events.",
+  availability: "Domo Hour runs every day 3–6 PM. For a limited time, Domo Hour is now available on weekends too! Not available on holidays or during special events.",
 
   // Lowest bite and sip prices, plus the named burger, from the menu below.
   offers: [
