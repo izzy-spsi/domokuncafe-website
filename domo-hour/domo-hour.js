@@ -56,6 +56,7 @@
         (data.tagline ? '<p class="dh__tagline">' + esc(data.tagline) + '</p>' : '') +
         '<p class="dh__schedule"><span class="dh__schedule-long">' + esc(data.schedule) + '</span>' +
           (data.scheduleShort ? '<span class="dh__schedule-short" aria-hidden="true">' + esc(data.scheduleShort) + '</span>' : '') + '</p>' +
+        (data.weekendNote ? '<p class="dh__weekend-note">' + esc(data.weekendNote) + '</p>' : '') +
         (data.hoursNote ? '<p class="dh__hours-note">' + esc(data.hoursNote) + '</p>' : '') +
         (data.sub ? '<p class="dh__sub">' + esc(data.sub) + '</p>' : '') +
         (offers ? '<ul class="dh__offers" aria-label="Domo Hour prices">' + offers + '</ul>' : '') +

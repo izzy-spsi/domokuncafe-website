@@ -1,11 +1,12 @@
 # Domo Hour
 
-Domo Hour is back on the site starting Monday, November 9, 2026. It is a weekday
-program: **Mon–Fri · 3–6 PM**. It is not available on holidays or during special events.
+Domo Hour is back on the site starting Monday, November 9, 2026. Starting Friday,
+November 13, 2026, **Domo Hour runs every day 3–6 PM.** For a limited time, Domo Hour
+is now available on weekends too! It is not available on holidays or during special events.
 The menu has no end date.
 
 It has its own section just before "What we're serving", a highlighted **Domo Hour**
-link in the nav and footer, a link from the menu section, and a weekday listing on `/events/`.
+link in the nav and footer, a link from the menu section, and a daily listing on `/events/`.
 
 ## Files
 
@@ -14,7 +15,7 @@ link in the nav and footer, a link from the menu section, and a weekday listing 
 | `domo-hour/domo-hour-data.js` | **Edit this.** Schedule, menu, prices, descriptions, photos |
 | `domo-hour/domo-hour.js` | Renders the section into `<section id="domo-hour">` and runs the menu toggle |
 | `domo-hour/domo-hour.css` | Styles for the section |
-| `events/events-data.js` → "Domo Hour" | Weekday listing on `/events/` (links to the menu here) |
+| `events/events-data.js` → "Domo Hour" | Every-day listing on `/events/` (links to the menu here) |
 | `index.html` noscript block | Same menu text for browsers with JavaScript off |
 
 Keep the noscript menu in `index.html` in step with `domo-hour-data.js`.
