@@ -32,7 +32,7 @@ function baseUrl(req) {
 }
 
 function sendPage(res, name) {
-  res.set('Content-Security-Policy', "default-src 'self'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'self'");
+  res.set('Content-Security-Policy', "default-src 'self'; img-src 'self' data: https://www.facebook.com; style-src 'self'; script-src 'self' https://connect.facebook.net; connect-src 'self' https://www.facebook.com https://connect.facebook.net; base-uri 'none'; form-action 'self'; frame-ancestors 'self'");
   res.set('X-Content-Type-Options', 'nosniff');
   res.set('Referrer-Policy', 'no-referrer');
   res.set('X-Robots-Tag', 'noindex, nofollow');
