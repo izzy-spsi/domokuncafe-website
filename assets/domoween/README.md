@@ -72,6 +72,6 @@ distorts it.
 
 ## Domo Hour
 
-Domo Hour is a separate weekday section (`domo-hour/`). It uses existing food photography,
+Domo Hour is a separate daily section (`domo-hour/`). It uses existing food photography,
 not Domo art, and it does not use the October "Domo-ween Edition" badge. To edit the menu
 or swap photos, see [`domo-hour/DOMO-HOUR.md`](../../domo-hour/DOMO-HOUR.md).
