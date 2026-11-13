@@ -59,7 +59,7 @@ theme and lets you switch. Placeholder content also gets a yellow
 
   With no events in a month, guests see a friendly "coming soon, follow
   @domokuncafe" message rather than placeholder entries.
-- **Recurring listings** (Domo Hour is weekdays 3–6 PM from Nov 9, 2026, with no end date;
+- **Recurring listings** (Domo Hour runs every day 3–6 PM from Nov 9, 2026, with weekends added Nov 13, 2026 for a limited time, and no end date;
   its menu lives in `domo-hour/domo-hour-data.js`) use
   `repeat: { days: ["Mon", ...], from, until }`. Leave `until` off when the listing is ongoing.
   They appear on every matching day in the calendar grid but as one card in the

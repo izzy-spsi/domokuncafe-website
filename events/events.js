@@ -131,6 +131,7 @@
 
   function daysLabel(ev) {
     var d = ev.repeat.dayIndexes;
+    if (d.join() === '0,1,2,3,4,5,6') return 'Every day';
     if (d.join() === '1,2,3,4,5') return 'Weekdays (Mon–Fri)';
     if (d.join() === '0,6') return 'Weekends (Sat–Sun)';
     return 'Every ' + d.map(function (i) { return DAYS[i].slice(0, 3); }).join(', ');
@@ -152,7 +153,7 @@
   function shortWhen(ev) {
     if (!ev.repeat) return formatDate(ev.date, { short: true });
     var d = ev.repeat.dayIndexes.join();
-    return d === '1,2,3,4,5' ? 'Mon–Fri' : d === '0,6' ? 'Sat–Sun' : ev.repeat.dayIndexes.map(function (i) { return DAYS[i].slice(0, 3); }).join(', ');
+    return d === '0,1,2,3,4,5,6' ? 'Every day' : d === '1,2,3,4,5' ? 'Mon–Fri' : d === '0,6' ? 'Sat–Sun' : ev.repeat.dayIndexes.map(function (i) { return DAYS[i].slice(0, 3); }).join(', ');
   }
 
   function socialLinks(className, extraClass) {

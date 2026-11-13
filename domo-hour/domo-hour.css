@@ -31,9 +31,11 @@
 .dh__eyebrow { color: var(--dh-accent); font-size: .8rem; font-weight: 700; letter-spacing: .18em; margin: 0; text-transform: uppercase; }
 .dh__badge { background: rgba(255, 255, 255, .1); border: 1px solid currentColor; border-radius: 999px; color: var(--dh-accent); font-size: .72rem; font-weight: 700; letter-spacing: .05em; padding: .22rem .7rem; text-transform: uppercase; }
 .dh__title { color: var(--dh-text); font-family: var(--display); font-size: clamp(3.4rem, 6.4vw, 5.4rem); letter-spacing: .01em; line-height: .95; margin: .4rem 0 .55rem; order: 2; }
-.dh__tagline { color: var(--dh-accent); font-size: clamp(.95rem, 1.6vw, 1.15rem); font-weight: 800; letter-spacing: .08em; margin: 0 0 1rem; order: 3; }
-.dh__schedule { align-self: flex-start; background: var(--dh-pill-bg); border-radius: 999px; box-shadow: 0 8px 20px rgba(0, 0, 0, .25); color: var(--dh-pill-text); font-size: 1.02rem; font-weight: 800; letter-spacing: .06em; margin: 0 0 1rem; order: 4; padding: .55rem 1.15rem; }
+.dh__tagline { color: var(--dh-accent); font-size: clamp(.95rem, 1.6vw, 1.15rem); font-weight: 800; letter-spacing: .02em; line-height: 1.35; margin: 0 0 .7rem; max-width: 28rem; order: 3; }
+#happy-hour { display: block; height: 0; scroll-margin-top: 90px; }
+.dh__schedule { align-self: flex-start; background: var(--dh-pill-bg); border-radius: 999px; box-shadow: 0 8px 20px rgba(0, 0, 0, .25); color: var(--dh-pill-text); font-size: 1.02rem; font-weight: 800; letter-spacing: .04em; line-height: 1.35; margin: 0 0 1rem; max-width: 100%; order: 4; padding: .55rem 1.15rem; }
 .dh__schedule-short { display: none; }
+.dh__weekend-note { color: var(--dh-accent); font-size: 1.02rem; font-weight: 800; letter-spacing: .01em; line-height: 1.4; margin: -.15rem 0 .4rem; max-width: 34rem; order: 4; }
 .dh__hours-note { color: var(--dh-text); font-size: .95rem; font-weight: 700; letter-spacing: .02em; margin: -.3rem 0 1rem; order: 4; }
 .dh .dh__visit.dh__visit--primary { background: var(--dh-cta-bg); border-color: var(--dh-cta-bg); color: var(--dh-cta-text); }
 .dh .dh__visit.dh__visit--primary:hover, .dh .dh__visit.dh__visit--primary:focus-visible { background: #fff; border-color: #fff; color: var(--dh-cta-text); }
@@ -88,6 +90,7 @@
   /* Offer first: title → schedule → prices, then the rest. */
   .dh__title { font-size: clamp(2.6rem, 14.6vw, 4.2rem); margin: .3rem 0 .6rem; white-space: nowrap; }
   .dh__schedule { font-size: 1.05rem; margin-bottom: .85rem; order: 3; }
+  .dh__weekend-note { font-size: .98rem; margin: 0 0 .35rem; order: 3; }
   .dh__hours-note { font-size: .92rem; margin: -.2rem 0 .9rem; order: 3; }
   .dh__schedule-long { clip: rect(0 0 0 0); height: 1px; overflow: hidden; position: absolute; white-space: nowrap; width: 1px; }
   .dh__schedule-short { display: inline; }
@@ -95,8 +98,8 @@
   .dh__offer { min-height: 5.4rem; padding: .7rem .85rem; }
   .dh__offer--hero { align-items: center; flex-direction: row; gap: .75rem; grid-column: 1 / -1; min-height: 0; }
   .dh__offer--hero .dh__offer-price { font-size: 3rem; }
-  .dh__tagline { margin-bottom: .6rem; order: 5; }
-  .dh__sub { font-size: 1rem; margin-bottom: 1.2rem; order: 6; }
+  .dh__tagline { margin-bottom: .45rem; order: 2; }
+  .dh__sub { font-size: 1rem; margin: 0 0 .8rem; order: 3; }
   .dh__ctas .button { width: 100%; }
   .dh__sub + .dh__ctas { margin-top: 0; }
   .dh__photos { gap: .55rem; }

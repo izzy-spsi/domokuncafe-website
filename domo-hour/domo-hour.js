@@ -52,10 +52,12 @@
     '<div class="container dh__inner">' +
       '<div class="dh__copy">' +
         (top ? '<div class="dh__top">' + top + '</div>' : '') +
+        '<span id="happy-hour"></span>' +
         '<h2 class="dh__title" id="dh-title">' + esc(data.title) + '</h2>' +
         (data.tagline ? '<p class="dh__tagline">' + esc(data.tagline) + '</p>' : '') +
         '<p class="dh__schedule"><span class="dh__schedule-long">' + esc(data.schedule) + '</span>' +
           (data.scheduleShort ? '<span class="dh__schedule-short" aria-hidden="true">' + esc(data.scheduleShort) + '</span>' : '') + '</p>' +
+        (data.weekendNote ? '<p class="dh__weekend-note">' + esc(data.weekendNote) + '</p>' : '') +
         (data.hoursNote ? '<p class="dh__hours-note">' + esc(data.hoursNote) + '</p>' : '') +
         (data.sub ? '<p class="dh__sub">' + esc(data.sub) + '</p>' : '') +
         (offers ? '<ul class="dh__offers" aria-label="Domo Hour prices">' + offers + '</ul>' : '') +
@@ -87,9 +89,9 @@
   // can change height, so re-apply the hash target once layout settles.
   function followHash() {
     if (location.hash === '#domo-hour-menu' && panel) { setOpen(true, false); panel.scrollIntoView({ block: 'start' }); }
-    else if (/^#domo-hour/.test(location.hash)) mount.scrollIntoView({ block: 'start' });
+    else if (location.hash === '#domo-hour' || location.hash === '#happy-hour') mount.scrollIntoView({ block: 'start' });
   }
-  if (/^#domo-hour/.test(location.hash)) {
+  if (location.hash === '#domo-hour' || location.hash === '#happy-hour' || location.hash === '#domo-hour-menu') {
     followHash();
     window.addEventListener('load', function () { setTimeout(followHash, 80); });
   }
@@ -97,6 +99,8 @@
     if (location.hash === '#domo-hour-menu') {
       if (panel) { setOpen(true, false); panel.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' }); }
       else mount.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    } else if (location.hash === '#domo-hour' || location.hash === '#happy-hour') {
+      mount.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
     }
   });
 })();
