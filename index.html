@@ -4,65 +4,275 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#CC2222">
-  <meta name="description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
-  <title>Domo Cafe - Buena Park, CA</title>
+  <meta name="description" content="Domo Cafe is a character cafe in Buena Park. Domo Hour, our daily happy hour, runs every day from 3–6 PM in Orange County.">
+  <title>Domo Cafe in Buena Park | Daily Happy Hour, 3–6 PM</title>
   <link rel="canonical" href="https://www.domokuncafe.com/">
   <link rel="icon" type="image/png" href="domo-cafe-logo-transparent.png">
   <link rel="apple-touch-icon" href="domo-cafe-logo-transparent.png">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Domo Cafe">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Domo Cafe - Buena Park, CA">
-  <meta property="og:description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
+  <meta property="og:title" content="Domo Cafe in Buena Park | Daily Happy Hour, 3–6 PM">
+  <meta property="og:description" content="Domo Cafe is a character cafe in Buena Park. Domo Hour, our daily happy hour, runs every day from 3–6 PM in Orange County.">
   <meta property="og:url" content="https://www.domokuncafe.com/">
   <meta property="og:image" content="https://www.domokuncafe.com/assets/sydney/hero/hero-1.png">
   <meta property="og:image:alt" content="Domo Cafe entrance doors painted with Domo's face">
   <meta property="og:image:width" content="1024">
   <meta property="og:image:height" content="605">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Domo Cafe - Buena Park, CA">
-  <meta name="twitter:description" content="Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.">
+  <meta name="twitter:title" content="Domo Cafe in Buena Park | Daily Happy Hour, 3–6 PM">
+  <meta name="twitter:description" content="Domo Cafe is a character cafe in Buena Park. Domo Hour, our daily happy hour, runs every day from 3–6 PM in Orange County.">
   <meta name="twitter:image" content="https://www.domokuncafe.com/assets/sydney/hero/hero-1.png">
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": ["Restaurant", "LocalBusiness"],
-    "@id": "https://www.domokuncafe.com/#restaurant",
-    "name": "Domo Cafe",
-    "url": "https://www.domokuncafe.com/",
-    "image": "https://www.domokuncafe.com/assets/sydney/hero/hero-1.png",
-    "logo": "https://www.domokuncafe.com/domo-cafe-logo-transparent.png",
-    "description": "Domo Cafe is an immersive character cafe in Buena Park, California. Come hungry, leave smiling.",
-    "telephone": "+1-415-360-3666",
-    "email": "info@domokuncafe.com",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "8340 La Palma Ave",
-      "addressLocality": "Buena Park",
-      "addressRegion": "CA",
-      "postalCode": "90620",
-      "addressCountry": "US"
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-        "opens": "11:00",
-        "closes": "20:00"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "Restaurant",
+        "LocalBusiness"
+      ],
+      "@id": "https://www.domokuncafe.com/#restaurant",
+      "name": "Domo Cafe",
+      "url": "https://www.domokuncafe.com/",
+      "image": "https://www.domokuncafe.com/assets/sydney/hero/hero-1.png",
+      "logo": "https://www.domokuncafe.com/domo-cafe-logo-transparent.png",
+      "description": "Domo Cafe is a character cafe in Buena Park. Domo Hour is our daily happy hour, every day from 3–6 PM.",
+      "telephone": "+1-415-360-3666",
+      "email": "info@domokuncafe.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "8340 La Palma Ave Unit R",
+        "addressLocality": "Buena Park",
+        "addressRegion": "CA",
+        "postalCode": "90620",
+        "addressCountry": "US"
       },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Saturday", "Sunday"],
-        "opens": "10:00",
-        "closes": "21:00"
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "11:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Saturday",
+            "Sunday"
+          ],
+          "opens": "10:00",
+          "closes": "21:00"
+        }
+      ],
+      "hasMenu": {
+        "@id": "https://www.domokuncafe.com/#domo-hour-menu"
+      },
+      "makesOffer": {
+        "@id": "https://www.domokuncafe.com/#happy-hour-offer"
+      },
+      "sameAs": [
+        "https://www.instagram.com/domokuncafe",
+        "https://www.tiktok.com/@domokuncafe",
+        "https://www.facebook.com/domokuncafe"
+      ]
+    },
+    {
+      "@type": "Menu",
+      "@id": "https://www.domokuncafe.com/#domo-hour-menu",
+      "name": "Domo Hour",
+      "description": "Domo Hour is Domo Cafe's daily happy hour in Buena Park, every day 15:00–18:00. Not available on holidays or during special events.",
+      "hasMenuSection": [
+        {
+          "@type": "MenuSection",
+          "name": "Bites",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Single Smash Burger",
+              "offers": {
+                "@type": "Offer",
+                "price": "10.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              },
+              "description": "Single wagyu smash patty, melted American cheese, pickles, caramelized onions and yum yum sauce on a toasted Domo brioche bun. Served with furikake waffle fries."
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Domo Bites Back",
+              "offers": {
+                "@type": "Offer",
+                "price": "6.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              },
+              "description": "Crispy breaded cauliflower bites tossed in sweet and spicy gochujang or house buffalo sauce."
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Domo Style Fries",
+              "offers": {
+                "@type": "Offer",
+                "price": "5.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              },
+              "description": "Melted American cheese, caramelized onions and house sauce on furikake waffle fries."
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Side Curry Mac & Cheese",
+              "offers": {
+                "@type": "Offer",
+                "price": "5.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Domo Churro Fries",
+              "offers": {
+                "@type": "Offer",
+                "price": "6.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              }
+            }
+          ]
+        },
+        {
+          "@type": "MenuSection",
+          "name": "Sips",
+          "hasMenuItem": [
+            {
+              "@type": "MenuItem",
+              "name": "Sparkling Strawberry Lime Refresher",
+              "offers": {
+                "@type": "Offer",
+                "price": "5.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Dirty Soda",
+              "offers": {
+                "@type": "Offer",
+                "price": "5.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              },
+              "description": "Paradise Fizz or Berry Bliss"
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Mango Lemonade",
+              "offers": {
+                "@type": "Offer",
+                "price": "4.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Domo's Iced Cookie Coffee",
+              "offers": {
+                "@type": "Offer",
+                "price": "4.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Strawberry Lemonade",
+              "offers": {
+                "@type": "Offer",
+                "price": "4.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Milo Dinosaur",
+              "offers": {
+                "@type": "Offer",
+                "price": "4.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              }
+            },
+            {
+              "@type": "MenuItem",
+              "name": "Domo Palmer",
+              "offers": {
+                "@type": "Offer",
+                "price": "4.00",
+                "priceCurrency": "USD",
+                "availability": "https://schema.org/InStock"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "@type": "Offer",
+      "@id": "https://www.domokuncafe.com/#happy-hour-offer",
+      "name": "Domo Hour happy hour",
+      "description": "Daily happy hour at Domo Cafe in Buena Park, every day 15:00–18:00. Not available on holidays or during special events.",
+      "url": "https://www.domokuncafe.com/#happy-hour",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock",
+      "priceSpecification": {
+        "@type": "PriceSpecification",
+        "minPrice": "4.00",
+        "maxPrice": "10.00",
+        "priceCurrency": "USD"
       }
-    ],
-    "sameAs": [
-      "https://www.instagram.com/domokuncafe",
-      "https://www.tiktok.com/@domokuncafe",
-      "https://www.facebook.com/domokuncafe"
-    ]
-  }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://www.domokuncafe.com/#happy-hour",
+      "name": "Domo Hour",
+      "alternateName": "Happy Hour",
+      "serviceType": "Happy hour",
+      "description": "Domo Hour is Domo Cafe's daily happy hour in Buena Park, every day from 3–6 PM.",
+      "provider": {
+        "@id": "https://www.domokuncafe.com/#restaurant"
+      },
+      "url": "https://www.domokuncafe.com/#happy-hour",
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "15:00",
+        "closes": "18:00"
+      },
+      "offers": {
+        "@id": "https://www.domokuncafe.com/#happy-hour-offer"
+      }
+    }
+  ]
+}
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -536,8 +746,11 @@
     <section class="dh" id="domo-hour" aria-labelledby="dh-title">
       <noscript>
         <div class="container">
+          <span id="happy-hour"></span>
           <h2 class="dh__title" id="dh-title">DOMO HOUR</h2>
+          <p class="dh__tagline">Domo Hour — Our Daily Happy Hour, 3–6 PM</p>
           <p class="dh__schedule">Domo Hour runs every day 3–6 PM.</p>
+          <p class="dh__sub">Happy hour in Buena Park, every day from 3–6 PM.</p>
           <p class="dh__weekend-note">For a limited time, Domo Hour is now available on weekends too!</p>
           <p class="dh__hours-note">Not available on holidays or during special events.</p>
           <div class="dh__menu" id="domo-hour-menu">
