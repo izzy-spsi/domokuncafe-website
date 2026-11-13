@@ -45,7 +45,7 @@ window.DOMO_EVENTS = {
     },
     {
       title: "Domo Hour",
-      description: "Domo Hour runs every day 3–6 PM. For a limited time, Domo Hour is now available on weekends too! Not available on holidays or during special events.",
+      description: "Domo Hour is our daily happy hour in Buena Park and runs every day 3–6 PM. For a limited time, Domo Hour is now available on weekends too! Not available on holidays or during special events.",
       startTime: "15:00",
       endTime: "18:00",
       // Weekdays from the Nov 9, 2026 relaunch. Weekends start Friday, Nov 13, 2026.

@@ -7,6 +7,8 @@ The menu has no end date.
 
 It has its own section just before "What we're serving", a highlighted **Domo Hour**
 link in the nav and footer, a link from the menu section, and a daily listing on `/events/`.
+The section keeps `id="domo-hour"`. A `#happy-hour` anchor in the same section is the
+happy-hour deep link. The visible subheading is “Domo Hour — Our Daily Happy Hour, 3–6 PM.”
 
 ## Files
 
