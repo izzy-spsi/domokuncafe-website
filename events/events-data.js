@@ -21,6 +21,10 @@
  *   art:         optional official Domo art for the card (Domoween events only), one of:
  *                wc_44_frankenstein, wc_40_mummy, wc_41_jack-o-lantern, wc_43_witch-broom,
  *                wc_53_mr-usagi-pumpkin-mask, tashanna_pumpkin-head
+ *   image:       optional site path for official art on the calendar card, e.g.
+ *                "/assets/events/sip-and-paint.png". Leave "" until the file is in
+ *                the repo. The card shows an image only when this is set — no
+ *                placeholder. Do not point it at generated art.
  *
  * Only add real, confirmed events. Copy can talk about Domo but must never quote him
  * saying anything except "Domo". Keep it cute-spooky and family-appropriate.
@@ -54,6 +58,24 @@ window.DOMO_EVENTS = {
       link: "/#domo-hour-menu",
       linkLabel: "See the Domo Hour menu"
     },
+    {
+      // Friday, November 27, 2026, 9:00 PM Pacific. No end time and no price.
+      date: "2026-11-27",
+      startTime: "21:00",
+      endTime: "",
+      title: "Domo After Dark: Sip & Paint",
+      description: "Sip and paint evening at Domo Cafe.",
+      image: ""
+    },
+    {
+      // Tuesday, December 22, 2026. All day — no start time and no price.
+      date: "2026-12-22",
+      startTime: "",
+      endTime: "",
+      title: "Domo's Birthday",
+      description: "Domo's birthday at Domo Cafe.",
+      image: ""
+    },
 
     // {
     //   date: "2026-10-00",
@@ -64,7 +86,8 @@ window.DOMO_EVENTS = {
     //   link: "",
     //   linkLabel: "",
     //   series: "Domoween",
-    //   art: "wc_43_witch-broom"
+    //   art: "wc_43_witch-broom",
+    //   image: ""
     // },
   ]
 };

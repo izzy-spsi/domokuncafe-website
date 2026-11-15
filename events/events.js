@@ -295,7 +295,7 @@
       eventAttendanceMode: 'https://schema.org/OfflineEventAttendanceMode',
       location: { '@type': 'Restaurant', '@id': SITE + '/#restaurant', name: VENUE.name, address: { '@type': 'PostalAddress', streetAddress: VENUE.street, addressLocality: VENUE.city, addressRegion: VENUE.region, postalCode: VENUE.zip, addressCountry: 'US' } },
       organizer: { '@type': 'Organization', name: VENUE.name, url: SITE + '/' },
-      image: [SITE + (ev.series === 'Domoween' ? '/assets/domoween/happy-halloween-domo-kun-banner.png' : '/domo-cafe-logo-transparent.png')],
+      image: [ev.image ? absUrl(ev.image) : SITE + (ev.series === 'Domoween' ? '/assets/domoween/happy-halloween-domo-kun-banner.png' : '/domo-cafe-logo-transparent.png')],
       url: ev.link ? absUrl(ev.link) : SITE + '/events/?month=' + ev.date.slice(0, 7) + '#' + ev.id
     };
     if (ev.description) node.description = ev.description;
@@ -417,6 +417,7 @@
             return '<article class="ev-card" id="' + esc(ev.id) + '">' +
               '<div class="ev-card__date' + (ev.repeat && !ev.repeat.until ? ' ev-card__date--ongoing' : '') + '" aria-hidden="true">' + badge + '</div>' +
               '<div class="ev-card__body">' +
+                (ev.image ? '<img class="ev-card__art" src="' + esc(ev.image) + '" alt="">' : '') +
                 (ev.series ? '<p class="ev-card__series">' + esc(ev.series) + '</p>' : '') +
                 '<h3>' + esc(ev.title) + '</h3>' +
                 '<p class="ev-card__when"><time datetime="' + esc(ev.date + (ev.startTime ? 'T' + ev.startTime : '')) + '">' + esc(whenLabel(ev)) + ' · ' + esc(formatTime(ev)) + '</time></p>' +

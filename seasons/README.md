@@ -52,7 +52,9 @@ theme and lets you switch. Placeholder content also gets a yellow
   [`events/events-data.js`](../events/events-data.js). It's one list for the whole
   site. Each event has `date`, `startTime`, `endTime`, `title`, `description`, an
   optional `link`/`linkLabel`, `series` (e.g. `"Domoween"` or
-  `"Community Tuesday"`), and optional `art`. Events automatically appear on:
+  `"Community Tuesday"`), optional `art`, and optional `image` (a site path to
+  official art; leave `""` until the file is in the repo — the calendar card
+  shows it only when set, with no placeholder). Events automatically appear on:
   - the `/events/` calendar, with Add to Google Calendar and a downloadable `.ics`
   - the Domoween "October events" block on the home page (events dated Oct 1 – Nov 1)
   - the `/domoween/` page, including Event structured data for search engines
