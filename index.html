@@ -74,6 +74,46 @@
           ],
           "opens": "10:00",
           "closes": "21:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Thursday",
+          "opens": "00:00",
+          "closes": "00:00",
+          "validFrom": "2026-11-26",
+          "validThrough": "2026-11-26"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Thursday",
+          "opens": "11:00",
+          "closes": "17:00",
+          "validFrom": "2026-12-24",
+          "validThrough": "2026-12-24"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Friday",
+          "opens": "00:00",
+          "closes": "00:00",
+          "validFrom": "2026-12-25",
+          "validThrough": "2026-12-25"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Thursday",
+          "opens": "11:00",
+          "closes": "17:00",
+          "validFrom": "2026-12-31",
+          "validThrough": "2026-12-31"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Friday",
+          "opens": "11:00",
+          "closes": "20:00",
+          "validFrom": "2027-01-01",
+          "validThrough": "2027-01-01"
         }
       ],
       "hasMenu": {
@@ -560,6 +600,19 @@
       .sdd-banner p { font-size: .86rem; }
       .sdd-banner__link { text-align: center; width: 100%; }
     }
+    /* 2026 holiday hours. Each line hides the Pacific day after its date; the block hides after Jan 1, 2027. */
+    .holiday-hours { margin: -.55rem 0 1.15rem; }
+    .holiday-hours__title { color: var(--red); font-family: var(--display); font-size: 1.45rem; font-weight: 400; letter-spacing: -.02em; line-height: 1.08; margin: 0 0 .15rem; }
+    .holiday-hours .hours { margin: 0; }
+    .holiday-hours .hours li { gap: .75rem; }
+    .holiday-hours .hours span { min-width: 0; }
+    .holiday-hours .hours strong { flex-shrink: 0; white-space: nowrap; }
+    html.hh-done [data-holiday-hours] { display: none !important; }
+    html.hh-past-2026-11-26 [data-holiday="2026-11-26"],
+    html.hh-past-2026-12-24 [data-holiday="2026-12-24"],
+    html.hh-past-2026-12-25 [data-holiday="2026-12-25"],
+    html.hh-past-2026-12-31 [data-holiday="2026-12-31"],
+    html.hh-past-2027-01-01 [data-holiday="2027-01-01"] { display: none !important; }
   </style>
   <script>
     /* Spooky Dinner with Domo — auto-hides after Oct 31, 2026 (America/Los_Angeles). */
@@ -567,6 +620,22 @@
       if (Date.now() >= Date.parse('2026-11-01T07:00:00.000Z')) {
         document.documentElement.classList.add('sdd-expired');
       }
+    })();
+    /* Holiday hours — hide each date the Pacific day after it, and the whole notice after Jan 1, 2027. */
+    (function () {
+      var parts = {};
+      try {
+        new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles', year: 'numeric', month: '2-digit', day: '2-digit' }).formatToParts(new Date()).forEach(function (p) { parts[p.type] = p.value; });
+      } catch (e) {
+        var d = new Date(Date.now() - 8 * 3600e3);
+        parts = { year: String(d.getUTCFullYear()), month: ('0' + (d.getUTCMonth() + 1)).slice(-2), day: ('0' + d.getUTCDate()).slice(-2) };
+      }
+      var today = parts.year + '-' + parts.month + '-' + parts.day;
+      var root = document.documentElement;
+      ['2026-11-26', '2026-12-24', '2026-12-25', '2026-12-31', '2027-01-01'].forEach(function (date) {
+        if (today > date) root.classList.add('hh-past-' + date);
+      });
+      if (today > '2027-01-01') root.classList.add('hh-done');
     })();
   </script>
   <link rel="stylesheet" href="/domo-hour/domo-hour.css">
@@ -750,7 +819,7 @@
       </div>
     </section>
 
-    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><div class="visit__actions"><a class="button" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/findTime" target="_blank" rel="noopener noreferrer">Reserve a Table <span class="sr-only">on Toast. Books a future time.</span><span aria-hidden="true">↗</span></a><a class="button button--light" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/joinWaitlist" target="_blank" rel="noopener noreferrer">Join Waitlist <span class="sr-only">on Toast. Adds you to today's line. This does not reserve a table.</span><span aria-hidden="true">↗</span></a><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><p class="visit__waitlist-note">Reserve a Table books a future time. Join Waitlist adds you to today's line and does not reserve a table. Walk-ins are welcome. <a href="/reservations/">Reservation details</a> · <a href="/waitlist/">Waitlist details</a></p></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><div class="visit__contacts"><a href="tel:+14153603666">415-360-DOMO (3666)</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
+    <section class="section visit" id="visit" aria-labelledby="visit-heading"><div class="container visit-grid"><div><div class="eyebrow" style="color:#FFD98B">Come hang out</div><h2 id="visit-heading">Your table<br>is waiting.</h2><p>Find us in Buena Park for a meal, a mood, and a little Domo magic. Walk-ins are welcome.</p><div class="visit__actions"><a class="button" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/findTime" target="_blank" rel="noopener noreferrer">Reserve a Table <span class="sr-only">on Toast. Books a future time.</span><span aria-hidden="true">↗</span></a><a class="button button--light" href="https://tables.toasttab.com/restaurants/48703a4e-b67b-4229-92a8-8dddd4775b18/joinWaitlist" target="_blank" rel="noopener noreferrer">Join Waitlist <span class="sr-only">on Toast. Adds you to today's line. This does not reserve a table.</span><span aria-hidden="true">↗</span></a><a class="button button--light" href="https://maps.google.com/?q=8340+La+Palma+Ave,+Buena+Park,+CA+90620" target="_blank" rel="noopener">Get directions <span aria-hidden="true">↗</span></a></div><p class="visit__waitlist-note">Reserve a Table books a future time. Join Waitlist adds you to today's line and does not reserve a table. Walk-ins are welcome. <a href="/reservations/">Reservation details</a> · <a href="/waitlist/">Waitlist details</a></p></div><div class="visit__card"><h3>Plan your visit</h3><p><strong>8340 La Palma Ave</strong><br>Buena Park, CA 90620</p><ul class="hours"><li><span>Monday – Friday</span><strong>11am – 8pm</strong></li><li><span>Saturday – Sunday</span><strong>10am – 9pm</strong></li></ul><div class="holiday-hours" data-holiday-hours><h4 class="holiday-hours__title" id="holiday-hours-heading">Holiday hours</h4><ul class="hours" aria-labelledby="holiday-hours-heading"><li data-holiday="2026-11-26"><span>Thu, Nov 26 · Thanksgiving</span><strong>Closed</strong></li><li data-holiday="2026-12-24"><span>Thu, Dec 24 · Christmas Eve</span><strong>11am – 5pm</strong></li><li data-holiday="2026-12-25"><span>Fri, Dec 25 · Christmas Day</span><strong>Closed</strong></li><li data-holiday="2026-12-31"><span>Thu, Dec 31 · New Year's Eve</span><strong>11am – 5pm</strong></li><li data-holiday="2027-01-01"><span>Fri, Jan 1 · New Year's Day</span><strong>Regular hours</strong></li></ul></div><div class="visit__contacts"><a href="tel:+14153603666">415-360-DOMO (3666)</a><a href="mailto:info@domokuncafe.com">info@domokuncafe.com</a></div><p style="margin-bottom:0"><small>Hours may vary on holidays. Follow <a href="https://www.instagram.com/domokuncafe" target="_blank" rel="noopener">@domokuncafe</a> for updates.</small></p></div></div></section>
 
     <section class="section section--white" id="events" aria-labelledby="events-heading"><div class="container"><div class="section-heading"><div><div class="eyebrow">Make it a thing</div><h2 id="events-heading">Good times,<br>on the calendar.</h2></div><p>Community nights and seasonal surprises are still taking shape. Spooky Dinner with Domo is already ticketed for Halloween night.</p></div><div class="events-grid"><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-hug.png" alt="Domo characters hugging"></div><h3>Domo Community Tuesdays</h3><p>Local schools, teams, and nonprofits raise funds at Domo. Separate from Domo Hour. <strong style="color:var(--red)">Coming soon.</strong></p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/menu/domo-yaki.png" alt="Domo Cafe stuffed pancakes"></div><h3>Seasonal drops</h3><p>Limited-time menu moments are on the way.</p></article><article class="event-card"><div class="icon" aria-hidden="true"><img src="assets/sydney/values/domo-character.png" alt="Domo character portrait"></div><h3>Character moments</h3><p>Spooky Dinner with Domo is Saturday, October 31, 7:30–9:00 PM Pacific, from $50. Private tickets only — every guest needs a ticket. <a href="https://toast.app/r/domo-cafe-8340-la-palma-avenue/events/dine-with-domo?deeplink=true" target="_blank" rel="noopener" style="color:var(--red);font-weight:700">Get tickets →</a></p></article></div></div></section>
 
