@@ -12,8 +12,5 @@ Disallow: /staff
 Disallow: /community
 Disallow: /preview-july4-banner.html
 Disallow: /index-hours-test.html
-# Weekday promo files stay in the repo while the offer is revamped. Remove this
-# line when the homepage section is published again.
-Disallow: /domo-hour
 
 Sitemap: https://domokuncafe.com/sitemap.xml

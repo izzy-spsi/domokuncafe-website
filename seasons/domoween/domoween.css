@@ -265,9 +265,9 @@ html[data-theme="domoween"] .footer-bottom { color: #B9A8D6; }
 html[data-theme="domoween"] .dw-legal { border-top: 1px solid rgba(255, 255, 255, .15); color: #E6DAF7; font-size: .84rem; margin: 2.2rem 0 0; max-width: none; padding-top: 1.1rem; }
 html[data-theme="domoween"] .dw-legal + .footer-bottom { border-top: 0; margin-top: .4rem; padding-top: .4rem; }
 
-/* ---------- Domo Hour: Domo-ween Edition ----------
-   Seasonal skin for the permanent Domo Hour section (domo-hour/). Delete this block (and the
-   `seasonal.domoween` badge in domo-hour/domo-hour-data.js) to remove the October treatment. */
+/* ---------- Domo Hour color skin ----------
+   Recolors the Domo Hour section while the Domoween theme is active. The old
+   "Domo-ween Edition • All October" badge has been removed from the menu data. */
 html[data-theme="domoween"] .dh {
   --dh-bg-1: #2E1A4F;
   --dh-bg-2: var(--dw-night);

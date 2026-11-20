@@ -17,9 +17,14 @@
  *                { days: ["Mon", "Tue", "Wed", "Thu", "Fri"], from: "YYYY-MM-DD", until: "YYYY-MM-DD" }
  *                It shows on every matching day in the calendar grid, but as ONE card in the lists,
  *                and its calendar invite repeats weekly until the `until` date.
+ *                Leave `until` off for an ongoing listing (no end date is invented).
  *   art:         optional official Domo art for the card (Domoween events only), one of:
  *                wc_44_frankenstein, wc_40_mummy, wc_41_jack-o-lantern, wc_43_witch-broom,
  *                wc_53_mr-usagi-pumpkin-mask, tashanna_pumpkin-head
+ *   image:       optional site path for official art on the calendar card, e.g.
+ *                "/assets/events/sip-and-paint.png". Leave "" until the file is in
+ *                the repo. The card shows an image only when this is set — no
+ *                placeholder. Do not point it at generated art.
  *
  * Only add real, confirmed events. Copy can talk about Domo but must never quote him
  * saying anything except "Domo". Keep it cute-spooky and family-appropriate.
@@ -42,20 +47,35 @@ window.DOMO_EVENTS = {
       linkLabel: "Get tickets",
       art: "wc_41_jack-o-lantern"
     },
-    /* Weekday promo unpublished while it is revamped. Uncomment to list it on the calendar again.
     {
       title: "Domo Hour",
-      description: "Monday–Friday • 3–6 PM",
+      description: "Domo Hour is our daily happy hour in Buena Park and runs every day 3–6 PM. For a limited time, Domo Hour is now available on weekends too! Not available on holidays or during special events.",
       startTime: "15:00",
       endTime: "18:00",
-      repeat: { days: ["Mon", "Tue", "Wed", "Thu", "Fri"], from: "2026-10-01", until: "2026-10-31" },
-      // Menu and prices live in domo-hour/domo-hour-data.js (one source of truth). While its menu is
-      // switched off (showMenu: false) this links to the section; once on, it can be "/#domo-hour-menu"
-      // with linkLabel "See the Domo Hour menu".
-      link: "/#domo-hour",
-      linkLabel: "Domo Hour details"
+      // Weekdays from the Nov 9, 2026 relaunch. Weekends start Friday, Nov 13, 2026.
+      // Nov 9–12 has no weekend, so one every-day listing from Nov 9 is the same calendar.
+      repeat: { days: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"], from: "2026-11-09" },
+      link: "/#domo-hour-menu",
+      linkLabel: "See the Domo Hour menu"
     },
-    */
+    {
+      // Friday, November 27, 2026, 9:00 PM Pacific. No end time and no price.
+      date: "2026-11-27",
+      startTime: "21:00",
+      endTime: "",
+      title: "Domo After Dark: Sip & Paint",
+      description: "Sip and paint evening at Domo Cafe.",
+      image: ""
+    },
+    {
+      // Tuesday, December 22, 2026. All day — no start time and no price.
+      date: "2026-12-22",
+      startTime: "",
+      endTime: "",
+      title: "Domo's Birthday",
+      description: "Domo's birthday at Domo Cafe.",
+      image: ""
+    },
 
     // {
     //   date: "2026-10-00",
@@ -66,7 +86,8 @@ window.DOMO_EVENTS = {
     //   link: "",
     //   linkLabel: "",
     //   series: "Domoween",
-    //   art: "wc_43_witch-broom"
+    //   art: "wc_43_witch-broom",
+    //   image: ""
     // },
   ]
 };
