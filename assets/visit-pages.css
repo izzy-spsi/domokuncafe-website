@@ -10,7 +10,6 @@
 .vp-card a:not(.button) { color: var(--red); font-weight: 700; }
 .vp-policy { margin: .4rem 0 0; padding-left: 1.15rem; }
 .vp-policy li { margin: .55rem 0; }
-.vp-draft { color: var(--brown); font-size: .78rem; font-weight: 700; letter-spacing: .12em; margin-bottom: .4rem; text-transform: uppercase; }
 @media (max-width: 570px) {
   .vp-hero { padding: 2.6rem 0 1.6rem; }
   .vp-actions { align-items: stretch; flex-direction: column; }
